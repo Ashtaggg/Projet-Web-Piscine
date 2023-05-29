@@ -84,10 +84,20 @@
                                 $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                 echo"<p class='Date'>" . $DateDiff . " j</p>";
                             }
-                            else{
+                            else if($DateDiff*24 >=1){
                                 $DateDiff = $DateDiff * 24;
                                 $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                 echo"<p class='Date'>" . $DateDiff . " h</p>";
+                            }
+                            else if($DateDiff*24*60 >=1){
+                                $DateDiff = $DateDiff * 24 * 60;
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " min</p>";
+                            }
+                            else{
+                                $DateDiff = $DateDiff * 24 * 60 * 60;
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " sec</p>";
                             }
                             //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
