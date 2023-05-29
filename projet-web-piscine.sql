@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 29 mai 2023 à 12:21
+-- Généré le : lun. 29 mai 2023 à 12:44
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -82,14 +82,15 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `Posts` text NOT NULL COMMENT 'ID des posts',
   `Emplois` text NOT NULL,
   PRIMARY KEY (`IDutilisateur`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`) VALUES
-(1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'images/pp', 2, '', '', '', '');
+(1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'images/pp', 2, '', '', '', ''),
+(2, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'images/pp', 2, '', '', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
