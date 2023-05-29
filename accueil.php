@@ -53,6 +53,33 @@
     </div>
     <div id="section">
         <h2>Actualité ECE In de la Semaine</h2>
+        <table>
+            <?php
+                $Date = new DateTime("now");
+                $Date->modify("-7 day");
+                $Date->modify("+2 hours");
+                $Date = $Date->format('Y-m-d H:i:s');
+                if ($db_found) {
+                    $post = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC";
+                    $post_result = mysqli_query($db_handle,$post);
+                    while($post_data = mysqli_fetch_assoc($post_result))
+                    {
+                        $IDutilisateur = $post_data["Envoyeur"];
+                        $utilisateur = "SELECT * FROM utilisateur  WHERE IDutilisateur LIKE '%$IDutilisateur%'";
+                        $utilisateur_result = mysqli_query($db_handle,$utilisateur);
+                        while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
+                        {
+                            echo"<br><br><img height=50 src='" . $utilisateur_data["PhotoProfil"] . "' />\n";
+                            echo$utilisateur_data["Nom"] . " &nbsp  &nbsp" . $utilisateur_data["Prenom"] . "<br>";
+
+                            echo"<img height=400 src='" . $post_data["Data"] . "' />";
+                            echo$post_data["Legende"] . "<br>";
+                            echo$post_data["Date"] . "<br><br><br><br>";
+                        }
+                    }
+                }
+            ?>
+        </table>
     </div>
     <div id="footer">
             <p>Nous contacter : </p>
