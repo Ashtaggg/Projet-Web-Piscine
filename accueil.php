@@ -69,12 +69,13 @@
                         $utilisateur_result = mysqli_query($db_handle,$utilisateur);
                         while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
                         {
-                            echo"<br><br><img height=50 src='" . $utilisateur_data["PhotoProfil"] . "' />\n";
+                            echo"<br><br><img height=50 src='" . $utilisateur_data["PhotoProfil"] . "' />";
                             echo$utilisateur_data["Nom"] . " &nbsp  &nbsp" . $utilisateur_data["Prenom"] . "<br>";
 
                             echo"<img height=400 src='" . $post_data["Data"] . "' />";
                             echo$post_data["Legende"] . "<br>";
                             echo$post_data["Date"] . "<br><br><br><br>";
+                            echo"<p class='post'> erkvuheuirvn </p>";
                         }
                     }
                 }
