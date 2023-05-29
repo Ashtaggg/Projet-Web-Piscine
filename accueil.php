@@ -69,13 +69,30 @@
                         $utilisateur_result = mysqli_query($db_handle,$utilisateur);
                         while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
                         {
-                            echo"<br><br><img height=50 src='" . $utilisateur_data["PhotoProfil"] . "' />";
-                            echo$utilisateur_data["Nom"] . " &nbsp  &nbsp" . $utilisateur_data["Prenom"] . "<br>";
+                            $Date1 = new DateTime("now");
+                            $Date1->modify("+2 hours");
+                            $Date1 = $Date1->format('Y-m-d H:i:s');
+                            $Date1 = strtotime($Date1);
+                            $Date2 = strtotime($post_data["Date"]);
+                            $DateDiff = $Date1 - $Date2;
+                            $DateDiff = $DateDiff/86400;
+                            
+                            
+                            echo"<div class='post'><p class='PhotoProfil'><br><br><img height=75 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
+                            echo"<p class='Nom'>" . $utilisateur_data["Prenom"] . " " . $utilisateur_data["Nom"] . "</p>";
+                            if($DateDiff >=1){
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " j</p>";
+                            }
+                            else{
+                                $DateDiff = $DateDiff * 24;
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " h</p>";
+                            }
+                            //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
+                            echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
-                            echo"<img height=400 src='" . $post_data["Data"] . "' />";
-                            echo$post_data["Legende"] . "<br>";
-                            echo$post_data["Date"] . "<br><br><br><br>";
-                            echo"<p class='post'> erkvuheuirvn </p>";
+                            echo"<p class='Data'><img height=400 src='" . $post_data["Data"] . "' /></p></div>";
                         }
                     }
                 }
