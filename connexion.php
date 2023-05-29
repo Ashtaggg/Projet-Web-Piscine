@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="connexion.css" rel="stylesheet" type="text/css" />
-    <title>Emplois</title>
+    <title>Connexion ECE In</title>
     <?php
         // Identifier le nom de base de données
         $database = "projet-web-piscine";
