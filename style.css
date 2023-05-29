@@ -141,3 +141,26 @@ body {
     text-align: center;
     margin-bottom:25px;
 }
+
+
+
+
+#carrousel {
+    position: relative;
+    height: 200px;
+    width: 700px;
+    margin: auto;
+    display: grid;
+    place-items: center;
+}
+#prev{
+    transform: rotate(180deg);
+    position: absolute;
+    top: 400px;
+    left: 325px;
+}
+#next{
+    position: absolute;
+    top: 400px;
+    right: 750px;
+}
