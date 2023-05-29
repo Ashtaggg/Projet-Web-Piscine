@@ -112,5 +112,32 @@ body {
 }
 .post{
     background-color: #20838a;
-    color:aqua;
+    color:white;
+    width: 53%;
+    border-radius: 2%;
+    margin:20px;
+}
+.PhotoProfil{
+    margin-top:-10px;
+    margin-left: 40px;
+    float:left;
+}
+.Nom{
+    margin-top:35px;
+    margin-left:140px;
+    font-weight: 700;
+    font-size: 25px;
+}
+.Date{
+    margin-top:-10px;
+    margin-left:141px;
+    font-size: 11px;
+}
+.Legende{
+    margin-top:60px;
+    margin-left:40px;
+}
+.Data{
+    text-align: center;
+    margin-bottom:25px;
 }
