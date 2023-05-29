@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="carrousel.js"></script>
     <title>Accueil ECE In</title>
     <?php
         // Identifier le nom de base de données
@@ -55,6 +58,17 @@
     </div>
     <div id="section">
         <h2>Actualité ECE In de la Semaine</h2>
+
+        <div id="carrousel">
+            <img src="images/bob.jpg" width="300"/>
+            <img src="images/cars.jpg" width="300"/>
+        </div>
+
+        </br></br></br>
+        <img src="images/fleche.png" width="40" id="prev"/>
+        <img src="images/fleche.png" width="40" id="next"/>
+
+
         <table>
             <?php
                 $Date = new DateTime("now");
