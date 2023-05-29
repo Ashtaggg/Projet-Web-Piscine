@@ -90,9 +90,10 @@ body {
     clear:both;
     text-align:center;
     padding:5px;
-    margin-top:5%;
+    margin-top:40%;
     float:center;
 }
 #googleMaps{
+    margin-top:-210px; 
     float:left;
 }
