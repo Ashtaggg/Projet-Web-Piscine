@@ -91,7 +91,9 @@ body {
     text-align:center;
     padding:5px;
     margin-top:40%;
+    float:center;
 }
 #googleMaps{
-    text-align:left;
+    margin-top:-14.5%; 
+    float:left;
 }
