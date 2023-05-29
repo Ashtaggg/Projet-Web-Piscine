@@ -30,7 +30,7 @@
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
         <nav class="navigation">
-            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="100" height="100"></a>
+            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
             <input type="checkbox" id="toggler">
             <label for="toggler"><i class="ri-menu-line"></i></label>
             <div class="search">
@@ -48,8 +48,9 @@
                 </ul>
             </div>
         </nav>
-    <div id="Reseaux_Acc">
-        <h2>Mon réseau</h2>
+    <div id="Gray_bar"></div>
+    <div id="Suggestion_Acc">
+        <h2>Suggestions</h2>
     </div>
     <div id="section">
         <h2>Actualité ECE In de la Semaine</h2>
