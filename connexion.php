@@ -29,18 +29,36 @@
 <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="">
+                <form method="post">
                     <h2>Login</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" required>
+                        <input type="email" name="email" required>
                         <label for="">Email</label>
                     </div>
                     <div class="forget">
                         <label for=""><input type="checkbox">Remember Me </label>
                     </div>
-                    <button>Log in</button>
+                    <button name="login">Log in</button>
                 </form>
+                <?php
+                    $email = isset($_POST["email"]) ? $_POST["email"] : "";
+                    if ($db_found) {
+                        if (isset($_POST["login"])) {
+                            $email_verif = "SELECT * FROM utilisateur WHERE 1 = 1";
+                            if ($email != "") {
+                                $email_verif .= " AND Mail LIKE '%$email%'";
+                            }
+                            $email_result = mysqli_query($db_handle,$email_verif);
+                            if (!$email_result || mysqli_num_rows($email_result) == 0) {
+                                echo "<br>Adresse mail non valide";
+                            }
+                            else {
+                                echo "<br>Adresse mail OK";
+                            }
+                        }
+                    }
+                ?>
             </div>
         </div>
     </section>
