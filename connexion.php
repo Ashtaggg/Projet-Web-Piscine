@@ -50,11 +50,13 @@
                                 $email_verif .= " AND Mail LIKE '%$email%'";
                             }
                             $email_result = mysqli_query($db_handle,$email_verif);
-                            if (!$email_result || mysqli_num_rows($email_result) == 0) {
-                                echo "<br>Adresse mail non valide";
+                            if(!$email_result || mysqli_num_rows($email_result) == 0) {
+                                echo "<br> <p class='couleur_texte'> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Adresse mail non valide </p>";
                             }
                             else {
                                 echo "<br>Adresse mail OK";
+                                header("Location: accueil.php");
+                                die();
                             }
                         }
                     }
