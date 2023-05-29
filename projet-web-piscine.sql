@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 29 mai 2023 à 10:12
+-- Généré le : lun. 29 mai 2023 à 12:21
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -70,18 +70,26 @@ CREATE TABLE IF NOT EXISTS `post` (
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `IDutilisateur` int NOT NULL AUTO_INCREMENT,
-  `Type` int NOT NULL COMMENT 'Admin ou prof ou élève',
+  `Type` int NOT NULL COMMENT '(1) Admin ou (2) prof ou (3) élève',
   `Nom` varchar(255) NOT NULL,
   `Prenom` varchar(255) NOT NULL,
-  `Age` int NOT NULL,
+  `DateNaissance` date NOT NULL,
   `Adresse` varchar(255) NOT NULL,
   `PhotoProfil` varchar(255) NOT NULL,
   `AnneeEtude` int NOT NULL,
   `Amis` text NOT NULL,
   `Messages` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'ID des messages',
+  `Posts` text NOT NULL COMMENT 'ID des posts',
   `Emplois` text NOT NULL,
   PRIMARY KEY (`IDutilisateur`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`) VALUES
+(1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'images/pp', 2, '', '', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
