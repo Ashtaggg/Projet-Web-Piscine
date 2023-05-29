@@ -39,12 +39,12 @@
             </div>
             <div class="menu">
                 <ul class="list">
-                    <li><a href="accueil.html">Accueil</a></li>
-                    <li><a href="reseau.html">Mon réseau</a></li>
-                    <li><a href="vous.html">Vous</a></li>
-                    <li><a href="notifications.html">Notifications</a></li>
-                    <li><a href="messagerie.html">Messagerie</a></li>
-                    <li><a href="emplois.html">Emplois</a></li>
+                    <li><a href="accueil.php">Accueil</a></li>
+                    <li><a href="reseau.php">Mon réseau</a></li>
+                    <li><a href="vous.php">Vous</a></li>
+                    <li><a href="notifications.php">Notifications</a></li>
+                    <li><a href="messagerie.php">Messagerie</a></li>
+                    <li><a href="emplois.php">Emplois</a></li>
                 </ul>
             </div>
         </nav>
