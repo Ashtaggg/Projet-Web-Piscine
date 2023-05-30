@@ -35,7 +35,7 @@
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
     <nav class="navigation">
-        <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE_IN.png" alt="logo_ECE_In" width="115" height="65"></a>
+        <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE_IN.png" alt="logo_ECE_In" width="13s5" height="65"></a>
         <input type="checkbox" id="toggler" placeholder="Rechercher">
         <label for="toggler"><i class="ri-menu-line"></i></label>
         <div class="inputbox">
@@ -81,7 +81,6 @@
         ?>
     <div class='bouton'><button type="submit" >Charger mon CV</button></div>
     </div>
-
     <div id="Formation">
         <h2>Formations</h2>
     </div>
