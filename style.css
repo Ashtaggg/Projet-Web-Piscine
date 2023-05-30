@@ -110,7 +110,7 @@ body {
     padding:5px;
     float:center;
     position: sticky;
-    top : 109px;
+    top : 100px;
     z-index: 1;
 }
 
@@ -123,7 +123,7 @@ body {
     color:black;
     padding: 5px;
     position: sticky;
-    top : 149px;
+    top : 140px;
     margin-bottom: 288px;
 }
 
@@ -131,11 +131,12 @@ body {
     border-top: 1px solid gainsboro;
   }
 
-#section{
+.section{
     width: 70%;
     display: grid;
     place-items: center;
     background-color: white;
+    border-radius: 5px;
     color:black;
     padding: 5px;
     z-index: 2;
@@ -209,8 +210,19 @@ body {
 /* ------------------------------------Mon Réseau----------------------------------*/
 /* --------------------------------------------------------------------------------*/
 
-
-
+#Sec_AmisAmis{
+    margin-top: 40px;
+}
+div.scroll {
+    margin:4px, 4px;
+    padding:4px;
+    background-color: transparent;
+    width: 90%;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+}
 /* --------------------------------------------------------------------------------*/
 /* ---------------------------------------Vous-------------------------------------*/
 /* --------------------------------------------------------------------------------*/
