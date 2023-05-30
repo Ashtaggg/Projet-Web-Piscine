@@ -62,17 +62,23 @@
         <div class="line-1"></div>
         <p>Les Entreprises</p>
     </div>
+    <div class="inputbox_res">
+            <ion-icon name="search-outline"></ion-icon>
+            <input type="text" placeholder="Rechercher">
+        </div>
     <div id="Sec_Amis" class="section">
         <h2>Mes Amis</h2>
         <div class="scroll">
-            <p>Ami 1 </br></br></br></br></br></br></br></br></br></br>Ami 1</p>
+            <p>Ami 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Ami 1</p>
         </div>
+        </br>
     </div>
     <div id="Sec_AmisAmis" class="section">
         <h2>Amis de mes Amis</h2>
         <div class="scroll">
-            <p>Ami 1</br></br></br></br></br></br></br></br></br></br>Ami 1</p>
+            <p>Ami 1</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Ami 1</p>
         </div>
+        </br>
     </div>
     <div id="footer">
         <p>Nous contacter : </p>
