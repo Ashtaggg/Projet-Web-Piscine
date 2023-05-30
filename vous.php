@@ -36,11 +36,11 @@
     </div>
     <nav class="navigation">
         <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE_IN.png" alt="logo_ECE_In" width="115" height="65"></a>
-        <input type="checkbox" id="toggler">
+        <input type="checkbox" id="toggler" placeholder="Rechercher">
         <label for="toggler"><i class="ri-menu-line"></i></label>
         <div class="inputbox">
             <ion-icon name="search-outline"></ion-icon>
-            <input type="text" placeholder="Rechercher" size="22">
+            <input type="text" placeholder="Rechercher">
         </div>
         <div class="menu">
             <ul class="list">
@@ -79,7 +79,7 @@
                 echo "Database not found";
             }//end else
         ?>
-    <button type="submit" >Charger mon CV</button>
+    <div class='bouton'><button type="submit" >Charger mon CV</button></div>
     </div>
 
     <div id="Formation">
