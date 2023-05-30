@@ -38,7 +38,7 @@
             <label for="toggler"><i class="ri-menu-line"></i></label>
             <div class="inputbox">
                 <ion-icon name="search-outline"></ion-icon>
-                <input type="text" placeholder="Rechercher">
+                <input type="text" placeholder="Rechercher" size="22">
             </div>
             <div class="menu">
                 <ul class="list">
