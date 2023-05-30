@@ -127,12 +127,21 @@ body {
     padding: 5px;
     z-index: 2;
 }
-#projet{
+.projet{
     width: 70%;
     display: grid;
     place-items: center;
     background-color: white;
     color:black;
+    padding: 5px;
+    z-index: 2;
+}
+#MonProfil{
+    width: 70%;
+    display: grid;
+    place-items: center;
+    color:black;
+    float:left;
     padding: 5px;
     z-index: 2;
 }

@@ -64,7 +64,7 @@
                     echo "Adresse: " . $data['Adresse'] . "<br>";
                     echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
                     $image = $data['PhotoProfil'];
-                    echo "<img src='$image' height='80' width='100'>" . "<br>";
+                     echo "<div id='PhotoProfil'><img src='$image' height='80' width='100'>" . "<br></div>";
                 }//end while
             }//end if
             //si le BDD n'existe pas
