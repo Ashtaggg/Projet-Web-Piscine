@@ -19,6 +19,7 @@ body {
     border-radius: 5px;
     position: sticky;
     top : 0;
+    z-index: 1;
 }
 
 .navigation a {
@@ -66,6 +67,33 @@ body {
     }
 }
 
+.inputbox{
+    position: relative;
+    width: 250px;
+    height: 35px;
+    border: 2px solid black;
+    border-radius: 22px;
+}
+.inputbox input {
+    width: 100%;
+    height: 50px;
+    margin-left: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    margin-top: -7px;
+}
+.inputbox ion-icon{
+    position: absolute;
+    right: 10px;
+    color: black;
+    font-size: 1.2em;
+    top: 9px;
+    margin-right: 5px;
+}
+
 #Gray_bar{
     background-color: #f5f5f5;
     height: 30px;
@@ -75,6 +103,7 @@ body {
     float:center;
     position: sticky;
     top : 110px;
+    z-index: 1;
 }
 
 #Suggestion_Acc{
@@ -95,6 +124,7 @@ body {
     background-color: white;
     color:black;
     padding: 5px;
+    z-index: 2;
 }
 
 #footer{
@@ -147,7 +177,6 @@ body {
 
 
 #carrousel {
-    position: relative;
     height: 200px;
     width: 700px;
     margin: auto;
@@ -157,12 +186,14 @@ body {
 
 #prev{
     transform: rotate(180deg);
+    display: grid;
     position: absolute;
     top: 400px;
     left: 325px;
 }
 #next{
-    position: absolute;
+    position:absolute;
+    display: grid;
     top: 400px;
     right: 750px;
 }

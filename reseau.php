@@ -29,25 +29,44 @@
     <div id="header">
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
-        <nav class="navigation">
-            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="100" height="100"></a>
-            <input type="checkbox" id="toggler">
-            <label for="toggler"><i class="ri-menu-line"></i></label>
-            <div class="search">
-                <input type="text" placeholder="Rechercher">
-                <i class="ri-search-line"></i>
-            </div>
-            <div class="menu">
-                <ul class="list">
-                    <li><a href="accueil.php">Accueil</a></li>
-                    <li><a href="reseau.php">Mon réseau</a></li>
-                    <li><a href="vous.php">Vous</a></li>
-                    <li><a href="notifications.php">Notifications</a></li>
-                    <li><a href="messagerie.php">Messagerie</a></li>
-                    <li><a href="emplois.php">Emplois</a></li>
-                </ul>
-            </div>
-        </nav>
+    <nav class="navigation">
+        <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
+        <input type="checkbox" id="toggler">
+        <label for="toggler"><i class="ri-menu-line"></i></label>
+        <div class="search">
+            <input type="text" placeholder="Rechercher">
+            <i class="ri-search-line"></i>
+        </div>
+        <div class="menu">
+            <ul class="list">
+                <li><a href="accueil.php">Accueil</a></li>
+                <li><a href="reseau.php">Mon réseau</a></li>
+                <li><a href="vous.php">Vous</a></li>
+                <li><a href="notifications.php">Notifications</a></li>
+                <li><a href="messagerie.php">Messagerie</a></li>
+                <li><a href="emplois.php">Emplois</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="Gray_bar"></div>
+    <div id="section">
+        <h2>Mes Amis</h2>
+        <?php
+
+            //$email = isset($_POST["email"]) ? $_POST["email"] : "";
+
+            /*if ($db_found) {
+                $post = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC";
+                $post_result = mysqli_query($db_handle,$post);
+                while($post_data = mysqli_fetch_assoc($post_result))
+                {
+
+                }
+            }*/
+
+
+        ?>
+    </div>
     <div id="footer">
         <p>Nous contacter : </p>
         <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>
