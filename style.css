@@ -161,6 +161,15 @@ body {
     margin-top:20px;
 }
 
+#menuPoster input{
+    margin-top:20px;
+}
+
+#menuPoster button{
+    margin-top:20px;
+    width: 30%;
+}
+
 .line-1 {
     border-top: 1px solid gainsboro;
 }
