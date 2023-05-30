@@ -108,7 +108,7 @@
                             //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
-                            echo"<p class='Data'><img height=400 src='" . $post_data["Data"] . "' /></p></div>";
+                            echo"<p class='Data'><img height=300 src='" . $post_data["Data"] . "' /></p></div>";
                         }
                     }
                 }
