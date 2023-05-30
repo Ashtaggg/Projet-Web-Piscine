@@ -52,6 +52,29 @@
             </div>
         </nav>
     <div id="Gray_bar"></div>
+    <div id="MonProfil">
+         <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur";
+                $result = mysqli_query($db_handle, $sql);
+                while ($data = mysqli_fetch_assoc($result)) {
+                    echo "ID: " . $data['IDutilisateur'] . "<br>";
+                    echo "Nom:" . $data['Nom'] . "<br>";
+                    echo "Prénom: " . $data['Prenom'] . "<br>";
+                    echo "Adresse: " . $data['Adresse'] . "<br>";
+                    echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
+                    $image = $data['PhotoProfil'];
+                    echo "<img src='$image' height='80' width='100'>" . "<br>";
+                }//end while
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+
+    </div>
     <div id="section">
         <h2>Formations</h2>
     </div>
