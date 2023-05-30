@@ -53,7 +53,7 @@
             </div>
         </nav>
     <div id="Gray_bar"></div>
-    <div id="Suggestion_Acc">
+    <div id="Info_Right">
         <h2>Suggestions</h2>
     </div>
     

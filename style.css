@@ -107,16 +107,22 @@ body {
     z-index: 1;
 }
 
-#Suggestion_Acc{
+#Info_Right{
     float: right;
     width: 25%;
     text-align: center;
     background-color: white;
+    border-radius: 5px;
     color:black;
     padding: 5px;
     position: sticky;
     top : 155px;
 }
+
+
+.line-1 {
+    border-top: 1px solid gainsboro;
+  }
 
 #section{
     width: 70%;
@@ -127,7 +133,7 @@ body {
     padding: 5px;
     z-index: 2;
 }
-.projet{
+#projet{
     width: 70%;
     display: grid;
     place-items: center;
