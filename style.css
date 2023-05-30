@@ -190,13 +190,13 @@ body {
     display: grid;
     position: absolute;
     top: 590px;
-    left: 325px;
+    left: 225px;
 }
 #next{
     position:absolute;
     display: grid;
     top: 590px;
-    right: 950px;
+    right: 570px;
 }
 
 /* --------------------------------------------------------------------------------*/
