@@ -127,7 +127,7 @@ body {
     padding: 5px;
     z-index: 2;
 }
-.projet{
+#projet{
     width: 70%;
     display: grid;
     place-items: center;
