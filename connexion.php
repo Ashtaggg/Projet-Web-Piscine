@@ -55,7 +55,7 @@
                             }
                             else {
                                 echo "<br>Adresse mail OK";
-                                header("Location: accueil.php");
+                                header('Location: accueil.php?email='.$email);
                                 die();
                             }
                         }
