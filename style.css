@@ -189,14 +189,14 @@ body {
     transform: rotate(180deg);
     display: grid;
     position: absolute;
-    top: 400px;
+    top: 590px;
     left: 325px;
 }
 #next{
     position:absolute;
     display: grid;
-    top: 400px;
-    right: 750px;
+    top: 590px;
+    right: 950px;
 }
 
 /* --------------------------------------------------------------------------------*/
