@@ -48,7 +48,8 @@
                 </ul>
             </div>
         </nav>
-        <div id="Formation">
+        <div id="Gray_bar"></div>
+        <div id="section">
             <h2>Formations</h2>
         </div>
     <div id="footer">
