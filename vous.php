@@ -26,6 +26,8 @@
         // $db_handle = mysqli_connect('localhost', 'root', 'root', $database, 8889);
 
         $db_found = mysqli_select_db($db_handle, $database);
+        session_start();
+        $email = isset($_SESSION['email']) ? $_SESSION['email'] : "";
     ?>
 </head>
 <body>

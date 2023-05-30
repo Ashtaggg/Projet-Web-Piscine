@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
     </script>
     <script type="text/javascript" src="carrousel.js"></script>
+    <script type="text/javascript" src="user.js"></script>
     <title>Accueil ECE In</title>
     <?php
         // Identifier le nom de base de données
@@ -26,7 +27,9 @@
         // $db_handle = mysqli_connect('localhost', 'root', 'root', $database, 8889);
 
         $db_found = mysqli_select_db($db_handle, $database);
-        //$email = isset($_POST["email"]) ? $_POST["email"] : "";
+
+        session_start();
+        $email = isset($_SESSION['email']) ? $_SESSION['email'] : "";
     ?>
 </head>
 <body>
@@ -76,7 +79,6 @@
         </br></br></br>
         <img src="images/fleche.png" width="40" id="prev"/>
         <img src="images/fleche.png" width="40" id="next"/>
-
         
         <table>
             <?php

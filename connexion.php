@@ -42,7 +42,9 @@
                     <button name="login">Log in</button>
                 </form>
                 <?php
+                    session_start();
                     $email = isset($_POST["email"]) ? $_POST["email"] : "";
+                    $_SESSION['email'] = $email;
                     if ($db_found) {
                         if (isset($_POST["login"])) {
                             $email_verif = "SELECT * FROM utilisateur WHERE 1 = 1";
@@ -55,7 +57,7 @@
                             }
                             else {
                                 echo "<br>Adresse mail OK";
-                                header("Location: accueil.php");
+                                header('Location: accueil.php');
                                 die();
                             }
                         }
