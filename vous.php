@@ -52,6 +52,9 @@
             </div>
         </nav>
     <div id="Gray_bar"></div>
+    <div id="Info_Right">
+        <h2>Mes amis</h2>
+    </div>
     <div id="MonProfil">
         <br><br>
          <?php
@@ -75,17 +78,15 @@
         ?>
 
     </div>
-    <div id="Gray_bar"></div>
-    <div id="section">
+
+    <div id="Formation">
         <h2>Formations</h2>
     </div>
-    <div id="Gray_bar"></div>
-    <div id="projet">
+
+    <div id="Projet">
         <h2>Projets</h2>
     </div>
-    <div id="MesAmis">
-        <h2>Mes amis</h2>
-    </div>
+
     <div id="footer">
     <p>Nous contacter : </p>
             <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>
