@@ -54,6 +54,7 @@
     <div id="Gray_bar"></div>
     <div id="Info_Right">
         <h2>Mes amis</h2>
+        <div class="line-1"></div>
     </div>
     <div id="MonProfil">
         <br><br>
@@ -82,7 +83,6 @@
     <div id="Formation">
         <h2>Formations</h2>
     </div>
-
     <div id="Projet">
         <h2>Projets</h2>
     </div>
