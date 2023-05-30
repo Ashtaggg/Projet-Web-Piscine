@@ -228,7 +228,7 @@ div.scroll {
 /* --------------------------------------------------------------------------------*/
 
 #Projet{
-    margin-top: 30px;
+    margin-top: 20px;
     width: 70%;
     display: grid;
     place-items: center;
@@ -265,7 +265,11 @@ div.scroll {
     margin-left: -500px;
     float:left;  
 }
-
+.bouton{
+    margin-top:-155px;
+    margin-left: 550px;
+    float:left;      
+}
 
 /* --------------------------------------------------------------------------------*/
 /* -----------------------------------Notifications--------------------------------*/
