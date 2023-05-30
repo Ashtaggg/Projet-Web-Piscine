@@ -38,7 +38,7 @@
             <label for="toggler"><i class="ri-menu-line"></i></label>
             <div class="inputbox">
                 <ion-icon name="search-outline"></ion-icon>
-                <input type="text" placeholder="Rechercher">
+                <input type="text" placeholder="Rechercher" size="22">
             </div>
             <div class="menu">
                 <ul class="list">
@@ -53,19 +53,19 @@
         </nav>
     <div id="Gray_bar"></div>
     <div id="MonProfil">
+        <br><br>
          <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
                 $sql = "SELECT * FROM utilisateur";
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo "ID: " . $data['IDutilisateur'] . "<br>";
                     echo "Nom:" . $data['Nom'] . "<br>";
                     echo "Prénom: " . $data['Prenom'] . "<br>";
                     echo "Adresse: " . $data['Adresse'] . "<br>";
                     echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
                     $image = $data['PhotoProfil'];
-                    echo "<img src='$image' height='80' width='100'>" . "<br>";
+                     echo "<div class='photo'><img src='$image' height='80' width='100'>" . "<br><br></div>";
                 }//end while
             }//end if
             //si le BDD n'existe pas

@@ -127,6 +127,27 @@ body {
     padding: 5px;
     z-index: 2;
 }
+.projet{
+    width: 70%;
+    display: grid;
+    place-items: center;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: 2;
+}
+#MonProfil{
+    background-color: white;
+    width: 70%;
+    display: grid;
+    place-items: center;
+    color:black;
+    margin-top:-10px;
+    margin-left: 0px;
+    float:left;  
+    padding: 5px;
+    z-index: 2;
+}
 
 #footer{
     background-color: white;
@@ -140,6 +161,11 @@ body {
 #googleMaps{
     margin-top:-210px; 
     float:left;
+}
+.photo{
+    margin-top:-75px;
+    margin-left: -500px;
+    float:left;  
 }
 .post{
     background-color: #20838a;
