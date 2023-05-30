@@ -225,7 +225,7 @@ body {
     z-index: 2;
 }
 #Formation{
-    margin-top: 500px;
+    margin-top: 200px;
     width: 70%;
     display: grid;
     place-items: center;
@@ -252,6 +252,7 @@ body {
     margin-left: -500px;
     float:left;  
 }
+
 
 /* --------------------------------------------------------------------------------*/
 /* -----------------------------------Notifications--------------------------------*/
