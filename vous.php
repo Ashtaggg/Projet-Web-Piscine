@@ -59,7 +59,6 @@
                 $sql = "SELECT * FROM utilisateur";
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo "ID: " . $data['IDutilisateur'] . "<br>";
                     echo "Nom:" . $data['Nom'] . "<br>";
                     echo "Prénom: " . $data['Prenom'] . "<br>";
                     echo "Adresse: " . $data['Adresse'] . "<br>";
