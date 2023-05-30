@@ -139,10 +139,38 @@ body {
     padding: 5px;
     z-index: 2;
 }
-
-/* --------------------------------------------------------------------------------*/
-/* -------------------------------------Accueil------------------------------------*/
-/* --------------------------------------------------------------------------------*/
+#Projet{
+    margin-top: 30px;
+    width: 70%;
+    display: grid;
+    place-items: center;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: 2;
+}
+#Formation{
+    margin-top: 500px;
+    width: 70%;
+    display: grid;
+    place-items: center;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: 2;
+}
+#MonProfil{
+    background-color: white;
+    width: 70%;
+    display: grid;
+    place-items: center;
+    color:black;
+    margin-top:-10px;
+    margin-left: 0px;
+    float:left;  
+    padding: 5px;
+    z-index: 2;
+}
 
 .post{
     background-color: #20838a;
