@@ -136,7 +136,7 @@ body {
     margin-bottom:20px;
 }
 
-.boutonPoster button{
+#Poster{
     width: 70%;
     height: 40px;
     margin-left: 10px;
@@ -306,6 +306,11 @@ div.scroll {
     float:left;  
 }
 
+.bouton{
+    margin-top:-115px;
+    margin-left: 551px;
+    float:left;    
+}
 
 /* --------------------------------------------------------------------------------*/
 /* -----------------------------------Notifications--------------------------------*/
