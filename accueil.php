@@ -26,7 +26,7 @@
         // $db_handle = mysqli_connect('localhost', 'root', 'root', $database, 8889);
 
         $db_found = mysqli_select_db($db_handle, $database);
-        $email = isset($_POST["email"]) ? $_POST["email"] : "";
+        //$email = isset($_POST["email"]) ? $_POST["email"] : "";
     ?>
 </head>
 <body>
@@ -39,13 +39,12 @@
             <label for="toggler"><i class="ri-menu-line"></i></label>
             <div class="inputbox">
                 <ion-icon name="search-outline"></ion-icon>
-                <input type="text" placeholder="Rechercher" size="22">
+                <input type="text" placeholder="Rechercher">
             </div>
             <div class="menu">
                 <ul class="list">
                     <li><a href="accueil.php">Accueil</a></li>
-                    <li><a <?php header("Location: accueil.php?email = $email");
-                                die(); ?>>Mon réseau</a></li>
+                    <li><a href="reseau.php">Mon réseau</a></li>
                     <li><a href="vous.php">Vous</a></li>
                     <li><a href="notifications.php">Notifications</a></li>
                     <li><a href="messagerie.php">Messagerie</a></li>
