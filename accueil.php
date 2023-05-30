@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
     </script>
     <script type="text/javascript" src="carrousel.js"></script>
-    <script type="text/javascript" src="user.js"></script>
     <title>Accueil ECE In</title>
     <?php
         // Identifier le nom de base de données
@@ -59,15 +58,19 @@
     <div id="Info_Right">
         <div class='boutonPoster'>
             <form>
-                <button type="submit" id="Poster" onclick="clicked()">Poster Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
+                <button type="submit" id="Poster" onclick="clic()">Poster Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
             </form>
             <script>
-                function clicked(){
+                function clic(){
                     const menu = document.getElementById('menuPoster');
-                    menu.style.display = "block";
+                    if (menu.style.display === "none") {
+                        menu.style.display = "block";
+                    } else {
+                        menu.style.display = "none";
+                    }
                 }
             </script>
-            <ul id="menuPoster">
+            <ul id="menuPoster" style="display: none;">
                 <li><a>jvbksun</a></li>
                 <li><a>jd hbkskj</a></li>
                 <li><a>sjd hkb</a></li>
