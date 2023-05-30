@@ -137,11 +137,14 @@ body {
     z-index: 2;
 }
 #MonProfil{
+    background-color: white;
     width: 70%;
     display: grid;
     place-items: center;
     color:black;
-    float:left;
+    margin-top:-10px;
+    margin-left: 0px;
+    float:left;  
     padding: 5px;
     z-index: 2;
 }
@@ -158,6 +161,11 @@ body {
 #googleMaps{
     margin-top:-210px; 
     float:left;
+}
+.photo{
+    margin-top:-75px;
+    margin-left: -500px;
+    float:left;  
 }
 .post{
     background-color: #20838a;
