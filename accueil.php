@@ -68,14 +68,14 @@
         
         <h2>Actualité ECE In de la Semaine</h2>
 
-        <div id="carrousel">
-            <img src="images/bob.jpg" width="300"/>
-            <img src="images/cars.jpg" width="300"/>
+        <div id="carrousel_all">
+            <img src="images/fleche.png" width="40" id="prev"/>
+            <div id="carrousel">
+                <img src="images/bob.jpg" width="300"/>
+                <img src="images/cars.jpg" width="300"/>
         </div>
-
-        </br></br></br>
-        <img src="images/fleche.png" width="40" id="prev"/>
-        <img src="images/fleche.png" width="40" id="next"/>
+            <img src="images/fleche.png" width="40" id="next"/>
+        </div>
 
         
         <table>
