@@ -54,14 +54,13 @@
     <div id="Info_Right">
         <h2>wesh</h2>
         <div class="line-1"></div>
-        <table border="0">
-            <tr>
-                <td>Mes amis </td>
-            </tr>                
-            <tr>                        
-                <td>Amis de mes Amis</td>
-            </tr>
-        </table>
+        <p>Mes Amis</p>
+        <div class="line-1"></div>
+        <p>Amis de mes Amis</p>
+        <div class="line-1"></div>
+        <p>Les Professeurs</p>
+        <div class="line-1"></div>
+        <p>Les Entreprises</p>
     </div>
     <div id="section">
         <h2>Mes Amis</h2>

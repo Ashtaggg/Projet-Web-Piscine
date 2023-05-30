@@ -34,32 +34,36 @@
     <div id="header">
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
-        <nav class="navigation">
-            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
-            <input type="checkbox" id="toggler">
-            <label for="toggler"><i class="ri-menu-line"></i></label>
-            <div class="inputbox">
-                <ion-icon name="search-outline"></ion-icon>
-                <input type="text" placeholder="Rechercher" size="22">
-            </div>
-            <div class="menu">
-                <ul class="list">
-                    <li><a href="accueil.php">Accueil</a></li>
-                    <li><a href="reseau.php">Mon réseau</a></li>
-                    <li><a href="vous.php">Vous</a></li>
-                    <li><a href="notifications.php">Notifications</a></li>
-                    <li><a href="messagerie.php">Messagerie</a></li>
-                    <li><a href="emplois.php">Emplois</a></li>
-                </ul>
-            </div>
-        </nav>
+    <nav class="navigation">
+        <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
+        <input type="checkbox" id="toggler">
+        <label for="toggler"><i class="ri-menu-line"></i></label>
+        <div class="inputbox">
+            <ion-icon name="search-outline"></ion-icon>
+            <input type="text" placeholder="Rechercher" size="22">
+        </div>
+        <div class="menu">
+            <ul class="list">
+                <li><a href="accueil.php">Accueil</a></li>
+                <li><a href="reseau.php">Mon réseau</a></li>
+                <li><a href="vous.php">Vous</a></li>
+                <li><a href="notifications.php">Notifications</a></li>
+                <li><a href="messagerie.php">Messagerie</a></li>
+                <li><a href="emplois.php">Emplois</a></li>
+            </ul>
+        </div>
+    </nav>
     <div id="Gray_bar"></div>
+    <div id="Info_Right">
+        <h2>Mes amis</h2>
+        <div class="line-1"></div>
+    </div>
     <div id="MonProfil">
         <br><br>
          <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur";
+                $sql = "SELECT * FROM utilisateur where IDutilisateur = 1"; //test pour avoir un seul utilisateur
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
                     echo "Nom:" . $data['Nom'] . "<br>";
@@ -75,15 +79,16 @@
                 echo "Database not found";
             }//end else
         ?>
-
+    <button type="submit" >Charger mon CV</button>
     </div>
-    <div id="section">
+
+    <div id="Formation">
         <h2>Formations</h2>
     </div>
-    <div id="Gray_bar"></div>
-    <div id="projet">
+    <div id="Projet">
         <h2>Projets</h2>
     </div>
+
     <div id="footer">
     <p>Nous contacter : </p>
             <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>
