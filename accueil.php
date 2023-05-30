@@ -56,7 +56,16 @@
     <div id="Suggestion_Acc">
         <h2>Suggestions</h2>
     </div>
+    
     <div id="section">
+    <h2> Un petit mot sur nous !</h1>
+        <p>
+            Bienvenue sur ECE In ! Une plate-frome en ligne permettant à un utilisateur de se connecter à son réseau dans un but professionnel.
+            Vous pourrez également publier vos événements, des photos, des vidéos, votre CV, chercher un emploi et chatter avec votre réseau. 
+
+        </p>
+
+        
         <h2>Actualité ECE In de la Semaine</h2>
 
         <div id="carrousel">
