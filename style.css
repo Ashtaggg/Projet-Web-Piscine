@@ -236,16 +236,20 @@ body {
     transform: rotate(180deg);
     display: grid;
     position: absolute;
-    top: 590px;
+    top: 560px;
     left: 225px;
 }
 #next{
     position:absolute;
     display: grid;
-    top: 590px;
+    top: 560px;
     right: 570px;
 }
-
+#carrousel_all ion-icon{
+    position: absolute;
+    color: black;
+    font-size: 2em;
+}
 #ECEin_Feed{
     margin-top: 40px;
 }
