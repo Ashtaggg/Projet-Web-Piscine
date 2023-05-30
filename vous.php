@@ -57,6 +57,23 @@
     <div id="Info_Right">
         <h2>Mes amis</h2>
         <div class="line-1"></div>
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur "; 
+                $result = mysqli_query($db_handle, $sql);
+                while ($data = mysqli_fetch_assoc($result)) {
+                    echo "Nom:" . $data['Nom'] . "<br>";
+                    echo "Prénom: " . $data['Prenom'] . "<br>";
+                    echo "Adresse: " . $data['Adresse'] . "<br>";
+                    echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
+                }//end while
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
     </div>
     <div id="MonProfil">
         <br><br>
