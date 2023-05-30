@@ -60,7 +60,7 @@
         <h2>Suggestions</h2>
     </div>
     
-    <div id="section">
+    <div class="section">
     <h2> Un petit mot sur nous !</h1>
         <p>
             Bienvenue sur ECE In ! Une plate-frome en ligne permettant à un utilisateur de se connecter à son réseau dans un but professionnel.
