@@ -67,7 +67,7 @@
         <img src="images/fleche.png" width="40" id="prev"/>
         <img src="images/fleche.png" width="40" id="next"/>
 
-
+        
         <table>
             <?php
                 $Date = new DateTime("now");

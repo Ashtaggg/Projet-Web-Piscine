@@ -145,6 +145,7 @@ body {
 
 
 
+
 #carrousel {
     position: relative;
     height: 200px;
@@ -153,6 +154,7 @@ body {
     display: grid;
     place-items: center;
 }
+
 #prev{
     transform: rotate(180deg);
     position: absolute;
