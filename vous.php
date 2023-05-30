@@ -63,7 +63,7 @@
          <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur where IDutilisateur = 1"; //test pour avoir un seul utilisateur
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; //test pour avoir un seul utilisateur
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
                     echo "Nom:" . $data['Nom'] . "<br>";
