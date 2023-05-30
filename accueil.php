@@ -78,28 +78,28 @@
             <h2>Suggestions</h2>
         </div>
     </div>
-    
-    <div class="section">
-    <h2> Un petit mot sur nous !</h1>
+
+    <div id="ECEin_News" class="section">
+        <h2>Un petit mot sur nous</h2>
         <p>
             Bienvenue sur ECE In ! Une plate-frome en ligne permettant à un utilisateur de se connecter à son réseau dans un but professionnel.
             Vous pourrez également publier vos événements, des photos, des vidéos, votre CV, chercher un emploi et chatter avec votre réseau. 
-
         </p>
-
-        
+        </br>
         <h2>Actualité ECE In de la Semaine</h2>
 
         <div id="carrousel_all">
-            <img src="images/fleche.png" width="40" id="prev"/>
+            <ion-icon name="caret-forward-outline" id="prev"></ion-icon>
             <div id="carrousel">
                 <img src="images/bob.jpg" width="300"/>
                 <img src="images/cars.jpg" width="300"/>
             </div>
-            <img src="images/fleche.png" width="40" id="next"/>
+            <ion-icon name="caret-forward-outline" id="next"></ion-icon>
         </div>
-
-        
+        </br>
+    </div>
+    <div id="ECEin_Feed" class="section">
+        <h2>L'actualité de vos Amis</h2>
         <table>
             <?php
                 $Date = new DateTime("now");
@@ -145,7 +145,9 @@
                 }
             ?>
         </table>
+        </br>
     </div>
+
     <div id="footer">
             <p>Nous contacter : </p>
             <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>
