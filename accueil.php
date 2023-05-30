@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
     </script>
     <script type="text/javascript" src="carrousel.js"></script>
-    <script type="text/javascript" src="user.js"></script>
     <title>Accueil ECE In</title>
     <?php
         // Identifier le nom de base de données
@@ -57,30 +56,53 @@
     </nav>
     <div id="Gray_bar"></div>
     <div id="Info_Right">
-        <h2>Suggestions</h2>
+        <div class='boutonPoster'>
+            <form>
+                <button type="submit" id="Poster" onclick="clic()">Poster Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
+            </form>
+            <script>
+                function clic(){
+                    const menu = document.getElementById('menuPoster');
+                    if (menu.style.display === "none") {
+                        menu.style.display = "block";
+                    } else {
+                        menu.style.display = "none";
+                    }
+                }
+            </script>
+            <ul id="menuPoster" style="display: none;">
+                <li><a>jvbksun</a></li>
+                <li><a>jd hbkskj</a></li>
+                <li><a>sjd hkb</a></li>
+            </ul>
+        </div>
+        <div class="line-2"></div>
+        <div id="suggestions">
+            <h2>Suggestions</h2>
+        </div>
     </div>
-    
-    <div class="section">
-    <h2> Un petit mot sur nous !</h1>
+
+    <div id="ECEin_News" class="section">
+        <h2>Un petit mot sur nous</h2>
         <p>
             Bienvenue sur ECE In ! Une plate-frome en ligne permettant à un utilisateur de se connecter à son réseau dans un but professionnel.
             Vous pourrez également publier vos événements, des photos, des vidéos, votre CV, chercher un emploi et chatter avec votre réseau. 
-
         </p>
-
-        
+        </br>
         <h2>Actualité ECE In de la Semaine</h2>
 
         <div id="carrousel_all">
-            <img src="images/fleche.png" width="40" id="prev"/>
+            <ion-icon name="caret-forward-outline" id="prev"></ion-icon>
             <div id="carrousel">
                 <img src="images/bob.jpg" width="300"/>
                 <img src="images/cars.jpg" width="300"/>
             </div>
-            <img src="images/fleche.png" width="40" id="next"/>
+            <ion-icon name="caret-forward-outline" id="next"></ion-icon>
         </div>
-
-        
+        </br>
+    </div>
+    <div id="ECEin_Feed" class="section">
+        <h2>L'actualité de vos Amis</h2>
         <table>
             <?php
                 $Date = new DateTime("now");
@@ -126,7 +148,9 @@
                 }
             ?>
         </table>
+        </br>
     </div>
+
     <div id="footer">
             <p>Nous contacter : </p>
             <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>

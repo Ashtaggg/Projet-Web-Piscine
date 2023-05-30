@@ -64,7 +64,7 @@
     </div>
     <div class="inputbox_res">
             <ion-icon name="search-outline"></ion-icon>
-            <input type="text" placeholder="Rechercher">
+            <input type="text" placeholder="Rechercher des Contacts">
         </div>
     <div id="Sec_Amis" class="section">
         <h2>Mes Amis</h2>

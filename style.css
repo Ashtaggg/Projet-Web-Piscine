@@ -2,6 +2,7 @@
 html {
     scroll-behavior: smooth;
 }
+
 /*---------------------------Body--------------------------*/
 body {
     padding: 1em;
@@ -130,9 +131,45 @@ body {
     margin-bottom: 288px;
 }
 
+.boutonPoster{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.boutonPoster button{
+    width: 70%;
+    height: 40px;
+    margin-left: 10px;
+    background: transparent;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    margin-top: -7px;
+    border-radius: 22px;
+}
+
+.boutonPoster ion-icon{
+    position: absolute;
+    right: 60px;
+    color: black;
+    font-size: 1.8em;
+    top: 23px;
+    margin-right: 5px;
+}
+
+#suggestions{
+    margin-top:20px;
+}
+
 .line-1 {
     border-top: 1px solid gainsboro;
-  }
+}
+
+.line-2 {
+    border-top: 40px solid #f5f5f5;
+    margin-left: -5px;
+    width: 105%;
+}
 
 .section{
     width: 70%;
@@ -225,37 +262,6 @@ div.scroll {
     overflow-x: hidden;
     overflow-y: auto;
     text-align:justify;
-    border: 1px solid gainsboro;
-    border-radius: 10px;
-}
-.inputbox_res{
-    position: relative;
-    width: 68%;
-    height: 35px;
-    border: 2px solid gainsboro;
-    border-radius: 10px;
-    margin-left: 15px;
-    margin-bottom: 40px;
-}
-.inputbox_res input {
-    width: 100%;
-    height: 50px;
-    margin-left: 10px;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1em;
-    color: black;
-    margin-top: -7px;
-}
-
-.inputbox_res ion-icon{
-    position: absolute;
-    right: 10px;
-    color: black;
-    font-size: 1.2em;
-    top: 9px;
-    margin-right: 5px;
 }
 /* --------------------------------------------------------------------------------*/
 /* ---------------------------------------Vous-------------------------------------*/
@@ -299,11 +305,15 @@ div.scroll {
     margin-left: -500px;
     float:left;  
 }
+<<<<<<< HEAD
 .bouton{
     margin-top:-115px;
     margin-left: 551px;
     float:left;    
 }
+=======
+
+>>>>>>> 3ee8632ae5258bca1b50ac1610ca4ebebe7acacd
 
 /* --------------------------------------------------------------------------------*/
 /* -----------------------------------Notifications--------------------------------*/
