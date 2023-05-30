@@ -52,7 +52,7 @@
     </nav>
     <div id="Gray_bar"></div>
     <div id="Info_Right">
-        <h2>wesh</h2>
+        <h2>Gérer mon réseau</h2>
         <div class="line-1"></div>
         <p>Mes Amis</p>
         <div class="line-1"></div>
@@ -62,23 +62,17 @@
         <div class="line-1"></div>
         <p>Les Entreprises</p>
     </div>
-    <div id="section">
+    <div id="Sec_Amis" class="section">
         <h2>Mes Amis</h2>
-        <?php
-
-            //$email = isset($_POST["email"]) ? $_POST["email"] : "";
-
-            /*if ($db_found) {
-                $post = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC";
-                $post_result = mysqli_query($db_handle,$post);
-                while($post_data = mysqli_fetch_assoc($post_result))
-                {
-
-                }
-            }*/
-
-
-        ?>
+        <div class="scroll">
+            <p>Ami 1 </br></br></br></br></br></br></br></br></br></br>Ami 1</p>
+        </div>
+    </div>
+    <div id="Sec_AmisAmis" class="section">
+        <h2>Amis de mes Amis</h2>
+        <div class="scroll">
+            <p>Ami 1</br></br></br></br></br></br></br></br></br></br>Ami 1</p>
+        </div>
     </div>
     <div id="footer">
         <p>Nous contacter : </p>
