@@ -76,7 +76,7 @@
             <div id="carrousel">
                 <img src="images/bob.jpg" width="300"/>
                 <img src="images/cars.jpg" width="300"/>
-        </div>
+            </div>
             <img src="images/fleche.png" width="40" id="next"/>
         </div>
 
