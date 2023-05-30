@@ -75,12 +75,16 @@
         ?>
 
     </div>
+    <div id="Gray_bar"></div>
     <div id="section">
         <h2>Formations</h2>
     </div>
     <div id="Gray_bar"></div>
     <div id="projet">
         <h2>Projets</h2>
+    </div>
+    <div id="MesAmis">
+        <h2>Mes amis</h2>
     </div>
     <div id="footer">
     <p>Nous contacter : </p>
