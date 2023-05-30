@@ -185,6 +185,11 @@ body {
     display: grid;
     place-items: center;
 }
+#carrousel_all {
+    margin: auto;
+    display: flex;
+    place-items: center;
+}
 
 #prev{
     transform: rotate(180deg);
