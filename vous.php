@@ -35,7 +35,7 @@
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
     <nav class="navigation">
-        <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
+        <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE_IN.png" alt="logo_ECE_In" width="115" height="65"></a>
         <input type="checkbox" id="toggler">
         <label for="toggler"><i class="ri-menu-line"></i></label>
         <div class="inputbox">
@@ -63,7 +63,7 @@
          <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur where IDutilisateur = 1"; //test pour avoir un seul utilisateur
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
                     echo "Nom:" . $data['Nom'] . "<br>";
