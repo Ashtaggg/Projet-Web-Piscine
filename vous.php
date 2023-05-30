@@ -33,12 +33,12 @@
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
         <nav class="navigation">
-            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="100" height="100"></a>
+            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
             <input type="checkbox" id="toggler">
             <label for="toggler"><i class="ri-menu-line"></i></label>
-            <div class="search">
+            <div class="inputbox">
+                <ion-icon name="search-outline"></ion-icon>
                 <input type="text" placeholder="Rechercher">
-                <i class="ri-search-line"></i>
             </div>
             <div class="menu">
                 <ul class="list">
@@ -52,6 +52,29 @@
             </div>
         </nav>
     <div id="Gray_bar"></div>
+    <div id="MonProfil">
+         <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur";
+                $result = mysqli_query($db_handle, $sql);
+                while ($data = mysqli_fetch_assoc($result)) {
+                    echo "ID: " . $data['IDutilisateur'] . "<br>";
+                    echo "Nom:" . $data['Nom'] . "<br>";
+                    echo "Prénom: " . $data['Prenom'] . "<br>";
+                    echo "Adresse: " . $data['Adresse'] . "<br>";
+                    echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
+                    $image = $data['PhotoProfil'];
+                    echo "<img src='$image' height='80' width='100'>" . "<br>";
+                }//end while
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+
+    </div>
     <div id="section">
         <h2>Formations</h2>
     </div>

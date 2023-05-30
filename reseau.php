@@ -33,10 +33,10 @@
         <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
         <input type="checkbox" id="toggler">
         <label for="toggler"><i class="ri-menu-line"></i></label>
-        <div class="search">
-            <input type="text" placeholder="Rechercher">
-            <i class="ri-search-line"></i>
-        </div>
+        <div class="inputbox">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" placeholder="Rechercher">
+            </div>
         <div class="menu">
             <ul class="list">
                 <li><a href="accueil.php">Accueil</a></li>
