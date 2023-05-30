@@ -57,7 +57,26 @@
     </nav>
     <div id="Gray_bar"></div>
     <div id="Info_Right">
-        <h2>Suggestions</h2>
+        <div class='boutonPoster'>
+            <form>
+                <button type="submit" id="Poster" onclick="clicked()">Poster Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
+            </form>
+            <script>
+                function clicked(){
+                    const menu = document.getElementById('menuPoster');
+                    menu.style.display = "block";
+                }
+            </script>
+            <ul id="menuPoster">
+                <li><a>jvbksun</a></li>
+                <li><a>jd hbkskj</a></li>
+                <li><a>sjd hkb</a></li>
+            </ul>
+        </div>
+        <div class="line-2"></div>
+        <div id="suggestions">
+            <h2>Suggestions</h2>
+        </div>
     </div>
     
     <div class="section">
