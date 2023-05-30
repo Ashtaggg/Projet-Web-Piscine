@@ -29,34 +29,34 @@
     <div id="header">
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
-        <nav class="navigation">
-            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
-            <input type="checkbox" id="toggler">
-            <label for="toggler"><i class="ri-menu-line"></i></label>
-            <div class="inputbox">
-                <ion-icon name="search-outline"></ion-icon>
-                <input type="text" placeholder="Rechercher" size="22">
-            </div>
-            <div class="menu">
-                <ul class="list">
-                    <li><a href="accueil.php">Accueil</a></li>
-                    <li><a href="reseau.php">Mon réseau</a></li>
-                    <li><a href="vous.php">Vous</a></li>
-                    <li><a href="notifications.php">Notifications</a></li>
-                    <li><a href="messagerie.php">Messagerie</a></li>
-                    <li><a href="emplois.php">Emplois</a></li>
-                </ul>
-            </div>
-        </nav> 
-        <div id="footer">
-            <p>Nous contacter : </p>
-            <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>
-            <p>Tel: 01 44 39 06 00 </p>
-            <P>Adresse: 10, Rue Sextius Michel</p>
-            <p></br></br>Droit d'auteur | Copyright © 2023</p>
-             <div id="googleMaps">
-                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.3662947158255!2d2.2859909764319983!3d48.851225171331286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685365414049!5m2!1sfr!2sfr" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+    <nav class="navigation">
+        <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
+        <input type="checkbox" id="toggler">
+        <label for="toggler"><i class="ri-menu-line"></i></label>
+        <div class="inputbox">
+            <ion-icon name="search-outline"></ion-icon>
+            <input type="text" placeholder="Rechercher" size="22">
         </div>
+        <div class="menu">
+            <ul class="list">
+                <li><a href="accueil.php">Accueil</a></li>
+                <li><a href="reseau.php">Mon réseau</a></li>
+                <li><a href="vous.php">Vous</a></li>
+                <li><a href="notifications.php">Notifications</a></li>
+                <li><a href="messagerie.php">Messagerie</a></li>
+                <li><a href="emplois.php">Emplois</a></li>
+            </ul>
+        </div>
+    </nav> 
+    <div id="footer">
+        <p>Nous contacter : </p>
+        <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>
+        <p>Tel: 01 44 39 06 00 </p>
+        <P>Adresse: 10, Rue Sextius Michel</p>
+        <p></br></br>Droit d'auteur | Copyright © 2023</p>
+            <div id="googleMaps">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.3662947158255!2d2.2859909764319983!3d48.851225171331286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685365414049!5m2!1sfr!2sfr" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
 </body>
 </html>
