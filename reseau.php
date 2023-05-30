@@ -49,6 +49,18 @@
         </div>
     </nav>
     <div id="Gray_bar"></div>
+    <div id="Info_Right">
+        <h2>wesh</h2>
+        <div class="line-1"></div>
+        <table border="0">
+            <tr>
+                <td>Mes amis </td>
+            </tr>                
+            <tr>                        
+                <td>Amis de mes Amis</td>
+            </tr>
+        </table>
+    </div>
     <div id="section">
         <h2>Mes Amis</h2>
         <?php
