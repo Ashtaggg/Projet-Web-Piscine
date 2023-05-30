@@ -63,10 +63,10 @@
                 $sql = "SELECT * FROM utilisateur "; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo "Nom:" . $data['Nom'] . "<br>";
-                    echo "Prénom: " . $data['Prenom'] . "<br>";
-                    echo "Adresse: " . $data['Adresse'] . "<br>";
-                    echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
+                    echo  $data['Nom'] . "<br>";
+                    echo  $data['Prenom'] . "<br>";
+                    $image = $data['PhotoProfil'];
+                    echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
                 }//end while
             }//end if
             //si le BDD n'existe pas

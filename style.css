@@ -136,7 +136,7 @@ body {
     margin-bottom:20px;
 }
 
-#Poster{
+.boutonPoster button{
     width: 70%;
     height: 40px;
     margin-left: 10px;
@@ -305,13 +305,11 @@ div.scroll {
     margin-left: -500px;
     float:left;  
 }
-
-.bouton{
-    margin-top:-115px;
-    margin-left: 551px;
-    float:left;    
+.photoAmis{
+    margin-top:-25px;
+    margin-left: -200px;
+    float:left;      
 }
-
 .bouton{
     margin-top:-115px;
     margin-left: 551px;
