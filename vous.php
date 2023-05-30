@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css" />
+
+
+
     <title>Mon Espace ECE In</title>
     <?php
         // Identifier le nom de base de données
@@ -48,9 +51,14 @@
                 </ul>
             </div>
         </nav>
-        <div id="Formation">
-            <h2>Formations</h2>
-        </div>
+    <div id="Gray_bar"></div>
+    <div id="section">
+        <h2>Formations</h2>
+    </div>
+    <div id="Gray_bar"></div>
+    <div id="projet">
+        <h2>Projets</h2>
+    </div>
     <div id="footer">
     <p>Nous contacter : </p>
             <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>

@@ -126,6 +126,15 @@ body {
     padding: 5px;
     z-index: 2;
 }
+#projet {
+    width: 70%;
+    display: grid;
+    place-items: center;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: 2;
+}
 
 #footer{
     background-color: white;
