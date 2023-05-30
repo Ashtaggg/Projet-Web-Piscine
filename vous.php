@@ -33,12 +33,12 @@
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
         <nav class="navigation">
-            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="100" height="100"></a>
+            <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE.png" alt="logo_ECE_In" width="75" height="75"></a>
             <input type="checkbox" id="toggler">
             <label for="toggler"><i class="ri-menu-line"></i></label>
-            <div class="search">
+            <div class="inputbox">
+                <ion-icon name="search-outline"></ion-icon>
                 <input type="text" placeholder="Rechercher">
-                <i class="ri-search-line"></i>
             </div>
             <div class="menu">
                 <ul class="list">
