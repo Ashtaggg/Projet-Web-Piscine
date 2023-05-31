@@ -50,6 +50,18 @@
             </ul>
         </div>
     </nav>
+    <div id="Gray_bar"></div>
+    <div id="Info_Right">
+        <h3>Jobs auxquels vous avez postulé :</h3>
+        <div class="line-1"></div>
+    </div>
+    <div id="Section" class="section">
+        <h2>Emplois disponibles</h2>
+        <div class="scroll">
+            <p>Emploi 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Emploi n</p>
+        </div>
+        </br>
+    </div>
     <div id="footer">
         <p>Nous contacter : </p>
         <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>
