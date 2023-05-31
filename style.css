@@ -353,7 +353,7 @@ div.scroll {
     z-index: 2;
 }
 #Formation{
-    margin-top: 200px;
+    margin-top: 250px;
     width: 70%;
     display: grid;
     place-items: center;
@@ -397,7 +397,7 @@ div.scroll {
     float:left;      
 }
 .bouton{
-    margin-top:-155px;
+    margin-top:-195px;
     margin-left: 551px;
     float:left;    
 }
