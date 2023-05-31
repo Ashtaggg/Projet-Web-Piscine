@@ -178,6 +178,8 @@ body {
 
 .line-1 {
     border-top: 1px solid gainsboro;
+    z-index: -1;
+    width: 100%;
 }
 
 .line-2 {
@@ -381,10 +383,11 @@ div.scroll {
     float:left;    
 }
 
-#plus{
-    margin-top: 10px;
-    margin-right: 50px;
-    float: right;
+#plusFormation{
+    margin-top:-100px;
+    margin-left: 800px;
+    float:left;
+    font-size: 20px;
 }
 
 /* --------------------------------------------------------------------------------*/
@@ -397,7 +400,28 @@ div.scroll {
 /* ------------------------------------Messagerie----------------------------------*/
 /* --------------------------------------------------------------------------------*/
 
-
+#Messagerie{
+    display: flex;
+    justify-content: center;
+    place-items: center;
+}
+#Messages{
+    width: 30%;
+    place-items: center;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: -1;
+}
+#Chat{
+    margin-left: 40px;
+    width: 50%;
+    place-items: center;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: -1;
+}
 
 /* --------------------------------------------------------------------------------*/
 /* --------------------------------------Emplois-----------------------------------*/
