@@ -321,13 +321,15 @@ div.scroll {
 /* ---------------------------------------Vous-------------------------------------*/
 /* --------------------------------------------------------------------------------*/
 
-#Projet{
-    margin-top: 30px;
+#MonProfil{
+    background-color: white;
     width: 70%;
     display: grid;
     place-items: center;
-    background-color: white;
     color:black;
+    margin-top:-10px;
+    margin-left: 0px;
+    float:left;  
     padding: 5px;
     z-index: 2;
 }
@@ -341,17 +343,28 @@ div.scroll {
     padding: 5px;
     z-index: 2;
 }
-#MonProfil{
-    background-color: white;
+#Projet{
+    margin-top: 30px;
     width: 70%;
     display: grid;
     place-items: center;
+    background-color: white;
     color:black;
-    margin-top:-10px;
-    margin-left: 0px;
-    float:left;  
     padding: 5px;
     z-index: 2;
+}
+
+
+#MesPost{
+    margin-top: 20px;
+    width: 70%;
+    display: grid;
+    place-items: center;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: 2;
+
 }
 
 .photo{
@@ -368,6 +381,13 @@ div.scroll {
     margin-top:-155px;
     margin-left: 551px;
     float:left;    
+}
+
+#plusFormation{
+    margin-top:-100px;
+    margin-left: 800px;
+    float:left;
+    font-size: 20px;
 }
 
 /* --------------------------------------------------------------------------------*/

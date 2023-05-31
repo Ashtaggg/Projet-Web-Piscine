@@ -83,7 +83,7 @@
                 $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo "Nom:" . $data['Nom'] . "<br>";
+                    echo "Nom: " . $data['Nom'] . "<br>";
                     echo "Prénom: " . $data['Prenom'] . "<br>";
                     echo "Adresse: " . $data['Adresse'] . "<br>";
                     echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
@@ -96,17 +96,99 @@
                 echo "Database not found";
             }//end else
         ?>
-    <div class='bouton'><button type="submit" >Charger mon CV</button></div>
-    <br><br>
-    <div class='bouton'>
-        <button type="submit">se déconnecter</button> 
+        <div class='bouton'><button type="submit" >Charger mon CV</button></div>
+        <br><br>
+        <div class='bouton'>
+            <a href="connexion.php"><button>se déconnecter</button></a>
+        </div>
     </div>
-    </div>
-    <div id="Formation">
+    
+    <div id="Formation">  
         <h2>Formations</h2>
+        <button id="plusFormation"onclick="clic()"><ion-icon name="add-circle-outline"></ion-icon></button>
+        
+        <div id="menuPoster" style="display: none;" style="list-style: none;">
+                <form method="post">
+                    <input type="text" name="Legende"></br>
+                    <input type="file" name="Data"></br>
+                    <button id="PosterFinal" type="submit" name="PosterFinal" value="10">Poster</button>
+                    
+                </form>
+            </div>
+            <script>
+                function clic(){
+                    const menu = document.getElementById('menuPoster');
+                    if (menu.style.display === "none") {
+                        menu.style.display = "block";
+                    } else {
+                        menu.style.display = "none";
+                    }
+                }
+            </script>
+
     </div>
     <div id="Projet">
         <h2>Projets</h2>
+    </div>
+    <div id="MesPost">
+        <h2>Mes posts</h2>
+        <table>
+            <?php
+                $Date = new DateTime("now");
+                $Date->modify("-7 day");
+                $Date->modify("+2 hours");
+                $Date = $Date->format('Y-m-d H:i:s');
+                if ($db_found) {
+                    $post = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC";
+                    $post_result = mysqli_query($db_handle,$post);
+                    while($post_data = mysqli_fetch_assoc($post_result))
+                    {
+                        $IDutilisateur = $post_data["Envoyeur"];
+                        $utilisateur = "SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$IDutilisateur%'";
+                        $utilisateur_result = mysqli_query($db_handle,$utilisateur);
+                        while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
+                        {
+                            if($IDutilisateur == $utilisateur){
+                                $Date1 = new DateTime("now");
+                                $Date1->modify("+2 hours");
+                                $Date1 = $Date1->format('Y-m-d H:i:s');
+                                $Date1 = strtotime($Date1);
+                                $Date2 = strtotime($post_data["Date"]);
+                                $DateDiff = $Date1 - $Date2;
+                                $DateDiff = $DateDiff/86400;
+                            
+                                 echo"<div class='post'><p class='PhotoProfil'><br><br><img height=75 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
+                                 echo"<p class='Nom'>" . $utilisateur_data["Prenom"] . " " . $utilisateur_data["Nom"] . "</p>";
+                                if($DateDiff >=1){
+                                     $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                     echo"<p class='Date'>" . $DateDiff . " j</p>";
+                                }
+                                else if($DateDiff * 24 >=1){
+                                    $DateDiff = $DateDiff * 24;
+                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                    echo"<p class='Date'>" . $DateDiff . " h</p>";
+                                }
+                                 else if($DateDiff * 24 * 60 >=1){
+                                    $DateDiff = $DateDiff * 24 * 60;
+                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                    echo"<p class='Date'>" . $DateDiff . " min</p>";
+                                }
+                                else{
+                                    $DateDiff = $DateDiff * 24 * 60 * 60;
+                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                    echo"<p class='Date'>" . $DateDiff . " sec</p>";
+                                }
+                                //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
+                                echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
+
+                                echo"<p class='Data'><img height=300 src='" . $post_data["Data"] . "' /></p></div>";
+                        }
+                        }
+                    }
+                }
+            ?>
+        </table>
+        </br>
     </div>
 
     <div id="footer">
