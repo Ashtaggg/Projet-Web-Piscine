@@ -189,40 +189,10 @@
                 <input type="text" id="domaine" name="domaine" placeholder="Ex: Economie"><br><br>
 
                 <label for="dateDeb">Date de début</label><br>
-                <select name="debut" required>
-                <option value="">Mois</option>
-                        <option value="janvier">janvier</option>
-                        <option value="fevrier">fevrier</option>
-                        <option value="mars">mars</option>
-                        <option value="avril">avril</option>
-                        <option value="mai">mai</option>
-                        <option value="juin">juin</option>
-                        <option value="juillet">juillet</option>
-                        <option value="aout">aout</option>
-                        <option value="septembre">septembre</option>
-                        <option value="octobre">octobre</option>
-                        <option value="novembre">novembre</option>
-                        <option value="decembre">decembre</option>
-                </select>
-                <input type="number" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br>
+                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br>
                 
                 <label for="dateFin">Date de fin (ou prévue)</label><br>
-                <select name="fin"required>
-                <option value="">Mois</option>
-                        <option value="janvier2">janvier</option>
-                        <option value="fevrier2">fevrier</option>
-                        <option value="mars2">mars</option>
-                        <option value="avril2">avril</option>
-                        <option value="mai2">mai</option>
-                        <option value="juin2">juin</option>
-                        <option value="juillet2">juillet</option>
-                        <option value="aout2">aout</option>
-                        <option value="septembre2">septembre</option>
-                        <option value="octobre2">octobre</option>
-                        <option value="novembre2">novembre</option>
-                        <option value="decembre2">decembre</option>
-                </select>
-                <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
+                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
                 
                 <label for="descriptif">Descriptif</label><br>
                 
