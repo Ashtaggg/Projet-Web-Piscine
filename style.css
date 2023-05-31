@@ -422,6 +422,17 @@ div.scroll {
     display: none;
     z-index: 2;
   }
+
+  .modification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 2;
+  }
   
 .form-container {
     position: absolute;
