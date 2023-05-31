@@ -70,7 +70,7 @@
                      $Date->modify("+2 hours");
                      $Date = $Date->format('Y-m-d H:i:s');
                      if ($db_found) {
-                         $message = "SELECT * FROM message ORDER BY Date DESC";
+                         $message = "SELECT * FROM ( SELECT IDmessage, Envoyeur, Recepteur, Date, Contenu, Statut, ROW_NUMBER() OVER(PARTITION BY Envoyeur ORDER BY Date DESC) rn FROM message ) a WHERE rn = 1;";
                          $message_result = mysqli_query($db_handle,$message);
                          while($message_data = mysqli_fetch_assoc($message_result))
                          {

@@ -57,7 +57,7 @@
     <div id="Gray_bar"></div>
     <div id="Info_Right">
         <div class='boutonPoster'>
-            <button id="Poster" onclick="clic()">Ajouter Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
+            <button id="Poster" onclick="clic()">Ajouter Une Publication<ion-icon name="add-circle-outline"></ion-icon></button>
             <div id="menuPoster" style="display: none;" style="list-style: none;">
                 <form method="post">
                     <input type="text" name="Legende"></br>
