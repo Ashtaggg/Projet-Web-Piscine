@@ -108,6 +108,9 @@
     <div id="Projet">
         <h2>Projets</h2>
     </div>
+    <div id="MesPost">
+        <h2>Mes posts</h2>
+    </div>
 
     <div id="footer">
     <p>Nous contacter : </p>
