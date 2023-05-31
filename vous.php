@@ -27,18 +27,20 @@
         session_start();
         $email = isset($_SESSION['email']) ? $_SESSION['email'] : "";
     ?>
+    <script>
+        function limitWords() {
+            var textarea = document.getElementById("myTextarea");
+            var words = textarea.value.trim().split(/\s+/); // Divise le contenu en mots
+            var maxWords = 10; // Limite maximale de mots
+      
+            if (words.length > maxWords) {
+                // Si le nombre de mots dépasse la limite
+                alert("La limite maximale de mots est de " + maxWords);
+                textarea.value = words.slice(0, maxWords).join(" "); // Réduit le texte aux premiers mots
+            }
+        }
+  </script>
 
-<script>
-  function validateForm() {
-    var dateDeb = document.getElementById("dateDeb").value;
-    var dateFin = document.getElementById("dateFin").value;
-
-    if (dateDeb > dateFin) {
-      alert("La date de fin doit être postérieure ou égale à la date de début.");
-      return false;
-    }
-  }
-</script>
 
 </head>
 <body>
@@ -199,31 +201,21 @@
                 <label for="domaine">Domaine d'études</label></br>
                 <input type="text" id="domaine" name="domaine" placeholder="Ex: Economie"><br><br>
 
-                <form onsubmit="return validateForm()">
-                    <label for="dateDeb">Date de début</label><br>
-                    <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br>
                 
-                    <label for="dateFin">Date de fin (ou prévue)</label><br>
-                    <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
+                <label for="dateDeb">Date de début</label><br>
+                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br>
+                
+                <label for="dateFin">Date de fin (ou prévue)</label><br>
+                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
   
-                    <input type="submit" value="Envoyer">
-                </form>
 
-                
-
-                
                 <label for="descriptif">Descriptif</label><br>
-                
-                <div class="description">
-                    <div class="rectangle">
-                    <input type="text" placeholder="Entrez votre texte">
-                    </div>
-                </div> 
+                <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
+            
                 <br><br><br><br><br><br>               
                 <input type="submit" value="Envoyer">
 
-                <br><br><br><br><br><br><br>
-            </form>
+                <br><br>
         </div>
     </div>
   
