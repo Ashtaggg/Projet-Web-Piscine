@@ -186,27 +186,35 @@
                                 $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                 echo"<p class='Date'>" . $DateDiff . " sec</p>";
                             }
-                            //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
                             echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
 
-                            echo"<div class='post2'><form method='post'><button class='Like'><ion-icon name='heart-outline'></ion-icon></button><p class='nbrLike'>" . $post_data["Like"] . "</p></form></div></div>";
-                            if (isset($_POST["Like"]) && !(empty($_POST['Like']))) {
-                        
-                                $Like = $post_data["Aime"] + 1;
-                                $sql = "UPDATE post SET Aime = $Like WHERE IDpost = $post_data['IDpost']";
+                            echo"<div class='post2' ><form method='post'><button class='Like' name='Like' id='button_" . $post_data['IDpost'] . "' onclick='like(this)'><ion-icon name='heart-outline'></ion-icon></button><p class='nbrLike'>" . $post_data["Aime"] . "</p></form></div></div>";
+                            $Like = $post_data["Aime"] + 1;
+                            /*if (isset($_POST["Like"]) && !(empty($_POST['Like']))) {
+                                $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$post_data['IDpost']}";
         
-                                $result = mysqli_query($db_handle, $sql);
-                                if ($result) {
+                                $result2 = mysqli_query($db_handle, $sql);
+                                if ($result2) {
                                     header('Location: accueil.php');
                                     die();
                                 }
                             }
+                            else{
+                                $sql = "";
+                            }
+                            echo$Like;*/
                         }
                     }
                 }
             ?>
+            <script>
+                    function like(element){
+                         const IDpost = element.id;
+                         console.log(IDpost);
+                    }
+            </script>
         </table>
         </br>
     </div>

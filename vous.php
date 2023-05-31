@@ -63,11 +63,15 @@
                 $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo  $data['Amis'] . "<br>";
-                    //echo  $data['Prenom'] . "<br>";
-                    //$image = $data['PhotoProfil'];
-                    //echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
-                }//end while
+                    $Amis = "SELECT * FROM utilisateur WHERE IDutilisateur IN (SELECT Amis FROM utilisateur where Mail like '%$email%')";
+                    $Amis_result = mysqli_query($db_handle, $Amis);
+                    while($Amis_data = mysqli_fetch_assoc($Amis_result)){
+                        echo  $data['Amis'] . "<br>";
+                        echo  $Amis_data['Prenom'] . "<br>";
+                        //$image = $data['PhotoProfil'];
+                        //echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
+                    }//end while
+                }
             }//end if
             //si le BDD n'existe pas
             else {
@@ -101,6 +105,8 @@
         <div class='bouton'>
             <a href="connexion.php"><button>se déconnecter</button></a>
         </div>
+        <br><br>
+        <div class='bouton'><button type="submit" >Modifier mon profil</button></div>
     </div>
     
     <div id="Formation">  

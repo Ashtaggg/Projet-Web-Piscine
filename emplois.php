@@ -60,7 +60,6 @@
         <div class="scroll">
             <p>Emploi 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Emploi n</p>
         </div>
-        </br>
     </div>
     <div id="footer">
         <p>Nous contacter : </p>
