@@ -44,12 +44,12 @@
         </div>
         <div class="menu">
             <ul class="list">
-                <li><a href="accueil.php">Accueil</a></li>
-                <li><a href="reseau.php">Mon réseau</a></li>
-                <li><a href="vous.php">Vous</a></li>
-                <li><a href="notifications.php">Notifications</a></li>
-                <li><a href="messagerie.php">Messagerie</a></li>
-                <li><a href="emplois.php">Emplois</a></li>
+                <li><a class="oncolor" href="accueil.php">Accueil</a></li>
+                <li><a class="oncolor" href="reseau.php">Mon réseau</a></li>
+                <li><a class="oncolor" href="vous.php" style="color : #037078">Vous</a></li>
+                <li><a class="oncolor" href="notifications.php">Notifications</a></li>
+                <li><a class="oncolor" href="messagerie.php">Messagerie</a></li>
+                <li><a class="oncolor" href="emplois.php">Emplois</a></li>
             </ul>
         </div>
     </nav>
@@ -60,13 +60,13 @@
         <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur "; 
+                $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo  $data['Nom'] . "<br>";
-                    echo  $data['Prenom'] . "<br>";
-                    $image = $data['PhotoProfil'];
-                    echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
+                    echo  $data['Amis'] . "<br>";
+                    //echo  $data['Prenom'] . "<br>";
+                    //$image = $data['PhotoProfil'];
+                    //echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
                 }//end while
             }//end if
             //si le BDD n'existe pas
@@ -97,6 +97,10 @@
             }//end else
         ?>
     <div class='bouton'><button type="submit" >Charger mon CV</button></div>
+    <br><br>
+    <div class='bouton'>
+        <button type="submit">se déconnecter</button> 
+    </div>
     </div>
     <div id="Formation">
         <h2>Formations</h2>

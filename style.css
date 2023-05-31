@@ -52,18 +52,10 @@ body {
     gap: 25px;
 }
 
-a::before {
-    content: "";
-    position: absolute;
-    bottom: 40px;
-    width: 0;
-    height: 2px;
-    background-color: black;
-    transition: width 0.5s ease-out;
-  }
-a:hover::before {
-    width: 80px;
-  }
+.oncolor:hover {
+    color: #037078;
+    transition: 0.25s;
+}
 
 
 #toggler, .navigation label {
@@ -210,7 +202,7 @@ a:hover::before {
 /* --------------------------------------------------------------------------------*/
 
 .post{
-    background-color: #20838a;
+    background-color: #037078;
     color:white;
     width: 53%;
     border-radius: 2%;
@@ -259,13 +251,13 @@ a:hover::before {
     transform: rotate(180deg);
     display: grid;
     position: absolute;
-    top: 560px;
+    top: 570px;
     left: 225px;
 }
 #next{
     position:absolute;
     display: grid;
-    top: 560px;
+    top: 570px;
     right: 570px;
 }
 #carrousel_all ion-icon{
@@ -371,7 +363,7 @@ div.scroll {
     float:left;      
 }
 .bouton{
-    margin-top:-115px;
+    margin-top:-155px;
     margin-left: 551px;
     float:left;    
 }
