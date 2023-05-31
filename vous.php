@@ -83,7 +83,7 @@
                 $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo "Nom:" . $data['Nom'] . "<br>";
+                    echo "Nom: " . $data['Nom'] . "<br>";
                     echo "Prénom: " . $data['Prenom'] . "<br>";
                     echo "Adresse: " . $data['Adresse'] . "<br>";
                     echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
@@ -98,6 +98,7 @@
         ?>
     <div class='bouton'><button type="submit" >Charger mon CV</button></div>
     </div>
+    <ion-icon id="plus" name="add-circle-outline"></ion-icon>
     <div id="Formation">
         <h2>Formations</h2>
     </div>
