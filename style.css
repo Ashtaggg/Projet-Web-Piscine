@@ -430,7 +430,6 @@ div.scroll {
 #Messagerie{
     display: flex;
     justify-content: center;
-    place-items: center;
 }
 #Messages{
     width: 30%;

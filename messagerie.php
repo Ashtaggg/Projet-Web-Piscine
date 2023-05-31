@@ -64,11 +64,39 @@
                 <input type="text" placeholder="Rechercher des Contacts">
             </div>
             <div class="scroll">
-                <p>Ami 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Ami 1</p>
+                <?php
+                    if($db_found){
+                        $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                        $result = mysqli_query($db_handle, $sql);
+                        while($data = mysqli_fetch_assoc($result)){
+                            echo '<a href="messagerie.php"><p>' . $data['Prenom'] . " " . $data['Nom'] . '</p></a>';
+                        }
+                    }
+                    else {
+                        echo "Database not found";
+                    }//end else
             </div>
             </br>
         </div>
         <div id="Chat" class="section">
+            <div id="Name">
+                <p style="font-weight : 700">
+                <?php
+                    if($db_found){
+                        $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                        $result = mysqli_query($db_handle, $sql);
+                        while($data = mysqli_fetch_assoc($result)){
+                            echo $data['Prenom'] . " " . $data['Nom'];
+                        }
+                    }
+                    else {
+                        echo "Database not found";
+                    }//end else
+                ?>
+                </p>
+            </div>
+            <div class="line-1"></div>
+            </br>
             <div class="scroll">
                 <p>Ami 1</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Ami 1</p>
             </div>
