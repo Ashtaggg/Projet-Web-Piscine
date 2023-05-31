@@ -214,7 +214,7 @@
                 <label for="descriptif">Descriptif</label><br>
                 <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
             
-                <br><br><br><br><br><br>               
+                <br><br>         
                 <input type="submit" value="Envoyer">
 
                 <br><br>
