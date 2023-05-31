@@ -157,15 +157,7 @@
                         element.style.color = "red";
                     }
                     console.log(IDpost);
-
-
-                    fetch('accueil.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: 'IDpost=' + IDpost // Vous pouvez passer des paramètres au fichier PHP si nécessaire
-                    })
+                    document.location.href="accueil.php?IDpost=" + IDpost; 
                 }
             </script>
             <?php
@@ -218,41 +210,23 @@
                             echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
 
                             echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' onclick=like(this)><ion-icon name='heart'></ion-icon></button><p class='nbrLike'>" . $post_data["Aime"] . "</p></div></div>";
-                            /*if (isset($_POST["Like"]) && !(empty($_POST['Like']))) {
-                                $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$post_data['IDpost']}";
-        
-                                $result2 = mysqli_query($db_handle, $sql);
-                                if ($result2) {
-                                    header('Location: accueil.php');
-                                    die();
-                                }
-                            }
-                            else{
-                                $sql = "";
-                            }
-                            echo$Like;*/
                         }
                     }
                 }
             ?>
             <?php 
-                $IDpost = isset($_POST['IDpost']) ? $_POST['IDpost'] : "";
-                echo"sjhvbjnunv   " . $IDpost;
+                if (isset($_GET["IDpost"]) && !(empty($_GET['IDpost']))) {
+                    $IDpost = isset($_GET['IDpost']) ? $_GET['IDpost'] : "";
 
-                $like = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC";
-                $like_result = mysqli_query($db_handle,$like);
-                while($like_data = mysqli_fetch_assoc($like_result))
-                {
-                    echo"</br>jvhbhdlibn   " . $like_data["Aime"];
-                }
-                $Like = $like_data["Aime"] + 1;
-
-                $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$post_data['IDpost']}";
-        
-                $result2 = mysqli_query($db_handle, $sql);
-                if ($result2) {
-                    header('Location: accueil.php');
-                    die();
+                    $like = "SELECT * FROM post WHERE IDpost LIKE '%$IDpost%'";
+                    $like_result = mysqli_query($db_handle,$like);
+                    $like_data = mysqli_fetch_assoc($like_result);
+                    
+                    $Like = $like_data["Aime"] + 1;
+                    
+                    $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$IDpost}";
+            
+                    $result2 = mysqli_query($db_handle, $sql);
                 }
             ?>
         </table>
