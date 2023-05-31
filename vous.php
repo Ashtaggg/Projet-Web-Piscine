@@ -96,15 +96,36 @@
                 echo "Database not found";
             }//end else
         ?>
-    <div class='bouton'><button type="submit" >Charger mon CV</button></div>
-    <br><br>
-    <div class='bouton'>
-        <a href="connexion.php"><button>se déconnecter</button></a>
+        <div class='bouton'><button type="submit" >Charger mon CV</button></div>
+        <br><br>
+        <div class='bouton'>
+            <a href="connexion.php"><button>se déconnecter</button></a>
+        </div>
     </div>
-    </div>
-    <ion-icon id="plus" name="add-circle-outline"></ion-icon>
-    <div id="Formation">
+    
+    <div id="Formation">  
         <h2>Formations</h2>
+        <button id="plusFormation"onclick="clic()"><ion-icon name="add-circle-outline"></ion-icon></button>
+        
+        <div id="menuPoster" style="display: none;" style="list-style: none;">
+                <form method="post">
+                    <input type="text" name="Legende"></br>
+                    <input type="file" name="Data"></br>
+                    <button id="PosterFinal" type="submit" name="PosterFinal" value="10">Poster</button>
+                    
+                </form>
+            </div>
+            <script>
+                function clic(){
+                    const menu = document.getElementById('menuPoster');
+                    if (menu.style.display === "none") {
+                        menu.style.display = "block";
+                    } else {
+                        menu.style.display = "none";
+                    }
+                }
+            </script>
+
     </div>
     <div id="Projet">
         <h2>Projets</h2>

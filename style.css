@@ -381,10 +381,11 @@ div.scroll {
     float:left;    
 }
 
-#plus{
-    margin-top: 10px;
-    margin-right: 50px;
-    float: right;
+#plusFormation{
+    margin-top:-100px;
+    margin-left: 800px;
+    float:left;
+    font-size: 20px;
 }
 
 /* --------------------------------------------------------------------------------*/
