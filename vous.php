@@ -111,6 +111,63 @@
     </div>
     <div id="MesPost">
         <h2>Mes posts</h2>
+        <table>
+            <?php
+                $Date = new DateTime("now");
+                $Date->modify("-7 day");
+                $Date->modify("+2 hours");
+                $Date = $Date->format('Y-m-d H:i:s');
+                if ($db_found) {
+                    $post = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC";
+                    $post_result = mysqli_query($db_handle,$post);
+                    while($post_data = mysqli_fetch_assoc($post_result))
+                    {
+                        $IDutilisateur = $post_data["Envoyeur"];
+                        $utilisateur = "SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$IDutilisateur%'";
+                        $utilisateur_result = mysqli_query($db_handle,$utilisateur);
+                        while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
+                        {
+                            if($IDutilisateur == $utilisateur){
+                                $Date1 = new DateTime("now");
+                                $Date1->modify("+2 hours");
+                                $Date1 = $Date1->format('Y-m-d H:i:s');
+                                $Date1 = strtotime($Date1);
+                                $Date2 = strtotime($post_data["Date"]);
+                                $DateDiff = $Date1 - $Date2;
+                                $DateDiff = $DateDiff/86400;
+                            
+                                 echo"<div class='post'><p class='PhotoProfil'><br><br><img height=75 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
+                                 echo"<p class='Nom'>" . $utilisateur_data["Prenom"] . " " . $utilisateur_data["Nom"] . "</p>";
+                                if($DateDiff >=1){
+                                     $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                     echo"<p class='Date'>" . $DateDiff . " j</p>";
+                                }
+                                else if($DateDiff * 24 >=1){
+                                    $DateDiff = $DateDiff * 24;
+                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                    echo"<p class='Date'>" . $DateDiff . " h</p>";
+                                }
+                                 else if($DateDiff * 24 * 60 >=1){
+                                    $DateDiff = $DateDiff * 24 * 60;
+                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                    echo"<p class='Date'>" . $DateDiff . " min</p>";
+                                }
+                                else{
+                                    $DateDiff = $DateDiff * 24 * 60 * 60;
+                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                    echo"<p class='Date'>" . $DateDiff . " sec</p>";
+                                }
+                                //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
+                                echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
+
+                                echo"<p class='Data'><img height=300 src='" . $post_data["Data"] . "' /></p></div>";
+                        }
+                        }
+                    }
+                }
+            ?>
+        </table>
+        </br>
     </div>
 
     <div id="footer">
