@@ -70,15 +70,21 @@
                      $Date->modify("+2 hours");
                      $Date = $Date->format('Y-m-d H:i:s');
                      if ($db_found) {
-                         $message = "SELECT * FROM messages ORDER BY Date DESC";
+                         $message = "SELECT * FROM message ORDER BY Date DESC";
                          $message_result = mysqli_query($db_handle,$message);
+                         if (!$message_result) {
+                            die('Erreur de requête SQL : ' . mysqli_error($db_handle));
+                        }
                          while($message_data = mysqli_fetch_assoc($message_result))
                          {
                              $IDenvoyeur = $message_data["Envoyeur"];
                              $IDrecepteur = $message_data["Recepteur"];
                              $Statut = $message_data["Statut"];
-                             $utilisateur = "SELECT * FROM utilisateur  WHERE email LIKE '%$email%'";
+                             $utilisateur = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
                              $utilisateur_result = mysqli_query($db_handle,$utilisateur);
+                             if (!$utilisateur_result) {
+                                die('Erreur de requête SQL : ' . mysqli_error($db_handle));
+                            }
                              while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
                             {
                                 $Date1 = new DateTime("now");
