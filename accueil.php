@@ -62,35 +62,46 @@
                 <form method="post">
                     <input type="text" name="Legende"></br>
                     <input type="file" name="Data"></br>
-                    <button id="PosterFinal">Poster<ion-icon name="add-circle-outline"></ion-icon></button>
+                    <button id="PosterFinal" type="submit" name="PosterFinal" value="10">Poster<ion-icon name="add-circle-outline"></ion-icon></button>
+                    <?php
+                        if ($db_found) {
+                            if (isset($_POST["PosterFinal"]) && !(empty($_POST['PosterFinal']))) {
+                                $Date = new DateTime("now");
+                                $Date->modify("+2 hours");
+                                $Date = $Date->format('Y-m-d H:i:s');
+
+                            
+                                $ID = "SELECT * FROM post ORDER BY Date DESC LIMIT 1;"; 
+                                $ID_result = mysqli_query($db_handle, $ID);
+                                $data = mysqli_fetch_assoc($ID_result);
+                                $IDpost = $data["IDpost"] + 1;
+
+                                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                                $IDuser_result = mysqli_query($db_handle, $IDuser);
+                                $data = mysqli_fetch_assoc($IDuser_result);
+                                $Envoyeur = $data['IDutilisateur'];
+
+                                $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                                $Data = "images/" . $Data;
+
+                                $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
+                                
+                                echo$IDpost . $Envoyeur . $Date . $Data . $Legende;
+
+                                $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Like`, `Dislike`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '' , '' , '');
+                                ";
+
+                                $result = mysqli_query($db_handle, $sql);
+                                if ($result) {
+                                    echo "<p>Add successful.</p>";
+                                }
+                            }
+                            else{
+                                $sql = "";
+                            }
+                        }
+                    ?>
                 </form>
-                <?php
-                    $Date = new DateTime("now");
-                    $Date->modify("+2 hours");
-                    $Date = $Date->format('Y-m-d H:i:s');
-
-                    $ID = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC LIMIT 1;"; 
-                    $ID_result = mysqli_query($db_handle, $ID);
-                    $data = mysqli_fetch_assoc($ID_result);
-                    $IDpost = $data['IDpost'] + 1;
-                    echo"ujtcvkbvrliughi" . $IDpost;
-
-                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                    $IDuser_result = mysqli_query($db_handle, $IDuser);
-                    $data = mysqli_fetch_assoc($IDuser_result);
-                    $Envoyeur = $data['IDutilisateur'];
-
-                    $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
-
-                    $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
-                    
-                    /*
-                    if ($db_found) {
-                        $sql = "INSERT INTO post(IDpost , Envoyeur, Type, Date, Data, Legende, Commentaires, Like, Dislike) 
-                                VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '' , '' , '');
-                        ";
-                    }*/
-                ?>
             </div>
             <script>
                 function clic(){
@@ -154,17 +165,26 @@
                             $DateDiff = $Date1 - $Date2;
                             $DateDiff = $DateDiff/86400;
                             
-                            
                             echo"<div class='post'><p class='PhotoProfil'><br><br><img height=75 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
                             echo"<p class='Nom'>" . $utilisateur_data["Prenom"] . " " . $utilisateur_data["Nom"] . "</p>";
                             if($DateDiff >=1){
                                 $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                 echo"<p class='Date'>" . $DateDiff . " j</p>";
                             }
-                            else{
+                            else if($DateDiff * 24 >=1){
                                 $DateDiff = $DateDiff * 24;
                                 $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                 echo"<p class='Date'>" . $DateDiff . " h</p>";
+                            }
+                            else if($DateDiff * 24 * 60 >=1){
+                                $DateDiff = $DateDiff * 24 * 60;
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " min</p>";
+                            }
+                            else{
+                                $DateDiff = $DateDiff * 24 * 60 * 60;
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " sec</p>";
                             }
                             //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
