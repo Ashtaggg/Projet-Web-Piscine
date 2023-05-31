@@ -99,7 +99,7 @@
     <div class='bouton'><button type="submit" >Charger mon CV</button></div>
     <br><br>
     <div class='bouton'>
-        <button type="submit">se déconnecter</button> 
+        <a href="connexion.php"><button>se déconnecter</button></a>
     </div>
     </div>
     <div id="Formation">
