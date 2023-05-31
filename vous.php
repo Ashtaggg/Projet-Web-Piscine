@@ -111,6 +111,9 @@
         <div id="overlay" class="overlay">
             <div class="form-container">
             <h2>Ajouter une formation</h2>
+            <a href="vous.php">
+                <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
+            </a><br>
             <form>
             <style>
                 .texte-reduit {
