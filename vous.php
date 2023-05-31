@@ -105,26 +105,32 @@
     
     <div id="Formation">  
         <h2>Formations</h2>
-        <button id="plusFormation"onclick="clic()"><ion-icon name="add-circle-outline"></ion-icon></button>
         
-        <div id="menuPoster" style="display: none;" style="list-style: none;">
-                <form method="post">
-                    <input type="text" name="Legende"></br>
-                    <input type="file" name="Data"></br>
-                    <button id="PosterFinal" type="submit" name="PosterFinal" value="10">Poster</button>
-                    
-                </form>
-            </div>
-            <script>
-                function clic(){
-                    const menu = document.getElementById('menuPoster');
-                    if (menu.style.display === "none") {
-                        menu.style.display = "block";
-                    } else {
-                        menu.style.display = "none";
-                    }
-                }
-            </script>
+        <button class="plusFormation" onclick="openForm()"><ion-icon name="add-circle-outline"></ion-icon></button>
+  
+        <div id="overlay" class="overlay">
+            <div class="form-container">
+            <h2>Formulaire</h2>
+            <form>
+                <!-- Vos champs de formulaire ici -->
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <input type="submit" value="Envoyer">
+            </form>
+        </div>
+    </div>
+  
+    <script>
+        function openForm() {
+            var overlay = document.getElementById("overlay");
+            overlay.style.display = "block";
+        }
+  </script>
+        
+
+        
 
     </div>
     <div id="Projet">

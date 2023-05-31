@@ -383,7 +383,7 @@ div.scroll {
     float:left;    
 }
 
-#plusFormation{
+.plusFormation{
     margin-top:-100px;
     margin-left: 800px;
     float:left;
@@ -392,6 +392,29 @@ div.scroll {
     outline: none;
     border: 0px;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Caché par défaut */
+    z-index: 2;
+  }
+  
+  .form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 5px;
+  }
+  
 
 /* --------------------------------------------------------------------------------*/
 /* -----------------------------------Notifications--------------------------------*/
@@ -406,7 +429,6 @@ div.scroll {
 #Messagerie{
     display: flex;
     justify-content: center;
-    place-items: center;
 }
 #Messages{
     width: 30%;
@@ -425,6 +447,41 @@ div.scroll {
     padding: 5px;
     z-index: -1;
 }
+#Icon{
+    display: flex;
+    justify-content: center;
+    place-items: center;
+}
+.inputbox_mess{
+    position: relative;
+    width: 68%;
+    height: 35px;
+    border: 2px solid gainsboro;
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-bottom: 40px;
+}
+.inputbox_mess input {
+    width: 100%;
+    height: 50px;
+    margin-left: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    margin-top: -7px;
+}
+
+.inputbox_mess ion-icon{
+    position: absolute;
+    right: 10px;
+    color: black;
+    font-size: 1.2em;
+    top: 9px;
+    margin-right: 5px;
+}
+
 
 /* --------------------------------------------------------------------------------*/
 /* --------------------------------------Emplois-----------------------------------*/
@@ -450,3 +507,20 @@ div.scroll {
     margin-top:-210px; 
     float:left;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
