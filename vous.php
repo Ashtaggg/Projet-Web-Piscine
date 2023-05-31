@@ -116,7 +116,7 @@
         <div class='bouton'><button type="submit" >Charger mon CV</button></div>
         <br><br>
         <div class='bouton'>
-            <a href="connexion.php"><button>se déconnecter</button></a>
+            <a href="connexion.php"><button>Se déconnecter</button></a>
         </div>
         <br><br>
         <button class='bouton' onclick="openProf()">Modifier mon profil</button>
@@ -204,11 +204,9 @@
                 <label for="dateDeb">Date de début</label><br>
                 <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br>
                 
-                    <label for="dateFin">Date de fin (ou prévue)</label><br>
-                    <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
-  
-                    <input type="submit" value="Envoyer">
-                </form>
+                <label for="dateFin">Date de fin (ou prévue)</label><br>
+                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
+                
 
                 
 
