@@ -60,13 +60,13 @@
         <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur "; 
+                $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo  $data['Nom'] . "<br>";
-                    echo  $data['Prenom'] . "<br>";
-                    $image = $data['PhotoProfil'];
-                    echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
+                    echo  $data['Amis'] . "<br>";
+                    //echo  $data['Prenom'] . "<br>";
+                    //$image = $data['PhotoProfil'];
+                    //echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
                 }//end while
             }//end if
             //si le BDD n'existe pas
