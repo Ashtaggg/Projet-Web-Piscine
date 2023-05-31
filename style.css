@@ -236,6 +236,25 @@ body {
     margin-bottom:25px;
 }
 
+.Like{
+    margin-left:10%;
+}
+
+.nbrLike{
+    margin-left:3%;
+}
+
+.post2{
+    display:flex;
+    margin-top:-5%;
+}
+
+.post2 button{
+    background: transparent;
+    outline: none;
+    border:0px;
+}
+
 #carrousel {
     height: 200px;
     width: 700px;

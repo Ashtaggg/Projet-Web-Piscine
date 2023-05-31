@@ -188,7 +188,20 @@
                             //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
-                            echo"<p class='Data'><img height=300 src='" . $post_data["Data"] . "' /></p></div>";
+                            echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
+
+                            echo"<div class='post2'><form method='post'><button class='Like'><ion-icon name='heart-outline'></ion-icon></button><p class='nbrLike'>" . $post_data["Like"] . "</p></form></div></div>";
+                            if (isset($_POST["Like"]) && !(empty($_POST['Like']))) {
+                        
+                                $Like = $post_data["Aime"] + 1;
+                                $sql = "UPDATE post SET Aime = $Like WHERE IDpost = $post_data['IDpost']";
+        
+                                $result = mysqli_query($db_handle, $sql);
+                                if ($result) {
+                                    header('Location: accueil.php');
+                                    die();
+                                }
+                            }
                         }
                     }
                 }
