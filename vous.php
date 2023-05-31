@@ -141,9 +141,8 @@
                     if ($db_found) {
                         if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
 
-                            //$IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                            //$IDuser_result = mysqli_query($db_handle, $IDuser);
-                            //$data = mysqli_fetch_assoc($IDuser_result);
+                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            $IDuser_result = mysqli_query($db_handle, $IDuser);
 
                             $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
                             $Data = "images/" . $Data;
@@ -151,7 +150,7 @@
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
                             $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
 
-                            $sql = "INSERT INTO `utilisateur`( `IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`) VALUES( '', '', '$Nom','$Prenom', '', '', '', '$Data' '', '', '', '', '',)";
+                            $sql = "UPDATE utilisateur SET Prenom = $Prenom WHERE IDutilisateur = {$IDuser}";
                             $result = mysqli_query($db_handle, $sql);
                             if ($result) {
                                 header('Location: vous.php');
@@ -161,6 +160,7 @@
                                 $sql = "";
                             }
                         }
+                        
                     }
                 ?>
             </div>
