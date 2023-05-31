@@ -52,6 +52,20 @@ body {
     gap: 25px;
 }
 
+a::before {
+    content: "";
+    position: absolute;
+    bottom: 40px;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.5s ease-out;
+  }
+a:hover::before {
+    width: 80px;
+  }
+
+
 #toggler, .navigation label {
     display: none;
 }
@@ -161,6 +175,15 @@ body {
     margin-top:20px;
 }
 
+#menuPoster input{
+    margin-top:20px;
+}
+
+#menuPoster button{
+    margin-top:20px;
+    width: 30%;
+}
+
 .line-1 {
     border-top: 1px solid gainsboro;
 }
@@ -236,14 +259,22 @@ body {
     transform: rotate(180deg);
     display: grid;
     position: absolute;
-    top: 590px;
+    top: 560px;
     left: 225px;
 }
 #next{
     position:absolute;
     display: grid;
-    top: 590px;
+    top: 560px;
     right: 570px;
+}
+#carrousel_all ion-icon{
+    position: absolute;
+    color: black;
+    font-size: 2em;
+}
+#ECEin_Feed{
+    margin-top: 40px;
 }
 
 /* --------------------------------------------------------------------------------*/
@@ -262,6 +293,35 @@ div.scroll {
     overflow-x: hidden;
     overflow-y: auto;
     text-align:justify;
+}
+.inputbox_res{
+    position: relative;
+    width: 68%;
+    height: 35px;
+    border: 2px solid gainsboro;
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-bottom: 40px;
+}
+.inputbox_res input {
+    width: 100%;
+    height: 50px;
+    margin-left: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    margin-top: -7px;
+}
+
+.inputbox_res ion-icon{
+    position: absolute;
+    right: 10px;
+    color: black;
+    font-size: 1.2em;
+    top: 9px;
+    margin-right: 5px;
 }
 /* --------------------------------------------------------------------------------*/
 /* ---------------------------------------Vous-------------------------------------*/

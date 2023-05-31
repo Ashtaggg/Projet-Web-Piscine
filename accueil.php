@@ -57,9 +57,41 @@
     <div id="Gray_bar"></div>
     <div id="Info_Right">
         <div class='boutonPoster'>
-            <form>
-                <button type="submit" id="Poster" onclick="clic()">Poster Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
-            </form>
+            <button id="Poster" onclick="clic()">Poster Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
+            <div id="menuPoster" style="display: none;" style="list-style: none;">
+                <form method="post">
+                    <input type="text" name="Legende"></br>
+                    <input type="file" name="Data"></br>
+                    <button id="PosterFinal">Poster<ion-icon name="add-circle-outline"></ion-icon></button>
+                </form>
+                <?php
+                    $Date = new DateTime("now");
+                    $Date->modify("+2 hours");
+                    $Date = $Date->format('Y-m-d H:i:s');
+
+                    $ID = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC LIMIT 1;"; 
+                    $ID_result = mysqli_query($db_handle, $ID);
+                    $data = mysqli_fetch_assoc($ID_result);
+                    $IDpost = $data['IDpost'] + 1;
+                    echo"ujtcvkbvrliughi" . $IDpost;
+
+                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                    $IDuser_result = mysqli_query($db_handle, $IDuser);
+                    $data = mysqli_fetch_assoc($IDuser_result);
+                    $Envoyeur = $data['IDutilisateur'];
+
+                    $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+
+                    $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
+                    
+                    /*
+                    if ($db_found) {
+                        $sql = "INSERT INTO post(IDpost , Envoyeur, Type, Date, Data, Legende, Commentaires, Like, Dislike) 
+                                VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '' , '' , '');
+                        ";
+                    }*/
+                ?>
+            </div>
             <script>
                 function clic(){
                     const menu = document.getElementById('menuPoster');
@@ -70,11 +102,6 @@
                     }
                 }
             </script>
-            <ul id="menuPoster" style="display: none;">
-                <li><a>jvbksun</a></li>
-                <li><a>jd hbkskj</a></li>
-                <li><a>sjd hkb</a></li>
-            </ul>
         </div>
         <div class="line-2"></div>
         <div id="suggestions">
