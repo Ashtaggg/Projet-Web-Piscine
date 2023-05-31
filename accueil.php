@@ -9,6 +9,9 @@
     </script>
     <script type="text/javascript" src="carrousel.js"></script>
     <title>Accueil ECE In</title>
+    
+
+
     <?php
         // Identifier le nom de base de données
         $database = "projet-web-piscine";
@@ -32,6 +35,9 @@
     ?>
 </head>
 <body>
+    
+
+
     <div id="header">
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
