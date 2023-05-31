@@ -63,11 +63,15 @@
                 $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo  $data['Amis'] . "<br>";
-                    //echo  $data['Prenom'] . "<br>";
-                    //$image = $data['PhotoProfil'];
-                    //echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
-                }//end while
+                    $Amis = "SELECT * FROM utilisateur WHERE IDutilisateur IN (SELECT Amis FROM utilisateur where Mail like '%$email%')";
+                    $Amis_result = mysqli_query($db_handle, $Amis);
+                    while($Amis_data = mysqli_fetch_assoc($Amis_result)){
+                        echo  $data['Amis'] . "<br>";
+                        echo  $Amis_data['Prenom'] . "<br>";
+                        //$image = $data['PhotoProfil'];
+                        //echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
+                    }//end while
+                }
             }//end if
             //si le BDD n'existe pas
             else {
@@ -101,6 +105,8 @@
         <div class='bouton'>
             <a href="connexion.php"><button>se déconnecter</button></a>
         </div>
+        <br><br>
+        <div class='bouton' onclick="openProf()"><button type="submit" >Modifier mon profil</button></div>
     </div>
     
     <div id="Formation">  
@@ -163,8 +169,18 @@
                     <option value="decembre2">decembre</option>
                 </select>
                 <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
-
+                
+                <label for="descriptif">Descriptif</label><br>
+                
+                <div class="description">
+                    <div class="rectangle">
+                    <input type="text" placeholder="Entrez votre texte">
+                    </div>
+                </div> 
+                <br><br><br><br><br><br>               
                 <input type="submit" value="Envoyer">
+
+                <br><br><br><br><br><br><br>
             </form>
         </div>
     </div>

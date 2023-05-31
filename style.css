@@ -353,7 +353,7 @@ div.scroll {
     z-index: 2;
 }
 #Formation{
-    margin-top: 200px;
+    margin-top: 250px;
     width: 70%;
     display: grid;
     place-items: center;
@@ -397,7 +397,7 @@ div.scroll {
     float:left;      
 }
 .bouton{
-    margin-top:-155px;
+    margin-top:-195px;
     margin-left: 551px;
     float:left;    
 }
@@ -419,11 +419,11 @@ div.scroll {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none; /* Caché par défaut */
+    display: none;
     z-index: 2;
   }
   
-  .form-container {
+.form-container {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -432,6 +432,9 @@ div.scroll {
     padding: 20px;
     width: 300px;
     border-radius: 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 400px;
   }
   
   .quitterFormation{
@@ -444,8 +447,29 @@ div.scroll {
     border: 0px;
     z-index: 2;
     font-size: 30px;
-
 }
+
+.rectangle {
+    width: 200px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border: 1px solid #000;
+    padding: 10px;
+  }
+  
+.description{
+    position: relative;
+    width: 250px;
+    height: 35px;
+    
+}
+.description input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: black;
+}
+
   
 
 /* --------------------------------------------------------------------------------*/
