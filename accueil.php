@@ -141,6 +141,27 @@
     <div id="ECEin_Feed" class="section">
         <h2>L'actualité de vos Amis</h2>
         <table>
+            <script>
+                function like(element){
+                    const IDpost = element.id;
+                    if(element.style.color === "red"){
+                        element.style.color = "white";
+                    }
+                    else{
+                        element.style.color = "red";
+                    }
+                    console.log(IDpost);
+
+
+                    fetch('accueil.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: 'IDpost=' + IDpost // Vous pouvez passer des paramètres au fichier PHP si nécessaire
+                    })
+                }
+            </script>
             <?php
                 $Date = new DateTime("now");
                 $Date->modify("-7 day");
@@ -190,8 +211,7 @@
 
                             echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
 
-                            echo"<div class='post2' ><form method='post'><button class='Like' name='Like' id='button_" . $post_data['IDpost'] . "' onclick='like(this)'><ion-icon name='heart-outline'></ion-icon></button><p class='nbrLike'>" . $post_data["Aime"] . "</p></form></div></div>";
-                            $Like = $post_data["Aime"] + 1;
+                            echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' onclick=like(this)><ion-icon name='heart'></ion-icon></button><p class='nbrLike'>" . $post_data["Aime"] . "</p></div></div>";
                             /*if (isset($_POST["Like"]) && !(empty($_POST['Like']))) {
                                 $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$post_data['IDpost']}";
         
@@ -209,12 +229,26 @@
                     }
                 }
             ?>
-            <script>
-                    function like(element){
-                         const IDpost = element.id;
-                         console.log(IDpost);
-                    }
-            </script>
+            <?php 
+                $IDpost = isset($_POST['IDpost']) ? $_POST['IDpost'] : "";
+                echo"sjhvbjnunv   " . $IDpost;
+
+                $like = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC";
+                $like_result = mysqli_query($db_handle,$like);
+                while($like_data = mysqli_fetch_assoc($like_result))
+                {
+                    echo"</br>jvhbhdlibn   " . $like_data["Aime"];
+                }
+                $Like = $like_data["Aime"] + 1;
+
+                $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$post_data['IDpost']}";
+        
+                $result2 = mysqli_query($db_handle, $sql);
+                if ($result2) {
+                    header('Location: accueil.php');
+                    die();
+                }
+            ?>
         </table>
         </br>
     </div>

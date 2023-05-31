@@ -72,9 +72,6 @@
                      if ($db_found) {
                          $message = "SELECT * FROM message ORDER BY Date DESC";
                          $message_result = mysqli_query($db_handle,$message);
-                         if (!$message_result) {
-                            die('Erreur de requête SQL : ' . mysqli_error($db_handle));
-                        }
                          while($message_data = mysqli_fetch_assoc($message_result))
                          {
                              $IDenvoyeur = $message_data["Envoyeur"];
@@ -82,11 +79,12 @@
                              $Statut = $message_data["Statut"];
                              $utilisateur = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
                              $utilisateur_result = mysqli_query($db_handle,$utilisateur);
-                             if (!$utilisateur_result) {
-                                die('Erreur de requête SQL : ' . mysqli_error($db_handle));
-                            }
+                             $envoyeur = "SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$IDenvoyeur%'";
+                             $envoyeur_result = mysqli_query($db_handle,$envoyeur);
+                             $envoyeur_data = mysqli_fetch_assoc($envoyeur_result);
                              while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
                             {
+                                $IDutilisateur = $utilisateur_data["IDutilisateur"];
                                 $Date1 = new DateTime("now");
                                 $Date1->modify("+2 hours");
                                 $Date1 = $Date1->format('Y-m-d H:i:s');
@@ -95,57 +93,56 @@
                                 $DateDiff = $Date1 - $Date2;
                                 $DateDiff = $DateDiff/86400;
 
-                                if($IDrecepteur==$utilisateur && $Statut==0)
+                                if($IDrecepteur==$IDutilisateur && $Statut==1)
                                 {
-                                    echo"<div class='message_box'><p class='PhotoProfil'><img height=30 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
-                                    echo"<p class='Nom_box'>" . $utilisateur_data["Prenom"] . " " . $utilisateur_data["Nom"] . "</p>";
+                                    echo"<div class='message_box'><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
+                                    echo"<p class='Nom_box'>" . $envoyeur_data["Prenom"] . " " . $envoyeur_data["Nom"] . "</p>";
+                                    echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "...</p>";
                                     if($DateDiff >=1){
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                        echo"<p class='Date'>" . $DateDiff . " j</p>";
+                                        echo"<p class='message_Date'>" . $DateDiff . " j</p></div></div>";
                                     }
                                     else if($DateDiff * 24 >=1){
                                         $DateDiff = $DateDiff * 24;
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                        echo"<p class='Date'>" . $DateDiff . " h</p>";
+                                        echo"<p class='message_Date'>" . $DateDiff . " h</p></div></div>";
                                     }
                                     else if($DateDiff * 24 * 60 >=1){
                                         $DateDiff = $DateDiff * 24 * 60;
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                        echo"<p class='Date'>" . $DateDiff . " min</p>";
+                                        echo"<p class='message_Date'>" . $DateDiff . " min</p></div></div>";
                                     }
                                     else{
                                         $DateDiff = $DateDiff * 24 * 60 * 60;
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                        echo"<p class='Date'>" . $DateDiff . " sec</p>";
+                                        echo"<p class='message_Date'>" . $DateDiff . " sec</p></div></div>";
                                     }
                                     //echo"<p class='Date'>" . $message_data["Date"] . "</p>";
-                                    echo"<p class='Message_txt'>" . $message_data["Contenu"] . "</p>";
                                 }
-                                elseif($IDrecepteur==$utilisateur && $Statut==1)
+                                elseif($IDrecepteur==$IDutilisateur && $Statut==0)
                                 {
-                                    echo"<div class='message_box' style='font-weight : 400'><p class='PhotoProfil'><img height=30 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
-                                    echo"<p class='Nom_box' style='font-weight : 400'>" . $utilisateur_data["Prenom"] . " " . $utilisateur_data["Nom"] . "</p>";
+                                    echo"<div class='message_box'style='font-weight: 700'><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
+                                    echo"<p class='Nom_box'>" . $envoyeur_data["Prenom"] . " " . $envoyeur_data["Nom"] . "</p>";
+                                    echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "...</p>";
                                     if($DateDiff >=1){
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                        echo"<p class='Date' style='font-weight : 400'>" . $DateDiff . " j</p>";
+                                        echo"<p class='message_Date'>" . $DateDiff . " j</p></div></div>";
                                     }
                                     else if($DateDiff * 24 >=1){
                                         $DateDiff = $DateDiff * 24;
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                        echo"<p class='Date' style='font-weight : 400'>" . $DateDiff . " h</p>";
+                                        echo"<p class='message_Date'>" . $DateDiff . " h</p></div></div>";
                                     }
                                     else if($DateDiff * 24 * 60 >=1){
                                         $DateDiff = $DateDiff * 24 * 60;
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                        echo"<p class='Date' style='font-weight : 400'>" . $DateDiff . " min</p>";
+                                        echo"<p class='message_Date'>" . $DateDiff . " min</p></div></div>";
                                     }
                                     else{
                                         $DateDiff = $DateDiff * 24 * 60 * 60;
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                        echo"<p class='Date' style='font-weight : 400'>" . $DateDiff . " sec</p>";
+                                        echo"<p class='message_Date'>" . $DateDiff . " sec</p></div></div>";
                                     }
-                                    //echo"<p class='Date'>" . $message_data["Date"] . "</p>";
-                                    echo"<p class='Message_txt' style='font-weight : 400'>" . $message_data["Contenu"] . "</p>";
                                 }
                             }
                         }
