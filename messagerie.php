@@ -97,7 +97,7 @@
                                 {
                                     echo"<div class='message_box'><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
                                     echo"<p class='Nom_box'>" . $envoyeur_data["Prenom"] . " " . $envoyeur_data["Nom"] . "</p>";
-                                    echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "</p>";
+                                    echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "...</p>";
                                     if($DateDiff >=1){
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                         echo"<p class='message_Date'>" . $DateDiff . " j</p></div></div>";
@@ -123,7 +123,7 @@
                                 {
                                     echo"<div class='message_box'style='font-weight: 700'><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
                                     echo"<p class='Nom_box'>" . $envoyeur_data["Prenom"] . " " . $envoyeur_data["Nom"] . "</p>";
-                                    echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "</p>";
+                                    echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "...</p>";
                                     if($DateDiff >=1){
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                         echo"<p class='message_Date'>" . $DateDiff . " j</p></div></div>";
