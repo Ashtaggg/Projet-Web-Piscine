@@ -53,15 +53,16 @@
     <div id="Gray_bar"></div>
     <div id="Messagerie">
         <div id="Messages" class="section">
-            <p style="font-weight : 700">Messagerie</p>
-            <div class="line-1"></div>
-            </br>
-            <div class="inputbox_res">
-                <ion-icon name="search-outline"></ion-icon>
-                <input type="text" placeholder="Rechercher des Contacts">
+            <div id="Icon">
+                <p style="font-weight : 700">Messagerie   </p>
+                <ion-icon style="margin-left : 5px" name="file-tray-outline"></ion-icon>
             </div>
             <div class="line-1"></div>
             </br>
+            <div class="inputbox_mess">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" placeholder="Rechercher des Contacts">
+            </div>
             <div class="scroll">
                 <p>Ami 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Ami 1</p>
             </div>
