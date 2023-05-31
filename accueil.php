@@ -9,6 +9,7 @@
     </script>
     <script type="text/javascript" src="carrousel.js"></script>
     <title>Accueil ECE In</title>
+    <link rel="icon" href="images/logo_ECE_IN.png" type="image/gif">
     
 
 
