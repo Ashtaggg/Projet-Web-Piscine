@@ -57,51 +57,50 @@
     <div id="Gray_bar"></div>
     <div id="Info_Right">
         <div class='boutonPoster'>
-            <button id="Poster" onclick="clic()">Poster Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
+            <button id="Poster" onclick="clic()">Ajouter Une Publication <ion-icon name="add-circle-outline"></ion-icon></button>
             <div id="menuPoster" style="display: none;" style="list-style: none;">
                 <form method="post">
                     <input type="text" name="Legende"></br>
                     <input type="file" name="Data"></br>
-                    <button id="PosterFinal" type="submit" name="PosterFinal" value="10">Poster<ion-icon name="add-circle-outline"></ion-icon></button>
-                    <?php
-                        if ($db_found) {
-                            if (isset($_POST["PosterFinal"]) && !(empty($_POST['PosterFinal']))) {
-                                $Date = new DateTime("now");
-                                $Date->modify("+2 hours");
-                                $Date = $Date->format('Y-m-d H:i:s');
+                    <button id="PosterFinal" type="submit" name="PosterFinal" value="ON">Poster<ion-icon name="add-circle-outline"></ion-icon></button>
+                </form>
+                <?php
+                    if ($db_found) {
+                        if (isset($_POST["PosterFinal"]) && !(empty($_POST['PosterFinal']))) {
+                            $Date = new DateTime("now");
+                            $Date->modify("+2 hours");
+                            $Date = $Date->format('Y-m-d H:i:s');
 
-                            
-                                $ID = "SELECT * FROM post ORDER BY Date DESC LIMIT 1;"; 
-                                $ID_result = mysqli_query($db_handle, $ID);
-                                $data = mysqli_fetch_assoc($ID_result);
-                                $IDpost = $data["IDpost"] + 1;
+                        
+                            $ID = "SELECT * FROM post ORDER BY Date DESC LIMIT 1;"; 
+                            $ID_result = mysqli_query($db_handle, $ID);
+                            $data = mysqli_fetch_assoc($ID_result);
+                            $IDpost = $data["IDpost"] + 1;
 
-                                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                                $IDuser_result = mysqli_query($db_handle, $IDuser);
-                                $data = mysqli_fetch_assoc($IDuser_result);
-                                $Envoyeur = $data['IDutilisateur'];
+                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            $IDuser_result = mysqli_query($db_handle, $IDuser);
+                            $data = mysqli_fetch_assoc($IDuser_result);
+                            $Envoyeur = $data['IDutilisateur'];
 
-                                $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
-                                $Data = "images/" . $Data;
+                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                            $Data = "images/" . $Data;
 
-                                $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
-                                
-                                echo$IDpost . $Envoyeur . $Date . $Data . $Legende;
+                            $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
 
-                                $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Like`, `Dislike`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '' , '' , '');
-                                ";
+                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Like`, `Dislike`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '' , '' , '');
+                            ";
 
-                                $result = mysqli_query($db_handle, $sql);
-                                if ($result) {
-                                    echo "<p>Add successful.</p>";
-                                }
-                            }
-                            else{
-                                $sql = "";
+                            $result = mysqli_query($db_handle, $sql);
+                            if ($result) {
+                                header('Location: accueil.php');
+                                die();
                             }
                         }
-                    ?>
-                </form>
+                        else{
+                            $sql = "";
+                        }
+                    }
+                ?>
             </div>
             <script>
                 function clic(){
