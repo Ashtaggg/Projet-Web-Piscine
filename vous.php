@@ -151,8 +151,7 @@
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
                             $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
 
-                            $sql = "INSERT INTO `utilisateur`( `Prenom`, `Nom`, `Data`) VALUES('$Prenom', '$Nom', '$Data')";
-                            
+                            $sql = "INSERT INTO `utilisateur`( `IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`) VALUES( '', '', '$Nom','$Prenom', '', '', '', '$Data' '', '', '', '', '',)";
                             $result = mysqli_query($db_handle, $sql);
                             if ($result) {
                                 header('Location: vous.php');
@@ -199,18 +198,11 @@
                 <label for="domaine">Domaine d'études</label></br>
                 <input type="text" id="domaine" name="domaine" placeholder="Ex: Economie"><br><br>
 
-                <form onsubmit="return validateForm()">
-                    <label for="dateDeb">Date de début</label><br>
-                    <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br>
+                <label for="dateDeb">Date de début</label><br>
+                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br>
                 
-                    <label for="dateFin">Date de fin (ou prévue)</label><br>
-                    <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
-  
-                    <input type="submit" value="Envoyer">
-                </form>
-
-                
-
+                <label for="dateFin">Date de fin (ou prévue)</label><br>
+                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
                 
                 <label for="descriptif">Descriptif</label><br>
                 
