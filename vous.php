@@ -144,7 +144,7 @@
                     while($post_data = mysqli_fetch_assoc($post_result))
                     {
                         $IDutilisateur = $post_data["Envoyeur"];
-                        $utilisateur = "SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$IDutilisateur%'";
+                        $utilisateur = "SELECT IDutilisateur FROM utilisateur WHERE Mail LIKE '%$email%'";
                         $utilisateur_result = mysqli_query($db_handle,$utilisateur);
                         while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
                         {
