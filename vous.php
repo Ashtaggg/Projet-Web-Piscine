@@ -113,74 +113,62 @@
                 <a href="vous.php">
                    <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
                 </a><br>
-                <form>
-                <style>
-                    .texte-reduit {
+                <form method="post">
+                    <style>
+                        .texte-reduit {
                         font-size: 10px;
-                    }
-                </style>
-                    <p class="texte-reduit">*indique un champ obligatoireV2</br></p>
-                    <label for="ecole">Ecole* </label></br>
-                    <input type="text" id="ecole" name="ecole" placeholder="Ex: Université Paris V" required><br><br>
-                    <label for="diplome">Diplôme</label></br>
-                    <input type="text" id="diplome" name="diplome" placeholder="Ex: Licence"><br><br>
-                    <label for="domaine">Domaine d'études</label></br>
-                    <input type="text" id="domaine" name="domaine" placeholder="Ex: Economie"><br><br>
-
-                    <label for="dateDeb">Date de début</label><br>
-                    <select name="debut" required>
-                        <option value="">Mois</option>
-                        <option value="janvier">janvier</option>
-                        <option value="fevrier">fevrier</option>
-                        <option value="mars">mars</option>
-                        <option value="avril">avril</option>
-                        <option value="mai">mai</option>
-                        <option value="juin">juin</option>
-                        <option value="juillet">juillet</option>
-                        <option value="aout">aout</option>
-                        <option value="septembre">septembre</option>
-                        <option value="octobre">octobre</option>
-                        <option value="novembre">novembre</option>
-                        <option value="decembre">decembre</option>
-                    </select>
-                    <input type="number" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br>
-                
-                    <label for="dateFin">Date de fin (ou prévue)</label><br>
-                    <select name="fin"required>
-                        <option value="">Mois</option>
-                        <option value="janvier2">janvier</option>
-                        <option value="fevrier2">fevrier</option>
-                        <option value="mars2">mars</option>
-                        <option value="avril2">avril</option>
-                        <option value="mai2">mai</option>
-                        <option value="juin2">juin</option>
-                        <option value="juillet2">juillet</option>
-                        <option value="aout2">aout</option>
-                        <option value="septembre2">septembre</option>
-                        <option value="octobre2">octobre</option>
-                        <option value="novembre2">novembre</option>
-                        <option value="decembre2">decembre</option>
-                    </select>
-                    <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
-                
-                    <label for="descriptif">Descriptif</label><br>
-                
-                    <div class="description">
-                        <div class="rectangle">
-                        <input type="text" placeholder="Entrez votre texte">
-                        </div>
-                    </div> 
-                    <br><br><br><br><br><br>               
-                    <input type="submit" value="Envoyer">
-
+                        }
+                    </style>
+                    <p class="texte-reduit">Si vous ne souhaitez pas modifier un paramètre, laissez le vide</br></p>
+                    <p>Nom : <input type="text" name="Nom"></br></p>
+                    <p>Prenom : <input type="text" name="Prenom"></br></p>
+                    <p>Changer ma photo de profil : <input type="file" name="Data"></br></p>
                     <br><br><br><br><br><br><br>
+                    <button id="PosterChangement" type="submit" name="PosterChangement" value="ON">Valider</button>
                 </form>
+                <?php
+                    if ($db_found) {
+                        if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
+                            $Date = new DateTime("now");
+                            $Date->modify("+2 hours");
+                            $Date = $Date->format('Y-m-d H:i:s');
+
+                        
+                            $ID = "SELECT * FROM post ORDER BY Date DESC LIMIT 1;"; 
+                            $ID_result = mysqli_query($db_handle, $ID);
+                            $data = mysqli_fetch_assoc($ID_result);
+                            $IDpost = $data["IDpost"] + 1;
+
+                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            $IDuser_result = mysqli_query($db_handle, $IDuser);
+                            $data = mysqli_fetch_assoc($IDuser_result);
+                            $Envoyeur = $data['IDutilisateur'];
+
+                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                            $Data = "images/" . $Data;
+
+                            $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
+
+                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Like`, `Dislike`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '' , '' , '');
+                            ";
+
+                            $result = mysqli_query($db_handle, $sql);
+                            if ($result) {
+                                header('Location: accueil.php');
+                                die();
+                            }
+                        }
+                        else{
+                            $sql = "";
+                        }
+                    }
+                ?>
             </div>
         </div>
         <script>
         function openProf() {
-            var overlay = document.getElementById("overlay");
-            overlay.style.display = "block";
+            var modification = document.getElementById("modification");
+            modification.style.display = "block";
         }
         </script>
     </div>
@@ -212,14 +200,37 @@
 
                 <label for="dateDeb">Date de début</label><br>
                 <select name="debut" required>
-                    <option value="">Mois</option>
+                <option value="">Mois</option>
+                        <option value="janvier">janvier</option>
+                        <option value="fevrier">fevrier</option>
+                        <option value="mars">mars</option>
+                        <option value="avril">avril</option>
+                        <option value="mai">mai</option>
+                        <option value="juin">juin</option>
+                        <option value="juillet">juillet</option>
+                        <option value="aout">aout</option>
+                        <option value="septembre">septembre</option>
+                        <option value="octobre">octobre</option>
+                        <option value="novembre">novembre</option>
+                        <option value="decembre">decembre</option>
                 </select>
                 <input type="number" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br>
                 
                 <label for="dateFin">Date de fin (ou prévue)</label><br>
                 <select name="fin"required>
-                    <option value="">Mois</option>
-                    <option value="janvier2">janvier</option>
+                <option value="">Mois</option>
+                        <option value="janvier2">janvier</option>
+                        <option value="fevrier2">fevrier</option>
+                        <option value="mars2">mars</option>
+                        <option value="avril2">avril</option>
+                        <option value="mai2">mai</option>
+                        <option value="juin2">juin</option>
+                        <option value="juillet2">juillet</option>
+                        <option value="aout2">aout</option>
+                        <option value="septembre2">septembre</option>
+                        <option value="octobre2">octobre</option>
+                        <option value="novembre2">novembre</option>
+                        <option value="decembre2">decembre</option>
                 </select>
                 <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
                 
