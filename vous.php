@@ -129,37 +129,27 @@
                 <?php
                     if ($db_found) {
                         if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
-                            $Date = new DateTime("now");
-                            $Date->modify("+2 hours");
-                            $Date = $Date->format('Y-m-d H:i:s');
 
-                        
-                            $ID = "SELECT * FROM post ORDER BY Date DESC LIMIT 1;"; 
-                            $ID_result = mysqli_query($db_handle, $ID);
-                            $data = mysqli_fetch_assoc($ID_result);
-                            $IDpost = $data["IDpost"] + 1;
-
-                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                            $IDuser_result = mysqli_query($db_handle, $IDuser);
-                            $data = mysqli_fetch_assoc($IDuser_result);
-                            $Envoyeur = $data['IDutilisateur'];
+                            //$IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            //$IDuser_result = mysqli_query($db_handle, $IDuser);
+                            //$data = mysqli_fetch_assoc($IDuser_result);
 
                             $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
                             $Data = "images/" . $Data;
 
-                            $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
+                            $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
+                            $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
 
-                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Like`, `Dislike`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '' , '' , '');
-                            ";
-
+                            $sql = "INSERT INTO `utilisateur`( `Prenom`, `Nom`, `Data`) VALUES('$Prenom', '$Nom', '$Data')";
+                            
                             $result = mysqli_query($db_handle, $sql);
                             if ($result) {
-                                header('Location: accueil.php');
+                                header('Location: vous.php');
                                 die();
                             }
-                        }
-                        else{
-                            $sql = "";
+                            else{
+                                $sql = "";
+                            }
                         }
                     }
                 ?>
@@ -281,7 +271,7 @@
                             }   
                             //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
                             echo"<p class='Legende'>" . $Envoyeur_data["Legende"] . "</p>";
-                            echo"<p class='Data'><img height=300 src='" . $Envoyeur_data["Data"] . "' /></p></div>";
+                            echo"<p class='Data'><img height=250 src='" . $Envoyeur_data["Data"] . "' /></p></div>";
                         }
                     }
                 }
