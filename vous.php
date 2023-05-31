@@ -143,9 +143,8 @@
                     if ($db_found) {
                         if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
 
-                            //$IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                            //$IDuser_result = mysqli_query($db_handle, $IDuser);
-                            //$data = mysqli_fetch_assoc($IDuser_result);
+                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            $IDuser_result = mysqli_query($db_handle, $IDuser);
 
                             $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
                             $Data = "images/" . $Data;
@@ -153,8 +152,7 @@
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
                             $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
 
-                            $sql = "INSERT INTO `utilisateur`( `Prenom`, `Nom`, `Data`) VALUES('$Prenom', '$Nom', '$Data')";
-                            
+                            $sql = "UPDATE utilisateur SET Prenom = $Prenom WHERE IDutilisateur = {$IDuser}";
                             $result = mysqli_query($db_handle, $sql);
                             if ($result) {
                                 header('Location: vous.php');
@@ -164,6 +162,7 @@
                                 $sql = "";
                             }
                         }
+                        
                     }
                 ?>
             </div>
@@ -205,10 +204,15 @@
                 <label for="dateDeb">Date de début</label><br>
                 <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br>
                 
-                <label for="dateFin">Date de fin (ou prévue)</label><br>
-                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
+                    <label for="dateFin">Date de fin (ou prévue)</label><br>
+                    <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
   
+                    <input type="submit" value="Envoyer">
+                </form>
 
+                
+
+                
                 <label for="descriptif">Descriptif</label><br>
                 <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
             
