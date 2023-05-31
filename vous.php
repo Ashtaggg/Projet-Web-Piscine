@@ -97,6 +97,10 @@
             }//end else
         ?>
     <div class='bouton'><button type="submit" >Charger mon CV</button></div>
+    <br><br>
+    <div class='bouton'>
+        <button type="submit">se déconnecter</button> 
+    </div>
     </div>
     <div id="Formation">
         <h2>Formations</h2>
