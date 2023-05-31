@@ -111,6 +111,9 @@
         <div id="overlay" class="overlay">
             <div class="form-container">
             <h2>Ajouter une formation</h2>
+            <a href="vous.php">
+                <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
+            </a><br>
             <form>
             <style>
                 .texte-reduit {
@@ -126,7 +129,8 @@
                 <input type="text" id="domaine" name="domaine" placeholder="Ex: Economie"><br><br>
 
                 <label for="dateDeb">Date de début</label><br>
-                <select name="debut">
+                <select name="debut" required>
+                    <option value="">Mois</option>
                     <option value="janvier">janvier</option>
                     <option value="fevrier">fevrier</option>
                     <option value="mars">mars</option>
@@ -140,10 +144,11 @@
                     <option value="novembre">novembre</option>
                     <option value="decembre">decembre</option>
                 </select>
-                <input type="number" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"><br>
+                <input type="number" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br>
                 
                 <label for="dateFin">Date de fin (ou prévue)</label><br>
-                <select name="fin">
+                <select name="fin"required>
+                    <option value="">Mois</option>
                     <option value="janvier2">janvier</option>
                     <option value="fevrier2">fevrier</option>
                     <option value="mars2">mars</option>
@@ -157,7 +162,7 @@
                     <option value="novembre2">novembre</option>
                     <option value="decembre2">decembre</option>
                 </select>
-                <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"><br><br>
+                <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
 
                 <input type="submit" value="Envoyer">
             </form>
