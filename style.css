@@ -386,6 +386,9 @@ div.scroll {
     margin-left: 800px;
     float:left;
     font-size: 20px;
+    background: transparent;
+    outline: none;
+    border: 0px;
 }
 
 /* --------------------------------------------------------------------------------*/
