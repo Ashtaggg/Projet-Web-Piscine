@@ -163,8 +163,18 @@
                     <option value="decembre2">decembre</option>
                 </select>
                 <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
-
+                
+                <label for="descriptif">Descriptif</label><br>
+                
+                <div class="description">
+                    <div class="rectangle">
+                    <input type="text" placeholder="Entrez votre texte">
+                    </div>
+                </div> 
+                <br><br><br><br><br><br>               
                 <input type="submit" value="Envoyer">
+
+                <br><br><br><br><br><br><br>
             </form>
         </div>
     </div>
