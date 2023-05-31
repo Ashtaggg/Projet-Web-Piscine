@@ -106,7 +106,7 @@
             <a href="connexion.php"><button>se déconnecter</button></a>
         </div>
         <br><br>
-        <div class='bouton'><button type="submit" >Modifier mon profil</button></div>
+        <div class='bouton' onclick="openProf()"><button type="submit" >Modifier mon profil</button></div>
     </div>
     
     <div id="Formation">  
