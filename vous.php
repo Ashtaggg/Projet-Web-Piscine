@@ -211,17 +211,10 @@
                 <input type="text" id="domaine" name="domaine" placeholder="Ex: Economie"><br><br>
 
                 <label for="dateDeb">Date de début</label><br>
-                <select name="debut" required>
-                    <option value="">Mois</option>
-                </select>
-                <input type="number" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br>
+                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br>
                 
                 <label for="dateFin">Date de fin (ou prévue)</label><br>
-                <select name="fin"required>
-                    <option value="">Mois</option>
-                    <option value="janvier2">janvier</option>
-                </select>
-                <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
+                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"required placeholder="année"><br><br>
                 
                 <label for="descriptif">Descriptif</label><br>
                 
