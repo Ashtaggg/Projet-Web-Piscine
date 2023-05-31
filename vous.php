@@ -110,13 +110,55 @@
   
         <div id="overlay" class="overlay">
             <div class="form-container">
-            <h2>Formulaire</h2>
+            <h2>Ajouter une formation</h2>
             <form>
-                <!-- Vos champs de formulaire ici -->
-                <label for="name">Nom :</label>
-                <input type="text" id="name" name="name" required><br><br>
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required><br><br>
+            <style>
+                .texte-reduit {
+                    font-size: 10px;
+                }
+            </style>
+                <p class="texte-reduit">*indique un champ obligatoire</br></p>
+                <label for="ecole">Ecole* </label></br>
+                <input type="text" id="ecole" name="ecole" placeholder="Ex: Université Paris V" required><br><br>
+                <label for="diplome">Diplôme</label></br>
+                <input type="text" id="diplome" name="diplome" placeholder="Ex: Licence"><br><br>
+                <label for="domaine">Domaine d'études</label></br>
+                <input type="text" id="domaine" name="domaine" placeholder="Ex: Economie"><br><br>
+
+                <label for="dateDeb">Date de début</label><br>
+                <select name="debut">
+                    <option value="janvier">janvier</option>
+                    <option value="fevrier">fevrier</option>
+                    <option value="mars">mars</option>
+                    <option value="avril">avril</option>
+                    <option value="mai">mai</option>
+                    <option value="juin">juin</option>
+                    <option value="juillet">juillet</option>
+                    <option value="aout">aout</option>
+                    <option value="septembre">septembre</option>
+                    <option value="octobre">octobre</option>
+                    <option value="novembre">novembre</option>
+                    <option value="decembre">decembre</option>
+                </select>
+                <input type="number" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;"><br>
+                
+                <label for="dateFin">Date de fin (ou prévue)</label><br>
+                <select name="fin">
+                    <option value="janvier2">janvier</option>
+                    <option value="fevrier2">fevrier</option>
+                    <option value="mars2">mars</option>
+                    <option value="avril2">avril</option>
+                    <option value="mai2">mai</option>
+                    <option value="juin2">juin</option>
+                    <option value="juillet2">juillet</option>
+                    <option value="aout2">aout</option>
+                    <option value="septembre2">septembre</option>
+                    <option value="octobre2">octobre</option>
+                    <option value="novembre2">novembre</option>
+                    <option value="decembre2">decembre</option>
+                </select>
+                <input type="number" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;"><br><br>
+
                 <input type="submit" value="Envoyer">
             </form>
         </div>
@@ -145,50 +187,46 @@
                 $Date->modify("+2 hours");
                 $Date = $Date->format('Y-m-d H:i:s');
                 if ($db_found) {
-                    $post = "SELECT * FROM post WHERE Date >= '$Date' ORDER BY Date DESC";
-                    $post_result = mysqli_query($db_handle,$post);
-                    while($post_data = mysqli_fetch_assoc($post_result))
+                    $Moi = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                    $Moi_result = mysqli_query($db_handle, $Moi);
+                    while($Moi_data = mysqli_fetch_assoc($Moi_result))
                     {
-                        $IDutilisateur = $post_data["Envoyeur"];
-                        $utilisateur = "SELECT IDutilisateur FROM utilisateur WHERE Mail LIKE '%$email%'";
-                        $utilisateur_result = mysqli_query($db_handle,$utilisateur);
-                        while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
+                        $Envoyeur = "SELECT * FROM post WHERE Envoyeur LIKE '%$Moi_data[IDutilisateur]%' ORDER BY Date DESC";
+                        $Envoyeur_result = mysqli_query($db_handle, $Envoyeur);
+                        while($Envoyeur_data = mysqli_fetch_assoc($Envoyeur_result))
                         {
-                            if($IDutilisateur == $utilisateur){
-                                $Date1 = new DateTime("now");
-                                $Date1->modify("+2 hours");
-                                $Date1 = $Date1->format('Y-m-d H:i:s');
-                                $Date1 = strtotime($Date1);
-                                $Date2 = strtotime($post_data["Date"]);
-                                $DateDiff = $Date1 - $Date2;
-                                $DateDiff = $DateDiff/86400;
-                            
-                                 echo"<div class='post'><p class='PhotoProfil'><br><br><img height=75 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
-                                 echo"<p class='Nom'>" . $utilisateur_data["Prenom"] . " " . $utilisateur_data["Nom"] . "</p>";
-                                if($DateDiff >=1){
-                                     $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                     echo"<p class='Date'>" . $DateDiff . " j</p>";
+                            $Date1 = new DateTime("now");
+                            $Date1->modify("+2 hours");
+                            $Date1 = $Date1->format('Y-m-d H:i:s');
+                            $Date1 = strtotime($Date1);
+                            $Date2 = strtotime($Envoyeur_data["Date"]);
+                            $DateDiff = $Date1 - $Date2;
+                            $DateDiff = $DateDiff/86400;
+                    
+                            echo"<div class='post'><p class='PhotoProfil'><br><br><img height=75 src='" . $Moi_data["PhotoProfil"] . "' /></p>";
+                            echo"<p class='Nom'>" . $Moi_data["Prenom"] . " " . $Moi_data["Nom"] . "</p>";
+                            if($DateDiff >=1){
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " j</p>";
                                 }
-                                else if($DateDiff * 24 >=1){
-                                    $DateDiff = $DateDiff * 24;
-                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                    echo"<p class='Date'>" . $DateDiff . " h</p>";
-                                }
-                                 else if($DateDiff * 24 * 60 >=1){
+                            else if($DateDiff * 24 >=1){
+                                $DateDiff = $DateDiff * 24;
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " h</p>";
+                            }
+                            else if($DateDiff * 24 * 60 >=1){
                                     $DateDiff = $DateDiff * 24 * 60;
-                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                    echo"<p class='Date'>" . $DateDiff . " min</p>";
-                                }
-                                else{
-                                    $DateDiff = $DateDiff * 24 * 60 * 60;
-                                    $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
-                                    echo"<p class='Date'>" . $DateDiff . " sec</p>";
-                                }
-                                //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
-                                echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
-
-                                echo"<p class='Data'><img height=300 src='" . $post_data["Data"] . "' /></p></div>";
-                        }
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " min</p>";
+                            }
+                            else{
+                                $DateDiff = $DateDiff * 24 * 60 * 60;
+                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                echo"<p class='Date'>" . $DateDiff . " sec</p>";
+                            }   
+                            //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
+                            echo"<p class='Legende'>" . $Envoyeur_data["Legende"] . "</p>";
+                            echo"<p class='Data'><img height=300 src='" . $Envoyeur_data["Data"] . "' /></p></div>";
                         }
                     }
                 }

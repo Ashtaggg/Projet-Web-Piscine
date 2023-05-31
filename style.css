@@ -420,6 +420,7 @@ div.scroll {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: none; /* Caché par défaut */
+    z-index: 2;
   }
   
   .form-container {
@@ -433,15 +434,7 @@ div.scroll {
     border-radius: 5px;
   }
   
-  /* Styles pour le bouton */
-  .open-form-btn {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+  
 
 /* --------------------------------------------------------------------------------*/
 /* -----------------------------------Notifications--------------------------------*/
@@ -456,7 +449,6 @@ div.scroll {
 #Messagerie{
     display: flex;
     justify-content: center;
-    place-items: center;
 }
 #Messages{
     width: 30%;

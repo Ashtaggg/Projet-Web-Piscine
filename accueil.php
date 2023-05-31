@@ -151,6 +151,7 @@
                     $post_result = mysqli_query($db_handle,$post);
                     while($post_data = mysqli_fetch_assoc($post_result))
                     {
+                     
                         $IDutilisateur = $post_data["Envoyeur"];
                         $utilisateur = "SELECT * FROM utilisateur  WHERE IDutilisateur LIKE '%$IDutilisateur%'";
                         $utilisateur_result = mysqli_query($db_handle,$utilisateur);
