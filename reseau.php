@@ -38,7 +38,7 @@
         <div class="inputbox">
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" placeholder="Rechercher" size="22">
-            </div>
+        </div>
         <div class="menu">
             <ul class="list">
                 <li><a class="oncolor" href="accueil.php">Accueil</a></li>
