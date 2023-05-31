@@ -52,18 +52,10 @@ body {
     gap: 25px;
 }
 
-a::before {
-    content: "";
-    position: absolute;
-    bottom: 40px;
-    width: 0;
-    height: 2px;
-    background-color: black;
-    transition: width 0.5s ease-out;
-  }
-a:hover::before {
-    width: 80px;
-  }
+.oncolor:hover {
+    color: #037078;
+    transition: 0.25s;
+}
 
 
 #toggler, .navigation label {
@@ -210,7 +202,7 @@ a:hover::before {
 /* --------------------------------------------------------------------------------*/
 
 .post{
-    background-color: #20838a;
+    background-color: #037078;
     color:white;
     width: 53%;
     border-radius: 2%;
@@ -259,13 +251,13 @@ a:hover::before {
     transform: rotate(180deg);
     display: grid;
     position: absolute;
-    top: 560px;
+    top: 570px;
     left: 225px;
 }
 #next{
     position:absolute;
     display: grid;
-    top: 560px;
+    top: 570px;
     right: 570px;
 }
 #carrousel_all ion-icon{
@@ -327,13 +319,15 @@ div.scroll {
 /* ---------------------------------------Vous-------------------------------------*/
 /* --------------------------------------------------------------------------------*/
 
-#Projet{
-    margin-top: 30px;
+#MonProfil{
+    background-color: white;
     width: 70%;
     display: grid;
     place-items: center;
-    background-color: white;
     color:black;
+    margin-top:-10px;
+    margin-left: 0px;
+    float:left;  
     padding: 5px;
     z-index: 2;
 }
@@ -347,17 +341,28 @@ div.scroll {
     padding: 5px;
     z-index: 2;
 }
-#MonProfil{
-    background-color: white;
+#Projet{
+    margin-top: 30px;
     width: 70%;
     display: grid;
     place-items: center;
+    background-color: white;
     color:black;
-    margin-top:-10px;
-    margin-left: 0px;
-    float:left;  
     padding: 5px;
     z-index: 2;
+}
+
+
+#MesPost{
+    margin-top: 10px;
+    width: 70%;
+    display: grid;
+    place-items: center;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: 2;
+
 }
 
 .photo{
@@ -371,7 +376,7 @@ div.scroll {
     float:left;      
 }
 .bouton{
-    margin-top:-115px;
+    margin-top:-155px;
     margin-left: 551px;
     float:left;    
 }
