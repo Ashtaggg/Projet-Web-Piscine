@@ -164,7 +164,8 @@
                             $sql2 = "UPDATE utilisateur SET Nom = '$Nom' where IDutilisateur = {$IDuser2}";
                             $sql2_result = mysqli_query($db_handle, $sql2);
 
-                            $sql3 =
+                            //$sql3 = "UPDATE utilisateur SET Mail = '$Mail' where IDutilisateur = {$IDuser2}";
+                            //$sql3_result = mysqli_query($db_handle, $sql3);
                         }
                         
                     }
