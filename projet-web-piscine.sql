@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 01 juin 2023 à 22:49
+-- Généré le : jeu. 01 juin 2023 à 22:55
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `formation` (
   `IDformation` int NOT NULL,
   `IDutilisateur` int NOT NULL,
   `NomEcole` varchar(255) NOT NULL,
+  `Diplome` varchar(255) NOT NULL,
   `Type` int NOT NULL,
   `DateDebut` date NOT NULL,
   `DateFin` date NOT NULL,
