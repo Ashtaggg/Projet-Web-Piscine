@@ -137,7 +137,7 @@
                     <p>Nom : <input type="text" name="Nom"></br></p>
                     <p>Prenom : <input type="text" name="Prenom"></br></p>
                     <p>Mon mail : <input type="text" name="Mail"></br></p>
-                    
+                    <p>Mon adresse : <input type="text" name="Adresse"></br></p>
                     <br><br><br><br><br><br><br>
                     <input type="submit" value="Valider" name=PosterChangement>
                 </form>
@@ -150,18 +150,21 @@
                             $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                             $IDuser2 = $IDuser_data["IDutilisateur"];
         
-                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
-                            $Data = "images/" . $Data;
+                            //$Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                            //$Data = "images/" . $Data;
+                            //echo $Data;
 
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
                             $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
                             $Mail = isset($_POST["Mail"]) ? $_POST["Mail"] : "";
-                            echo $Prenom . "jvbjvbu" . $IDuser2;
-                            //$test = "INSERT INTO `utilisteur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`)VALUES('', '', '$Nom','$Prenom', '','','','$Data','','','','','',)";
-                            //$test_result = mysqli_query($db_handle, $test);
 
-                            $sql = "UPDATE utilisateur SET Prenom = '$Prenom', Nom = '$Nom', Mail = '$Mail' where IDutilisateur = {$IDuser2}";
+                            $sql = "UPDATE utilisateur SET Prenom = '$Prenom' where IDutilisateur = {$IDuser2}";
                             $result = mysqli_query($db_handle, $sql);
+
+                            $sql2 = "UPDATE utilisateur SET Nom = '$Nom' where IDutilisateur = {$IDuser2}";
+                            $sql2_result = mysqli_query($db_handle, $sql2);
+
+                            $sql3 =
                         }
                         
                     }
@@ -274,26 +277,7 @@
 
                     <br><br>
                 </form>
-                <?php
-                    if ($db_found) {
-                        if (isset($_POST["poster"]) && !(empty($_POST['poster']))) {
 
-                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                            $IDuser_result = mysqli_query($db_handle, $IDuser);
-                            $IDuser_data = mysqli_fetch_assoc($IDuser_result);
-        
-                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
-                            $Data = "images/" . $Data;
-
-                            $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
-                            $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
-
-                            $sql = "UPDATE utilisateur SET Prenom = $Prenom, Nom = $Nom, PhotoProfil = $Data where IDutilisateur = {$IDuser}";
-                            $result = mysqli_query($db_handle, $sql);
-                        }
-                        
-                    }
-                ?>
             </div>
         </div>
         <script>

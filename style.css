@@ -432,7 +432,7 @@ div.scroll {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 2;
+    z-index: 11;
   }
 
 .modification {
@@ -443,7 +443,7 @@ div.scroll {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 2;
+    z-index: 11;
   }
   
 .form-container {
@@ -468,7 +468,7 @@ div.scroll {
     background: transparent;
     outline: none;
     border: 0px;
-    z-index: 2;
+    z-index: 11;
     font-size: 30px;
 }
 
