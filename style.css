@@ -30,7 +30,7 @@ body {
     border-radius: 5px;
     position: sticky;
     top : 0;
-    z-index: 1;
+    z-index: 10;
 }
 
 .navigation a {
@@ -121,7 +121,7 @@ body {
     float:center;
     position: sticky;
     top : 100px;
-    z-index: 1;
+    z-index: 10;
 }
 
 #Info_Right{
@@ -485,6 +485,7 @@ div.scroll {
 #Messagerie{
     display: flex;
     justify-content: center;
+    z-index: -1;
 }
 #Messages{
     width: 30%;
@@ -492,7 +493,7 @@ div.scroll {
     background-color: white;
     color:black;
     padding: 5px;
-    z-index: -1;
+    z-index: 1;
 }
 #Chat{
     margin-left: 40px;
@@ -538,11 +539,16 @@ div.scroll {
     margin-right: 5px;
 }
 .message_box{
-    width: 90%;
+    width: 100%;
     height: 75px;
     border: 2px solid gainsboro;
     border-radius: 5px;
+    background-color: transparent;
     margin-bottom: 10px;
+    z-index: 2;
+}
+.message_box:hover{
+    border-color:#037078; 
 }
 .message_PhotoProfil{
     float:left;

@@ -29,6 +29,13 @@
     ?>
 </head>
 <body>
+<script>
+    function messa(element){
+        const IDenvoyeur = element.id;
+        console.log(IDenvoyeur);
+        document.location.href="messagerie.php?IDenvoyeur=" + IDenvoyeur; 
+    }
+</script>
     <div id="header">
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
@@ -58,7 +65,7 @@
                 <p style="font-weight : 700">Messagerie   </p>
                 <ion-icon style="margin-left : 5px" name="file-tray-outline"></ion-icon>
             </div>
-            <div class="line-1"></div>
+            
             </br>
             <div class="inputbox_mess">
                 <ion-icon name="search-outline"></ion-icon>
@@ -96,7 +103,7 @@
 
                                 if($IDrecepteur==$IDutilisateur && $Statut==1)
                                 {
-                                    echo"<div class='message_box'><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
+                                    echo"<div class='message_box' id='". $message_data['Envoyeur'] . "' onclick=messa(this)><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
                                     echo"<p class='Nom_box'>" . $envoyeur_data["Prenom"] . " " . $envoyeur_data["Nom"] . "</p>";
                                     echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "...</p>";
                                     if($DateDiff >=1){
@@ -122,7 +129,7 @@
                                 }
                                 elseif($IDrecepteur==$IDutilisateur && $Statut==0)
                                 {
-                                    echo"<div class='message_box'style='font-weight: 700'><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
+                                    echo"<div class='message_box' id='". $message_data['Envoyeur'] . "' style='font-weight: 700' onclick=messa(this)><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
                                     echo"<p class='Nom_box'>" . $envoyeur_data["Prenom"] . " " . $envoyeur_data["Nom"] . "</p>";
                                     echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "...</p>";
                                     if($DateDiff >=1){
@@ -159,12 +166,14 @@
             <div id="Name">
                 <p style="font-weight : 700">
                 <?php
-                    if($db_found){
-                        $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                        $result = mysqli_query($db_handle, $sql);
-                        while($data = mysqli_fetch_assoc($result)){
-                            echo $data['Prenom'] . " " . $data['Nom'];
-                        }
+                if (isset($_GET["IDenvoyeur"]) && !(empty($_GET['IDenvoyeur']))) {
+                    $IDenvoyeur = isset($_GET['IDenvoyeur']) ? $_GET['IDenvoyeur'] : "";
+                }
+                if($db_found){
+                    $sql = "SELECT * FROM utilisateur WHERE IDutilisateur = $IDenvoyeur";
+                    $result = mysqli_query($db_handle, $sql);
+                    $data = mysqli_fetch_assoc($result);
+                    echo $data["Prenom"] . " " . $data["Nom"];
                     }
                     else {
                         echo "Database not found";
@@ -175,7 +184,96 @@
             <div class="line-1"></div>
             </br>
             <div class="scroll">
-                <p>Ami 1</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Ami 1</p>
+            <?php
+                     $Date = new DateTime("now");
+                     $Date->modify("-7 day");
+                     $Date->modify("+2 hours");
+                     $Date = $Date->format('Y-m-d H:i:s');
+                     $utilisateur = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                     $utilisateur_result = mysqli_query($db_handle,$utilisateur);
+                     $IDutilisateur = $utilisateur_data["IDutilisateur"];
+                     if ($db_found) {
+                         $message = "SELECT * FROM `message` WHERE (Envoyeur = $IDenvoyeur OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDenvoyeur OR Recepteur = $IDutilisateur)"
+                         $message_result = mysqli_query($db_handle,$message);
+                         /*while($message_data = mysqli_fetch_assoc($message_result))
+                         {
+                             $IDenvoyeur = $message_data["Envoyeur"];
+                             $IDrecepteur = $message_data["Recepteur"];
+                             $Statut = $message_data["Statut"];
+                             $utilisateur = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                             $utilisateur_result = mysqli_query($db_handle,$utilisateur);
+                             $envoyeur = "SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$IDenvoyeur%'";
+                             $envoyeur_result = mysqli_query($db_handle,$envoyeur);
+                             $envoyeur_data = mysqli_fetch_assoc($envoyeur_result);
+                             while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
+                            {
+                                $IDutilisateur = $utilisateur_data["IDutilisateur"];
+                                $Date1 = new DateTime("now");
+                                $Date1->modify("+2 hours");
+                                $Date1 = $Date1->format('Y-m-d H:i:s');
+                                $Date1 = strtotime($Date1);
+                                $Date2 = strtotime($message_data["Date"]);
+                                $DateDiff = $Date1 - $Date2;
+                                $DateDiff = $DateDiff/86400;
+
+                                if($IDrecepteur==$IDutilisateur && $Statut==1)
+                                {
+                                    echo"<div class='message_box' id='". $message_data['Envoyeur'] . "' onclick=messa(this)><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
+                                    echo"<p class='Nom_box'>" . $envoyeur_data["Prenom"] . " " . $envoyeur_data["Nom"] . "</p>";
+                                    echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "...</p>";
+                                    if($DateDiff >=1){
+                                        $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                        echo"<p class='message_Date'>" . $DateDiff . " j</p></div></div>";
+                                    }
+                                    else if($DateDiff * 24 >=1){
+                                        $DateDiff = $DateDiff * 24;
+                                        $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                        echo"<p class='message_Date'>" . $DateDiff . " h</p></div></div>";
+                                    }
+                                    else if($DateDiff * 24 * 60 >=1){
+                                        $DateDiff = $DateDiff * 24 * 60;
+                                        $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                        echo"<p class='message_Date'>" . $DateDiff . " min</p></div></div>";
+                                    }
+                                    else{
+                                        $DateDiff = $DateDiff * 24 * 60 * 60;
+                                        $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                        echo"<p class='message_Date'>" . $DateDiff . " sec</p></div></div>";
+                                    }
+                                    //echo"<p class='Date'>" . $message_data["Date"] . "</p>";
+                                }
+                                elseif($IDrecepteur==$IDutilisateur && $Statut==0)
+                                {
+                                    echo"<div class='message_box' id='". $message_data['Envoyeur'] . "' style='font-weight: 700' onclick=messa(this)><p class='message_PhotoProfil'><img height=30 src='" . $envoyeur_data["PhotoProfil"] . "' /></p>";
+                                    echo"<p class='Nom_box'>" . $envoyeur_data["Prenom"] . " " . $envoyeur_data["Nom"] . "</p>";
+                                    echo "<div class='message_txt_box'><p class='Message_txt'>" . substr($message_data["Contenu"], 0, 15) . "...</p>";
+                                    if($DateDiff >=1){
+                                        $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                        echo"<p class='message_Date'>" . $DateDiff . " j</p></div></div>";
+                                    }
+                                    else if($DateDiff * 24 >=1){
+                                        $DateDiff = $DateDiff * 24;
+                                        $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                        echo"<p class='message_Date'>" . $DateDiff . " h</p></div></div>";
+                                    }
+                                    else if($DateDiff * 24 * 60 >=1){
+                                        $DateDiff = $DateDiff * 24 * 60;
+                                        $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                        echo"<p class='message_Date'>" . $DateDiff . " min</p></div></div>";
+                                    }
+                                    else{
+                                        $DateDiff = $DateDiff * 24 * 60 * 60;
+                                        $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                        echo"<p class='message_Date'>" . $DateDiff . " sec</p></div></div>";
+                                    }
+                                }*/
+                            }
+                        }
+                    }
+                    else {
+                        echo "Database not found";
+                    }//end else
+                ?>
             </div>
             </br>
         </div>
