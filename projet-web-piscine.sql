@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 01 juin 2023 à 14:37
+-- Généré le : jeu. 01 juin 2023 à 15:49
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -101,8 +101,22 @@ CREATE TABLE IF NOT EXISTS `post` (
 --
 
 INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES
-(1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 0, 0),
-(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 0, 0);
+(1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 0, 1),
+(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 0, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `relation`
+--
+
+DROP TABLE IF EXISTS `relation`;
+CREATE TABLE IF NOT EXISTS `relation` (
+  `Ami1` int NOT NULL COMMENT 'IDutilisateur',
+  `Ami2` int NOT NULL COMMENT 'IDutilisateur',
+  `Statut` int NOT NULL COMMENT '(1) Demande (2) Accepté ',
+  PRIMARY KEY (`Ami1`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
