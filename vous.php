@@ -139,22 +139,25 @@
                     <p>Mon mail : <input type="text" name="Mail"></br></p>
                     <p>Date de Naissance :<input type="text" name="DateNaissance"></br></p>
                     <br><br><br><br><br><br><br>
-                    <button id="PosterChangement" type="submit" name="PosterChangement" value="ON">Valider</button>
+                    <button class="boutonPoster" type="submit" name="PosterChangement" value="ON">Valider</button>
                 </form>
                 <?php
                     if ($db_found) {
                         if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
-                            $IDuser = "SELECT IDutilisateur FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+
+                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                             $IDuser_result = mysqli_query($db_handle, $IDuser);
+                            while($IDuser_data = mysqli_fetch_assoc($IDuser_result));
+                            {
+                                $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                                $Data = "images/" . $Data;
 
-                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
-                            $Data = "images/" . $Data;
+                                $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
+                                $Prenom = isset($_POST["prenom"]) ? $_POST["prenom"] : "";
 
-                            $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
-                            $Prenom = isset($_POST["prenom"]) ? $_POST["prenom"] : "";
-
-                            $sql = "UPDATE utilisateur SET Prenom = $Prenom WHERE IDutilisateur = {$IDuser}";
-                            $result = mysqli_query($db_handle, $sql);
+                                $sql = "UPDATE utilisateur SET Prenom = $Prenom";
+                                $result = mysqli_query($db_handle, $sql);
+                            }
                         }
                         
                     }

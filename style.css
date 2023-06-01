@@ -238,10 +238,22 @@ body {
 
 .Like{
     margin-left:10%;
+    font-size:1.1em;
 }
 
 .nbrLike{
     margin-left:3%;
+    font-size:1.2em;
+}
+
+.Com{
+    margin-left:10%;
+    font-size:1.1em;
+}
+
+.nbrCom{
+    margin-left:3%;
+    font-size:1.2em;
 }
 
 .post2{

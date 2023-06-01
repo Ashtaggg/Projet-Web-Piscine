@@ -94,7 +94,7 @@
 
                             $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
 
-                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Like`, `Dislike`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '' , '' , '');
+                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0');
                             ";
 
                             $result = mysqli_query($db_handle, $sql);
@@ -157,7 +157,11 @@
                     else{
                         element.style.color = "red";
                     }
-                    document.location.href="accueil.php?IDpost=" + IDpost; 
+                    document.location.href="accueil.php?IDpostLike=" + IDpost; 
+                }
+                function com(element){
+                    const IDpost = element.id;
+                    document.location.href="accueil.php?IDpostCom=" + IDpost; 
                 }
             </script>
             <?php
@@ -209,14 +213,15 @@
 
                             echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
 
-                            echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' onclick=like(this)><ion-icon name='heart'></ion-icon></button><p class='nbrLike'>" . $post_data["Aime"] . "</p></div></div>";
+                            echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike'>" . $post_data["Aime"] . "</p>";
+                            echo"<button class='Com' name='Com' id='" . $post_data['IDpost'] . "' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'>" . $post_data["Commentaires"] . "</p></div></div>";
                         }
                     }
                 }
             ?>
             <?php 
-                if (isset($_GET["IDpost"]) && !(empty($_GET['IDpost']))) {
-                    $IDpost = isset($_GET['IDpost']) ? $_GET['IDpost'] : "";
+                if (isset($_GET["IDpostLike"]) && !(empty($_GET['IDpostLike']))) {
+                    $IDpost = isset($_GET['IDpostLike']) ? $_GET['IDpostLike'] : "";
 
                     $like = "SELECT * FROM post WHERE IDpost LIKE '%$IDpost%'";
                     $like_result = mysqli_query($db_handle,$like);
@@ -227,7 +232,20 @@
                     $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$IDpost}";
             
                     $result2 = mysqli_query($db_handle, $sql);
-                }
+                }/*
+                if (isset($_GET["IDpostCom"]) && !(empty($_GET['IDpostCom']))) {
+                    $IDpost = isset($_GET['IDpostCom']) ? $_GET['IDpostCom'] : "";
+
+                    $like = "SELECT * FROM post WHERE IDpost LIKE '%$IDpost%'";
+                    $like_result = mysqli_query($db_handle,$like);
+                    $like_data = mysqli_fetch_assoc($like_result);
+                    
+                    $Like = $like_data["Aime"] + 1;
+                    
+                    $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$IDpost}";
+            
+                    $result2 = mysqli_query($db_handle, $sql);
+                }*/
             ?>
         </table>
         </br>
