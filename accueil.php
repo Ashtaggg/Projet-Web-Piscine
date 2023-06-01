@@ -246,25 +246,18 @@
             
                     $result2 = mysqli_query($db_handle, $sql);
                 } 
-                if (isset($_POST["IDpostCom"]) && !(empty($_POST['IDpostCom']))) {
-                    $IDpostCom = isset($_POST['IDpostCom']) ? $_POST['IDpostCom'] : "";
-
-                    echo"<div id='overlay' class='overlay'> <div class='form-container'>";
-                    echo"<h2>Ajouter une formation</h2>";
-                    echo"</div></div>"; 
-                    /*
-                    $com = "SELECT * FROM post WHERE IDpost LIKE '%$IDpostCom%'";
-                    $com_result = mysqli_query($db_handle,$com);
-                    $com_data = mysqli_fetch_assoc($com_result);
-                    
-                    $Com = $com_data["Commentaires"] + 1;
-                    
-                    $sql = "UPDATE post SET Commentaires = $Com WHERE IDpost = {$IDpostCom}";
-            
-                    $result2 = mysqli_query($db_handle, $sql);*/
-                } 
             ?>
         </table>
+        <div id="overlay3" class="overlay3">
+            <div class="com-container">
+                <h2>Ajouter un commentaire</h2>
+                <button class="quitterCom" onclick=com_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
+                
+                <div class="php">
+                    
+                </div>
+            </div>
+        </div>
         </br>
     </div>
 

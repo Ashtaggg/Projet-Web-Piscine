@@ -36,20 +36,29 @@ function like(element){
 }
 
 
-function com(element){
+function com(element) {
     var IDpost = element.id;
-    var Com = parseInt(element.dataset.com);
-    element.style.color = "red";
+    var Com = parseInt(element.dataset.com) + 1;
+    var overlay3 = document.getElementById("overlay3");
+    overlay3.style.display = "block";
     $.ajax({
-        url: 'accueil.php',
+        url: 'commentaires.php',
         type: 'POST',
         cache: false,
         data: { IDpostCom: IDpost },
-        success: function() {
+        success: function(response) {
             $('.nbrCom[data-idpost="' + IDpost + '"]').text(Com);
+            $('.php').load('commentaires.php');
         },
         error: function() {
             alert('Erreur lors de la requête AJAX');
         }
     });
+}
+
+function com_cacher(element){
+    var IDpost = element.id;
+    var Com = parseInt(element.dataset.com);
+    var overlay3 = document.getElementById("overlay3");
+    overlay3.style.display = "none";
 }
