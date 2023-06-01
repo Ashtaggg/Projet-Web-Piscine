@@ -135,29 +135,33 @@
                     <p class="texte-reduit">Si vous ne souhaitez pas modifier un paramètre, laissez le vide</br></p>
                     <p>Changer ma photo de profil : <input type="file" name="Data"></br></p>
                     <p>Nom : <input type="text" name="Nom"></br></p>
-                    <p>Prenom : <input type="text" name="prenom"></br></p>
+                    <p>Prenom : <input type="text" name="Prenom"></br></p>
                     <p>Mon mail : <input type="text" name="Mail"></br></p>
-                    <p>Date de Naissance :<input type="text" name="DateNaissance"></br></p>
+                    
                     <br><br><br><br><br><br><br>
-                    <button class="boutonPoster" type="submit" name="PosterChangement" value="ON">Valider</button>
+                    <input type="submit" value="Valider" name=PosterChangement>
                 </form>
                 <?php
                     if ($db_found) {
                         if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
-
+                            echo "test";
                             $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                             $IDuser_result = mysqli_query($db_handle, $IDuser);
-                            while($IDuser_data = mysqli_fetch_assoc($IDuser_result));
-                            {
-                                $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
-                                $Data = "images/" . $Data;
+                            $IDuser_data = mysqli_fetch_assoc($IDuser_result);
+                            $IDuser2 = $IDuser_data["IDutilisateur"];
+        
+                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                            $Data = "images/" . $Data;
 
-                                $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
-                                $Prenom = isset($_POST["prenom"]) ? $_POST["prenom"] : "";
+                            $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
+                            $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
+                            $Mail = isset($_POST["Mail"]) ? $_POST["Mail"] : "";
+                            echo $Prenom . "jvbjvbu" . $IDuser2;
+                            //$test = "INSERT INTO `utilisteur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`)VALUES('', '', '$Nom','$Prenom', '','','','$Data','','','','','',)";
+                            //$test_result = mysqli_query($db_handle, $test);
 
-                                $sql = "UPDATE utilisateur SET Prenom = $Prenom";
-                                $result = mysqli_query($db_handle, $sql);
-                            }
+                            $sql = "UPDATE utilisateur SET Prenom = '$Prenom', Nom = '$Nom', Mail = '$Mail' where IDutilisateur = {$IDuser2}";
+                            $result = mysqli_query($db_handle, $sql);
                         }
                         
                     }
@@ -183,7 +187,7 @@
                 <a href="vous.php">
                     <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
                 </a><br>
-                <form>
+                <form method=post>
                 <style>
                     .texte-reduit {
                         font-size: 10px;
@@ -234,6 +238,15 @@
                 <a href="vous.php">
                     <button class="quitterProjet"><ion-icon name="close-outline"></ion-icon></button>
                 </a><br>
+                <form method=post>
+                    <style>
+                        .texte-reduit {
+                            font-size: 10px;
+                        }
+                    </style>
+                    <p class="texte-reduit">*indique un champ obligatoire </br></p>
+                    <label for="ecole">Ecole* </label></br>
+                    <input type="text" id="ecole" name="ecole" placeholder="Ex: Université Paris V" required><br><br>
                 <form>
                 <style>
                     .texte-reduit {
@@ -256,11 +269,31 @@
                 <label for="descriptif">Description</label><br>
                 <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
             
-                <br><br>         
-                <input type="submit" value="Envoyer">
+                    <br><br>         
+                    <input type="submit" value="Envoyer" name=poster>
 
-                <br><br>
+                    <br><br>
                 </form>
+                <?php
+                    if ($db_found) {
+                        if (isset($_POST["poster"]) && !(empty($_POST['poster']))) {
+
+                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            $IDuser_result = mysqli_query($db_handle, $IDuser);
+                            $IDuser_data = mysqli_fetch_assoc($IDuser_result);
+        
+                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                            $Data = "images/" . $Data;
+
+                            $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
+                            $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
+
+                            $sql = "UPDATE utilisateur SET Prenom = $Prenom, Nom = $Nom, PhotoProfil = $Data where IDutilisateur = {$IDuser}";
+                            $result = mysqli_query($db_handle, $sql);
+                        }
+                        
+                    }
+                ?>
             </div>
         </div>
         <script>

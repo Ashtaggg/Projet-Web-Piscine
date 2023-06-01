@@ -95,8 +95,7 @@
 
                             $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
 
-                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0');
-                            ";
+                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0')";
 
                             $result = mysqli_query($db_handle, $sql);
                             if ($result) {
