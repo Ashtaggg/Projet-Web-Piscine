@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 31 mai 2023 à 22:48
+-- Généré le : jeu. 01 juin 2023 à 09:31
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `Date` datetime NOT NULL,
   `Data` varchar(255) NOT NULL,
   `Legende` text NOT NULL,
-  `Commentaires` text NOT NULL COMMENT 'Liste des ID Messages',
+  `Commentaires` int NOT NULL,
   `Aime` int NOT NULL,
   PRIMARY KEY (`IDpost`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `post` (
 --
 
 INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES
-(1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', '', 0),
-(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', '', 0);
+(1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 0, 0),
+(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 0, 7);
 
 -- --------------------------------------------------------
 
