@@ -213,38 +213,55 @@
 
                             echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
 
-                            echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' data-like='" . $post_data['Aime'] ."' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike'>" . $post_data["Aime"] . "</p>";
-                            echo"<button class='Com' name='Com' id='" . $post_data['IDpost'] . "' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'>" . $post_data["Commentaires"] . "</p></div></div>";
+                            echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' data-like='" . $post_data['Aime'] ."' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $post_data['IDpost'] . "'>" . $post_data["Aime"] . "</p>";
+                            echo"<button class='Com' name='Com' id='" . $post_data['IDpost'] . "' data-com='" . $post_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $post_data['IDpost'] . "'>" . $post_data["Commentaires"] . "</p></div></div>";
                         }
                     }
                 }
             ?>
             <?php 
                 if (isset($_POST["IDpostLike"]) && !(empty($_POST['IDpostLike']))) {
-                    $IDpost = isset($_POST['IDpostLike']) ? $_POST['IDpostLike'] : "";
+                    $IDpostLike = isset($_POST['IDpostLike']) ? $_POST['IDpostLike'] : "";
 
-                    $like = "SELECT * FROM post WHERE IDpost LIKE '%$IDpost%'";
+                    $like = "SELECT * FROM post WHERE IDpost LIKE '%$IDpostLike%'";
                     $like_result = mysqli_query($db_handle,$like);
                     $like_data = mysqli_fetch_assoc($like_result);
                     
                     $Like = $like_data["Aime"] + 1;
                     
-                    $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$IDpost}";
+                    $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$IDpostLike}";
             
                     $result2 = mysqli_query($db_handle, $sql);
                 } 
                 if (isset($_POST["IDpostDislike"]) && !(empty($_POST['IDpostDislike']))) {
-                    $IDpost = isset($_POST['IDpostDislike']) ? $_POST['IDpostDislike'] : "";
+                    $IDpostDislike = isset($_POST['IDpostDislike']) ? $_POST['IDpostDislike'] : "";
 
-                    $like = "SELECT * FROM post WHERE IDpost LIKE '%$IDpost%'";
+                    $like = "SELECT * FROM post WHERE IDpost LIKE '%$IDpostDislike%'";
                     $like_result = mysqli_query($db_handle,$like);
                     $like_data = mysqli_fetch_assoc($like_result);
                     
                     $Like = $like_data["Aime"] - 1;
                     
-                    $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$IDpost}";
+                    $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$IDpostDislike}";
             
                     $result2 = mysqli_query($db_handle, $sql);
+                } 
+                if (isset($_POST["IDpostCom"]) && !(empty($_POST['IDpostCom']))) {
+                    $IDpostCom = isset($_POST['IDpostCom']) ? $_POST['IDpostCom'] : "";
+
+                    echo"<div id='overlay' class='overlay'> <div class='form-container'>";
+                    echo"<h2>Ajouter une formation</h2>";
+                    echo"</div></div>"; 
+                    /*
+                    $com = "SELECT * FROM post WHERE IDpost LIKE '%$IDpostCom%'";
+                    $com_result = mysqli_query($db_handle,$com);
+                    $com_data = mysqli_fetch_assoc($com_result);
+                    
+                    $Com = $com_data["Commentaires"] + 1;
+                    
+                    $sql = "UPDATE post SET Commentaires = $Com WHERE IDpost = {$IDpostCom}";
+            
+                    $result2 = mysqli_query($db_handle, $sql);*/
                 } 
             ?>
         </table>

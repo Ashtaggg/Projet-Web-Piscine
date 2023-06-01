@@ -9,8 +9,8 @@ function like(element){
             type: 'POST',
             cache: false,
             data: { IDpostDislike: IDpost },
-            success: function(response) {
-                $('.nbrLike').text(Like);
+            success: function() {
+                $('.nbrLike[data-idpost="' + IDpost + '"]').text(Like);
             },
             error: function() {
                 alert('Erreur lors de la requête AJAX');
@@ -25,12 +25,31 @@ function like(element){
             type: 'POST',
             cache: false,
             data: { IDpostLike: IDpost },
-            success: function(response) {
-                $('.nbrLike').text(Like);
+            success: function() {
+                $('.nbrLike[data-idpost="' + IDpost + '"]').text(Like);
             },
             error: function() {
                 alert('Erreur lors de la requête AJAX');
             }
         });
     }
+}
+
+
+function com(element){
+    var IDpost = element.id;
+    var Com = parseInt(element.dataset.com);
+    element.style.color = "red";
+    $.ajax({
+        url: 'accueil.php',
+        type: 'POST',
+        cache: false,
+        data: { IDpostCom: IDpost },
+        success: function() {
+            $('.nbrCom[data-idpost="' + IDpost + '"]').text(Com);
+        },
+        error: function() {
+            alert('Erreur lors de la requête AJAX');
+        }
+    });
 }
