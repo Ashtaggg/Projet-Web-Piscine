@@ -133,34 +133,28 @@
                         }
                     </style>
                     <p class="texte-reduit">Si vous ne souhaitez pas modifier un paramètre, laissez le vide</br></p>
-                    <p>Nom : <input type="text" name="Nom"></br></p>
-                    <p>Prenom : <input type="text" name="Prenom"></br></p>
                     <p>Changer ma photo de profil : <input type="file" name="Data"></br></p>
+                    <p>Nom : <input type="text" name="Nom"></br></p>
+                    <p>Prenom : <input type="text" name="prenom"></br></p>
+                    <p>Mon mail : <input type="text" name="Mail"></br></p>
+                    <p>Date de Naissance :<input type="text" name="DateNaissance"></br></p>
                     <br><br><br><br><br><br><br>
                     <button id="PosterChangement" type="submit" name="PosterChangement" value="ON">Valider</button>
                 </form>
                 <?php
                     if ($db_found) {
                         if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
-
-                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            $IDuser = "SELECT IDutilisateur FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                             $IDuser_result = mysqli_query($db_handle, $IDuser);
 
                             $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
                             $Data = "images/" . $Data;
 
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
-                            $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
+                            $Prenom = isset($_POST["prenom"]) ? $_POST["prenom"] : "";
 
                             $sql = "UPDATE utilisateur SET Prenom = $Prenom WHERE IDutilisateur = {$IDuser}";
                             $result = mysqli_query($db_handle, $sql);
-                            if ($result) {
-                                header('Location: vous.php');
-                                die();
-                            }
-                            else{
-                                $sql = "";
-                            }
                         }
                         
                     }

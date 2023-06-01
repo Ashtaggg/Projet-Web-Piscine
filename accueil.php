@@ -157,7 +157,6 @@
                     else{
                         element.style.color = "red";
                     }
-                    console.log(IDpost);
                     document.location.href="accueil.php?IDpost=" + IDpost; 
                 }
             </script>
