@@ -193,8 +193,8 @@
                      $utilisateur_result = mysqli_query($db_handle,$utilisateur);
                      $IDutilisateur = $utilisateur_data["IDutilisateur"];
                      if ($db_found) {
-                         $message = "SELECT * FROM `message` WHERE (Envoyeur = $IDenvoyeur OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDenvoyeur OR Recepteur = $IDutilisateur)"
-                         $message_result = mysqli_query($db_handle,$message);
+                         //$message = "SELECT * FROM `message` WHERE (Envoyeur = $IDenvoyeur OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDenvoyeur OR Recepteur = $IDutilisateur)"
+                         //$message_result = mysqli_query($db_handle,$message);
                          /*while($message_data = mysqli_fetch_assoc($message_result))
                          {
                              $IDenvoyeur = $message_data["Envoyeur"];
@@ -266,9 +266,9 @@
                                         $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                         echo"<p class='message_Date'>" . $DateDiff . " sec</p></div></div>";
                                     }
-                                }*/
+                                }
                             }
-                        }
+                        }*/
                     }
                     else {
                         echo "Database not found";

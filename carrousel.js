@@ -1,4 +1,8 @@
-$(document).ready(function() {
+
+//Celui des profs :
+
+
+/*$(document).ready(function() {
     var $img = $('#carrousel img');
     var max = $img.length;
     var i = 0; // compteur
@@ -64,12 +68,12 @@ $(document).ready(function() {
 
 
 
+*/
 
 
 
+//Le notre :
 
-
-/*
 $(document).ready(function(){
     $img = $('#carrousel img');
     indexImg = $img.length - 1;
@@ -153,4 +157,4 @@ $(document).ready(function(){
         }, 5000);
     }
     slideImg();
-});*/
+});
