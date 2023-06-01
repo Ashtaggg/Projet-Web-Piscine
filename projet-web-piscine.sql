@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 01 juin 2023 à 09:31
+-- Généré le : jeu. 01 juin 2023 à 14:37
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -20,6 +20,44 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `projet-web-piscine`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `emplois`
+--
+
+DROP TABLE IF EXISTS `emplois`;
+CREATE TABLE IF NOT EXISTS `emplois` (
+  `IDemplois` int NOT NULL,
+  `Type` int NOT NULL,
+  `DateDebut` date NOT NULL,
+  `DateFin` date NOT NULL,
+  `Lieu` varchar(255) NOT NULL,
+  `Poste` varchar(255) NOT NULL,
+  `Salaire` int NOT NULL,
+  PRIMARY KEY (`IDemplois`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `formation`
+--
+
+DROP TABLE IF EXISTS `formation`;
+CREATE TABLE IF NOT EXISTS `formation` (
+  `IDformation` int NOT NULL,
+  `NomEcole` varchar(255) NOT NULL,
+  `Type` int NOT NULL,
+  `DateDebut` date NOT NULL,
+  `DateFin` date NOT NULL,
+  `Lieu` varchar(255) NOT NULL,
+  `Poste` varchar(255) NOT NULL,
+  `Domaine` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
+  PRIMARY KEY (`IDformation`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -64,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 
 INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES
 (1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 0, 0),
-(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 0, 7);
+(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 0, 0);
 
 -- --------------------------------------------------------
 
