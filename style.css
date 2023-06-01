@@ -423,7 +423,7 @@ div.scroll {
     z-index: 2;
   }
 
-  .modification {
+.modification {
     position: fixed;
     top: 0;
     left: 0;
@@ -448,7 +448,7 @@ div.scroll {
     height: 400px;
   }
   
-  .quitterFormation{
+.quitterFormation{
     margin-top:-70px;
     margin-left: 270px;
     float:left;
@@ -460,9 +460,6 @@ div.scroll {
     font-size: 30px;
 }
 
-
-  
-
 .description input {
     background: transparent;
     border: none;
@@ -470,6 +467,38 @@ div.scroll {
     color: black;
 }
 
+.plusProjet{
+    margin-top:-100px;
+    margin-left: 800px;
+    float:left;
+    font-size: 20px;
+    background: transparent;
+    outline: none;
+    border: 0px;
+}
+
+.overlay2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 2;
+  }
+
+.quitterProjet{
+    margin-top:-70px;
+    margin-left: 270px;
+    float:left;
+    font-size: 20px;
+    background: transparent;
+    outline: none;
+    border: 0px;
+    z-index: 2;
+    font-size: 30px;
+}
   
 
 /* --------------------------------------------------------------------------------*/
