@@ -31,7 +31,7 @@
         function limitWords() {
             var textarea = document.getElementById("myTextarea");
             var words = textarea.value.trim().split(/\s+/); // Divise le contenu en mots
-            var maxWords = 10; // Limite maximale de mots
+            var maxWords = 250; // Limite maximale de mots
       
             if (words.length > maxWords) {
                 // Si le nombre de mots dépasse la limite
@@ -196,7 +196,7 @@
 
                 
                 <label for="dateDeb">Date de début</label><br>
-                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br>
+                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2023" style="margin-left: 15%;" required placeholder="année"><br>
                 
                 <label for="dateFin">Date de fin (ou prévue)</label><br>
                 <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
@@ -238,16 +238,19 @@
                     }
                 </style>
                 <p class="texte-reduit">*indique un champ obligatoire </br></p>
-                <label for="ecole">Ecole* </label></br>
-                <input type="text" id="ecole" name="ecole" placeholder="Ex: Université Paris V" required><br><br>
+                <label for="entreprise">Nom de l'entreprise/de l'école* </label></br>
+                <input type="text" id="entreprise" name="entreprise" placeholder="Ex: Omnes Education" required><br><br>
+
+                <label for="lieu">lieu </label></br>
+                <input type="text" id="lieu" name="lieu" placeholder="Ex: San Francisco"><br><br>
                 
                 <label for="dateDeb">Date de début</label><br>
-                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br>
+                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2023" style="margin-left: 15%;" required placeholder="année"><br>
                 
                 <label for="dateFin">Date de fin (ou prévue)</label><br>
                 <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
-       
-                <label for="descriptif">Descriptif</label><br>
+                
+                <label for="descriptif">Description</label><br>
                 <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
             
                 <br><br>         
