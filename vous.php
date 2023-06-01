@@ -133,34 +133,28 @@
                         }
                     </style>
                     <p class="texte-reduit">Si vous ne souhaitez pas modifier un paramètre, laissez le vide</br></p>
-                    <p>Nom : <input type="text" name="Nom"></br></p>
-                    <p>Prenom : <input type="text" name="Prenom"></br></p>
                     <p>Changer ma photo de profil : <input type="file" name="Data"></br></p>
+                    <p>Nom : <input type="text" name="Nom"></br></p>
+                    <p>Prenom : <input type="text" name="prenom"></br></p>
+                    <p>Mon mail : <input type="text" name="Mail"></br></p>
+                    <p>Date de Naissance :<input type="text" name="DateNaissance"></br></p>
                     <br><br><br><br><br><br><br>
                     <button id="PosterChangement" type="submit" name="PosterChangement" value="ON">Valider</button>
                 </form>
                 <?php
                     if ($db_found) {
                         if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
-
-                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            $IDuser = "SELECT IDutilisateur FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                             $IDuser_result = mysqli_query($db_handle, $IDuser);
 
                             $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
                             $Data = "images/" . $Data;
 
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
-                            $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
+                            $Prenom = isset($_POST["prenom"]) ? $_POST["prenom"] : "";
 
                             $sql = "UPDATE utilisateur SET Prenom = $Prenom WHERE IDutilisateur = {$IDuser}";
                             $result = mysqli_query($db_handle, $sql);
-                            if ($result) {
-                                header('Location: vous.php');
-                                die();
-                            }
-                            else{
-                                $sql = "";
-                            }
                         }
                         
                     }
@@ -182,16 +176,16 @@
   
         <div id="overlay" class="overlay">
             <div class="form-container">
-            <h2>Ajouter une formation</h2>
-            <a href="vous.php">
-                <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
-            </a><br>
-            <form>
-            <style>
-                .texte-reduit {
-                    font-size: 10px;
-                }
-            </style>
+                <h2>Ajouter une formation</h2>
+                <a href="vous.php">
+                    <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
+                </a><br>
+                <form>
+                <style>
+                    .texte-reduit {
+                        font-size: 10px;
+                    }
+                </style>
                 <p class="texte-reduit">*indique un champ obligatoire </br></p>
                 <label for="ecole">Ecole* </label></br>
                 <input type="text" id="ecole" name="ecole" placeholder="Ex: Université Paris V" required><br><br>
@@ -206,11 +200,7 @@
                 
                 <label for="dateFin">Date de fin (ou prévue)</label><br>
                 <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
-                
-
-                
-
-                
+       
                 <label for="descriptif">Descriptif</label><br>
                 <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
             
@@ -218,23 +208,63 @@
                 <input type="submit" value="Envoyer">
 
                 <br><br>
+                </form>
+            </div>
         </div>
-    </div>
   
-    <script>
-        function openForm() {
-            var overlay = document.getElementById("overlay");
-            overlay.style.display = "block";
-        }
-  </script>
-        
-
-        
-
+        <script>
+            function openForm() {
+                var overlay = document.getElementById("overlay");
+                overlay.style.display = "block";
+            }
+        </script>
     </div>
+
+
     <div id="Projet">
         <h2>Projets</h2>
+        <button class="plusProjet" onclick="openFormulaire()"><ion-icon name="add-circle-outline"></ion-icon></button>
+  
+        <div id="overlay2" class="overlay2">
+            <div class="form-container">
+                <h2>Ajouter un projet</h2>
+                <a href="vous.php">
+                    <button class="quitterProjet"><ion-icon name="close-outline"></ion-icon></button>
+                </a><br>
+                <form>
+                <style>
+                    .texte-reduit {
+                        font-size: 10px;
+                    }
+                </style>
+                <p class="texte-reduit">*indique un champ obligatoire </br></p>
+                <label for="ecole">Ecole* </label></br>
+                <input type="text" id="ecole" name="ecole" placeholder="Ex: Université Paris V" required><br><br>
+                
+                <label for="dateDeb">Date de début</label><br>
+                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br>
+                
+                <label for="dateFin">Date de fin (ou prévue)</label><br>
+                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
+       
+                <label for="descriptif">Descriptif</label><br>
+                <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
+            
+                <br><br>         
+                <input type="submit" value="Envoyer">
+
+                <br><br>
+                </form>
+            </div>
+        </div>
+        <script>
+            function openFormulaire() {
+                var overlay2 = document.getElementById("overlay2");
+                overlay2.style.display = "block";
+            }
+        </script>
     </div>
+    
     <div id="MesPost">
         <h2>Mes posts</h2>
         <table>
