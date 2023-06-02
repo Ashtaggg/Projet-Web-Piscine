@@ -406,7 +406,6 @@
                     $DateFin = isset($_POST["dateFin2"]) ? $_POST["dateFin2"] : "";
                     $Description = isset($_POST["descriptif"]) ? $_POST["descriptif"] : "";
 
-
                     $sql = "INSERT INTO `projet`(`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES ('$IDprojet', '$IDuser2', '$Ecole', '$NomProjet', '$Lieu', '$DateDeb', '$DateFin', '$Description')";
                     $result = mysqli_query($db_handle, $sql);
 
