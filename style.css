@@ -178,7 +178,7 @@ body {
 
 .line-1 {
     border-top: 1px solid gainsboro;
-    z-index: -1;
+    z-index: 1;
     width: 100%;
 }
 
@@ -655,7 +655,7 @@ div.scroll {
 #Messagerie{
     display: flex;
     justify-content: center;
-    z-index: -1;
+    z-index: 1;
 }
 #Messages{
     width: 30%;
@@ -672,7 +672,7 @@ div.scroll {
     background-color: white;
     color:black;
     padding: 5px;
-    z-index: -1;
+    z-index: 1;
 }
 #Icon{
     display: flex;
@@ -749,6 +749,14 @@ div.scroll {
     border-radius: 10px;
     background-color: transparent;
 }
+.chat_txt{
+    place-items: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
 .message_ecrir{
     display: flex;
     width: 95%;

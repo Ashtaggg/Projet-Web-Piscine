@@ -65,7 +65,7 @@
                 <p style="font-weight : 700">Messagerie   </p>
                 <ion-icon style="margin-left : 5px" name="file-tray-outline"></ion-icon>
             </div>
-            
+            <div class="line-1"></div>
             </br>
             <div class="inputbox_mess">
                 <ion-icon name="search-outline"></ion-icon>
@@ -197,7 +197,7 @@
                     if (isset($_GET["IDenvoyeur"]) && !(empty($_GET['IDenvoyeur']))) {
                         $IDenvoyeur = isset($_GET['IDenvoyeur']) ? $_GET['IDenvoyeur'] : "";
                         if ($db_found) {
-                            $message = "SELECT * FROM `message` WHERE (Envoyeur = $IDenvoyeur OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDenvoyeur OR Recepteur = $IDutilisateur) ORDER BY Date DESC";
+                            $message = "SELECT * FROM `message` WHERE (Envoyeur = $IDenvoyeur OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDenvoyeur OR Recepteur = $IDutilisateur) ORDER BY Date ASC";
                             $message_result = mysqli_query($db_handle,$message);
                             while($message_data = mysqli_fetch_assoc($message_result))
                             {
@@ -234,11 +234,14 @@
                             echo "Database not found";
                         }//end else
                     }
+                    else {
+                        echo "<p class='chat_txt'>Parlez avec un ami !</p><br>";
+                    }//end else
                 ?>
                 </div>
                 <div class="message_ecrir">
-                    <ion-icon class="icon_ecrir" id="lefticons" name="call-outline"></ion-icon>
-                    <ion-icon class="icon_ecrir" id="lefticons" name="videocam-outline"></ion-icon>
+                    <a href="https://zoom.us/fr/signin#/login"> <ion-icon class="icon_ecrir" id="lefticons" name="call-outline"></ion-icon> </a>
+                    <a href="https://zoom.us/fr/signin#/login"> <ion-icon class="icon_ecrir" id="lefticons" name="videocam-outline"></ion-icon> </a>
                     <div class="inputbox_ecrir">
                         <input type="text" placeholder="cause avec le copaing" size="22">
                     </div>
