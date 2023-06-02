@@ -467,7 +467,6 @@ div.scroll {
     margin-top: 30px;
     width: 70%;
     display: grid;
-    place-items: center;
     background-color: white;
     color:black;
     padding: 5px;
@@ -586,7 +585,7 @@ div.scroll {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 2;
+    z-index: 11;
   }
 
 .quitterProjet{
@@ -597,7 +596,7 @@ div.scroll {
     background: transparent;
     outline: none;
     border: 0px;
-    z-index: 2;
+    z-index: 11;
     font-size: 30px;
 }
 

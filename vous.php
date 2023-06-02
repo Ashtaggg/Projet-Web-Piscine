@@ -249,7 +249,6 @@
                                 
                 <label for="dateDeb">Date de début*</label><br>
                 <input type="date" id="dateDeb" name="dateDeb" min="1900-01-01" max="2023-12-31" style="margin-left: 15%;" required placeholder="jj/mm/aaaa"><br>
-
                 
                 <label for="dateFin">Date de fin (ou prévue)*</label><br>
                 <input type="date" id="dateFin" name="dateFin" min="1900-01-01" max="2099-12-31" style="margin-left: 15%;" required placeholder="jj/mm/aaaa"><br><br>
@@ -297,7 +296,7 @@
                     $Descriptif = isset($_POST["descriptif"]) ? $_POST["descriptif"] : "";
 
 
-                    $sql = "INSERT INTO `formation`(`IDformation`, `IDutilisateur`, `NomEcole`, `Diplome`, `Type`, `DateDebut`, `DateFin`, `Lieu`, `Poste`, `Domaine`, `Description`) VALUES ('$IDformation', '$IDuser2', '$Ecole', '$Diplome', '', '$DateDeb', '$DateFin', '$Lieu', '', '$Domaine', '$Descriptif')";
+                    $sql = "INSERT INTO `formation`(`IDformation`, `IDutilisateur`, `NomEcole`, `Diplome`, `DateDebut`, `DateFin`, `Lieu`, `Domaine`, `Description`) VALUES ('$IDformation', '$IDuser2', '$Ecole', '$Diplome', '$DateDeb', '$DateFin', '$Lieu', '$Domaine', '$Descriptif')";
                     $result = mysqli_query($db_handle, $sql);
 
                 }
@@ -309,9 +308,37 @@
 
 
     <div id="Projet">
-        <h2>Projets</h2>
+        <div style="text-align: center;">
+            <h2>Projets</h2>
+        </div>
         <button class="plusProjet" onclick="openFormulaire()"><ion-icon name="add-circle-outline"></ion-icon></button>
-  
+        
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $result = mysqli_query($db_handle, $sql);
+                $data = mysqli_fetch_assoc($result);
+                $IDutilisateur= $data['IDutilisateur']; 
+
+                $sql2 = "SELECT * FROM utilisateur JOIN projet WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = projet.IDutilisateur"; 
+                $result2 = mysqli_query($db_handle, $sql2);
+                while ($data2 = mysqli_fetch_assoc($result2)) {
+                    echo "<div class='affichageFormation'>Ecole: " . $data2['NomEcole'] . "<br>";
+                    echo "Nom du projet: " . $data2['NomProjet'] . "<br>";
+                    echo "Lieu: " . $data2['Lieu'] . "<br>";
+                    echo "Date de début: " . $data2['DateDebut'] . "<br>";
+                    echo "Date de fin: " . $data2['DateFin'] . "<br>";
+                    echo "Description: " . $data2['Description'] . "<br></div>";
+                    echo "<div> "."<br> </div>";
+                }
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+
         <div id="overlay2" class="overlay2">
             <div class="form-container">
                 <h2>Ajouter un projet</h2>
@@ -324,33 +351,27 @@
                             font-size: 10px;
                         }
                     </style>
-                    <p class="texte-reduit">*indique un champ obligatoire </br></p>
-                    <label for="ecole">Ecole* </label></br>
-                    <input type="text" id="ecole" name="ecole" placeholder="Ex: Université Paris V" required><br><br>
-                <form>
-                <style>
-                    .texte-reduit {
-                        font-size: 10px;
-                    }
-                </style>
                 <p class="texte-reduit">*indique un champ obligatoire </br></p>
-                <label for="entreprise">Nom de l'entreprise/de l'école* </label></br>
-                <input type="text" id="entreprise" name="entreprise" placeholder="Ex: Omnes Education" required><br><br>
+                <label for="ecole2">Ecole* </label></br>
+                <input type="text" id="ecole2" name="ecole2" placeholder="Ex: Omnes Education" required><br><br>
 
-                <label for="lieu">lieu </label></br>
-                <input type="text" id="lieu" name="lieu" placeholder="Ex: San Francisco"><br><br>
+                <label for="NomProjet">Nom du projet* </label></br>
+                <input type="text" id="NomProjet" name="NomProjet" placeholder="Ex: ECE makers" required><br><br>
+
+                <label for="lieu2">Lieu </label></br>
+                <input type="text" id="lieu2" name="lieu2" placeholder="Ex: San Francisco"><br><br>
                 
-                <label for="dateDeb">Date de début</label><br>
-                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2023" style="margin-left: 15%;" required placeholder="année"><br>
+                <label for="dateDeb2">Date de début*</label><br>
+                <input type="date" id="dateDeb2" name="dateDeb2" min="1900-01-01" max="2023-12-31" style="margin-left: 15%;" required placeholder="jj/mm/aaaa"><br>
                 
-                <label for="dateFin">Date de fin (ou prévue)</label><br>
-                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
+                <label for="dateFin">Date de fin (ou prévue)*</label><br>
+                <input type="date" id="dateFin2" name="dateFin2" min="1900-01-01" max="2099-12-31" style="margin-left: 15%;" required placeholder="jj/mm/aaaa"><br><br>
                 
                 <label for="descriptif">Description</label><br>
-                <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
+                <textarea id="myTextarea2" name="descriptif" rows="4" cols="33" oninput="limitWords()"></textarea>
             
                     <br><br>         
-                    <input type="submit" value="Envoyer" name=poster>
+                    <input type="submit" value="Envoyer" name="PosterProjet">
 
                     <br><br>
                 </form>
@@ -363,6 +384,38 @@
                 overlay2.style.display = "block";
             }
         </script>
+
+        <?php
+            if ($db_found) {     
+                if (isset($_POST["PosterProjet"]) && !(empty($_POST['PosterProjet']))) {
+
+                    $ID = "SELECT * FROM projet ORDER BY DateDebut DESC LIMIT 1;"; 
+                    $ID_result = mysqli_query($db_handle, $ID);
+                    $data = mysqli_fetch_assoc($ID_result);
+                    $IDprojet = $data["IDprojet"] + 1;
+
+                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                    $IDuser_result = mysqli_query($db_handle, $IDuser);
+                    $IDuser_data = mysqli_fetch_assoc($IDuser_result);
+                    $IDuser2 = $IDuser_data["IDutilisateur"];
+
+                    $Ecole = isset($_POST["ecole2"]) ? $_POST["ecole2"] : "";
+                    $NomProjet = isset($_POST["NomProjet"]) ? $_POST["NomProjet"] : "";
+                    $Lieu = isset($_POST["lieu2"]) ? $_POST["lieu2"] : "";
+                    $DateDeb = isset($_POST["dateDeb2"]) ? $_POST["dateDeb2"] : "";
+                    $DateFin = isset($_POST["dateFin2"]) ? $_POST["dateFin2"] : "";
+                    $Description = isset($_POST["descriptif"]) ? $_POST["descriptif"] : "";
+
+
+                    $sql = "INSERT INTO `projet`(`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES ('$IDprojet', '$IDuser2', '$Ecole', '$NomProjet', '$Lieu', '$DateDeb', '$DateFin', '$Description')";
+                    $result = mysqli_query($db_handle, $sql);
+
+                }
+                        
+            }
+        ?>
+
+
     </div>
     
     <div id="MesPost">
