@@ -57,10 +57,52 @@
         <div class="line-1"></div>
     </div>
     <div id="Section" class="section">
-        <h2>Emplois disponibles</h2>
-        <div class="scroll">
-            <p>Emploi 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Emploi n</p>
+        <div style="text-align: center;">
+            <h2>Emplois disponibles</h2>
         </div>
+        
+        <div class="scroll">
+              <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $result = mysqli_query($db_handle, $sql);
+                $data = mysqli_fetch_assoc($result);
+                $IDutilisateur= $data['IDutilisateur']; 
+
+                $sql2 = "SELECT * FROM utilisateur JOIN emplois WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = emplois.IDutilisateur"; 
+                $result2 = mysqli_query($db_handle, $sql2);
+                while ($data2 = mysqli_fetch_assoc($result2)) {
+
+                    //FAIRE ATTENTION : IDutilisateur ?       nvlle colonne "nom" ?    adresse vrmt utile ?
+
+                    echo "<div class='affichageFormation'>Lieu: " . $data2['Lieu'] . "<br>";
+                    echo "Poste: " . $data2['Poste'] . "<br>";
+                    echo "Salaire: " . $data2['Salaire'] . "<br>";
+                    echo "Date de début: " . $data2['DateDebut'] . "<br>";
+                    echo "Date de fin: " . $data2['DateFin'] . "<br>";
+                    echo "<div> "."<br> </div>";
+                }
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+
+        <p>Emploi 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Emploi n</p>
+        
+        
+        
+        </div>
+
+        
+
+
+
+
+
+
     </div>
     <div id="footer">
         <p>Nous contacter : </p>
