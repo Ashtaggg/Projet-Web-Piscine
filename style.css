@@ -437,7 +437,7 @@ div.scroll {
     padding:4px;
     background-color: transparent;
     width: 90%;
-    height: 500px;
+    height: 400px;
     overflow-x: hidden;
     overflow-y: auto;
     text-align:justify;
@@ -739,8 +739,26 @@ div.scroll {
     margin-top: -5px;
 }
 #scroll_msg{
-    border-radius: 10px;
+    margin-left:5%;
+    margin-top: 5px;
+}
+.Conv{
+    width: 90%;
+    height: 500px;
     border: 2px solid gainsboro;
+    border-radius: 10px;
+    background-color: transparent;
+}
+.message_ecrir{
+    display: flex;
+    width: 95%;
+    height: 60px;
+    border: 2px solid gainsboro;
+    border-radius: 5px;
+    background-color: transparent;
+    margin-top: 11px;
+    margin-left:2.5%;
+    z-index: 2;
 }
 .message_me{
     float:right;
@@ -766,6 +784,36 @@ div.scroll {
     float:left;
     margin-top:12px
    }
+
+.inputbox_ecrir{
+    position: relative;
+    width: 60%;
+    height: 75%;
+    border: 2px solid #037078;
+    border-radius: 20px;
+    margin-left: 15%;
+    margin-top: 7px;
+}
+.inputbox_ecrir input {
+    width: 100%;
+    height: 50px;
+    margin-left: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    margin-top: -1px;
+}
+.icon_ecrir{
+    color: #037078;
+    font-size: 1.5em;
+    margin-top:20px;
+    margin-left: 8px;
+}
+#lefticons{
+    margin-left: 20px;
+}
 
 
 /* --------------------------------------------------------------------------------*/
