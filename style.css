@@ -794,6 +794,7 @@ div.scroll {
     border-radius: 20px;
     margin-left: 15%;
     margin-top: 7px;
+    z-index: 3;
 }
 .inputbox_ecrir input {
     width: 100%;
@@ -805,6 +806,7 @@ div.scroll {
     font-size: 1em;
     color: black;
     margin-top: -1px;
+    z-index: 3;
 }
 .icon_ecrir{
     color: #037078;
