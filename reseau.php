@@ -91,8 +91,34 @@
         </div>
     <div id="Sec_Amis" class="section">
         <h2>Mes Amis</h2>
+        <div class="line-1"></div>
         <div class="scroll">
-            <p>Ami 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Ami 1</p>
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
+                $result_sql = mysqli_query($db_handle, $sql);
+                while ($data_sql = mysqli_fetch_assoc($result_sql)) {
+                    $IDutilisateur= $data_sql['IDutilisateur'];
+                    $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%' and relation.statut='2' and Ami2 = IDutilisateur";
+                    $Amis_result = mysqli_query($db_handle, $Amis);
+                    $Amis_data = mysqli_fetch_assoc($Amis_result);
+                    echo "<div>". "<br></div>";
+                    $image = $Amis_data['PhotoProfil'];
+                    echo "<a href='amis.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
+                    echo  "<div class='amis'>".$Amis_data['Nom'] . "</div>";
+                    echo  "<div class='amis'>".$Amis_data['Prenom'] . "</div><br>";
+                    echo "<div>". "<br></div>";
+                    echo "<div class='line-1'>" . "<br></div>";
+                           
+                }//end while
+                
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
         </div>
         </br>
     </div>

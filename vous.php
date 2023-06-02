@@ -26,6 +26,7 @@
         $db_found = mysqli_select_db($db_handle, $database);
         session_start();
         $email = isset($_SESSION['email']) ? $_SESSION['email'] : "";
+
     ?>
     <script>
         function limitWords() {
@@ -89,6 +90,10 @@
                         $image = $Amis_data['PhotoProfil'];
                         echo "<a href='amis.php'><div class='photoAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
                         echo "<div class='line-1'>" . "<br></div>";
+                        $Ami2 = $Amis_data['Ami2'];
+                        echo $Ami2;
+
+                        $_SESSION['Ami2'] = $Ami2;
                         
                     }
                 }//end while
@@ -111,9 +116,11 @@
          <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
+                
                 $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
+                    //echo "Ami2: " .$Ami2. "<br>";
                     echo "Nom: " . $data['Nom'] . "<br>";
                     echo "Prénom: " . $data['Prenom'] . "<br>";
                     echo "Adresse: " . $data['Adresse'] . "<br>";
@@ -178,7 +185,6 @@
                 <?php
                     if ($db_found) {
                         if (isset($_POST["PosterChangement"]) && !(empty($_POST['PosterChangement']))) {
-                            echo "test";
                             $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                             $IDuser_result = mysqli_query($db_handle, $IDuser);
                             $IDuser_data = mysqli_fetch_assoc($IDuser_result);

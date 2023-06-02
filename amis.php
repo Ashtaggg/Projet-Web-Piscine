@@ -33,6 +33,7 @@
         $db_found = mysqli_select_db($db_handle, $database);
 
         session_start();
+        $Ami2 = isset($_SESSION['Ami2']) ? $_SESSION['Ami2'] : "";
         $email = isset($_SESSION['email']) ? $_SESSION['email'] : "";
     ?>
 </head>
@@ -68,16 +69,23 @@
          <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                $IDuser_result = mysqli_query($db_handle, $IDuser);
+                $IDuser_data = mysqli_fetch_assoc($IDuser_result);
+                $IDuser2 = $IDuser_data["IDutilisateur"];
+
+                $sql = "SELECT * FROM  relation WHERE Ami2 LIKE '%$Ami2%'"; 
                 $result = mysqli_query($db_handle, $sql);
-                while ($data = mysqli_fetch_assoc($result)) {
-                    echo "Nom: " . $data['Nom'] . "<br>";
-                    echo "Prénom: " . $data['Prenom'] . "<br>";
-                    echo "Adresse: " . $data['Adresse'] . "<br>";
-                    echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
-                    $image = $data['PhotoProfil'];
-                     echo "<div class='photo'><img src='$image' height='80' width='100'>" . "<br><br></div>";
-                }//end while
+                $data = mysqli_fetch_assoc($result);
+                    $sql2 ="SELECT * FROM relation join utilisateur WHERE relation.Ami2 = utilisateur.IDutilisateur and relation.Ami1 like '%$IDuser2%'";
+                    $sql2_result = mysqli_query($db_handle, $sql2);
+                    $data_sql2 = mysqli_fetch_assoc($sql2_result);
+                    echo  $data_sql2['Nom'] . "<br>";
+                    echo  $data_sql2['Prenom'] . "<br>";
+                    echo "Adresse: " . $data_sql2['Adresse'] . "<br>";
+                    echo "Date de naissance: " . $data_sql2['DateNaissance'] ."<br>";
+                    $image = $data_sql2['PhotoProfil'];
+                    echo "<div class='photo_ami2'><img src='$image' height='80' width='100'>" . "</div>";
             }//end if
             //si le BDD n'existe pas
             else {
@@ -87,14 +95,14 @@
         <br><br><br>
         </div>
 
-        <div id="Formation">  
+        <div id="Formation2">  
         <div style="text-align: center;">
             <h2>Formations</h2>
         </div>
         <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $sql = "SELECT * FROM relation join utilisateur WHERE Ami2 LIKE '%$Ami2%' and relation.Ami2 = utilisateur.IDutilisateur"; 
                 $result = mysqli_query($db_handle, $sql);
                 $data = mysqli_fetch_assoc($result);
                 $IDutilisateur= $data['IDutilisateur']; 
