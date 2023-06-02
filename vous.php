@@ -66,7 +66,9 @@
             </ul>
         </div>
     </nav>
+
     <div id="Gray_bar"></div>
+
     <div id="Info_Right">
         <h2>Mes amis</h2>
         <div class="line-1"></div>
@@ -74,12 +76,13 @@
             //si le BDD existe, faire le traitement
             if ($db_found) {
                 $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
-                $result = mysqli_query($db_handle, $sql);
-                while ($data = mysqli_fetch_assoc($result)) {
-                    $Amis = "SELECT * FROM utilisateur WHERE IDutilisateur IN (SELECT Amis FROM utilisateur where Mail like '%$email%')";
+                $result_sql = mysqli_query($db_handle, $sql);
+                while ($data_sql = mysqli_fetch_assoc($result_sql)) {
+                    $IDutilisateur= $data_sql['IDutilisateur'];
+                    $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%' AND Ami2 like '3'";
                     $Amis_result = mysqli_query($db_handle, $Amis);
                     while($Amis_data = mysqli_fetch_assoc($Amis_result)){
-                        echo  $data['Amis'] . "<br>";
+                        echo  $Amis_data['Ami2'] . "<br>";
                         echo  $Amis_data['Prenom'] . "<br>";
                         //$image = $data['PhotoProfil'];
                         //echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
@@ -133,11 +136,10 @@
                         }
                     </style>
                     <p class="texte-reduit">Si vous ne souhaitez pas modifier un paramètre, laissez le vide</br></p>
-                    <p>Changer ma photo de profil : <input type="file" name="Data"></br></p>
-                    <p>Nom : <input type="text" name="Nom"></br></p>
-                    <p>Prenom : <input type="text" name="Prenom"></br></p>
-                    <p>Mon mail : <input type="text" name="Mail"></br></p>
-                    <p>Mon adresse : <input type="text" name="Adresse"></br></p>
+                    <p>Changer ma photo de profil : <input type="file" name="Data" required></br></p>
+                    <p>Nom : <input type="text" name="Nom" required></br></p>
+                    <p>Prenom : <input type="text" name="Prenom" required></br></p>
+                    <p>Mon adresse : <input type="text" name="Adresse" required></br></p>
                     <br><br><br><br><br><br><br>
                     <input type="submit" value="Valider" name=PosterChangement>
                 </form>
@@ -150,13 +152,13 @@
                             $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                             $IDuser2 = $IDuser_data["IDutilisateur"];
         
-                            //$Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
-                            //$Data = "images/" . $Data;
+                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                            $Data = "images/" . $Data;
                             //echo $Data;
 
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
                             $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
-                            $Mail = isset($_POST["Mail"]) ? $_POST["Mail"] : "";
+                            $Adresse = isset($_POST["Adresse"]) ? $_POST["Adresse"] : "";
 
                             $sql = "UPDATE utilisateur SET Prenom = '$Prenom' where IDutilisateur = {$IDuser2}";
                             $result = mysqli_query($db_handle, $sql);
@@ -164,8 +166,11 @@
                             $sql2 = "UPDATE utilisateur SET Nom = '$Nom' where IDutilisateur = {$IDuser2}";
                             $sql2_result = mysqli_query($db_handle, $sql2);
 
-                            //$sql3 = "UPDATE utilisateur SET Mail = '$Mail' where IDutilisateur = {$IDuser2}";
-                            //$sql3_result = mysqli_query($db_handle, $sql3);
+                            $sql3 = "UPDATE utilisateur SET Adresse = '$Adresse' where IDutilisateur = {$IDuser2}";
+                            $sql3_result = mysqli_query($db_handle, $sql3);
+
+                            $sql4 = "UPDATE utilisateur SET PhotoProfil = '$Data' where IDutilisateur = {$IDuser2}";
+                            $sql3_result = mysqli_query($db_handle, $sql4);
                         }
                         
                     }
