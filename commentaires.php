@@ -28,19 +28,58 @@
         session_start();
         $email = isset($_SESSION['email']) ? $_SESSION['email'] : "";
     ?>
+    <script>
+        function limitWords() {
+            var textarea = document.getElementById("myTextarea");
+            var words = textarea.value.trim().split(/\s+/); // Divise le contenu en mots
+            var maxWords = 100; // Limite maximale de mots
+      
+            if (words.length > maxWords) {
+                // Si le nombre de mots dépasse la limite
+                //alert("La limite maximale de mots est de " + maxWords);
+                textarea.value = words.slice(0, maxWords).join(" "); // Réduit le texte aux premiers mots
+            }
+        }
+  </script>
 </head>
 <body>
     <?php
+        $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+        $IDuser_result = mysqli_query($db_handle, $IDuser);
+        $data = mysqli_fetch_assoc($IDuser_result);
+        $IDuser = $data['IDutilisateur'];
+
+        if (isset($_POST["ContenuCom"]) && !(empty($_POST['ContenuCom']))) {
+            $ContenuCom = isset($_POST['ContenuCom']) ? $_POST['ContenuCom'] : "";
+            $IDpostCom = isset($_POST['IDpostCom']) ? $_POST['IDpostCom'] : "";
+            $NbrCom = isset($_POST['NbrCom']) ? $_POST['NbrCom'] : "";
+
+            $Date1 = new DateTime("now");
+            $Date1->modify("+2 hours");
+            $Date1 = $Date1->format('Y-m-d H:i:s');
+
+            $ID = "SELECT * FROM commentaire ORDER BY IDcommentaire DESC LIMIT 1;"; 
+            $ID_result = mysqli_query($db_handle, $ID);
+            $data = mysqli_fetch_assoc($ID_result);
+            $IDcommentaire = $data["IDcommentaire"] + 1;
+            
+            $sql = "INSERT INTO `commentaire`(`IDcommentaire`, `Envoyeur`, `IDpost`, `Date`, `Contenu`) VALUES('$IDcommentaire', '$IDuser', '$IDpostCom', '$Date1', '$ContenuCom')";
+            $result = mysqli_query($db_handle, $sql);
+
+            $sql = "UPDATE post SET Commentaires = $NbrCom WHERE IDpost = {$IDpostCom}";
+            $result2 = mysqli_query($db_handle, $sql);
+        }
+       
         if (isset($_POST["IDpostCom"]) && !(empty($_POST['IDpostCom']))) {
             $IDpostCom = isset($_POST['IDpostCom']) ? $_POST['IDpostCom'] : "";
 
-            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-            $IDuser_result = mysqli_query($db_handle, $IDuser);
-            $data = mysqli_fetch_assoc($IDuser_result);
-            $IDuser = $data['IDutilisateur'];
+            $post = "SELECT * FROM post WHERE IDpost = $IDpostCom";
+            $post_result = mysqli_query($db_handle,$post);
+            $post_data = mysqli_fetch_assoc($post_result);
             
-            $sql = "SELECT * FROM commentaire WHERE IDpost LIKE '%$IDpostCom%'"; 
+            $sql = "SELECT * FROM commentaire WHERE IDpost LIKE '%$IDpostCom%' ORDER BY Date ASC"; 
             $result = mysqli_query($db_handle, $sql);
+            echo"<div class='afficherCom'>";
             while ($com_data = mysqli_fetch_assoc($result)) {
                 $IDutilisateur = $com_data["Envoyeur"];
                 $utilisateur = "SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$IDutilisateur%'";                    
@@ -107,18 +146,12 @@
                     }
                 }
             }
-
-
-            /*
-            $com = "SELECT * FROM post WHERE IDpost LIKE '%$IDpostCom%'";
-            $com_result = mysqli_query($db_handle,$com);
-            $com_data = mysqli_fetch_assoc($com_result);
-            
-            $Com = $com_data["Commentaires"] + 1;
-            
-            $sql = "UPDATE post SET Commentaires = $Com WHERE IDpost = {$IDpostCom}";
-
-            $result2 = mysqli_query($db_handle, $sql);*/
+            echo"</div>";
+            echo"<div class='posterCom'>";
+            echo"<label for='descriptif'>Descriptif</label><br>";
+            echo"<textarea id='contenuCom' rows='4' cols='33' oninput='limitWords()'></textarea>";
+            echo"<button class='boutonCom' id='" . $IDpostCom . "' data-com='" . $post_data['Commentaires'] ."' onclick=com_poster(this)>Poster</button>";
+            echo"</div>";
         } 
     ?>
 </body>

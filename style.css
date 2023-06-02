@@ -353,7 +353,7 @@ body {
     background-color: #f5f5f5;;
     color:black;
     width: 60%;
-    border-radius: 2%;
+    border-radius: 15px;
     margin:5px;
 }
 
@@ -361,33 +361,66 @@ body {
     background-color: #037078;;
     color:white;
     width: 60%;
-    border-radius: 2%;
+    border-radius: 15px;
     margin:5px;
     margin-left:200px;
+}
+
+.afficherCom{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 350px;
 }
 
 .PhotoProfilCom{
     margin-top:-35px;
     margin-left: 3px;
     float:left;
+    padding:5px;
 }
 .NomCom{
     margin-top:5px;
     margin-left:30px;
     font-weight: 550;
     font-size: 15px;
+    padding:5px;
+    padding-top:9px;
 }
 .DateCom{
     margin-top:-30px;
-    margin-left:93%;
+    margin-left:91%;
     font-size: 10px;
 }
 .ContenuCom{
     margin-top:10px;
     margin-left:40px;
+    padding-bottom: 10px;
 }
 
+.posterCom{
+    background-color: white;
+    color:black;
+    clear:both;
+    text-align:left;
+    padding:5px;
+    margin-bottom:5%;
+    float:center;
+    position: absolute;
+    bottom: 0;
+}
 
+.boutonCom{
+    margin-top:-25px;
+    margin-left: 280px;
+    float:left;
+    font-size: 13px;
+    /*background: transparent;
+    outline: none;
+    border: 0px;*/
+    border-radius: 22px;
+    border-width: 2px;
+    z-index: 2;
+}
 
 
 
@@ -467,7 +500,6 @@ div.scroll {
     margin-top: 30px;
     width: 70%;
     display: grid;
-    place-items: center;
     background-color: white;
     color:black;
     padding: 5px;
@@ -493,8 +525,8 @@ div.scroll {
     float:left;  
 }
 .photoAmis{
-    margin-top:-25px;
-    margin-left: -70px;
+    margin-top:-60px;
+    margin-left: 10px;
     float:left;      
 }
 .bouton{
@@ -586,7 +618,7 @@ div.scroll {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 2;
+    z-index: 11;
   }
 
 .quitterProjet{
@@ -597,7 +629,7 @@ div.scroll {
     background: transparent;
     outline: none;
     border: 0px;
-    z-index: 2;
+    z-index: 11;
     font-size: 30px;
 }
 
