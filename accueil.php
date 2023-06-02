@@ -211,7 +211,13 @@
                             }
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
-                            echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
+                            $extension = pathinfo($post_data["Data"], PATHINFO_EXTENSION);
+                            if ($extension === 'jpg' || $extension === 'jpg') {
+                                echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
+                            }
+                            else if ($extension === 'mp4') {
+                                echo"<video controls autoplay><source src='" . $post_data["Data"] . ".mp4' type='video/mp4'></video>";
+                            }
 
                             echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' data-like='" . $post_data['Aime'] ."' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $post_data['IDpost'] . "'>" . $post_data["Aime"] . "</p>";
                             echo"<button class='Com' name='Com' id='" . $post_data['IDpost'] . "' data-com='" . $post_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $post_data['IDpost'] . "'>" . $post_data["Commentaires"] . "</p></div></div>";
