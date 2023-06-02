@@ -442,6 +442,17 @@ div.scroll {
     overflow-y: auto;
     text-align:justify;
 }
+
+.amis{
+    margin-top:5px;
+    margin-left: 20px;
+    float:left;  
+}
+.photoMonAmis{
+    margin-top:-8px;
+    margin-left: 10px;
+    float:left;  
+}
 .inputbox_res{
     position: relative;
     width: 68%;
@@ -640,7 +651,25 @@ div.scroll {
     padding-bottom: 5px;
     padding-left: 10px;  
 }
-  
+ /* --------------------------------------------------------------------------------*/
+/* -----------------------------------Amis--------------------------------*/
+/* --------------------------------------------------------------------------------*/ 
+
+#Formation2{
+    margin-top: 220px;
+    width: 70%;
+    display: grid;
+    background-color: white;
+    color:black;
+    padding: 5px;
+    z-index: 2;
+}
+
+.photo_ami2{
+    margin-top: -75px;
+    margin-left: -510px;
+    float:left;  
+}
 
 /* --------------------------------------------------------------------------------*/
 /* -----------------------------------Notifications--------------------------------*/
