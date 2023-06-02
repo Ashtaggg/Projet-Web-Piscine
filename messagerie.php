@@ -310,6 +310,8 @@
                 ?>
                 </div>
                 <div class="message_ecrir">
+                    <ion-icon class="icon_ecrir" id="lefticons" name="call-outline"></ion-icon>
+                    <ion-icon class="icon_ecrir" id="lefticons" name="videocam-outline"></ion-icon>
                     <div class="inputbox_ecrir">
                         <input type="text" placeholder="cause avec le copaing" size="22">
                     </div>
