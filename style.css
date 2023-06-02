@@ -491,7 +491,6 @@ div.scroll {
     margin-top: 250px;
     width: 70%;
     display: grid;
-    place-items: center;
     background-color: white;
     color:black;
     padding: 5px;
@@ -501,7 +500,6 @@ div.scroll {
     margin-top: 30px;
     width: 70%;
     display: grid;
-    place-items: center;
     background-color: white;
     color:black;
     padding: 5px;
@@ -527,8 +525,8 @@ div.scroll {
     float:left;  
 }
 .photoAmis{
-    margin-top:-25px;
-    margin-left: -70px;
+    margin-top:-60px;
+    margin-left: 10px;
     float:left;      
 }
 .bouton{
@@ -620,7 +618,7 @@ div.scroll {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 2;
+    z-index: 11;
   }
 
 .quitterProjet{
@@ -631,8 +629,15 @@ div.scroll {
     background: transparent;
     outline: none;
     border: 0px;
-    z-index: 2;
+    z-index: 11;
     font-size: 30px;
+}
+
+.affichageFormation{
+    border: 1.5px solid #037078;  
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;  
 }
   
 
@@ -732,6 +737,35 @@ div.scroll {
     margin-left: 50px;
     margin-top: -5px;
 }
+#scroll_msg{
+    border-radius: 10px;
+    border: 2px solid gainsboro;
+}
+.message_me{
+    float:right;
+    margin-right: 10px;
+    background-color: #037078;
+    color: white;
+    border-radius: 10px;
+    padding: 4px;
+}
+.icon_me{
+    float:right;
+    margin-top:12px
+   }
+.message_him{
+    float:left;
+    margin-left: 10px;
+    background-color: gray;
+    color: white;
+    border-radius: 10px;
+    padding: 4px;
+}
+.icon_him{
+    float:left;
+    margin-top:12px
+   }
+
 
 /* --------------------------------------------------------------------------------*/
 /* --------------------------------------Emplois-----------------------------------*/

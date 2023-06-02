@@ -66,7 +66,9 @@
             </ul>
         </div>
     </nav>
+
     <div id="Gray_bar"></div>
+
     <div id="Info_Right">
         <h2>Mes amis</h2>
         <div class="line-1"></div>
@@ -74,17 +76,23 @@
             //si le BDD existe, faire le traitement
             if ($db_found) {
                 $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
-                $result = mysqli_query($db_handle, $sql);
-                while ($data = mysqli_fetch_assoc($result)) {
-                    $Amis = "SELECT * FROM utilisateur WHERE IDutilisateur IN (SELECT Amis FROM utilisateur where Mail like '%$email%')";
+                $result_sql = mysqli_query($db_handle, $sql);
+                while ($data_sql = mysqli_fetch_assoc($result_sql)) {
+                    $IDutilisateur= $data_sql['IDutilisateur'];
+                    $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%' and relation.statut='2' and Ami2 = IDutilisateur";
                     $Amis_result = mysqli_query($db_handle, $Amis);
-                    while($Amis_data = mysqli_fetch_assoc($Amis_result)){
-                        echo  $data['Amis'] . "<br>";
+                    while ($Amis_data = mysqli_fetch_assoc($Amis_result)){
+                        echo "<div>". "<br></div>";
+                        echo  $Amis_data['Nom'] . "<br>";
                         echo  $Amis_data['Prenom'] . "<br>";
-                        //$image = $data['PhotoProfil'];
-                        //echo "<div class='photoAmis'><img src='$image' height='60' width='80'>" . "<br><br></div>";
-                    }//end while
-                }
+                        echo "<div>". "<br></div>";
+                        $image = $Amis_data['PhotoProfil'];
+                        echo "<a href='amis.php'><div class='photoAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
+                        echo "<div class='line-1'>" . "<br></div>";
+                        
+                    }
+                }//end while
+                
             }//end if
             //si le BDD n'existe pas
             else {
@@ -133,11 +141,10 @@
                         }
                     </style>
                     <p class="texte-reduit">Si vous ne souhaitez pas modifier un paramètre, laissez le vide</br></p>
-                    <p>Changer ma photo de profil : <input type="file" name="Data"></br></p>
-                    <p>Nom : <input type="text" name="Nom"></br></p>
-                    <p>Prenom : <input type="text" name="Prenom"></br></p>
-                    <p>Mon mail : <input type="text" name="Mail"></br></p>
-                    <p>Mon adresse : <input type="text" name="Adresse"></br></p>
+                    <p>Changer ma photo de profil : <input type="file" name="Data" required></br></p>
+                    <p>Nom : <input type="text" name="Nom" required></br></p>
+                    <p>Prenom : <input type="text" name="Prenom" required></br></p>
+                    <p>Mon adresse : <input type="text" name="Adresse" required></br></p>
                     <br><br><br><br><br><br><br>
                     <input type="submit" value="Valider" name=PosterChangement>
                 </form>
@@ -150,13 +157,13 @@
                             $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                             $IDuser2 = $IDuser_data["IDutilisateur"];
         
-                            //$Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
-                            //$Data = "images/" . $Data;
+                            $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
+                            $Data = "images/" . $Data;
                             //echo $Data;
 
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
                             $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
-                            $Mail = isset($_POST["Mail"]) ? $_POST["Mail"] : "";
+                            $Adresse = isset($_POST["Adresse"]) ? $_POST["Adresse"] : "";
 
                             $sql = "UPDATE utilisateur SET Prenom = '$Prenom' where IDutilisateur = {$IDuser2}";
                             $result = mysqli_query($db_handle, $sql);
@@ -164,8 +171,11 @@
                             $sql2 = "UPDATE utilisateur SET Nom = '$Nom' where IDutilisateur = {$IDuser2}";
                             $sql2_result = mysqli_query($db_handle, $sql2);
 
-                            //$sql3 = "UPDATE utilisateur SET Mail = '$Mail' where IDutilisateur = {$IDuser2}";
-                            //$sql3_result = mysqli_query($db_handle, $sql3);
+                            $sql3 = "UPDATE utilisateur SET Adresse = '$Adresse' where IDutilisateur = {$IDuser2}";
+                            $sql3_result = mysqli_query($db_handle, $sql3);
+
+                            $sql4 = "UPDATE utilisateur SET PhotoProfil = '$Data' where IDutilisateur = {$IDuser2}";
+                            $sql3_result = mysqli_query($db_handle, $sql4);
                         }
                         
                     }
@@ -181,7 +191,10 @@
     </div>
 
     <div id="Formation">  
-        <h2>Formations</h2>
+        <div style="text-align: center;">
+            <h2>Formations</h2>
+        </div>
+        <button class="plusFormation" onclick="openForm()"><ion-icon name="add-circle-outline"></ion-icon></button>
 
         <?php
             //si le BDD existe, faire le traitement
@@ -194,13 +207,14 @@
                 $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = formation.IDutilisateur"; 
                 $result2 = mysqli_query($db_handle, $sql2);
                 while ($data2 = mysqli_fetch_assoc($result2)) {
-                    echo "Ecole: " . $data2['NomEcole'] . "<br>";
+                    echo "<div class='affichageFormation'>Ecole: " . $data2['NomEcole'] . "<br>";
                     echo "Diplome: " . $data2['Diplome'] . "<br>";
                     echo "Date de début: " . $data2['DateDebut'] . "<br>";
                     echo "Date de fin: " . $data2['DateFin'] . "<br>";
                     echo "Lieu: " . $data2['Lieu'] . "<br>";
                     echo "Domaine: " . $data2['Domaine'] . "<br>";
-                    echo "Description: " . $data2['Description'] . "<br>";
+                    echo "Description: " . $data2['Description'] . "<br></div>";
+                    echo "<div> "."<br> </div>";
                 }
             }//end if
             //si le BDD n'existe pas
@@ -209,7 +223,7 @@
             }//end else
         ?>
 
-        <button class="plusFormation" onclick="openForm()"><ion-icon name="add-circle-outline"></ion-icon></button>
+        
   
         <div id="overlay" class="overlay">
             <div class="form-container">
@@ -234,46 +248,20 @@
                 <input type="text" id="lieu" name="lieu" placeholder="Ex: France"><br><br>
                                 
                 <label for="dateDeb">Date de début*</label><br>
-                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2023" style="margin-left: 15%;" required placeholder="année"><br>
+                <input type="date" id="dateDeb" name="dateDeb" min="1900-01-01" max="2023-12-31" style="margin-left: 15%;" required placeholder="jj/mm/aaaa"><br>
                 
                 <label for="dateFin">Date de fin (ou prévue)*</label><br>
-                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
+                <input type="date" id="dateFin" name="dateFin" min="1900-01-01" max="2099-12-31" style="margin-left: 15%;" required placeholder="jj/mm/aaaa"><br><br>
+
        
                 <label for="descriptif">Descriptif</label><br>
-                <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
+                <textarea id="myTextarea" name="descriptif" rows="4" cols="33" oninput="limitWords()"></textarea>
             
                 <br><br>         
                 <input type="submit" value="Envoyer" name="PosterFormation">
 
                 <br><br>
                 </form>
-
-                <?php
-                    if ($db_found) {
-                        if (isset($_POST["PosterFormation"]) && !(empty($_POST['PosterFormation']))) {
-                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                            $IDuser_result = mysqli_query($db_handle, $IDuser);
-                            $IDuser_data = mysqli_fetch_assoc($IDuser_result);
-                            $IDuser2 = $IDuser_data["IDutilisateur"];
-
-                            $Ecole = isset($_POST["ecole"]) ? $_POST["ecole"] : "";
-                            $Diplome = isset($_POST["diplome"]) ? $_POST["diplome"] : "";
-                            $Domaine_etude = isset($_POST["domaine"]) ? $_POST["domaine"] : "";
-                            $DateDeb = isset($_POST["dateDeb"]) ? $_POST["dateDeb"] : "";
-                            $DateFin = isset($_POST["dateFin"]) ? $_POST["dateFin"] : "";
-                            $Descriptif = isset($_POST["descriptif"]) ? $_POST["descriptif"] : "";
-
-
-                            $sql = "INSERT INTO formation(IDformation, NomEcole, Type, DateDebut, DateFin, Lieu, Post, Domaine, Description) VALUES ('', '$Ecole', '', '$DateDeb', '$DateFin', '', '', '$Description')";
-                            $result = mysqli_query($db_handle, $sql);
-
-                        }
-                        
-                    }
-                ?>
-
-
-
 
             </div>
         </div>
@@ -284,13 +272,73 @@
                 overlay.style.display = "block";
             }
         </script>
+
+        <?php
+            if ($db_found) {     
+                if (isset($_POST["PosterFormation"]) && !(empty($_POST['PosterFormation']))) {
+
+                    $ID = "SELECT * FROM formation ORDER BY DateDebut DESC LIMIT 1;"; 
+                    $ID_result = mysqli_query($db_handle, $ID);
+                    $data = mysqli_fetch_assoc($ID_result);
+                    $IDformation = $data["IDformation"] + 1;
+
+                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                    $IDuser_result = mysqli_query($db_handle, $IDuser);
+                    $IDuser_data = mysqli_fetch_assoc($IDuser_result);
+                    $IDuser2 = $IDuser_data["IDutilisateur"];
+
+                    $Ecole = isset($_POST["ecole"]) ? $_POST["ecole"] : "";
+                    $Diplome = isset($_POST["diplome"]) ? $_POST["diplome"] : "";
+                    $Domaine = isset($_POST["domaine"]) ? $_POST["domaine"] : "";
+                    $Lieu = isset($_POST["lieu"]) ? $_POST["lieu"] : "";
+                    $DateDeb = isset($_POST["dateDeb"]) ? $_POST["dateDeb"] : "";
+                    $DateFin = isset($_POST["dateFin"]) ? $_POST["dateFin"] : "";
+                    $Descriptif = isset($_POST["descriptif"]) ? $_POST["descriptif"] : "";
+
+
+                    $sql = "INSERT INTO `formation`(`IDformation`, `IDutilisateur`, `NomEcole`, `Diplome`, `DateDebut`, `DateFin`, `Lieu`, `Domaine`, `Description`) VALUES ('$IDformation', '$IDuser2', '$Ecole', '$Diplome', '$DateDeb', '$DateFin', '$Lieu', '$Domaine', '$Descriptif')";
+                    $result = mysqli_query($db_handle, $sql);
+
+                }
+                        
+            }
+        ?>
+
     </div>
 
 
     <div id="Projet">
-        <h2>Projets</h2>
+        <div style="text-align: center;">
+            <h2>Projets</h2>
+        </div>
         <button class="plusProjet" onclick="openFormulaire()"><ion-icon name="add-circle-outline"></ion-icon></button>
-  
+        
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $result = mysqli_query($db_handle, $sql);
+                $data = mysqli_fetch_assoc($result);
+                $IDutilisateur= $data['IDutilisateur']; 
+
+                $sql2 = "SELECT * FROM utilisateur JOIN projet WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = projet.IDutilisateur"; 
+                $result2 = mysqli_query($db_handle, $sql2);
+                while ($data2 = mysqli_fetch_assoc($result2)) {
+                    echo "<div class='affichageFormation'>Ecole: " . $data2['NomEcole'] . "<br>";
+                    echo "Nom du projet: " . $data2['NomProjet'] . "<br>";
+                    echo "Lieu: " . $data2['Lieu'] . "<br>";
+                    echo "Date de début: " . $data2['DateDebut'] . "<br>";
+                    echo "Date de fin: " . $data2['DateFin'] . "<br>";
+                    echo "Description: " . $data2['Description'] . "<br></div>";
+                    echo "<div> "."<br> </div>";
+                }
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+
         <div id="overlay2" class="overlay2">
             <div class="form-container">
                 <h2>Ajouter un projet</h2>
@@ -303,33 +351,27 @@
                             font-size: 10px;
                         }
                     </style>
-                    <p class="texte-reduit">*indique un champ obligatoire </br></p>
-                    <label for="ecole">Ecole* </label></br>
-                    <input type="text" id="ecole" name="ecole" placeholder="Ex: Université Paris V" required><br><br>
-                <form>
-                <style>
-                    .texte-reduit {
-                        font-size: 10px;
-                    }
-                </style>
                 <p class="texte-reduit">*indique un champ obligatoire </br></p>
-                <label for="entreprise">Nom de l'entreprise/de l'école* </label></br>
-                <input type="text" id="entreprise" name="entreprise" placeholder="Ex: Omnes Education" required><br><br>
+                <label for="ecole2">Ecole* </label></br>
+                <input type="text" id="ecole2" name="ecole2" placeholder="Ex: Omnes Education" required><br><br>
 
-                <label for="lieu">lieu </label></br>
-                <input type="text" id="lieu" name="lieu" placeholder="Ex: San Francisco"><br><br>
+                <label for="NomProjet">Nom du projet* </label></br>
+                <input type="text" id="NomProjet" name="NomProjet" placeholder="Ex: ECE makers" required><br><br>
+
+                <label for="lieu2">Lieu </label></br>
+                <input type="text" id="lieu2" name="lieu2" placeholder="Ex: San Francisco"><br><br>
                 
-                <label for="dateDeb">Date de début</label><br>
-                <input type="month" id="dateDeb" name="dateDeb" min="1900" max="2023" style="margin-left: 15%;" required placeholder="année"><br>
+                <label for="dateDeb2">Date de début*</label><br>
+                <input type="date" id="dateDeb2" name="dateDeb2" min="1900-01-01" max="2023-12-31" style="margin-left: 15%;" required placeholder="jj/mm/aaaa"><br>
                 
-                <label for="dateFin">Date de fin (ou prévue)</label><br>
-                <input type="month" id="dateFin" name="dateFin" min="1900" max="2099" style="margin-left: 15%;" required placeholder="année"><br><br>
+                <label for="dateFin">Date de fin (ou prévue)*</label><br>
+                <input type="date" id="dateFin2" name="dateFin2" min="1900-01-01" max="2099-12-31" style="margin-left: 15%;" required placeholder="jj/mm/aaaa"><br><br>
                 
                 <label for="descriptif">Description</label><br>
-                <textarea id="myTextarea" rows="4" cols="33" oninput="limitWords()"></textarea>
+                <textarea id="myTextarea2" name="descriptif" rows="4" cols="33" oninput="limitWords()"></textarea>
             
                     <br><br>         
-                    <input type="submit" value="Envoyer" name=poster>
+                    <input type="submit" value="Envoyer" name="PosterProjet">
 
                     <br><br>
                 </form>
@@ -342,6 +384,37 @@
                 overlay2.style.display = "block";
             }
         </script>
+
+        <?php
+            if ($db_found) {     
+                if (isset($_POST["PosterProjet"]) && !(empty($_POST['PosterProjet']))) {
+
+                    $ID = "SELECT * FROM projet ORDER BY DateDebut DESC LIMIT 1;"; 
+                    $ID_result = mysqli_query($db_handle, $ID);
+                    $data = mysqli_fetch_assoc($ID_result);
+                    $IDprojet = $data["IDprojet"] + 1;
+
+                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                    $IDuser_result = mysqli_query($db_handle, $IDuser);
+                    $IDuser_data = mysqli_fetch_assoc($IDuser_result);
+                    $IDuser2 = $IDuser_data["IDutilisateur"];
+
+                    $Ecole = isset($_POST["ecole2"]) ? $_POST["ecole2"] : "";
+                    $NomProjet = isset($_POST["NomProjet"]) ? $_POST["NomProjet"] : "";
+                    $Lieu = isset($_POST["lieu2"]) ? $_POST["lieu2"] : "";
+                    $DateDeb = isset($_POST["dateDeb2"]) ? $_POST["dateDeb2"] : "";
+                    $DateFin = isset($_POST["dateFin2"]) ? $_POST["dateFin2"] : "";
+                    $Description = isset($_POST["descriptif"]) ? $_POST["descriptif"] : "";
+
+                    $sql = "INSERT INTO `projet`(`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES ('$IDprojet', '$IDuser2', '$Ecole', '$NomProjet', '$Lieu', '$DateDeb', '$DateFin', '$Description')";
+                    $result = mysqli_query($db_handle, $sql);
+
+                }
+                        
+            }
+        ?>
+
+
     </div>
     
     <div id="MesPost">

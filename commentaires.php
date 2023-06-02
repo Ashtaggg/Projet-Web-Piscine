@@ -82,7 +82,8 @@
             echo"<div class='afficherCom'>";
             while ($com_data = mysqli_fetch_assoc($result)) {
                 $IDutilisateur = $com_data["Envoyeur"];
-                $utilisateur = "SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$IDutilisateur%'";                    $utilisateur_result = mysqli_query($db_handle,$utilisateur);
+                $utilisateur = "SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$IDutilisateur%'";                    
+                $utilisateur_result = mysqli_query($db_handle,$utilisateur);
                 while($utilisateur_data = mysqli_fetch_assoc($utilisateur_result))
                 {
                     $Date1 = new DateTime("now");
