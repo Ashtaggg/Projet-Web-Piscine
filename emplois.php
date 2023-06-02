@@ -54,7 +54,19 @@
     <div id="Gray_bar"></div>
     <div id="Info_Right">
         <h3>Jobs auxquels vous avez postulé :</h3>
+        <label for="choix">Choisir un job </label></br>
+        <input type="text" id="job" name="job" placeholder="1" required><br><br>
+        <input type="submit" value="Envoyer" name="PosterEmplois">
         <div class="line-1"></div>
+        <h4> Stages </h4>
+        <div class="line-1"></div>
+        <h4> CDD </h4>
+        <div class="line-1"></div>
+        <h4> CDI </h4>
+        <div class="line-1"></div>
+        <?php
+             
+        ?>
     </div>
     <div id="Emplois">
         <div style="text-align: center;">
@@ -69,22 +81,25 @@
                 $sql2 = "SELECT * FROM emplois";
                 $result2 = mysqli_query($db_handle, $sql2);
                 while ($data2 = mysqli_fetch_assoc($result2)) {
-
-                    //FAIRE ATTENTION : on fait quoi avec le type ?
-
-                    echo "<div class='affichageFormation'>Entreprise: " . $data2['NomEntreprise'] . "<br>";
+                    echo "<div class='affichageFormation'>Entreprise: " . $data2['NomEntreprise'];
+                    echo "<div style='display: inline-block; margin-left: 550px;'>" . $data2['IDemplois'] . "</div><br>";
                     echo "Poste: " . $data2['Poste'] . "<br>";
+                    echo "Type: " . $data2['Type'] . "<br>";
                     echo "Salaire: " . $data2['Salaire'] . " €<br>";
                     echo "Date de début: " . $data2['DateDebut'] . "<br>";
                     echo "Date de fin: " . $data2['DateFin'] . "<br></div>";
                     echo "<div> "."<br> </div>";
+
                 }
             }//end if
             //si le BDD n'existe pas
             else {
                 echo "Database not found";
             }//end else
+
+            
             ?>
+            
 
         
         <p>Emploi 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Emploi n</p>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 02 juin 2023 à 18:39
+-- Généré le : ven. 02 juin 2023 à 23:08
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -72,7 +72,8 @@ CREATE TABLE IF NOT EXISTS `emplois` (
 
 INSERT INTO `emplois` (`IDemplois`, `IDutilisateur`, `NomEntreprise`, `Type`, `DateDebut`, `DateFin`, `Lieu`, `Poste`, `Salaire`) VALUES
 (1, 0, 'Carrefour', 'Stage', '2023-06-14', '2023-07-14', '1 AV du Général Sarrail, 75016 Paris', 'Mise en rayon/drive', 0),
-(2, 0, 'Thalès', 'CDD', '2023-07-01', '2023-08-31', '6 r Verrerie, 92190 Meudon', 'Ingénieur développement logiciel', 2000);
+(2, 0, 'Thalès', 'CDD', '2023-07-01', '2023-08-31', '6 r Verrerie, 92190 Meudon', 'Ingénieur développement logiciel', 2000),
+(3, 0, 'Lycée Hoche', 'CDD', '2023-09-04', '2024-06-18', '73 av St Cloud, 78000 Versailles', 'Professeur d\'italien', 1850);
 
 -- --------------------------------------------------------
 
@@ -242,8 +243,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `MotDePasse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`, `Description`, `Humeur`) VALUES
 (1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', '', ''),
-(2, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
-(3, 1, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
+(2, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '1234', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
+(3, 1, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '1234', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
 (4, 1, 'Cars', 'Flash', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'ai envie de rentrer chez moi', 'Motivé');
 COMMIT;
 
