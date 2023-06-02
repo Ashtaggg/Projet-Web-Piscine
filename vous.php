@@ -99,6 +99,12 @@
                 echo "Database not found";
             }//end else
         ?>
+        <script>
+            function openProf() {
+                var modification = document.getElementById("modification");
+                modification.style.display = "block";
+            }
+        </script>
     </div>
     <div id="MonProfil">
         <br><br>
@@ -111,7 +117,8 @@
                     echo "Nom: " . $data['Nom'] . "<br>";
                     echo "Prénom: " . $data['Prenom'] . "<br>";
                     echo "Adresse: " . $data['Adresse'] . "<br>";
-                    echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
+                    echo "Date de naissance: " . $data['DateNaissance'] . "<br><br>";
+                    echo "Mon humeur: " . $data['Humeur'] . "<br><br>";
                     $image = $data['PhotoProfil'];
                      echo "<div class='photo'><img src='$image' height='80' width='100'>" . "<br><br></div>";
                 }//end while
@@ -145,6 +152,26 @@
                     <p>Nom : <input type="text" name="Nom" required></br></p>
                     <p>Prenom : <input type="text" name="Prenom" required></br></p>
                     <p>Mon adresse : <input type="text" name="Adresse" required></br></p>
+                    <fieldset>
+                        <legend>Changer mon humeur:</legend>
+                        <div>
+                            <input type="radio" id="Joyeux" name="humeur" value="Joyeux"checked>
+                            <label for="huey">Joyeux</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="Triste" name="humeur" value="Triste">
+                            <label for="dewey">Triste</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="Stressé" name="humeur" value="Stressé">
+                            <label for="louie">Stressé</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="Motivé" name="humeur" value="Motivé">
+                            <label for="louie">Motivé</label>
+                        </div>
+                    </fieldset>
+
                     <br><br><br><br><br><br><br>
                     <input type="submit" value="Valider" name=PosterChangement>
                 </form>
@@ -164,6 +191,7 @@
                             $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
                             $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
                             $Adresse = isset($_POST["Adresse"]) ? $_POST["Adresse"] : "";
+                            $Humeur = isset($_POST["humeur"]) ? $_POST["humeur"] : "";
 
                             $sql = "UPDATE utilisateur SET Prenom = '$Prenom' where IDutilisateur = {$IDuser2}";
                             $result = mysqli_query($db_handle, $sql);
@@ -175,19 +203,18 @@
                             $sql3_result = mysqli_query($db_handle, $sql3);
 
                             $sql4 = "UPDATE utilisateur SET PhotoProfil = '$Data' where IDutilisateur = {$IDuser2}";
-                            $sql3_result = mysqli_query($db_handle, $sql4);
+                            $sql4_result = mysqli_query($db_handle, $sql4);
+  
+                            $sql5 = "UPDATE utilisateur SET Humeur = '$Humeur' where IDutilisateur = {$IDuser2}";
+                            $sql5_result = mysqli_query($db_handle, $sql5);
+
+
                         }
                         
                     }
                 ?>
             </div>
         </div>
-        <script>
-        function openProf() {
-            var modification = document.getElementById("modification");
-            modification.style.display = "block";
-        }
-        </script>
     </div>
 
     <div id="Formation">  

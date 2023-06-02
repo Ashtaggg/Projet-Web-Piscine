@@ -489,7 +489,7 @@ div.scroll {
     z-index: 2;
 }
 #Formation{
-    margin-top: 250px;
+    margin-top: 300px;
     width: 70%;
     display: grid;
     background-color: white;
@@ -521,7 +521,7 @@ div.scroll {
 }
 
 .photo{
-    margin-top:-75px;
+    margin-top:-125px;
     margin-left: -500px;
     float:left;  
 }
