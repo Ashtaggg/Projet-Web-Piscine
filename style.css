@@ -600,6 +600,13 @@ div.scroll {
     z-index: 2;
     font-size: 30px;
 }
+
+.affichageFormation{
+    border: 1.5px solid #037078;  
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;  
+}
   
 
 /* --------------------------------------------------------------------------------*/

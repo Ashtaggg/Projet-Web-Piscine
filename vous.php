@@ -202,13 +202,14 @@
                 $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = formation.IDutilisateur"; 
                 $result2 = mysqli_query($db_handle, $sql2);
                 while ($data2 = mysqli_fetch_assoc($result2)) {
-                    echo "Ecole: " . $data2['NomEcole'] . "<br>";
+                    echo "<div class='affichageFormation'>Ecole: " . $data2['NomEcole'] . "<br>";
                     echo "Diplome: " . $data2['Diplome'] . "<br>";
                     echo "Date de début: " . $data2['DateDebut'] . "<br>";
                     echo "Date de fin: " . $data2['DateFin'] . "<br>";
                     echo "Lieu: " . $data2['Lieu'] . "<br>";
                     echo "Domaine: " . $data2['Domaine'] . "<br>";
-                    echo "Description: " . $data2['Description'] . "<br>";
+                    echo "Description: " . $data2['Description'] . "<br></div>";
+                    echo "<div> "."<br> </div>";
                 }
             }//end if
             //si le BDD n'existe pas
