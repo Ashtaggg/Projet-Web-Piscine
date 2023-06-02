@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
@@ -76,15 +76,20 @@ CREATE TABLE IF NOT EXISTS `formation` (
   `IDutilisateur` int NOT NULL,
   `NomEcole` varchar(255) NOT NULL,
   `Diplome` varchar(255) NOT NULL,
-  `Type` int NOT NULL,
   `DateDebut` date NOT NULL,
   `DateFin` date NOT NULL,
   `Lieu` varchar(255) NOT NULL,
-  `Poste` varchar(255) NOT NULL,
   `Domaine` varchar(255) NOT NULL,
   `Description` text NOT NULL,
   PRIMARY KEY (`IDformation`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `formation`
+--
+
+INSERT INTO `formation` (`IDformation`, `IDutilisateur`, `NomEcole`, `Diplome`, `DateDebut`, `DateFin`, `Lieu`, `Domaine`, `Description`) VALUES
+(1, 3, 'Blanche de Castille', 'Baccalauréat', '2018-09-03', '2021-06-16', 'Le Chesnay', 'Section générale', 'J\'ai eu mon bac !');
 
 -- --------------------------------------------------------
 
@@ -134,13 +139,40 @@ INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Co
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `projet`
+--
+
+DROP TABLE IF EXISTS `projet`;
+CREATE TABLE IF NOT EXISTS `projet` (
+  `IDprojet` int NOT NULL,
+  `IDutilisateur` int NOT NULL,
+  `NomEcole` varchar(255) NOT NULL,
+  `NomProjet` varchar(255) NOT NULL,
+  `Lieu` varchar(255) NOT NULL,
+  `DateDebut` date NOT NULL,
+  `DateFin` date NOT NULL,
+  `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`IDprojet`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `projet`
+--
+
+INSERT INTO `projet` (`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES
+(1, 3, 'Ece Paris/Lyon', 'Projet piscine web dynamique', 'France', '2023-05-29', '2023-06-04', 'Création d\'un LinkedIn (ECEIn)'),
+(2, 3, 'Omnes Education', 'ECE makers', 'San Francisco', '2023-06-14', '2023-06-23', ''),
+(3, 3, 'Omnes Education', 'ECE makers', 'San Francisco', '2023-06-01', '2023-06-16', 'qsdvdsdfvfezef');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `relation`
 --
 
 DROP TABLE IF EXISTS `relation`;
 CREATE TABLE IF NOT EXISTS `relation` (
-  `IDrelation` int NOT NULL AUTO_INCREMENT,
-  `Ami1` int NOT NULL,
+  `Ami1` int NOT NULL COMMENT 'IDutilisateur',
   `Ami2` int NOT NULL COMMENT 'IDutilisateur',
   `Statut` int NOT NULL COMMENT '(1) Demande (2) Accepté ',
   PRIMARY KEY (`IDrelation`)
