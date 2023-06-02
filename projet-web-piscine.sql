@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 02 juin 2023 à 13:33
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.26
+-- Généré le : ven. 02 juin 2023 à 14:27
+-- Version du serveur : 8.0.27
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -107,7 +107,15 @@ CREATE TABLE IF NOT EXISTS `message` (
   `Data` varchar(255) NOT NULL,
   `Statut` int NOT NULL COMMENT 'Si le message a été vu par le recepteur',
   PRIMARY KEY (`IDmessage`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `message`
+--
+
+INSERT INTO `message` (`IDmessage`, `Envoyeur`, `Recepteur`, `Date`, `Contenu`, `Data`, `Statut`) VALUES
+(1, '1', '2', '2023-06-02 13:55:40', 'T\'es bo', '', 1),
+(2, '2', '1', '2023-06-02 13:56:05', 'petite taille', '', 1);
 
 -- --------------------------------------------------------
 
@@ -134,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 
 INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES
 (1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 0, 1),
-(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 0, 8);
+(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -206,12 +214,15 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `DateNaissance` date NOT NULL,
   `Adresse` varchar(255) NOT NULL,
   `Mail` varchar(255) NOT NULL,
+  `MotDePasse` varchar(255) NOT NULL,
   `PhotoProfil` varchar(255) NOT NULL,
   `AnneeEtude` int NOT NULL,
   `Amis` text NOT NULL,
   `Messages` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'ID des messages',
   `Posts` text NOT NULL COMMENT 'ID des posts',
   `Emplois` text NOT NULL,
+  `Desciption` varchar(255) NOT NULL,
+  `Humeur` varchar(255) NOT NULL,
   PRIMARY KEY (`IDutilisateur`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -219,11 +230,11 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`) VALUES
-(1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', ''),
-(2, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', ''),
-(3, 1, 'Bourse', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', ''),
-(4, 1, 'Grassin', 'Laureline', '2003-11-17', '28 rue du Perray', 'laureline.grassin@edu.ece.fr', 'images/bob.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '');
+INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `MotDePasse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`, `Desciption`, `Humeur`) VALUES
+(1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', '', ''),
+(2, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
+(3, 1, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
+(4, 1, 'GRASSIN', 'Laureline', '2003-11-17', '28 rue du Perray', 'laureline.grassin@edu.ece.fr', '', 'images/bob.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
