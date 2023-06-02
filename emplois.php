@@ -61,7 +61,7 @@
             <h2>Emplois disponibles</h2>
         </div>
         
-        
+        <div class="scroll">
             <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
@@ -88,7 +88,7 @@
 
         
         <p>Emploi 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Emploi n</p>
-        
+        </div>
         
 
 
