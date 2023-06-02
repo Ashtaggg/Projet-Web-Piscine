@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 02 juin 2023 à 17:45
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.26
+-- Généré le : ven. 02 juin 2023 à 18:39
+-- Version du serveur : 8.0.27
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,7 +55,9 @@ INSERT INTO `commentaire` (`IDcommentaire`, `Envoyeur`, `IDpost`, `Date`, `Conte
 DROP TABLE IF EXISTS `emplois`;
 CREATE TABLE IF NOT EXISTS `emplois` (
   `IDemplois` int NOT NULL,
-  `Type` int NOT NULL,
+  `IDutilisateur` int NOT NULL,
+  `NomEntreprise` varchar(255) NOT NULL,
+  `Type` varchar(255) NOT NULL,
   `DateDebut` date NOT NULL,
   `DateFin` date NOT NULL,
   `Lieu` varchar(255) NOT NULL,
@@ -63,6 +65,14 @@ CREATE TABLE IF NOT EXISTS `emplois` (
   `Salaire` int NOT NULL,
   PRIMARY KEY (`IDemplois`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `emplois`
+--
+
+INSERT INTO `emplois` (`IDemplois`, `IDutilisateur`, `NomEntreprise`, `Type`, `DateDebut`, `DateFin`, `Lieu`, `Poste`, `Salaire`) VALUES
+(1, 0, 'Carrefour', 'Stage', '2023-06-14', '2023-07-14', '1 AV du Général Sarrail, 75016 Paris', 'Mise en rayon/drive', 0),
+(2, 0, 'Thalès', 'CDD', '2023-07-01', '2023-08-31', '6 r Verrerie, 92190 Meudon', 'Ingénieur développement logiciel', 2000);
 
 -- --------------------------------------------------------
 
