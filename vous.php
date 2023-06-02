@@ -82,14 +82,16 @@
                     $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%'";
                     $Amis_result = mysqli_query($db_handle, $Amis);
                     $Amis_data = mysqli_fetch_assoc($Amis_result);
-                        $Ami2 = "SELECT * FROM relation join utilisateur WHERE relation.Ami2 = utilisateur.IDutilisateur";
-                        $Ami2_result = mysqli_query($db_handle, $Ami2);
-                        while($Ami2_data = mysqli_fetch_assoc($Ami2_result)){
-                            echo  $Ami2_data['Nom'] . "<br>";
-                            echo  $Ami2_data['Prenom'] . "<br>";
-                            echo "<div class='line-1'>" . "</div>";
-                            $image = $Ami2_data['PhotoProfil'];
-                            echo "<div class='photoAmis'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                    $Ami2 = "SELECT * FROM relation join utilisateur WHERE relation.Ami2 = utilisateur.IDutilisateur";
+                    $Ami2_result = mysqli_query($db_handle, $Ami2);
+                    while($Ami2_data = mysqli_fetch_assoc($Ami2_result)){
+                        echo "<div>". "<br></div>";
+                        echo  $Ami2_data['Nom'] . "<br>";
+                        echo  $Ami2_data['Prenom'] . "<br>";
+                        echo "<div>". "<br></div>";
+                        $image = $Ami2_data['PhotoProfil'];
+                        echo "<a href='amis.php'><div class='photoAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
+                        echo "<div class='line-1'>" . "<br></div>";
                         }
                     }//end while
                 
