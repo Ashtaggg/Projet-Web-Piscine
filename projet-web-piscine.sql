@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 02 juin 2023 à 10:06
+-- Généré le : ven. 02 juin 2023 à 13:24
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -144,14 +144,19 @@ CREATE TABLE IF NOT EXISTS `relation` (
   `Ami2` int NOT NULL COMMENT 'IDutilisateur',
   `Statut` int NOT NULL COMMENT '(1) Demande (2) Accepté ',
   PRIMARY KEY (`IDrelation`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `relation`
 --
 
 INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `Statut`) VALUES
-(1, 0, 3, 2);
+(1, 4, 3, 2),
+(2, 4, 1, 2),
+(3, 1, 2, 2),
+(4, 3, 4, 2),
+(5, 2, 1, 1),
+(6, 2, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -184,8 +189,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`) VALUES
 (1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', ''),
 (2, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', ''),
-(3, 1, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', 'images/pp.jpg', 2, '1\r\n2\r\n4', '', '', ''),
-(4, 1, 'GRASSIN', 'Laureline', '2003-11-17', 'Avec Emma', 'laureline.grassin@edu.ece.fr', 'images/pp.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '');
+(3, 1, 'Bourse', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', ''),
+(4, 1, 'Grassin', 'Laureline', '2003-11-17', '28 rue du Perray', 'laureline.grassin@edu.ece.fr', 'images/bob.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
