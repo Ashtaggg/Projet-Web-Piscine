@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 02 juin 2023 à 09:37
--- Version du serveur : 8.0.27
--- Version de PHP : 7.4.26
+-- Généré le : ven. 02 juin 2023 à 10:06
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -139,18 +139,19 @@ INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Co
 
 DROP TABLE IF EXISTS `relation`;
 CREATE TABLE IF NOT EXISTS `relation` (
-  `Ami1` int NOT NULL COMMENT 'IDutilisateur',
+  `IDrelation` int NOT NULL AUTO_INCREMENT,
+  `Ami1` int NOT NULL,
   `Ami2` int NOT NULL COMMENT 'IDutilisateur',
   `Statut` int NOT NULL COMMENT '(1) Demande (2) Accepté ',
-  PRIMARY KEY (`Ami1`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`IDrelation`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `relation`
 --
 
-INSERT INTO `relation` (`Ami1`, `Ami2`, `Statut`) VALUES
-(4, 3, 2);
+INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `Statut`) VALUES
+(1, 0, 3, 2);
 
 -- --------------------------------------------------------
 
