@@ -79,21 +79,19 @@
                 $result_sql = mysqli_query($db_handle, $sql);
                 while ($data_sql = mysqli_fetch_assoc($result_sql)) {
                     $IDutilisateur= $data_sql['IDutilisateur'];
-                    $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%'";
+                    $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%' and relation.statut='2' and Ami2 = IDutilisateur";
                     $Amis_result = mysqli_query($db_handle, $Amis);
-                    $Amis_data = mysqli_fetch_assoc($Amis_result);
-                    $Ami2 = "SELECT * FROM relation join utilisateur WHERE relation.Ami2 = utilisateur.IDutilisateur";
-                    $Ami2_result = mysqli_query($db_handle, $Ami2);
-                    while($Ami2_data = mysqli_fetch_assoc($Ami2_result)){
+                    while ($Amis_data = mysqli_fetch_assoc($Amis_result)){
                         echo "<div>". "<br></div>";
-                        echo  $Ami2_data['Nom'] . "<br>";
-                        echo  $Ami2_data['Prenom'] . "<br>";
+                        echo  $Amis_data['Nom'] . "<br>";
+                        echo  $Amis_data['Prenom'] . "<br>";
                         echo "<div>". "<br></div>";
-                        $image = $Ami2_data['PhotoProfil'];
+                        $image = $Amis_data['PhotoProfil'];
                         echo "<a href='amis.php'><div class='photoAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
                         echo "<div class='line-1'>" . "<br></div>";
-                        }
-                    }//end while
+                        
+                    }
+                }//end while
                 
             }//end if
             //si le BDD n'existe pas

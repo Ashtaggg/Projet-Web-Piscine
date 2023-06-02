@@ -81,8 +81,6 @@
             else {
                 echo "Database not found";
             }//end else
-            session_start();
-            $Ami = isset($_SESSION['email']) ? $_SESSION['email'] : "";
         ?>
 </body>
 </html>
