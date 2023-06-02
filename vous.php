@@ -213,7 +213,7 @@
                     echo "Date de fin: " . $data2['DateFin'] . "<br>";
                     echo "Lieu: " . $data2['Lieu'] . "<br>";
                     echo "Domaine: " . $data2['Domaine'] . "<br>";
-                    echo "Description: " . $data2['Descriptif'] . "<br>";
+                    echo "Description: " . $data2['Description'] . "<br>";
                 }
             }//end if
             //si le BDD n'existe pas
@@ -296,7 +296,7 @@
                     $Descriptif = isset($_POST["descriptif"]) ? $_POST["descriptif"] : "";
 
 
-                    $sql = "INSERT INTO `formation`(`IDformation`, `IDutilisateur`, `NomEcole`, `Diplome`, `Type`, `DateDebut`, `DateFin`, `Lieu`, `Poste`, `Domaine`, `Descriptif`) VALUES ('$IDformation', '$IDuser2', '$Ecole', '$Diplome', '', '$DateDeb', '$DateFin', '$Lieu', '', '$Domaine', '$Descriptif')";
+                    $sql = "INSERT INTO `formation`(`IDformation`, `IDutilisateur`, `NomEcole`, `Diplome`, `Type`, `DateDebut`, `DateFin`, `Lieu`, `Poste`, `Domaine`, `Description`) VALUES ('$IDformation', '$IDuser2', '$Ecole', '$Diplome', '', '$DateDeb', '$DateFin', '$Lieu', '', '$Domaine', '$Descriptif')";
                     $result = mysqli_query($db_handle, $sql);
 
                 }
