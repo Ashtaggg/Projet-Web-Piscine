@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 01 juin 2023 à 22:55
+-- Généré le : ven. 02 juin 2023 à 09:37
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `projet-web-piscine`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaire`
+--
+
+DROP TABLE IF EXISTS `commentaire`;
+CREATE TABLE IF NOT EXISTS `commentaire` (
+  `IDcommentaire` int NOT NULL,
+  `Envoyeur` int NOT NULL COMMENT 'IDutilisateur',
+  `IDpost` int NOT NULL,
+  `Date` datetime NOT NULL,
+  `Contenu` text NOT NULL,
+  PRIMARY KEY (`IDcommentaire`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `commentaire`
+--
+
+INSERT INTO `commentaire` (`IDcommentaire`, `Envoyeur`, `IDpost`, `Date`, `Contenu`) VALUES
+(1, 1, 2, '2023-06-02 08:43:48', 'TEST'),
+(2, 2, 2, '2023-06-02 09:18:47', 'Ca marche !!!'),
+(3, 3, 2, '2023-06-02 09:32:01', 'Je suis aigrie !!!');
 
 -- --------------------------------------------------------
 
