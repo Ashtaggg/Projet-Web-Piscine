@@ -63,6 +63,28 @@
         <div class="line-1"></div>
         <p>Les Entreprises</p>
     </div>
+    <div id="MonProfil">
+    <br><br>
+         <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $result = mysqli_query($db_handle, $sql);
+                while ($data = mysqli_fetch_assoc($result)) {
+                    echo "Nom: " . $data['Nom'] . "<br>";
+                    echo "Prénom: " . $data['Prenom'] . "<br>";
+                    echo "Adresse: " . $data['Adresse'] . "<br>";
+                    echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
+                    $image = $data['PhotoProfil'];
+                     echo "<div class='photo'><img src='$image' height='80' width='100'>" . "<br><br></div>";
+                }//end while
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+    </div>
     <div class="inputbox_res">
             <ion-icon name="search-outline"></ion-icon>
             <input type="text" placeholder="Rechercher des Contacts">
