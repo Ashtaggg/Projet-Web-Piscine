@@ -39,7 +39,7 @@
                     </div>
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label for="">Password</label>
                     </div>
                     <div class="forget">
@@ -64,9 +64,9 @@
                             $password_result = mysqli_query($db_handle,$password_verif);
                             if(!$email_result || mysqli_num_rows($email_result) == 0) {
                                 echo "<br> <p class='couleur_texte'> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Adresse mail non valide </p>";
-                                if(!$password_result || mysqli_num_rows($password_result) == 0) {
-                                    echo "<br> <p class='couleur_texte'> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Mot de password non valide </p>";
-                                }
+                            }
+                            elseif(!$password_result || mysqli_num_rows($password_result) == 0) {
+                                echo "<br> <p class='couleur_texte'> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Mot de password non valide </p>";
                             }
                             else {
                                 echo "<br>Adresse mail OK";
