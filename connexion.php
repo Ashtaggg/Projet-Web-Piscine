@@ -37,6 +37,11 @@
                         <input type="email" name="email" required>
                         <label for="">Email</label>
                     </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" name="password" required>
+                        <label for="">Password</label>
+                    </div>
                     <div class="forget">
                         <label for=""><input type="checkbox">Remember Me </label>
                     </div>
@@ -46,15 +51,22 @@
                     session_start();
                     $email = isset($_POST["email"]) ? $_POST["email"] : "";
                     $_SESSION['email'] = $email;
+                    $password = isset($_POST["password"]) ? $_POST["password"] : "";
+                    $_SESSION['password'] = $password;
                     if ($db_found) {
                         if (isset($_POST["login"])) {
                             $email_verif = "SELECT * FROM utilisateur WHERE 1 = 1";
-                            if ($email != "") {
+                            if (($email != "") && ($password != "")) {
                                 $email_verif .= " AND Mail LIKE '%$email%'";
+                                $password_verif = "SELECT * FROM utilisateur  WHERE Mail LIKE '%$email%' AND MotDePasse LIKE '%$password%'";
                             }
                             $email_result = mysqli_query($db_handle,$email_verif);
+                            $password_result = mysqli_query($db_handle,$password_verif);
                             if(!$email_result || mysqli_num_rows($email_result) == 0) {
                                 echo "<br> <p class='couleur_texte'> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Adresse mail non valide </p>";
+                            }
+                            elseif(!$password_result || mysqli_num_rows($password_result) == 0) {
+                                echo "<br> <p class='couleur_texte'> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Mot de password non valide </p>";
                             }
                             else {
                                 echo "<br>Adresse mail OK";
