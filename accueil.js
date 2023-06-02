@@ -47,8 +47,8 @@ function com(element) {
         cache: false,
         data: { IDpostCom: IDpost },
         success: function(response) {
-            $('.nbrCom[data-idpost="' + IDpost + '"]').text(Com);
-            $('.php').load('commentaires.php');
+            //$('.nbrCom[data-idpost="' + IDpost + '"]').text(Com);
+            $('.php').load('commentaires.php', { IDpostCom: IDpost });
         },
         error: function() {
             alert('Erreur lors de la requête AJAX');
@@ -56,9 +56,7 @@ function com(element) {
     });
 }
 
-function com_cacher(element){
-    var IDpost = element.id;
-    var Com = parseInt(element.dataset.com);
+function com_cacher(){
     var overlay3 = document.getElementById("overlay3");
     overlay3.style.display = "none";
 }
