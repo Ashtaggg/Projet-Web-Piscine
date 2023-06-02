@@ -72,9 +72,9 @@
                 $result = mysqli_query($db_handle, $sql);
                 while ($data = mysqli_fetch_assoc($result)) {
                     echo "Nom: " . $data['Nom'] . "<br>";
-                    echo "Prénom: " . $data['Prenom'] . "<br>";
-                    echo "Adresse: " . $data['Adresse'] . "<br>";
-                    echo "Date de naissance: " . $data['DateNaissance'] . "<br>";
+                    echo "Prénom: " . $data['Prenom'] . "<br><br>";
+                    echo "<div class='line-1'>" . "<br></div>";
+                    echo "Ma description : ". $data['Description']. "<br>";
                     $image = $data['PhotoProfil'];
                      echo "<div class='photo'><img src='$image' height='80' width='100'>" . "<br><br></div>";
                 }//end while
