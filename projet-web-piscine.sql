@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 01 juin 2023 à 20:09
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.26
+-- Généré le : ven. 02 juin 2023 à 09:37
+-- Version du serveur : 8.0.27
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `projet-web-piscine`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaire`
+--
+
+DROP TABLE IF EXISTS `commentaire`;
+CREATE TABLE IF NOT EXISTS `commentaire` (
+  `IDcommentaire` int NOT NULL,
+  `Envoyeur` int NOT NULL COMMENT 'IDutilisateur',
+  `IDpost` int NOT NULL,
+  `Date` datetime NOT NULL,
+  `Contenu` text NOT NULL,
+  PRIMARY KEY (`IDcommentaire`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `commentaire`
+--
+
+INSERT INTO `commentaire` (`IDcommentaire`, `Envoyeur`, `IDpost`, `Date`, `Contenu`) VALUES
+(1, 1, 2, '2023-06-02 08:43:48', 'TEST'),
+(2, 2, 2, '2023-06-02 09:18:47', 'Ca marche !!!'),
+(3, 3, 2, '2023-06-02 09:32:01', 'Je suis aigrie !!!');
 
 -- --------------------------------------------------------
 
@@ -48,7 +73,9 @@ CREATE TABLE IF NOT EXISTS `emplois` (
 DROP TABLE IF EXISTS `formation`;
 CREATE TABLE IF NOT EXISTS `formation` (
   `IDformation` int NOT NULL,
+  `IDutilisateur` int NOT NULL,
   `NomEcole` varchar(255) NOT NULL,
+  `Diplome` varchar(255) NOT NULL,
   `Type` int NOT NULL,
   `DateDebut` date NOT NULL,
   `DateFin` date NOT NULL,
