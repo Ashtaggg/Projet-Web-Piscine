@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 02 juin 2023 à 13:24
+-- Généré le : ven. 02 juin 2023 à 13:33
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -172,23 +172,24 @@ INSERT INTO `projet` (`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lie
 
 DROP TABLE IF EXISTS `relation`;
 CREATE TABLE IF NOT EXISTS `relation` (
-  `Ami1` int NOT NULL COMMENT 'IDutilisateur',
-  `Ami2` int NOT NULL COMMENT 'IDutilisateur',
-  `Statut` int NOT NULL COMMENT '(1) Demande (2) Accepté ',
+  `IDrelation` int NOT NULL AUTO_INCREMENT,
+  `Ami1` int NOT NULL,
+  `Ami2` int NOT NULL,
+  `statut` int NOT NULL,
   PRIMARY KEY (`IDrelation`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `relation`
 --
 
-INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `Statut`) VALUES
+INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES
 (1, 4, 3, 2),
-(2, 4, 1, 2),
-(3, 1, 2, 2),
-(4, 3, 4, 2),
-(5, 2, 1, 1),
-(6, 2, 3, 2);
+(2, 3, 4, 2),
+(3, 4, 1, 2),
+(4, 1, 2, 2),
+(5, 2, 1, 2),
+(7, 2, 3, 1);
 
 -- --------------------------------------------------------
 
