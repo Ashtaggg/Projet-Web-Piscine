@@ -74,19 +74,20 @@
                 $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                 $IDuser2 = $IDuser_data["IDutilisateur"];
 
+                //echo "Ami2 : ". $Ami2;
                 
                 $sql2 ="SELECT * FROM relation join utilisateur WHERE Ami2 LIKE '%$Ami2%' and relation.Ami2 = utilisateur.IDutilisateur and relation.Ami1 like '%$IDuser2%'";
                 $sql2_result = mysqli_query($db_handle, $sql2);
                 while($data_sql2 = mysqli_fetch_assoc($sql2_result)){
                 //affichage du profil de l'ami
-                echo $data_sql2['Ami2'];
-                echo  $data_sql2['Nom'] . "<br>";
-                echo  $data_sql2['Prenom'] . "<br>";
-                echo "Adresse: " . $data_sql2['Adresse'] . "<br>";
-                echo "Date de naissance: " . $data_sql2['DateNaissance'] ."<br>";
-                echo "Humeur: " . $data_sql2['Humeur'] . "<br>";
-                $image = $data_sql2['PhotoProfil'];
-                echo "<div class='photo_ami2'><img src='$image' height='80' width='100'>" . "</div>";
+                    //echo $data_sql2['Ami2'];
+                    echo  $data_sql2['Nom'] . "<br>";
+                    echo  $data_sql2['Prenom'] . "<br>";
+                    echo "Adresse: " . $data_sql2['Adresse'] . "<br>";
+                    echo "Date de naissance: " . $data_sql2['DateNaissance'] ."<br>";
+                    echo "Humeur: " . $data_sql2['Humeur'] . "<br>";
+                    $image = $data_sql2['PhotoProfil'];
+                    echo "<div class='photo_ami2'><img src='$image' height='80' width='100'>" . "</div>";
                 }
             }//end if
             //si le BDD n'existe pas
@@ -113,11 +114,8 @@
                 $result_sql = mysqli_query($db_handle, $sql);
                 $data_sql = mysqli_fetch_assoc($result_sql);
                 $IDutilisateur= $data_sql['IDutilisateur']; 
-                echo $IDutilisateur;
-                echo $Ami2;
-                echo $data_sql['Ami2'];
                 
-                $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE utilisateur.IDutilisateur LIKE '1'  AND formation.IDutilisateur LIKE '1'"; 
+                $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE utilisateur.IDutilisateur LIKE '%$IDutilisateur%'  AND formation.IDutilisateur LIKE '%$IDutilisateur%'"; 
                 $result_sql2 = mysqli_query($db_handle, $sql2);
                 while($data_sql2 = mysqli_fetch_assoc($result_sql2)){
                     //Affichage des formation de l'ami
@@ -152,17 +150,25 @@
                 $data = mysqli_fetch_assoc($result);
                 $IDutilisateur= $data['IDutilisateur']; 
 
-                $sql2 = "SELECT * FROM utilisateur JOIN projet WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = projet.IDutilisateur"; 
-                $result2 = mysqli_query($db_handle, $sql2);
-                while ($data2 = mysqli_fetch_assoc($result2)) {
-                    echo "<div class='affichageFormation'>Ecole: " . $data2['NomEcole'] . "<br>";
-                    echo "Nom du projet: " . $data2['NomProjet'] . "<br>";
-                    echo "Lieu: " . $data2['Lieu'] . "<br>";
-                    echo "Date de début: " . $data2['DateDebut'] . "<br>";
-                    echo "Date de fin: " . $data2['DateFin'] . "<br>";
-                    echo "Description: " . $data2['Description'] . "<br></div>";
+                $sql = "SELECT * FROM relation join utilisateur WHERE relation.Ami1 LIKE '%$IDuser2%' and Ami2 LIKE '%$Ami2%' and IDutilisateur LIKE '%$Ami2%'"; 
+                $result_sql = mysqli_query($db_handle, $sql);
+                $data_sql = mysqli_fetch_assoc($result_sql);
+                $IDutilisateur= $data_sql['IDutilisateur']; 
+
+            
+                $sql2 = "SELECT * FROM utilisateur JOIN projet WHERE utilisateur.IDutilisateur LIKE '%$IDutilisateur%'  AND projet.IDutilisateur LIKE '%$IDutilisateur%'"; 
+                $result_sql2 = mysqli_query($db_handle, $sql2);
+                while($data_sql2 = mysqli_fetch_assoc($result_sql2)){
+                    //Affichage des formation de l'ami
+                    echo "<div class='affichageFormation'>Ecole: " . $data_sql2['NomEcole'] . "<br>";
+                    //echo "Diplome: " . $data_sql2['Diplome'] . "<br>";
+                    echo "Date de début: " . $data_sql2['DateDebut'] . "<br>";
+                    echo "Date de fin: " . $data_sql2['DateFin'] . "<br>";
+                    echo "Lieu: " . $data_sql2['Lieu'] . "<br>";
+                    //echo "Domaine: " . $data_sql2['Domaine'] . "<br>";
+                    echo "Description: " . $data_sql2['Description'] . "<br></div>";
                     echo "<div> "."<br> </div>";
-                }
+                } 
             }//end if
             //si le BDD n'existe pas
             else {
