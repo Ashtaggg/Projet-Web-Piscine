@@ -247,7 +247,7 @@
                     <div class="inputbox_ecrir">
                         <input type="text" placeholder="cause avec le copaing" size="22" id='contenuMess' class="inputMess">
                     </div>
-                    <ion-icon class="icon_ecrir" name="paper-plane-outline" data-env="<?php echo $IDenvoyeur_mess; ?>" data-recep="<?php echo $IDrecepteur_mess; ?>" data-utilisateur="<?php echo $IDutilisateur; ?>" onclick=mess(this)></ion-icon>
+                    <ion-icon class="icon_ecrir" name="paper-plane-outline" data-env="<?php echo $IDutilisateur; ?>" data-recep="<?php echo $IDenvoyeur; ?>" data-utilisateur="<?php echo $IDutilisateur; ?>" data-utilisateur="<?php echo $IDutilisateur; ?>"onclick=mess(this)></ion-icon>
                 </div>
             </div>
             </br>
