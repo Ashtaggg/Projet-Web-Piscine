@@ -90,14 +90,38 @@
             <div id="CDD">
                 <h4> CDD </h4>
                 <?php
-                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
-                        if($Emplois_data['Type'] == 'CDD')
-                        {
-                            echo $Emplois_data['NomEntreprise'] . "<br>";
-                            echo $Emplois_data['Poste'];
-                        }
-                    } 
-                
+                    if ($db_found) {
+                        if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                            if($Emplois_data['Type'] == 'CDD')
+                            {
+                                $IDemplois = $Emplois_data['IDemplois'];
+
+                                $ID = "SELECT * FROM emplois where IDemplois LIKE '%$IDemplois%'"; 
+                                $ID_result = mysqli_query($db_handle, $ID);
+                                $data = mysqli_fetch_assoc($ID_result);
+                                $IDemplois2 = $data["IDemplois"];
+                                $Postulants = $data["IDutilisateur"];
+
+                                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                                $IDuser_result = mysqli_query($db_handle, $IDuser);
+                                $data2 = mysqli_fetch_assoc($IDuser_result);
+                                $Envoyeur = $data2['IDutilisateur'];
+
+
+                                //$Postulants = "SELECT * FROM emplois where IDemplois LIKE '%$IDemplois%'";
+                                $test = $Envoyeur . "|" . $Postulants;
+
+
+                                //$sql = "UPDATE emplois SET IDutilisateur = '$test' where IDemplois LIKE '%$IDemplois2%'";
+                                $sql = "UPDATE emplois SET IDutilisateur = CONCAT('$Envoyeur', '|', '$Postulants') WHERE IDemplois LIKE '%$IDemplois2%'";
+                                $result = mysqli_query($db_handle, $sql);
+                                
+                                echo $Emplois_data['NomEntreprise'] . "<br>";
+                                echo $Emplois_data['Poste'];
+                                
+                            }
+                        } 
+                    }
                 ?>
                 <div class="line-1"></div>
             </div>
@@ -118,26 +142,26 @@
             
 
             <?php
-                if($db_found){
+                /*if($db_found){
                     if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
                         $ID = "SELECT * FROM emplois ORDER BY DateDebut DESC LIMIT 1;"; 
                         $ID_result = mysqli_query($db_handle, $ID);
                         $data = mysqli_fetch_assoc($ID_result);
                         $IDemplois = $data["IDemplois"] + 1;
                         
-                        /*$ID = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                        $ID = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                         $IDuser_result = mysqli_query($db_handle, $IDuser);
                         $data = mysqli_fetch_assoc($IDuser_result);
                         $Envoyeur = $data['IDutilisateur'];
 
                         $NomEntreprise = isset($_POST["NomEntreprise"]) ? $_POST["NomEntreprise"] : "";
-                        $Poste = isset($_POST["Poste"]) ? $_POST["Poste"] : "";*/
+                        $Poste = isset($_POST["Poste"]) ? $_POST["Poste"] : "";
                     
-                        //$sql = "INSERT INTO `projet`(`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES ('$IDprojet', '$IDuser2', '$Ecole', '$NomProjet', '$Lieu', '$DateDeb', '$DateFin', '$Description')";
-                        //$result = mysqli_query($db_handle, $sql);
+                        $sql = "INSERT INTO `projet`(`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES ('$IDprojet', '$IDuser2', '$Ecole', '$NomProjet', '$Lieu', '$DateDeb', '$DateFin', '$Description')";
+                        $result = mysqli_query($db_handle, $sql);
                         
                     }       
-                }
+                }*/
              ?>
 
         </div>
