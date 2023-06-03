@@ -805,7 +805,7 @@ div.scroll {
 }
 .message_me{
     float:right;
-    margin-right: 10px;
+    margin: 0px 10px 0px 0px;
     background-color: #037078;
     color: white;
     border-radius: 10px;
@@ -813,11 +813,12 @@ div.scroll {
 }
 .icon_me{
     float:right;
-    margin-top:12px
+    margin-top:-3px
    }
+
 .message_him{
     float:left;
-    margin-left: 10px;
+    margin: 0px 0px 10px 0px;
     background-color: gray;
     color: white;
     border-radius: 10px;
@@ -825,7 +826,7 @@ div.scroll {
 }
 .icon_him{
     float:left;
-    margin-top:12px
+    margin-top:-3px
    }
 
 .inputbox_ecrir{

@@ -210,10 +210,10 @@
                                 if($IDenvoyeur_mess==$IDutilisateur){
                                     echo"<p class='message_me'>" . $Contenu_message . "</p><br>";
                                     if($Statut_mess==0){
-                                        echo "<ion-icon class='icon_me' name='checkmark-outline'></ion-icon><br>";
+                                        echo "<ion-icon class='icon_me' name='checkmark-outline'></ion-icon></br>";
                                     }
                                     else{
-                                        echo "<ion-icon class='icon_me' name='checkmark-done-outline'></ion-icon><br>";
+                                        echo "<ion-icon class='icon_me' name='checkmark-done-outline'></ion-icon></br>";
                                     }
 
                                     //echo "Test moi    env : " . $IDenvoyeur_mess . "    rec : " . $IDrecepteur_mess . "    statut : " . $Statut_mess . "<br>";
@@ -223,10 +223,10 @@
                                     if($Statut_mess==0){
                                         $message_update = "UPDATE `message` SET `Statut`= 1 WHERE Envoyeur = $IDenvoyeur_mess AND Recepteur = $IDrecepteur_mess";
                                         $message_update_result = mysqli_query($db_handle,$message_update);
-                                        echo "<ion-icon class='icon_him' name='checkmark-done-outline'></ion-icon><br>";
+                                        echo "<ion-icon class='icon_him' name='checkmark-done-outline'></ion-icon></br>";
                                     }
                                     else{
-                                        echo "<ion-icon class='icon_him' name='checkmark-done-outline'></ion-icon><br>";
+                                        echo "<ion-icon class='icon_him' name='checkmark-done-outline'></ion-icon></br>";
                                     }
                                     //echo "Test lui    env : " . $IDenvoyeur_mess . "    rec : " . $IDrecepteur_mess . "    statut : " . $Statut_mess . "<br>";
                                 }
