@@ -31,10 +31,11 @@
 <body>
     <?php
         if (isset($_POST["IDenv"]) && !(empty($_POST['IDenv']))) {
-            $IDenvoyeur = isset($_POST['IDenv']) ? $_POST['IDenv'] : "";
+            $IDenvoyeur2 = isset($_POST['IDenv']) ? $_POST['IDenv'] : "";
             $IDrecep = isset($_POST['IDrecep']) ? $_POST['IDrecep'] : "";
             $Contenu = isset($_POST['Contenu']) ? $_POST['Contenu'] : "";
             $IDutilisateur = isset($_POST['IDutilisateur']) ? $_POST['IDutilisateur'] : "";
+
 
             $ID = "SELECT * FROM message ORDER BY Date DESC LIMIT 1;"; 
             $ID_result = mysqli_query($db_handle, $ID);
@@ -45,14 +46,12 @@
             $Date->modify("+2 hours");
             $Date = $Date->format('Y-m-d H:i:s');
 
-            $sql = "INSERT INTO `message`(`IDmessage`, `Envoyeur`, `Recepteur`, `Date`, `Contenu`, `Data`, `Statut`) VALUES('$IDmessage', '$IDenvoyeur', '$IDrecep', '$Date', '$Contenu', '', '0')";
+            $sql = "INSERT INTO `message`(`IDmessage`, `Envoyeur`, `Recepteur`, `Date`, `Contenu`, `Data`, `Statut`) VALUES('$IDmessage', '$IDenvoyeur2', '$IDrecep', '$Date', '$Contenu', '', '0')";
             $result = mysqli_query($db_handle, $sql);
 
-            echo"CA MARCHE";
 
 
-
-            $message = "SELECT * FROM `message` WHERE (Envoyeur = $IDenvoyeur OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDenvoyeur OR Recepteur = $IDutilisateur) ORDER BY Date ASC";
+            $message = "SELECT * FROM `message` WHERE (Envoyeur = $IDrecep OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDrecep OR Recepteur = $IDutilisateur) ORDER BY Date ASC";
             $message_result = mysqli_query($db_handle,$message);
             while($message_data = mysqli_fetch_assoc($message_result))
             {
