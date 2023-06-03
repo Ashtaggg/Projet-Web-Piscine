@@ -100,11 +100,20 @@
                                 $data2 = mysqli_fetch_assoc($IDuser_result);
                                 $Envoyeur = $data2['IDutilisateur'];
 
-                                
-                                // Insérer une nouvelle ligne dans la table "Postulants"
+
+
+                                // Vérifier si l'utilisateur a déjà postulé pour cet emploi
+                                $query = "SELECT * FROM postulant WHERE IDemplois = '$IDemplois' AND IDutilisateur = '$Envoyeur'";
+                                $result = mysqli_query($db_handle, $query);
+
+                                if (mysqli_num_rows($result) == 0) {
+                                // L'utilisateur n'a pas encore postulé, insérer une nouvelle ligne dans la table "Postulants"
                                 $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
                                 $result = mysqli_query($db_handle, $sql);
-
+                                } else {
+                                // L'utilisateur a déjà postulé pour cet emploi, afficher un message d'erreur ou prendre une autre action
+                                    echo "<script>alert('Vous avez déjà postulé pour cet emploi.');</script>";
+                                }
                             }
                         } 
                         $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
