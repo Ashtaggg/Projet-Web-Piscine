@@ -77,7 +77,7 @@
                 
                 $sql2 ="SELECT * FROM relation join utilisateur WHERE Ami2 LIKE '%$Ami2%' and relation.Ami2 = utilisateur.IDutilisateur and relation.Ami1 like '%$IDuser2%'";
                 $sql2_result = mysqli_query($db_handle, $sql2);
-                $data_sql2 = mysqli_fetch_assoc($sql2_result);
+                while($data_sql2 = mysqli_fetch_assoc($sql2_result)){
                 //affichage du profil de l'ami
                 echo $data_sql2['Ami2'];
                 echo  $data_sql2['Nom'] . "<br>";
@@ -86,6 +86,7 @@
                 echo "Date de naissance: " . $data_sql2['DateNaissance'] ."<br>";
                 $image = $data_sql2['PhotoProfil'];
                 echo "<div class='photo_ami2'><img src='$image' height='80' width='100'>" . "</div>";
+                }
             }//end if
             //si le BDD n'existe pas
             else {

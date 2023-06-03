@@ -159,6 +159,7 @@
                     <p>Prenom : <input type="text" name="Prenom" required></br></p>
                     <p>Mon adresse : <input type="text" name="Adresse" required></br></p>
                     <p>Mon mot de passe : <input type="text" name="MDP" required></br></p>
+                    <p>Ma description : <input type="text" name="Description" required></br><p>
                     <fieldset>
                         <legend>Changer mon humeur:</legend>
                         <div>
@@ -198,6 +199,7 @@
                             $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
                             $Adresse = isset($_POST["Adresse"]) ? $_POST["Adresse"] : "";
                             $Mdp = isset($_POST["MDP"]) ? $_POST["MDP"] : "";
+                            $Description = isset($_POST["Description"]) ? $_POST["Description"] : "";
                             $Humeur = isset($_POST["humeur"]) ? $_POST["humeur"] : "";
 
                             //changement des données de la bdd par celles récup dans le formulaire
@@ -217,8 +219,11 @@
                             $sql5 = "UPDATE utilisateur SET MotDePasse = '$Mdp' where IDutilisateur = {$IDuser2}";
                             $sql5_result = mysqli_query($db_handle, $sql5);
 
-                            $sql6 = "UPDATE utilisateur SET Humeur = '$Humeur' where IDutilisateur = {$IDuser2}";
+                            $sql6 = "UPDATE utilisateur SET Descript = '$Description' where IDutilisateur = {$IDuser2}";
                             $sql6_result = mysqli_query($db_handle, $sql6);
+
+                            $sql7 = "UPDATE utilisateur SET Humeur = '$Humeur' where IDutilisateur = {$IDuser2}";
+                            $sql7_result = mysqli_query($db_handle, $sql7);
 
 
                         }
