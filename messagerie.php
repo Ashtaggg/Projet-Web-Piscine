@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="messagerie.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <title>Messagerie ECE In</title>
     <link rel="icon" href="images/logo_ECE_IN.png" type="image/gif">
     <?php
@@ -185,6 +187,7 @@
             </br>
             <div class="Conv">
                 <div class="scroll" id="scroll_msg">
+                    <a class="prout">rvjrbknvl<a>
                 <?php
                     $Date = new DateTime("now");
                     $Date->modify("-7 day");
@@ -243,9 +246,9 @@
                     <a href="https://zoom.us/fr/signin#/login"> <ion-icon class="icon_ecrir" id="lefticons" name="call-outline"></ion-icon> </a>
                     <a href="https://zoom.us/fr/signin#/login"> <ion-icon class="icon_ecrir" id="lefticons" name="videocam-outline"></ion-icon> </a>
                     <div class="inputbox_ecrir">
-                        <input type="text" placeholder="cause avec le copaing" size="22">
+                        <input type="text" placeholder="cause avec le copaing" size="22" id='contenuMess'>
                     </div>
-                    <ion-icon class="icon_ecrir" name="paper-plane-outline"></ion-icon>
+                    <ion-icon class="icon_ecrir" name="paper-plane-outline" data-env="<?php echo $IDenvoyeur_mess; ?>" data-recep="<?php echo $IDrecepteur_mess; ?>" onclick=mess(this)></ion-icon>
                 </div>
             </div>
             </br>
