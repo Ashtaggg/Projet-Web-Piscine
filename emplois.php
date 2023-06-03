@@ -74,16 +74,53 @@
             <div id="stage">
                 <h4> Stages </h4>
                 <?php
-                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
-                        if($Emplois_data['Type'] == 'Stage')
-                        {
-                            echo $Emplois_data['NomEntreprise'] . "<br>";
-                            echo $Emplois_data['Poste'];
+                    if ($db_found) {
+                        if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                            if($Emplois_data['Type'] == 'Stage')
+                            {
+                                $IDemplois = $Emplois_data['IDemplois'];
+                                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                                $IDuser_result = mysqli_query($db_handle, $IDuser);
+                                $data2 = mysqli_fetch_assoc($IDuser_result);
+                                $Envoyeur = $data2['IDutilisateur'];
+
+
+
+                                // Vérifier si l'utilisateur a déjà postulé pour cet emploi
+                                $query = "SELECT * FROM postulant WHERE IDemplois = '$IDemplois' AND IDutilisateur = '$Envoyeur'";
+                                $result = mysqli_query($db_handle, $query);
+
+                                if (mysqli_num_rows($result) == 0) {
+                                // L'utilisateur n'a pas encore postulé, insérer une nouvelle ligne dans la table "Postulants"
+                                $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
+                                $result = mysqli_query($db_handle, $sql);
+                                } else {
+                                // L'utilisateur a déjà postulé pour cet emploi, afficher un message d'erreur ou prendre une autre action
+                                    echo "<script>alert('Vous avez déjà postulé pour cet emploi.');</script>";
+                                }
+                            }
+                        } 
+                        $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                        $IDuser_result = mysqli_query($db_handle, $IDuser);
+                        $data2 = mysqli_fetch_assoc($IDuser_result);
+                        $Envoyeur = $data2['IDutilisateur'];
+
+                        $sql1 = "SELECT * FROM utilisateur JOIN postulant WHERE utilisateur.IDutilisateur LIKE '%$Envoyeur%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
+                        $IDuser_result1 = mysqli_query($db_handle, $sql1);
+                        while ($data3 = mysqli_fetch_assoc($IDuser_result1)){
+                            $test = $data3['IDemplois'];
+                        
+                            $sql2 = "SELECT * FROM emplois JOIN postulant WHERE emplois.IDemplois LIKE '%$test%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
+                            $IDuser_test = mysqli_query($db_handle, $sql2);
+                            $data_test = mysqli_fetch_assoc($IDuser_test);
+
+                            if ($data_test['Type'] == 'Stage'){
+                                echo $data_test['NomEntreprise'] . "<br>";
+                                echo $data_test['Poste']. "<br><br>";
+                            }
                         }
-                    }   
-                    
-
-
+                        
+                    }
                 ?>
                 <div class="line-1"></div>
             </div>
@@ -130,8 +167,10 @@
                             $IDuser_test = mysqli_query($db_handle, $sql2);
                             $data_test = mysqli_fetch_assoc($IDuser_test);
 
-                            echo $data_test['NomEntreprise'] . "<br>";
-                            echo $data_test['Poste']. "<br>";
+                            if ($data_test['Type'] == 'CDD'){
+                                echo $data_test['NomEntreprise'] . "<br>";
+                                echo $data_test['Poste']. "<br><br>";
+                            }
                         }
                         
                     }
@@ -141,41 +180,56 @@
             <div id="CDI">
                 <h4> CDI </h4>
                 <?php
-                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
-                        if($Emplois_data['Type'] == 'CDI')
-                        {
-                            echo $Emplois_data['NomEntreprise'] . "<br>";
-                            echo $Emplois_data['Poste'];
+                    if ($db_found) {
+                        if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                            if($Emplois_data['Type'] == 'CDI')
+                            {
+                                $IDemplois = $Emplois_data['IDemplois'];
+                                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                                $IDuser_result = mysqli_query($db_handle, $IDuser);
+                                $data2 = mysqli_fetch_assoc($IDuser_result);
+                                $Envoyeur = $data2['IDutilisateur'];
+
+
+
+                                // Vérifier si l'utilisateur a déjà postulé pour cet emploi
+                                $query = "SELECT * FROM postulant WHERE IDemplois = '$IDemplois' AND IDutilisateur = '$Envoyeur'";
+                                $result = mysqli_query($db_handle, $query);
+
+                                if (mysqli_num_rows($result) == 0) {
+                                // L'utilisateur n'a pas encore postulé, insérer une nouvelle ligne dans la table "Postulants"
+                                $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
+                                $result = mysqli_query($db_handle, $sql);
+                                } else {
+                                // L'utilisateur a déjà postulé pour cet emploi, afficher un message d'erreur ou prendre une autre action
+                                    echo "<script>alert('Vous avez déjà postulé pour cet emploi.');</script>";
+                                }
+                            }
+                        } 
+                        $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                        $IDuser_result = mysqli_query($db_handle, $IDuser);
+                        $data2 = mysqli_fetch_assoc($IDuser_result);
+                        $Envoyeur = $data2['IDutilisateur'];
+
+                        $sql1 = "SELECT * FROM utilisateur JOIN postulant WHERE utilisateur.IDutilisateur LIKE '%$Envoyeur%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
+                        $IDuser_result1 = mysqli_query($db_handle, $sql1);
+                        while ($data3 = mysqli_fetch_assoc($IDuser_result1)){
+                            $test = $data3['IDemplois'];
+                        
+                            $sql2 = "SELECT * FROM emplois JOIN postulant WHERE emplois.IDemplois LIKE '%$test%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
+                            $IDuser_test = mysqli_query($db_handle, $sql2);
+                            $data_test = mysqli_fetch_assoc($IDuser_test);
+
+                            if ($data_test['Type'] == 'CDI'){
+                                echo $data_test['NomEntreprise'] . "<br>";
+                                echo $data_test['Poste']. "<br><br>";
+                            }
                         }
-                    } 
-                
+                        
+                    }
                 ?>
                 <div class="line-1"></div>
             </div>
-            
-
-            <?php
-                /*if($db_found){
-                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
-                        $ID = "SELECT * FROM emplois ORDER BY DateDebut DESC LIMIT 1;"; 
-                        $ID_result = mysqli_query($db_handle, $ID);
-                        $data = mysqli_fetch_assoc($ID_result);
-                        $IDemplois = $data["IDemplois"] + 1;
-                        
-                        $ID = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                        $IDuser_result = mysqli_query($db_handle, $IDuser);
-                        $data = mysqli_fetch_assoc($IDuser_result);
-                        $Envoyeur = $data['IDutilisateur'];
-
-                        $NomEntreprise = isset($_POST["NomEntreprise"]) ? $_POST["NomEntreprise"] : "";
-                        $Poste = isset($_POST["Poste"]) ? $_POST["Poste"] : "";
-                    
-                        $sql = "INSERT INTO `projet`(`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES ('$IDprojet', '$IDuser2', '$Ecole', '$NomProjet', '$Lieu', '$DateDeb', '$DateFin', '$Description')";
-                        $result = mysqli_query($db_handle, $sql);
-                        
-                    }       
-                }*/
-             ?>
 
         </div>
     </div>
@@ -193,10 +247,10 @@
                 $result2 = mysqli_query($db_handle, $sql2);
                 while ($data2 = mysqli_fetch_assoc($result2)) {
                     echo "<div class='affichageFormation'>Entreprise: " . $data2['NomEntreprise'];
-                    echo "<div style='display: inline-block; margin-left: 550px;'>" . $data2['IDemplois'] . "</div><br>";
+                    echo "<div style='display: inline-block; margin-left: 500px;'>" . $data2['IDemplois'] . "</div><br>";
                     echo "Poste: " . $data2['Poste'] . "<br>";
                     echo "Type: " . $data2['Type'] . "<br>";
-                    echo "Salaire: " . $data2['Salaire'] . " €<br>";
+                    echo "Salaire (mensuel): " . $data2['Salaire'] . " €<br>";
                     echo "Date de début: " . $data2['DateDebut'] . "<br>";
                     echo "Date de fin: " . $data2['DateFin'] . "<br></div>";
                     echo "<div> "."<br> </div>";
@@ -210,10 +264,7 @@
 
             
             ?>
-            
-
         
-        <p>Emploi 1 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>Emploi n</p>
         </div>
         
 
