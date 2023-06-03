@@ -51,18 +51,40 @@
             </ul>
         </div>
     </nav>
+
     <div id="Gray_bar"></div>
+
     <div id="Info_Right">
-        <h2>Gérer mon réseau</h2>
+        <h2>Mes demandes d'amis</h2>
         <div class="line-1"></div>
-        <p>Mes Amis</p>
-        <div class="line-1"></div>
-        <p>Amis de mes Amis</p>
-        <div class="line-1"></div>
-        <p>Les Professeurs</p>
-        <div class="line-1"></div>
-        <p>Les Entreprises</p>
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $result = mysqli_query($db_handle, $sql);
+                $data = mysqli_fetch_assoc($result);
+                $IDuser = $data['IDutilisateur'];
+
+                $Demande = "SELECT * FROM utilisateur join relation WHERE Ami1 LIKE'%$IDuser%' and statut = '1' and Ami2 = IDutilisateur";
+                $result_demande = mysqli_query($db_handle, $Demande);
+                while($data_demande = mysqli_fetch_assoc($result_demande)){
+                    echo "Nom: " . $data_demande['Nom'] . "<br>";
+                    echo "Prénom: " . $data_demande['Prenom'] . "<br><br>";
+                    echo "<div class='line-1'>" . "<br></div>";
+                    $image = $data_demande['PhotoProfil'];
+                    echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                }
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+
+
     </div>
+
+
     <div id="MonProfil">
     <br><br>
          <?php
@@ -86,9 +108,10 @@
         ?>
     </div>
     <div class="inputbox_res">
-            <ion-icon name="search-outline"></ion-icon>
-            <input type="text" placeholder="Rechercher des Contacts">
-        </div>
+        <ion-icon name="search-outline"></ion-icon>
+        <input type="text" placeholder="Rechercher des Contacts">
+    </div>
+
     <div id="Sec_Amis" class="section">
         <h2>Mes Amis</h2>
         <div class="line-1"></div>
