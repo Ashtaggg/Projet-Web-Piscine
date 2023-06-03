@@ -114,11 +114,8 @@
                 $result_sql = mysqli_query($db_handle, $sql);
                 $data_sql = mysqli_fetch_assoc($result_sql);
                 $IDutilisateur= $data_sql['IDutilisateur']; 
-                echo $IDutilisateur;
-                echo $Ami2;
-                echo $data_sql['Ami2'];
                 
-                $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE utilisateur.IDutilisateur LIKE '1'  AND formation.IDutilisateur LIKE '1'"; 
+                $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE utilisateur.IDutilisateur LIKE '%$IDutilisateur%'  AND formation.IDutilisateur LIKE '%$IDutilisateur%'"; 
                 $result_sql2 = mysqli_query($db_handle, $sql2);
                 while($data_sql2 = mysqli_fetch_assoc($result_sql2)){
                     //Affichage des formation de l'ami
@@ -157,9 +154,7 @@
                 $result_sql = mysqli_query($db_handle, $sql);
                 $data_sql = mysqli_fetch_assoc($result_sql);
                 $IDutilisateur= $data_sql['IDutilisateur']; 
-                echo $IDutilisateur;
-                echo $Ami2;
-                echo $data_sql['Ami2'];
+
             
                 $sql2 = "SELECT * FROM utilisateur JOIN projet WHERE utilisateur.IDutilisateur LIKE '%$IDutilisateur%'  AND projet.IDutilisateur LIKE '%$IDutilisateur%'"; 
                 $result_sql2 = mysqli_query($db_handle, $sql2);
