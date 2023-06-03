@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 03 juin 2023 à 14:00
+-- Généré le : sam. 03 juin 2023 à 16:41
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
 INSERT INTO `commentaire` (`IDcommentaire`, `Envoyeur`, `IDpost`, `Date`, `Contenu`) VALUES
 (1, 1, 2, '2023-06-02 08:43:48', 'TEST'),
 (2, 2, 2, '2023-06-02 09:18:47', 'Ca marche !!!'),
-(3, 3, 2, '2023-06-02 09:32:01', 'Je suis aigrie !!!');
+(3, 3, 2, '2023-06-02 09:32:01', 'Je suis aigrie !!!'),
+(4, 3, 1, '2023-06-03 16:07:25', 'bfzeb\n');
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,8 @@ INSERT INTO `emplois` (`IDemplois`, `IDutilisateur`, `NomEntreprise`, `Type`, `D
 (2, 0, 'Thalès', 'CDD', '2023-07-01', '2023-08-31', '6 r Verrerie, 92190 Meudon', 'Ingénieur développement logiciel', 2000),
 (3, 0, 'Lycée Hoche', 'CDD', '2023-09-04', '2024-06-18', '73 av St Cloud, 78000 Versailles', 'Professeur d\'italien', 1850),
 (4, 0, 'Nasa', 'CDI', '2023-09-01', '0000-00-00', '300 Hidden Figures Way, Washington', 'PDG', 12000),
-(5, 0, 'Roland Garros', 'Stage', '2023-04-10', '2023-06-20', 'Roland Garros', 'Logistique', 700);
+(5, 0, 'Roland Garros', 'Stage', '2023-04-10', '2023-06-20', 'Roland Garros', 'Logistique', 700),
+(6, 0, 'Mauboussin', 'Apprentissage', '2023-06-13', '2023-08-23', 'Parly 2', 'Vente', 1400);
 
 -- --------------------------------------------------------
 
@@ -154,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 --
 
 INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES
-(1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 0, 1),
+(1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 1, 2),
 (2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 3, 0);
 
 -- --------------------------------------------------------
@@ -169,7 +171,15 @@ CREATE TABLE IF NOT EXISTS `postulant` (
   `IDutilisateur` int NOT NULL,
   `IDemplois` int NOT NULL,
   PRIMARY KEY (`IDpostulant`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `postulant`
+--
+
+INSERT INTO `postulant` (`IDpostulant`, `IDutilisateur`, `IDemplois`) VALUES
+(22, 3, 6),
+(21, 3, 1);
 
 -- --------------------------------------------------------
 

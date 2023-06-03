@@ -231,6 +231,60 @@
                 <div class="line-1"></div>
             </div>
 
+            <div id="apprentissage">
+                <h4> Apprentissages </h4>
+                <?php
+                    if ($db_found) {
+                        if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                            if($Emplois_data['Type'] == 'Apprentissage')
+                            {
+                                $IDemplois = $Emplois_data['IDemplois'];
+                                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                                $IDuser_result = mysqli_query($db_handle, $IDuser);
+                                $data2 = mysqli_fetch_assoc($IDuser_result);
+                                $Envoyeur = $data2['IDutilisateur'];
+
+
+
+                                // Vérifier si l'utilisateur a déjà postulé pour cet emploi
+                                $query = "SELECT * FROM postulant WHERE IDemplois = '$IDemplois' AND IDutilisateur = '$Envoyeur'";
+                                $result = mysqli_query($db_handle, $query);
+
+                                if (mysqli_num_rows($result) == 0) {
+                                // L'utilisateur n'a pas encore postulé, insérer une nouvelle ligne dans la table "Postulants"
+                                $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
+                                $result = mysqli_query($db_handle, $sql);
+                                } else {
+                                // L'utilisateur a déjà postulé pour cet emploi, afficher un message d'erreur ou prendre une autre action
+                                    echo "<script>alert('Vous avez déjà postulé pour cet emploi.');</script>";
+                                }
+                            }
+                        } 
+                        $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                        $IDuser_result = mysqli_query($db_handle, $IDuser);
+                        $data2 = mysqli_fetch_assoc($IDuser_result);
+                        $Envoyeur = $data2['IDutilisateur'];
+
+                        $sql1 = "SELECT * FROM utilisateur JOIN postulant WHERE utilisateur.IDutilisateur LIKE '%$Envoyeur%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
+                        $IDuser_result1 = mysqli_query($db_handle, $sql1);
+                        while ($data3 = mysqli_fetch_assoc($IDuser_result1)){
+                            $test = $data3['IDemplois'];
+                        
+                            $sql2 = "SELECT * FROM emplois JOIN postulant WHERE emplois.IDemplois LIKE '%$test%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
+                            $IDuser_test = mysqli_query($db_handle, $sql2);
+                            $data_test = mysqli_fetch_assoc($IDuser_test);
+
+                            if ($data_test['Type'] == 'Apprentissage'){
+                                echo $data_test['NomEntreprise'] . "<br>";
+                                echo $data_test['Poste']. "<br><br>";
+                            }
+                        }
+                        
+                    }
+                ?>
+                <div class="line-1"></div>
+            </div>
+
         </div>
     </div>
     <div id="Emplois">
