@@ -66,7 +66,7 @@
                         $IDemplois= isset($_POST["job"]) ? $_POST["job"] : "";
                         $Emplois= "SELECT * FROM emplois WHERE IDemplois = $IDemplois"; 
                         $Emplois_result = mysqli_query($db_handle, $Emplois);
-                        $Emplois_data = mysqli_fetch_assoc($Emplois_result );
+                        $Emplois_data = mysqli_fetch_assoc($Emplois_result);
                     }       
                 }
             ?>
@@ -95,37 +95,36 @@
                             if($Emplois_data['Type'] == 'CDD')
                             {
                                 $IDemplois = $Emplois_data['IDemplois'];
-
-                                $ID = "SELECT * FROM emplois where IDemplois LIKE '%$IDemplois%'"; 
-                                $ID_result = mysqli_query($db_handle, $ID);
-                                $data = mysqli_fetch_assoc($ID_result);
-                                $IDemplois2 = $data["IDemplois"];
-                                $Postulants = $data["IDutilisateur"];
-
-                                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
                                 $IDuser_result = mysqli_query($db_handle, $IDuser);
                                 $data2 = mysqli_fetch_assoc($IDuser_result);
                                 $Envoyeur = $data2['IDutilisateur'];
 
-
-                                //$Postulants = "SELECT * FROM emplois where IDemplois LIKE '%$IDemplois%'";
-                                $test = $Envoyeur . "|" . $Postulants;
-
-
-                                //$sql = "UPDATE emplois SET IDutilisateur = '$test' where IDemplois LIKE '%$IDemplois2%'";
-                                $sql = "UPDATE emplois SET IDutilisateur = CONCAT('$Envoyeur', '|', '$Postulants') WHERE IDemplois LIKE '%$IDemplois2%'";
+                                
+                                // Insérer une nouvelle ligne dans la table "Postulants"
+                                $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
                                 $result = mysqli_query($db_handle, $sql);
 
-                    
-
-
-
-                                
-                                echo $Emplois_data['NomEntreprise'] . "<br>";
-                                echo $Emplois_data['Poste'];
-                                
                             }
                         } 
+                        $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                        $IDuser_result = mysqli_query($db_handle, $IDuser);
+                        $data2 = mysqli_fetch_assoc($IDuser_result);
+                        $Envoyeur = $data2['IDutilisateur'];
+
+                        $sql1 = "SELECT * FROM utilisateur JOIN postulant WHERE utilisateur.IDutilisateur LIKE '%$Envoyeur%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
+                        $IDuser_result1 = mysqli_query($db_handle, $sql1);
+                        while ($data3 = mysqli_fetch_assoc($IDuser_result1)){
+                            $test = $data3['IDemplois'];
+                        
+                            $sql2 = "SELECT * FROM emplois JOIN postulant WHERE emplois.IDemplois LIKE '%$test%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
+                            $IDuser_test = mysqli_query($db_handle, $sql2);
+                            $data_test = mysqli_fetch_assoc($IDuser_test);
+
+                            echo $data_test['NomEntreprise'] . "<br>";
+                            echo $data_test['Poste']. "<br>";
+                        }
+                        
                     }
                 ?>
                 <div class="line-1"></div>
