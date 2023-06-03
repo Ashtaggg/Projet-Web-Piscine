@@ -92,7 +92,6 @@
                         echo "<div class='line-1'>" . "<br></div>";
                         $Ami2 = $Amis_data['Ami2'];
                         echo $Ami2;
-
                         $_SESSION['Ami2'] = $Ami2;
                         
                     }
