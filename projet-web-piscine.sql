@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 02 juin 2023 à 23:08
+-- Généré le : sam. 03 juin 2023 à 13:03
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -158,6 +158,20 @@ INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Co
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `postulant`
+--
+
+DROP TABLE IF EXISTS `postulant`;
+CREATE TABLE IF NOT EXISTS `postulant` (
+  `IDpostulant` int NOT NULL AUTO_INCREMENT,
+  `IDutilisateur` int NOT NULL,
+  `IDemplois` int NOT NULL,
+  PRIMARY KEY (`IDpostulant`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `projet`
 --
 
@@ -180,8 +194,7 @@ CREATE TABLE IF NOT EXISTS `projet` (
 
 INSERT INTO `projet` (`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES
 (1, 3, 'Ece Paris/Lyon', 'Projet piscine web dynamique', 'France', '2023-05-29', '2023-06-04', 'Création d\'un LinkedIn (ECEIn)'),
-(2, 3, 'Omnes Education', 'ECE makers', 'San Francisco', '2023-06-14', '2023-06-23', ''),
-(3, 3, 'Omnes Education', 'ECE makers', 'San Francisco', '2023-06-01', '2023-06-16', 'qsdvdsdfvfezef');
+(2, 3, 'Omnes Education', 'ECE makers', 'San Francisco', '2023-06-14', '2023-06-23', '');
 
 -- --------------------------------------------------------
 
@@ -245,7 +258,7 @@ INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissa
 (1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', '', ''),
 (2, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '1234', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
 (3, 1, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '1234', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
-(4, 1, 'Cars', 'Flash', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'ai envie de rentrer chez moi', 'Motivé');
+(4, 1, 'Cars', 'Flash', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '1234', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'ai envie de rentrer chez moi', 'Motivé');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
