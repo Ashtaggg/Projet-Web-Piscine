@@ -84,6 +84,7 @@
                 echo  $data_sql2['Prenom'] . "<br>";
                 echo "Adresse: " . $data_sql2['Adresse'] . "<br>";
                 echo "Date de naissance: " . $data_sql2['DateNaissance'] ."<br>";
+                echo "Humeur: " . $data_sql2['Humeur'] . "<br>";
                 $image = $data_sql2['PhotoProfil'];
                 echo "<div class='photo_ami2'><img src='$image' height='80' width='100'>" . "</div>";
                 }
