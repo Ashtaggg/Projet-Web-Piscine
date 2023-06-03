@@ -135,38 +135,38 @@
 
                 $IDutilisateur= $data_sql['IDutilisateur'];
                 //echo $IDutilisateur."<br>";
-
-                $Amis = "SELECT * FROM relation join utilisateur WHERE relation.Ami1 like '%$IDutilisateur%' and relation.statut='2' and relation.Ami2 = IDutilisateur";
+                echo $IDutilisateur;
+                $Amis = "SELECT DISTINCT u2.* FROM utilisateur u1 JOIN relation r1 ON r1.Ami1 = u1.IDutilisateur JOIN relation r2 ON r2.Ami1 = r1.Ami2 JOIN utilisateur u2 ON u2.IDutilisateur = r2.Ami2 WHERE r1.statut = '2' AND r2.statut = '2' AND u1.IDutilisateur = '%$IDutilisateur%' AND u2.IDutilisateur NOT IN (SELECT r3.Ami2 FROM relation r3 WHERE r3.Ami1 = '%$IDutilisateur%') AND u2.IDutilisateur != '%$IDutilisateur%'";
                 $Amis_result = mysqli_query($db_handle, $Amis);
                 while($Amis_data = mysqli_fetch_assoc($Amis_result)){
-                        $MonAmi = $Amis_data['Ami2'];
-                        echo $MonAmi."<br>";
-
+                        //$MonAmi = $Amis_data['Ami2'];
+                        //echo $MonAmi."<br>";
+                        echo "test"; 
                         //$Amiami = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$MonAmi%' and relation.statut LIKE '2' and Ami2 = IDutilisateur and IDutilisateur NOT LIKE '$IDutilisateur'";
                         //$Amiami_result = mysqli_query($db_handle, $Amiami);
                         //while ($Amiami_data = mysqli_fetch_assoc($Amiami_result)){
-                            $req = "SELECT * FROM relation as rel1 join relation as rel2 WHERE rel1.Ami1 LIKE '%$IDutilisateur%' and rel2.Ami1 LIKE '%$MonAmi%' and rel2.Ami2 NOT LIKE '%$MonAmi%'";
-                            $req_result = mysqli_query($db_handle, $req);
-                            $req_data = mysqli_fetch_assoc($req_result);
-                            $Ami2 = $req_data['Ami2'];
+                           // $req = "SELECT * FROM relation as rel1 join relation as rel2 WHERE rel1.Ami1 LIKE '%$IDutilisateur%' and rel2.Ami1 LIKE '%$MonAmi%' and rel2.Ami2 NOT LIKE '%$MonAmi%'";
+                            //$req_result = mysqli_query($db_handle, $req);
+                           // $req_data = mysqli_fetch_assoc($req_result);
+                            //$Ami2 = $req_data['Ami2'];
                             //echo $Ami2."<br>";
 
-                            $Amiami = "SELECT * FROM relation join utilisateur WHERE IDutilisateur like '%$Ami2%'  and IDutilisateur NOT LIKE '$IDutilisateur'";
-                            $Amiami_result = mysqli_query($db_handle, $Amiami);
-                            while($Amiami_data = mysqli_fetch_assoc($Amiami_result)){
+                            //$Amiami = "SELECT * FROM relation join utilisateur WHERE IDutilisateur like '%$Ami2%'  and IDutilisateur NOT LIKE '$IDutilisateur'";
+                            //$Amiami_result = mysqli_query($db_handle, $Amiami);
+                            //while($Amiami_data = mysqli_fetch_assoc($Amiami_result)){
                             //if( $Ami_data['statut'] == )
                             //echo $Amiami_data['Ami2'];
                             echo "<div>". "<br></div>";
-                            $image = $Amiami_data['PhotoProfil'];
+                            $image = $Ami_data['PhotoProfil'];
                             echo "<a href='amis.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
-                            echo  "<div class='amis'>".$Amiami_data['Nom'] . "</div>";
-                            echo  "<div class='amis'>".$Amiami_data['Prenom'] . "</div><br>";
+                            echo  "<div class='amis'>".$Ami_data['Nom'] . "</div>";
+                            echo  "<div class='amis'>".$Ami_data['Prenom'] . "</div><br>";
                             echo "<div>". "<br></div>";                        
                             echo "<div class='line-1'>" . "<br></div>";
                     }        
                 }//end while
                 
-            }//end if
+            //}//end if
             //si le BDD n'existe pas
             else {
                 echo "Database not found";
