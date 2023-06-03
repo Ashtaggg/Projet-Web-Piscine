@@ -115,6 +115,11 @@
                                 //$sql = "UPDATE emplois SET IDutilisateur = '$test' where IDemplois LIKE '%$IDemplois2%'";
                                 $sql = "UPDATE emplois SET IDutilisateur = CONCAT('$Envoyeur', '|', '$Postulants') WHERE IDemplois LIKE '%$IDemplois2%'";
                                 $result = mysqli_query($db_handle, $sql);
+
+                    
+
+
+
                                 
                                 echo $Emplois_data['NomEntreprise'] . "<br>";
                                 echo $Emplois_data['Poste'];

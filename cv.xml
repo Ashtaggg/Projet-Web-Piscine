@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<embassadeurs>
+
+    <embassadeur>
+        <pays>Chine</pays>
+        <groupe>Asie-Pacifique</groupe>
+        <prenom>Zhang Jun</prenom>
+        <statut>Permanant</statut>
+    </embassadeur>
+
+    <embassadeur>
+        <pays>Etats-Unis</pays>
+        <groupe>Amérique du Nord</groupe>
+        <prenom>Linda Thomas-Greenfield</prenom>
+        <statut>Permanant</statut>
+    </embassadeur>
+
+    <embassadeur>
+        <test1> azerty </test1>
+        <test2> azerty </test2>
+        <test3> azerty </test3>
+        <test4> azerty </test4>
+    </embassadeur>
+
+
+</embassadeurs>
