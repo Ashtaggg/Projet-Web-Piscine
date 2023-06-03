@@ -54,19 +54,93 @@
     <div id="Gray_bar"></div>
     <div id="Info_Right">
         <h3>Jobs auxquels vous avez postulé :</h3>
-        <label for="choix">Choisir un job </label></br>
-        <input type="text" id="job" name="job" placeholder="1" required><br><br>
-        <input type="submit" value="Envoyer" name="PosterEmplois">
-        <div class="line-1"></div>
-        <h4> Stages </h4>
-        <div class="line-1"></div>
-        <h4> CDD </h4>
-        <div class="line-1"></div>
-        <h4> CDI </h4>
-        <div class="line-1"></div>
-        <?php
-             
-        ?>
+        <div class='ajoutEmplois'>
+            <form method="post">
+                <label for="choix">Choisir un job </label></br>
+                <input type="text" id="job" name="job" placeholder="1" required><br><br>
+                <input type="submit" value="Envoyer" name="PosterEmplois">
+            </form>
+            <?php
+                if($db_found){
+                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                        $IDemplois= isset($_POST["job"]) ? $_POST["job"] : "";
+                        $Emplois= "SELECT * FROM emplois WHERE IDemplois = $IDemplois"; 
+                        $Emplois_result = mysqli_query($db_handle, $Emplois);
+                        $Emplois_data = mysqli_fetch_assoc($Emplois_result );
+                    }       
+                }
+            ?>
+            <div class="line-1"></div>
+            <div id="stage">
+                <h4> Stages </h4>
+                <?php
+                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                        if($Emplois_data['Type'] == 'Stage')
+                        {
+                            echo $Emplois_data['NomEntreprise'] . "<br>";
+                            echo $Emplois_data['Poste'];
+                        }
+                    }   
+                    
+
+
+                ?>
+                <div class="line-1"></div>
+            </div>
+            <div id="CDD">
+                <h4> CDD </h4>
+                <?php
+                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                        if($Emplois_data['Type'] == 'CDD')
+                        {
+                            echo $Emplois_data['NomEntreprise'] . "<br>";
+                            echo $Emplois_data['Poste'];
+                        }
+                    } 
+                
+                ?>
+                <div class="line-1"></div>
+            </div>
+            <div id="CDI">
+                <h4> CDI </h4>
+                <?php
+                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                        if($Emplois_data['Type'] == 'CDI')
+                        {
+                            echo $Emplois_data['NomEntreprise'] . "<br>";
+                            echo $Emplois_data['Poste'];
+                        }
+                    } 
+                
+                ?>
+                <div class="line-1"></div>
+            </div>
+            
+
+            <?php
+                if($db_found){
+                    if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                        $ID = "SELECT * FROM emplois ORDER BY DateDebut DESC LIMIT 1;"; 
+                        $ID_result = mysqli_query($db_handle, $ID);
+                        $data = mysqli_fetch_assoc($ID_result);
+                        $IDemplois = $data["IDemplois"] + 1;
+                        
+                        /*$ID = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                        $IDuser_result = mysqli_query($db_handle, $IDuser);
+                        $data = mysqli_fetch_assoc($IDuser_result);
+                        $Envoyeur = $data['IDutilisateur'];
+
+                        $NomEntreprise = isset($_POST["NomEntreprise"]) ? $_POST["NomEntreprise"] : "";
+                        $Poste = isset($_POST["Poste"]) ? $_POST["Poste"] : "";*/
+                    
+                        //$sql = "INSERT INTO `projet`(`IDprojet`, `IDutilisateur`, `NomEcole`, `NomProjet`, `Lieu`, `DateDebut`, `DateFin`, `Description`) VALUES ('$IDprojet', '$IDuser2', '$Ecole', '$NomProjet', '$Lieu', '$DateDeb', '$DateFin', '$Description')";
+                        //$result = mysqli_query($db_handle, $sql);
+                        
+                    }       
+                }
+             ?>
+
+        </div>
     </div>
     <div id="Emplois">
         <div style="text-align: center;">
