@@ -53,6 +53,13 @@
         </div>
         <div class="menu">
             <ul class="list">
+                <?php
+                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                    $IDuser_result = mysqli_query($db_handle, $IDuser);
+                    $data = mysqli_fetch_assoc($IDuser_result);
+                    $Envoyeur = $data['IDutilisateur'];
+
+                ?>
                 <li><a class="oncolor" href="accueil.php" style="color : #037078">Accueil</a></li>
                 <li><a class="oncolor" href="reseau.php">Mon réseau</a></li>
                 <li><a class="oncolor" href="vous.php">Vous</a></li>

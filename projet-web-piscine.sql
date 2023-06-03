@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 03 juin 2023 à 16:41
+-- Généré le : sam. 03 juin 2023 à 23:41
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `Data` varchar(255) NOT NULL,
   `Statut` int NOT NULL COMMENT 'Si le message a été vu par le recepteur',
   PRIMARY KEY (`IDmessage`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `message`
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `postulant` (
   `IDutilisateur` int NOT NULL,
   `IDemplois` int NOT NULL,
   PRIMARY KEY (`IDpostulant`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `postulant`
@@ -233,7 +233,7 @@ INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES
 (3, 4, 1, 2),
 (4, 1, 2, 2),
 (5, 2, 1, 2),
-(7, 2, 3, 1);
+(7, 2, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -244,7 +244,8 @@ INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `IDutilisateur` int NOT NULL AUTO_INCREMENT,
-  `Type` int NOT NULL COMMENT '(1) Admin ou (2) prof ou (3) élève ou (4) ancien élève',
+  `Type` int NOT NULL COMMENT '(2) prof ou (3) élève ou (4) ancien élève',
+  `Admin` int NOT NULL COMMENT '(0) non (1) oui',
   `Nom` varchar(255) NOT NULL,
   `Prenom` varchar(255) NOT NULL,
   `DateNaissance` date NOT NULL,
@@ -266,11 +267,11 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `MotDePasse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`, `Descript`, `Humeur`) VALUES
-(1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', '', ''),
-(2, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '1234', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
-(3, 1, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '1234', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
-(4, 1, 'Cars', 'Flash', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '1234', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'ai envie de rentrer chez moi', 'Motivé');
+INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Admin`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `MotDePasse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`, `Descript`, `Humeur`) VALUES
+(1, 1, 0, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '1234', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', '', ''),
+(2, 1, 0, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '1234', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
+(3, 1, 0, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '1234', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
+(4, 1, 0, 'Cars', 'Flash', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '1234', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'ai envie de rentrer chez moi', 'Motivé');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
