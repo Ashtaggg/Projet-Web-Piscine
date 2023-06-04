@@ -218,6 +218,7 @@
                             if($notifs_data['Vu']==0)
                             {
                                 echo "Nom: ";
+                                rcho "Prénom: ";
                                 $poster = "SELECT * FROM utilisateur where IDutilisateur like '%$IDposter%'";
                                 $result_poster = mysqli_query($db_handle, $poster);
                                 $data_poster = mysqli_fetch_assoc($result_poster);
