@@ -124,7 +124,7 @@
                                 $IDnotif_data = mysqli_fetch_assoc($IDnotif_result);
                                 $IDnotif = $IDnotif_data['IDnotification'] + 1;
 
-                                $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,'IDposter', `TypePoster`, `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notif', '$IDposter', '$TypePoster', '$IDpost', '0')";
+                                $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,`IDposter`, `TypePoster`, `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notif', '$IDposter', '$TypePoster', '$IDpost', '0')";
                                 $result_all_users = mysqli_query($db_handle, $sql2);
                             }
 
