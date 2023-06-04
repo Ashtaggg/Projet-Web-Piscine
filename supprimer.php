@@ -42,12 +42,12 @@
                 echo'<button class="supprimerNon" data-id="' . $IDuser .'" onclick=supprimer_non(this)>Non</button>';
                 echo'</div>';
                 echo'</div>';
-                if (isset($_POST["IDsuppr"]) && !(empty($_POST['IDsuppr']))) {
-                    $IDsuppr = isset($_POST["IDsuppr"]) ? $_POST["IDsuppr"] : "";
+            }
+            if (isset($_POST["IDsuppr"]) && !(empty($_POST['IDsuppr']))) {
+                $IDsuppr = isset($_POST["IDsuppr"]) ? $_POST["IDsuppr"] : "";
 
-                    $sql = "DELETE FROM utilisateur WHERE IDutilisateur = $IDsuppr;";
-                    $result = mysqli_query($db_handle, $sql);
-                }
+                $sql = "DELETE FROM utilisateur WHERE IDutilisateur = $IDsuppr;";
+                $result = mysqli_query($db_handle, $sql);
             }
         }
 

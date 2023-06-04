@@ -43,8 +43,9 @@ function validerSupprimer(element){
 }
 
 
-function supprimer_oui(){
+function supprimer_oui(element){
     var id = parseInt(element.dataset.id);
+    console.log("jhvbkcs");
     $.ajax({
         url: 'admin.php',
         type: 'POST',
