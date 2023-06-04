@@ -81,8 +81,8 @@
             <div class="line-1"></div>
             </br>
             <div class="inputbox_mess">
-                <ion-icon name="search-outline"></ion-icon>
-                <input type="text" id="rech-message" placeholder="Rechercher des Contacts" onclick=rech_mess(this)>
+                <ion-icon name="search-outline" onclick=rech_mess(this)></ion-icon>
+                <input type="text" id="rech-message" placeholder="Rechercher des Contacts">
             </div>
             <div class="scroll" id="scroll-messagerie">
                 <?php
