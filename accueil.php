@@ -79,8 +79,11 @@
             <button id="Poster" onclick="clic()">Ajouter Une Publication<ion-icon name="add-circle-outline"></ion-icon></button>
             <div id="menuPoster" style="display: none;" style="list-style: none;">
                 <form method="post">
-                    <input type="text" name="Legende"></br>
-                    <input type="file" name="Data"></br>
+                    <label for="Legende">Description : </label>
+                    <input type="text" name="Legende" required></br>
+                    <label for="Localisation">Localisation : </label>
+                    <input type="text" name="Localisation" required></br>
+                    <input type="file" name="Data" required></br>
                     <button id="PosterFinal" type="submit" name="PosterFinal" value="ON">Poster<ion-icon name="add-circle-outline"></ion-icon></button>
                 </form>
                 <?php
@@ -104,24 +107,34 @@
                             $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
                             $Data = "images/" . $Data;
 
+                            $Localisation = isset($_POST["Localisation"]) ? $_POST["Localisation"] : "";
+
                             $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
 
-                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0')";
+                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`, `Localisation`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0', '$Localisation')";
                             
                             $result = mysqli_query($db_handle, $sql);
+                            if ($result) {
+                                header('Location: accueil.php');
+                                die();
+                            }
+
+                            
                             $All_usres = "SELECT * FROM utilisateur";
                             $All_usres_result = mysqli_query($db_handle, $All_usres);
                             while($data_all_users = mysqli_fetch_assoc($All_usres_result))
                             {
                                 $IDuser_notif = $data_all_users['IDutilisateur'];
                                 $IDposter = $Envoyeur;
-                                $sql2 = "INSERT INTO `notification`(`IDutilisateur`,'IDposter',  `IDpost`, `Vu`) VALUES ('$IDuser_notifs', '$IDpost', '0')";
-                                $result_all_users = mysqli_query($db_handle, $sql2);
-                            }
+                                $TypePoster = $data['Type'];
 
-                            if ($result) {
-                                header('Location: accueil.php');
-                                die();
+                                $IDnotif_sql = "SELECT * FROM notifications ORDER BY IDnotification DESC LIMIT 1;"; 
+                                $IDnotif_result = mysqli_query($db_handle, $ID);
+                                $IDnotif_data = mysqli_fetch_assoc($ID_result);
+                                $IDnotif = $data["IDnotification"] + 1;
+
+                                $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,'IDposter',`TypePoster` `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notifs', '$IDposter', '$IDpost', '0')";
+                                $result_all_users = mysqli_query($db_handle, $sql2);
                             }
                         }
                         else{
@@ -145,7 +158,6 @@
         <div id="suggestions">
             <h2>Suggestions</h2>
             <div class="line-1"></div>
-            <div class="scrollSugg">
             <?php
                 if ($db_found) {
                     $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
@@ -153,25 +165,25 @@
                     $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                     $IDuser2 = $IDuser_data["IDutilisateur"];
 
-                    $sql="SELECT * FROM utilisateur WHERE  utilisateur.IDutilisateur NOT IN (SELECT Ami2 FROM relation join utilisateur WHERE Ami1 LIKE '%$IDuser2%' and statut ='2') AND utilisateur.IDutilisateur NOT LIKE '%$IDuser2%'";
+                    $sql="SELECT * FROM relation WHERE Ami1 LIKE '%$IDuser2%'";
                     $sql_result = mysqli_query($db_handle, $sql);
                     while($sql_data = mysqli_fetch_assoc($sql_result))
                     {
-                        $Amis2 = $sql_data['IDutilisateur'];
-                        echo "<div style='text-align: center;'>" .$sql_data['Nom']. "<br></div>";
-                        echo "<div style='text-align: center;'>" .$sql_data['Prenom'] . "<br><br></div>";
-                        //echo "<div class='demander'><form method='post'><input type='submit' value='valider' name='demander'>"."</form></div>";
-                        $image = $sql_data['PhotoProfil'];
-                        echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>"; 
-                        echo "<div class='line-1'></div>";
-                        //if(isset($_POST['demander']) AND $_POST['demander']=='valider'){
-                            //$sql = "INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES('', '$Amis2', '$IDuser2', '1') ";
-                            //$result = mysqli_query($db_handle, $sql);
-                        //} 
+                        $Amis2 = $sql_data['Ami2'];
+
+                        $sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur NOT LIKE '%$Amis2%' and IDutilisateur NOT LIKE '%$IDuser2%'";
+                        $sql2_result = mysqli_query($db_handle, $sql2);
+                        while($sql2_data = mysqli_fetch_assoc($sql2_result)){
+                            //echo $sql2_data['IDutilisateur'];
+                            echo $sql2_data['Nom']. "<br>";
+                            echo $sql2_data['Prenom'] . "<br><br>";
+                            $image = $sql2_data['PhotoProfil'];
+                            echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>";
+                            echo "<div class='line-1'></div>";
+                        }
                     } 
                 }
             ?>
-            </div>
         </div>
     </div>
 
@@ -187,8 +199,8 @@
         <div id="carrousel_all">
             <ion-icon name="caret-forward-outline" id="prev"></ion-icon>
             <div id="carrousel">
-                <img src="images/bob.jpg" width="300"/> <!-- 1ère image du carrousel -->
-                <img src="images/cars.jpg" width="300"/> <!-- 2ème image du carrousel -->
+                <img src="images/bob.jpg" width="300"/>
+                <img src="images/cars.jpg" width="300"/>
             </div>
             <ion-icon name="caret-forward-outline" id="next"></ion-icon>
         </div>
@@ -242,10 +254,11 @@
                                 $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                 echo"<p class='Date'>" . $DateDiff . " sec</p>";
                             }
+                            echo"<p class='Localisation'><ion-icon name='location'></ion-icon>" . $post_data["Localisation"] . "</p>";
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
                             $extension = pathinfo($post_data["Data"], PATHINFO_EXTENSION);
-                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'gif') {
+                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'jfif' || $extension === 'gif') {
                                 echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
                             }
                             else if ($extension === 'mp4') {

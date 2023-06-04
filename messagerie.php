@@ -326,7 +326,7 @@
                                             echo"<p class='LocalisationMess'><ion-icon name='location'></ion-icon>" . $data["Localisation"] . "</p>";
                                             echo"<p class='LegendeMess'>" . $data["Legende"] . "</p>";
                                             $extension = pathinfo($data["Data"], PATHINFO_EXTENSION);
-                                            if ($extension === 'jpg' || $extension === 'jpg' || $extension === 'gif') {
+                                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'jfif' || $extension === 'gif') {
                                                 echo"<p class='DataMess'><img height=170 src='" . $data["Data"] . "' /></p>";
                                             }
                                             else if ($extension === 'mp4') {

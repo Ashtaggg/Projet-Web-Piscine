@@ -538,7 +538,7 @@
                             echo"<p class='Legende'>" . $Envoyeur_data["Legende"] . "</p>";
                             
                             $extension = pathinfo($Envoyeur_data["Data"], PATHINFO_EXTENSION);
-                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'gif') {
+                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'jfif' || $extension === 'gif') {
                                 echo"<p class='Data'><img height=250 src='" . $Envoyeur_data["Data"] . "' /></p>";
                             }
                             else if ($extension === 'mp4') {
