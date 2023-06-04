@@ -271,7 +271,7 @@
                 $IDutilisateur= $data['IDutilisateur']; 
 
                 //on joint les tables utilisateur et formation pour qu'à chaque formation soit attribué l'utilisateur connecté
-                $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = formation.IDutilisateur"; 
+                $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE utilisateur.IDutilisateur = $IDutilisateur AND formation.IDutilisateur = $IDutilisateur"; 
                 $result2 = mysqli_query($db_handle, $sql2);
                 while ($data2 = mysqli_fetch_assoc($result2)) {
                     //on affiche les formations de l'utilisateur connecté
@@ -367,9 +367,9 @@
                     $Descriptif = isset($_POST["descriptif"]) ? $_POST["descriptif"] : "";
 
 
-                    $sql = "INSERT INTO `formation`(`IDformation`, `IDutilisateur`, `NomEcole`, `Diplome`, `DateDebut`, `DateFin`, `Lieu`, `Domaine`, `Description`) VALUES ('$IDformation', '$IDuser2', '$Ecole', '$Diplome', '$DateDeb', '$DateFin', '$Lieu', '$Domaine', '$Descriptif')";
-                    $result = mysqli_query($db_handle, $sql);
-
+                    $sql6 = "INSERT INTO `formation`(`IDformation`, `IDutilisateur`, `NomEcole`, `Diplome`, `DateDebut`, `DateFin`, `Lieu`, `Domaine`, `Description`) VALUES ('$IDformation', '$IDuser2', '$Ecole', '$Diplome', '$DateDeb', '$DateFin', '$Lieu', '$Domaine', '$Descriptif')";
+                    $result6 = mysqli_query($db_handle, $sql6);
+                    
                 }
                         
             }

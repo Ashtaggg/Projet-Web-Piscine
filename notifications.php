@@ -126,11 +126,14 @@
                 $result_demande = mysqli_query($db_handle, $Demande);
                 while($data_demande = mysqli_fetch_assoc($result_demande)){
                     $Ami = $data_demande['Ami2'];
-                    echo "Nom: " . $data_demande['Nom'] . "<br>";
-                    echo "Prénom: " . $data_demande['Prenom'] . "<br><br>";
-                    echo "<div class='line-1'>" . "<br></div>";
+                    //echo "Nom: " . $data_demande['Nom'] . "<br>";
+                    //echo "Prénom: " . $data_demande['Prenom'] . "<br><br>";
                     $image = $data_demande['PhotoProfil'];
-                    echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                    echo "<div class='notif-post-poster'><div class='photo_notif'><img src='$image' height='40' width='60'>" . "</div>";
+                    echo "<p id='name'>" . $data_demande['Nom']." ". $data_demande['Prenom'] . "</p></div>";
+                    echo "<div class='line-1'>" . "<br></div>";
+                    
+
                     if(isset($_POST['demande']) AND $_POST['demande']=='accepter'){
                         $sql = "UPDATE relation SET statut = '2' where Ami1 = {$IDuser} and Ami2 = {$Ami}";
                         $result = mysqli_query($db_handle, $sql);
@@ -178,7 +181,7 @@
                                 $data_poster = mysqli_fetch_assoc($result_poster);
                                 $image = $data_poster['PhotoProfil'];
                                 echo "<div class='notif-post-poster'><div class='photo_notif'><img src='$image' height='40' width='60'>" . "</div>";
-                                echo "<p id='name'>" . $data_poster['Nom'], $data_poster['Prenom'] . "</p></div>";
+                                echo "<p id='name'>" . $data_poster['Nom']." ". $data_poster['Prenom'] . "</p></div>";
                                 $sql_post = "SELECT * FROM post WHERE IDpost = {$notifs_data['IDpost']}";
                                 $result_post = mysqli_query($db_handle, $sql_post);
                                 $data_post = mysqli_fetch_assoc($result_post);

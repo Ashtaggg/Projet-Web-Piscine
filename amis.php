@@ -109,7 +109,7 @@
                 $IDuser_result = mysqli_query($db_handle, $IDuser);
                 $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                 $IDuser2 = $IDuser_data["IDutilisateur"];
-                echo $Ami2;
+                
                 $sql = "SELECT * FROM relation join utilisateur WHERE relation.Ami1 LIKE '%$IDuser2%' and Ami2 LIKE '%$Ami2%' and IDutilisateur LIKE '%$Ami2%'"; 
                 $result_sql = mysqli_query($db_handle, $sql);
                 $data_sql = mysqli_fetch_assoc($result_sql);
