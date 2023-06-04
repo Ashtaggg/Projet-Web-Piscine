@@ -218,8 +218,6 @@
                             if($notifs_data['Vu']==0)
                             {
                                 echo "Nom: ";
-                                $sql_supp = "DELETE FROM notification where IDnotification = {$notifs_data['IDnotification']}";
-                                $result_supp = mysqli_query($db_handle, $sql_supp);
                                 $poster = "SELECT * FROM utilisateur where IDutilisateur like '%$IDposter%'";
                                 $result_poster = mysqli_query($db_handle, $poster);
                                 $data_poster = mysqli_fetch_assoc($result_poster);
