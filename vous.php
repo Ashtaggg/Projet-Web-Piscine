@@ -549,7 +549,8 @@
                             }
 
                             echo"<div class='post2' ><button class='Like' name='Like' id='" . $Envoyeur_data['IDpost'] . "' data-like='" . $Envoyeur_data['Aime'] ."' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $Envoyeur_data['IDpost'] . "'>" . $Envoyeur_data["Aime"] . "</p>";
-                            echo"<button class='Com' name='Com' id='" . $Envoyeur_data['IDpost'] . "' data-com='" . $Envoyeur_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $Envoyeur_data['IDpost'] . "'>" . $Envoyeur_data["Commentaires"] . "</p></div></div>";
+                            echo"<button class='Com' name='Com' id='" . $Envoyeur_data['IDpost'] . "' data-com='" . $Envoyeur_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $Envoyeur_data['IDpost'] . "'>" . $Envoyeur_data["Commentaires"] . "</p>";
+                            echo"<button class='Partager' name='Partager' id='" . $Envoyeur_data['IDpost'] . "' onclick=partage(this) style='color:white'><ion-icon name='share-social'></ion-icon></button></div></div>";
                         }
                     }
                 }
@@ -560,6 +561,15 @@
                 <h2>Ajouter un commentaire</h2>
                 <button class="quitterCom" onclick=com_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
                 
+                <div class="php">
+                    
+                </div>
+            </div>
+        </div>
+        <div id="overlay4" class="overlay4">
+            <div class="partager-container">
+                <h2>Partager la publication</h2>
+                <button class="quitterPartage" onclick=partage_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
                 <div class="php">
                     
                 </div>
