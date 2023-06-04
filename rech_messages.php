@@ -36,12 +36,22 @@
             // Recherche
             if ($Contenu != "") {
                 $Search_user .= " AND Prenom LIKE '%$Contenu%';";
+                $Search_user_result = mysqli_query($db_handle, $Search_user);
+                $data = mysqli_fetch_assoc($Search_user_result);
+                if($data==NULL){
+                    $Search_user = "SELECT * FROM utilisateur WHERE 1 = 1 AND Nom LIKE '%$Contenu%';";
+                    $Search_user_result = mysqli_query($db_handle, $Search_user);
+                    $data = mysqli_fetch_assoc($Search_user_result);
+                }
             }
-            $Search_user_result = mysqli_query($db_handle, $Search_user);
-            $data = mysqli_fetch_assoc($Search_user_result);
-
-            echo"<div class='message_box' id='". $data['IDutilisateur'] . "' onclick=messa(this)><p class='message_PhotoProfil'><img height=30 src='" . $data["PhotoProfil"] . "' /></p>";
-            echo"<p class='Nom_box'>" . $data["Prenom"] . " " . $data["Nom"] . "</p>";
+            if($data != NULL){
+                echo"<div class='message_box' id='". $data['IDutilisateur'] . "' onclick=messa(this)><p class='message_PhotoProfil'><img height=30 src='" . $data["PhotoProfil"] . "' /></p>";
+                echo"<p class='Nom_box'>" . $data["Prenom"] . " " . $data["Nom"] . "</p></div>";
+            }
+            else{
+                echo"<div class='message_box'><p class='Nom_box'>Aucun utilisateur trouvé</p></div>";
+            }
+            
         }
     ?>
 </body>
