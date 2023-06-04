@@ -157,27 +157,17 @@
                     $sql_result = mysqli_query($db_handle, $sql);
                     while($sql_data = mysqli_fetch_assoc($sql_result))
                     {
-                        //echo "test". "<br>";
-                        //$Amis2 = $sql_data['IDutilisateur'];
-                        //echo $Amis2;
-                        //soucis car $amis2 change a chaque fois -> essayer avec une jointure
-                        //$sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur NOT LIKE '%$Amis2%' and IDutilisateur NOT LIKE '%$IDuser2%'";
-                        //$sql2_result = mysqli_query($db_handle, $sql2);
-                        //$sql2_data = mysqli_fetch_assoc($sql2_result);
-                            //$NvAmi = $sql2_data['IDutilisateur'];
-                            //echo $NvAmi;
-                            //echo $sql2_data['IDutilisateur'];
-                            echo "<div style='text-align: center;'>" .$sql_data['Nom']. "<br></div>";
-                            echo "<div style='text-align: center;'>" .$sql_data['Prenom'] . "<br><br></div>";
-                            //echo "<div class='demander'><form method='post'><input type='submit' value='valider' name='demander'>"."</form></div>";
-                            $image = $sql_data['PhotoProfil'];
-                            echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>"; 
-                            echo "<div class='line-1'></div>";
-                            //if(isset($_POST['demander']) AND $_POST['demander']=='valider'){
-                            //    $sql = "INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES('', '$IDuser2', '$Amis2', '1') ";
-                            //    $result = mysqli_query($db_handle, $sql);
-                            //} 
-                        //}
+                        $Amis2 = $sql_data['IDutilisateur'];
+                        echo "<div style='text-align: center;'>" .$sql_data['Nom']. "<br></div>";
+                        echo "<div style='text-align: center;'>" .$sql_data['Prenom'] . "<br><br></div>";
+                        //echo "<div class='demander'><form method='post'><input type='submit' value='valider' name='demander'>"."</form></div>";
+                        $image = $sql_data['PhotoProfil'];
+                        echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>"; 
+                        echo "<div class='line-1'></div>";
+                        //if(isset($_POST['demander']) AND $_POST['demander']=='valider'){
+                            //$sql = "INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES('', '$Amis2', '$IDuser2', '1') ";
+                            //$result = mysqli_query($db_handle, $sql);
+                        //} 
                     } 
                 }
             ?>

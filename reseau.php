@@ -102,10 +102,15 @@
                             if(isset($_POST['demande']) AND $_POST['demande']=='accepter'){
                                 $sql = "UPDATE relation SET statut = '2' where Ami1 = {$IDuser} and Ami2 = {$Ami}";
                                 $result = mysqli_query($db_handle, $sql);
+                                $data_sql = mysqli_fetch_assoc($result);
+                                $sql2 = "INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES('', '$Ami', '$IDuser', '2') ";
+                                $result2 = mysqli_query($db_handle, $sql2);
+                                $data_sql2 = mysqli_fetch_assoc($result2);
                             } 
                             else if(isset($_POST['demande']) AND $_POST['demande']=='refuser'){
-                                $sql2 = "UPDATE relation SET statut = '0' where Ami1 = {$IDuser} and Ami2 = {$Ami}";
-                                $result2 = mysqli_query($db_handle, $sql2); 
+                                $sql3 = "UPDATE relation SET statut = '0' where Ami1 = {$IDuser} and Ami2 = {$Ami}";
+                                $result3 = mysqli_query($db_handle, $sql3);
+                                $data_sql3 = mysqli_fetch_assoc($result3); 
                             }
                         }
                     }//end if
