@@ -66,7 +66,7 @@
     <div id="Gray_bar"></div>
 
 
-    <div id="Info_Right">
+    <div id="Info_Right2">
         <h2>Mes demandes d'amis</h2>
         <button id="accepter" value="acceder" onclick="openAcc()">accéder</button>
 
