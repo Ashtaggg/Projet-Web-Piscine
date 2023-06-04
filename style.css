@@ -994,7 +994,33 @@ body.affichageCV {
 }
 
 
+/* --------------------------------------------------------------------------------*/
+/* -------------------------------------Supprimer------------------------------------*/
+/* --------------------------------------------------------------------------------*/
+.photoSupprimer{
+    margin-top:-60px;
+    margin-left: -70px;
+    float:left;  
+}
 
+.supprimer-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 150px;
+    text-align: center;
+}
+
+.supprimerOui{
+    margin-right:40px;
+}
 
 
 

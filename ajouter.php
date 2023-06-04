@@ -33,7 +33,7 @@
     <h2>Créer un compte ECE In</h2>
     <div class="line-1"></div></br>
     <script>
-        function test(element) {
+        function validerAjouter(element) {
             var Type = document.querySelector('input[name="Type"]:checked').value;
             var Admin = document.querySelector('input[name="Admin"]:checked').value;
             var Nom = document.getElementsByName('Nom')[0].value;
@@ -101,7 +101,7 @@
         <p>Mot de Passe : <input type="text" name="MotDePasse" required></br></p>   
         <p>Photo Profil : <input type="file" name="PhotoProfil" id="PhotoProfil" required></br></p>
         <p>Année d'étude : <input type="number" name="AnneeEtude" required></br></p>
-        <input  onclick=test(this) type="button" value="CreerCompte" name=CreerCompte>
+        <input  onclick=validerAjouter(this) type="button" value="CreerCompte" name=CreerCompte>
     </form>
     <?php
         if ($db_found) {
