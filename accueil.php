@@ -237,8 +237,8 @@
         <div id="carrousel_all">
             <ion-icon name="caret-forward-outline" id="prev"></ion-icon>
             <div id="carrousel">
-                <img src="images/bob.jpg" width="300"/>
-                <img src="images/cars.jpg" width="300"/>
+                <img src="images/mathis.png" width="130"/>
+                <img src="images/event.png" width="130"/>
             </div>
             <ion-icon name="caret-forward-outline" id="next"></ion-icon>
         </div>
