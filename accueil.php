@@ -244,7 +244,7 @@
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
                             $extension = pathinfo($post_data["Data"], PATHINFO_EXTENSION);
-                            if ($extension === 'jpg' || $extension === 'jpg' || $extension === 'gif') {
+                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'gif') {
                                 echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
                             }
                             else if ($extension === 'mp4') {
