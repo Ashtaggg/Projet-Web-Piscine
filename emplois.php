@@ -32,7 +32,7 @@
     <div id="header">
         <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
     </div>
-    <nav class="navigation">
+    <nav class="navigation"> <!-- bare de navigation -->
         <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE_IN.png" alt="logo_ECE_In" width="135" height="65"></a>
         <input type="checkbox" id="toggler">
         <label for="toggler"><i class="ri-menu-line"></i></label>
@@ -66,7 +66,7 @@
     <div id="Info_Right">
         <h3>Jobs auxquels vous avez postulé :</h3>
         <div class='ajoutEmplois'>
-            <form method="post">
+            <form method="post">    <!-- formulaire pour postuler à un emplois -->
                 <label for="choix">Choisir un job </label></br>
                 <input type="text" id="job" name="job" placeholder="1" required><br><br>
                 <input type="submit" value="Envoyer" name="PosterEmplois">
@@ -74,6 +74,8 @@
             <?php
                 if($db_found){
                     if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                        //on récupère le numero entré dans le formulaire et on lui associe la valeur IDemplois
+                        //dans la table emplois de la bdd pour avoir toutes les autres infos sur l'emplois (type, nom, salaire, etc)
                         $IDemplois= isset($_POST["job"]) ? $_POST["job"] : "";
                         $Emplois= "SELECT * FROM emplois WHERE IDemplois = $IDemplois"; 
                         $Emplois_result = mysqli_query($db_handle, $Emplois);
@@ -87,6 +89,7 @@
                 <?php
                     if ($db_found) {
                         if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
+                            //si c'est un stage
                             if($Emplois_data['Type'] == 'Stage')
                             {
                                 $IDemplois = $Emplois_data['IDemplois'];
@@ -97,16 +100,16 @@
 
 
 
-                                // Vérifier si l'utilisateur a déjà postulé pour cet emploi
+                                // on vérifie si l'utilisateur a déjà postulé
                                 $query = "SELECT * FROM postulant WHERE IDemplois = '$IDemplois' AND IDutilisateur = '$Envoyeur'";
                                 $result = mysqli_query($db_handle, $query);
 
                                 if (mysqli_num_rows($result) == 0) {
-                                // L'utilisateur n'a pas encore postulé, insérer une nouvelle ligne dans la table "Postulants"
+                                // l'utilisateur n'a pas encore postulé, on peut insérer une nouvelle ligne dans la table "Postulants"
                                 $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
                                 $result = mysqli_query($db_handle, $sql);
                                 } else {
-                                // L'utilisateur a déjà postulé pour cet emploi, afficher un message d'erreur ou prendre une autre action
+                                // l'utilisateur a déjà postulé, on afficher un message d'erreur
                                     echo "<script>alert('Vous avez déjà postulé pour cet emploi.');</script>";
                                 }
                             }
@@ -116,15 +119,18 @@
                         $data2 = mysqli_fetch_assoc($IDuser_result);
                         $Envoyeur = $data2['IDutilisateur'];
 
+                        //on joint les tables utilisateur et postulant pour que l'IDutilisateur soit le même dans les 2 tables (celui de la personne connectée)
                         $sql1 = "SELECT * FROM utilisateur JOIN postulant WHERE utilisateur.IDutilisateur LIKE '%$Envoyeur%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
                         $IDuser_result1 = mysqli_query($db_handle, $sql1);
                         while ($data3 = mysqli_fetch_assoc($IDuser_result1)){
                             $test = $data3['IDemplois'];
-                        
+                            
+                            //on joint les tables emplois et postulant pour que l'IDemplois soit le même pour que l'emplois séléctionné soit attribué au bon utilisateur
                             $sql2 = "SELECT * FROM emplois JOIN postulant WHERE emplois.IDemplois LIKE '%$test%' AND postulant.IDutilisateur LIKE '%$Envoyeur%'";
                             $IDuser_test = mysqli_query($db_handle, $sql2);
                             $data_test = mysqli_fetch_assoc($IDuser_test);
-
+                            
+                            //si le type d'emplois est un stage alors on affiche le nom de l'entreprise et le poste qu'elle propose
                             if ($data_test['Type'] == 'Stage'){
                                 echo $data_test['NomEntreprise'] . "<br>";
                                 echo $data_test['Poste']. "<br><br>";
@@ -138,6 +144,7 @@
             <div id="CDD">
                 <h4> CDD </h4>
                 <?php
+                    //ce code fonctionne de la même manière que pour les stages
                     if ($db_found) {
                         if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
                             if($Emplois_data['Type'] == 'CDD')
@@ -149,17 +156,13 @@
                                 $Envoyeur = $data2['IDutilisateur'];
 
 
-
-                                // Vérifier si l'utilisateur a déjà postulé pour cet emploi
                                 $query = "SELECT * FROM postulant WHERE IDemplois = '$IDemplois' AND IDutilisateur = '$Envoyeur'";
                                 $result = mysqli_query($db_handle, $query);
 
                                 if (mysqli_num_rows($result) == 0) {
-                                // L'utilisateur n'a pas encore postulé, insérer une nouvelle ligne dans la table "Postulants"
                                 $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
                                 $result = mysqli_query($db_handle, $sql);
                                 } else {
-                                // L'utilisateur a déjà postulé pour cet emploi, afficher un message d'erreur ou prendre une autre action
                                     echo "<script>alert('Vous avez déjà postulé pour cet emploi.');</script>";
                                 }
                             }
@@ -191,6 +194,7 @@
             <div id="CDI">
                 <h4> CDI </h4>
                 <?php
+                //ce code fonctionne de la même manière que pour les stages et les CDD
                     if ($db_found) {
                         if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
                             if($Emplois_data['Type'] == 'CDI')
@@ -201,18 +205,13 @@
                                 $data2 = mysqli_fetch_assoc($IDuser_result);
                                 $Envoyeur = $data2['IDutilisateur'];
 
-
-
-                                // Vérifier si l'utilisateur a déjà postulé pour cet emploi
                                 $query = "SELECT * FROM postulant WHERE IDemplois = '$IDemplois' AND IDutilisateur = '$Envoyeur'";
                                 $result = mysqli_query($db_handle, $query);
 
                                 if (mysqli_num_rows($result) == 0) {
-                                // L'utilisateur n'a pas encore postulé, insérer une nouvelle ligne dans la table "Postulants"
                                 $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
                                 $result = mysqli_query($db_handle, $sql);
                                 } else {
-                                // L'utilisateur a déjà postulé pour cet emploi, afficher un message d'erreur ou prendre une autre action
                                     echo "<script>alert('Vous avez déjà postulé pour cet emploi.');</script>";
                                 }
                             }
@@ -245,6 +244,7 @@
             <div id="apprentissage">
                 <h4> Apprentissages </h4>
                 <?php
+                //ce code fonctionne de la même manière que les stages, cdd et cdi
                     if ($db_found) {
                         if (isset($_POST["PosterEmplois"]) && !(empty($_POST['PosterEmplois']))) {
                             if($Emplois_data['Type'] == 'Apprentissage')
@@ -255,18 +255,13 @@
                                 $data2 = mysqli_fetch_assoc($IDuser_result);
                                 $Envoyeur = $data2['IDutilisateur'];
 
-
-
-                                // Vérifier si l'utilisateur a déjà postulé pour cet emploi
                                 $query = "SELECT * FROM postulant WHERE IDemplois = '$IDemplois' AND IDutilisateur = '$Envoyeur'";
                                 $result = mysqli_query($db_handle, $query);
 
                                 if (mysqli_num_rows($result) == 0) {
-                                // L'utilisateur n'a pas encore postulé, insérer une nouvelle ligne dans la table "Postulants"
                                 $sql = "INSERT INTO `postulant` (`IDpostulant`, `IDemplois`, `IDutilisateur`) VALUES ('', '$IDemplois', '$Envoyeur')";
                                 $result = mysqli_query($db_handle, $sql);
                                 } else {
-                                // L'utilisateur a déjà postulé pour cet emploi, afficher un message d'erreur ou prendre une autre action
                                     echo "<script>alert('Vous avez déjà postulé pour cet emploi.');</script>";
                                 }
                             }
@@ -305,9 +300,9 @@
         
         <div class="scroll">
             <?php
-            //si le BDD existe, faire le traitement
+            //si le BDD existe
             if ($db_found) {
-                
+                //on affiche certaines valeurs de la table emplois pour pouvoir voir les emplois auxquels l'utilisateur peut postuler
                 $sql2 = "SELECT * FROM emplois";
                 $result2 = mysqli_query($db_handle, $sql2);
                 while ($data2 = mysqli_fetch_assoc($result2)) {

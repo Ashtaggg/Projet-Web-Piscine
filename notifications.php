@@ -161,23 +161,66 @@
                 $data_utilisateur = mysqli_fetch_assoc($result_utilisateur);
                 $IDutilisateur = $data_utilisateur['IDutilisateur'];
 
-                $notifs = "SELECT * FROM notification WHERE IDutilisateur='%$IDutilisateur%'"; 
+                $notifs = "SELECT * FROM notification WHERE IDutilisateur='$IDutilisateur'"; 
                 $notifs_result = mysqli_query($db_handle, $notifs);
-                echo "aaaaa";
-                echo$IDutilisateur;
                 while($notifs_data = mysqli_fetch_assoc($notifs_result)){
                     $IDposter = $notifs_data['IDposter'];
-                    $notufff = $notifs_data['IDnotification'];
-                    echo$notufff;
                     if($notifs_data['IDutilisateur']==$IDutilisateur)
                     {
-                        echo$IDposter;
                         if($notifs_data['TypePoster']>=2 && $notifs_data['TypePoster']<=4)
                         {
                             if($notifs_data['Vu']==0)
                             {
-                                $poster = "SELECT * FROM utilisateur where Mail like '%$email%'";
-                                $poster_poster = mysqli_query($db_handle, $poster);
+                                $sql_upate_vu = "UPDATE notification SET Vu = '1' where IDutilisateur = {$IDutilisateur} and IDposter = {$IDposter}";
+                                $result_update_vu = mysqli_query($db_handle, $sql_upate_vu);
+                                $poster = "SELECT * FROM utilisateur where IDutilisateur like '%$IDposter%'";
+                                $result_poster = mysqli_query($db_handle, $poster);
+                                $data_poster = mysqli_fetch_assoc($result_poster);
+                                echo "Nom: " . $data_poster['Nom'] . "<br>";
+                                echo "Prénom: " . $data_poster['Prenom'] . "<br><br>";
+                                echo "<div class='line-1'>" . "<br></div>";
+                                $image = $data_poster['PhotoProfil'];
+                                echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+
+                            }
+                        }
+                    }
+                }
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+        </div>
+        </br>
+    </div>
+    <div id="Notifs_Posts_Ecole" class="section">
+        <h2>Posts de mon Ecole</h2>
+        <div class="line-1"></div>
+        <div class="scroll">
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $utilisateur = "SELECT * FROM utilisateur where Mail like '%$email%'";
+                $result_utilisateur = mysqli_query($db_handle, $utilisateur);
+                $data_utilisateur = mysqli_fetch_assoc($result_utilisateur);
+                $IDutilisateur = $data_utilisateur['IDutilisateur'];
+
+                $notifs = "SELECT * FROM notification WHERE IDutilisateur='$IDutilisateur'"; 
+                $notifs_result = mysqli_query($db_handle, $notifs);
+                while($notifs_data = mysqli_fetch_assoc($notifs_result)){
+                    $IDposter = $notifs_data['IDposter'];
+                    if($notifs_data['IDutilisateur']==$IDutilisateur)
+                    {
+                        if($notifs_data['TypePoster']==5)
+                        {
+                            if($notifs_data['Vu']==0)
+                            {
+                                echo "Nom: ";
+                                echo "Prénom: ";
+                                $poster = "SELECT * FROM utilisateur where IDutilisateur like '%$IDposter%'";
+                                $result_poster = mysqli_query($db_handle, $poster);
                                 $data_poster = mysqli_fetch_assoc($result_poster);
                                 echo "Nom: " . $data_poster['Nom'] . "<br>";
                                 echo "Prénom: " . $data_poster['Prenom'] . "<br><br>";
