@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="accueil.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>Mon Espace ECE In</title>
     <link rel="icon" href="images/logo_ECE_IN.png" type="image/gif">
+    
     <?php
         // Identifier le nom de base de données
         $database = "projet-web-piscine";
@@ -200,7 +201,7 @@
                     </fieldset>
 
                     <br><br><br><br><br><br><br>
-                    <input type="submit" value="Valider" name=PosterChangement>
+                    <input type="submit" value="Valider" name="PosterChangement">
                 </form>
                 <?php
                     if ($db_found) {
@@ -257,19 +258,23 @@
         <div style="text-align: center;">
             <h2>Formations</h2>
         </div>
+        
         <button class="plusFormation" onclick="openForm()"><ion-icon name="add-circle-outline"></ion-icon></button>
 
         <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
+                //on récupère les information de l'utilisateur connecté
                 $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 $data = mysqli_fetch_assoc($result);
                 $IDutilisateur= $data['IDutilisateur']; 
 
+                //on joint les tables utilisateur et formation pour qu'à chaque formation soit attribué l'utilisateur connecté
                 $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = formation.IDutilisateur"; 
                 $result2 = mysqli_query($db_handle, $sql2);
                 while ($data2 = mysqli_fetch_assoc($result2)) {
+                    //on affiche les formations de l'utilisateur connecté
                     echo "<div class='affichageFormation'>Ecole: " . $data2['NomEcole'] . "<br>";
                     echo "Diplome: " . $data2['Diplome'] . "<br>";
                     echo "Date de début: " . $data2['DateDebut'] . "<br>";
@@ -287,14 +292,17 @@
         ?>
 
         
-  
+            
         <div id="overlay" class="overlay">
             <div class="form-container">
+
+
+
                 <h2>Ajouter une formation</h2>
                 <a href="vous.php">
                     <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
                 </a><br>
-                <form method=post>
+                <form method="post">
                 <style>
                     .texte-reduit {
                         font-size: 10px;
@@ -541,7 +549,8 @@
                             }
 
                             echo"<div class='post2' ><button class='Like' name='Like' id='" . $Envoyeur_data['IDpost'] . "' data-like='" . $Envoyeur_data['Aime'] ."' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $Envoyeur_data['IDpost'] . "'>" . $Envoyeur_data["Aime"] . "</p>";
-                            echo"<button class='Com' name='Com' id='" . $Envoyeur_data['IDpost'] . "' data-com='" . $Envoyeur_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $Envoyeur_data['IDpost'] . "'>" . $Envoyeur_data["Commentaires"] . "</p></div></div>";
+                            echo"<button class='Com' name='Com' id='" . $Envoyeur_data['IDpost'] . "' data-com='" . $Envoyeur_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $Envoyeur_data['IDpost'] . "'>" . $Envoyeur_data["Commentaires"] . "</p>";
+                            echo"<button class='Partager' name='Partager' id='" . $Envoyeur_data['IDpost'] . "' onclick=partage(this) style='color:white'><ion-icon name='share-social'></ion-icon></button></div></div>";
                         }
                     }
                 }
@@ -552,6 +561,15 @@
                 <h2>Ajouter un commentaire</h2>
                 <button class="quitterCom" onclick=com_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
                 
+                <div class="php">
+                    
+                </div>
+            </div>
+        </div>
+        <div id="overlay4" class="overlay4">
+            <div class="partager-container">
+                <h2>Partager la publication</h2>
+                <button class="quitterPartage" onclick=partage_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
                 <div class="php">
                     
                 </div>

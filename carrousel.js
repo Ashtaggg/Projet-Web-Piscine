@@ -1,5 +1,5 @@
 
-//Celui des profs :
+//Celui fournis sur boostcamp :
 
 
 /*$(document).ready(function() {
@@ -79,13 +79,13 @@ $(document).ready(function(){
     indexImg = $img.length - 1;
     i = 0;
     $currentImg = $img.eq(i);
-    $img.css('display', 'none');
-    $currentImg.css('display', 'block');
+    $img.css('display', 'none');    //on "cache" l'image
+    $currentImg.css('display', 'block');    //on l'affiche
     $minia = $('#boutons img');
     $currentMinia = $minia.eq(i);
     
     
-    $('#next').click(function(){
+    $('#next').click(function(){ //si on detecte un clic on affiche une image en fonction de celle affichée actuellement
         i++;
         if (i <= indexImg){
             $img.css('display', 'none');
@@ -103,7 +103,7 @@ $(document).ready(function(){
     });
 
 
-    $('#prev').click(function(){
+    $('#prev').click(function(){ //meme que précédemment mais dans "l'autre" sens
         i--;
         if (i >= 0){
             $img.css('display', 'none');
@@ -141,7 +141,7 @@ $(document).ready(function(){
 
 
 
-    function slideImg(){
+    function slideImg(){    //fonction qui permet au carrousel de tourner sans appuyer sur les flèches
         setTimeout(function(){
         if (i < indexImg){
             i++;

@@ -299,6 +299,11 @@ body {
     margin-top:-5%;
 }
 
+.Partager{
+    margin-left:40%;
+    font-size:1.1em;
+}
+
 .post2 button{
     background: transparent;
     outline: none;
@@ -338,6 +343,43 @@ body {
 .quitterCom{
     margin-top:-70px;
     margin-left: 470px;
+    float:left;
+    font-size: 20px;
+    background: transparent;
+    outline: none;
+    border: 0px;
+    z-index: 2;
+    font-size: 30px;
+}
+
+.overlay4 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 11;
+}
+
+.partager-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 400px;
+}
+
+.quitterPartage{
+    margin-top:-80px;
+    margin-left: 280px;
     float:left;
     font-size: 20px;
     background: transparent;
@@ -922,6 +964,7 @@ body.affichageCV {
     border: 2px solid gainsboro;
     border-radius: 10px;
     background-color: transparent;
+    z-index:11;
 }
 .chat_txt{
     place-items: center;
@@ -998,6 +1041,70 @@ body.affichageCV {
 }
 #lefticons{
     margin-left: 20px;
+}
+
+
+.PhotoProfilMess{
+    margin-top:-30px;
+    margin-left: 10px;
+    float:left;
+}
+.NomMess{
+    margin-top:8px;
+    margin-left:60px;
+    font-weight: 700;
+    font-size: 15px;
+}
+.DateMess{
+    margin-top:-10px;
+    margin-left:70px;
+    font-size: 11px;
+}
+.LocalisationMess{
+    margin-top:-24px;
+    margin-right:20px;
+    text-align: right;
+    font-size: 11px;
+}
+.LegendeMess{
+    margin-top:30px;
+    margin-left:15px;
+}
+.DataMess{
+    text-align: center;
+    margin-bottom:25px;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.LikeMess{
+    margin-left:10%;
+    font-size:0.8em;
+}
+
+.nbrLike{
+    margin-left:3%;
+    font-size:0.8em;
+}
+
+.ComMess{
+    margin-left:10%;
+    font-size:0.8em;
+}
+
+.nbrCom{
+    margin-left:3%;
+    font-size:0.8em;
+}
+/*
+.post2{
+    display:flex;
+    margin-top:-5%;
+}*/
+
+.PartagerMess{
+    margin-left:40%;
+    font-size:0.8em;
 }
 
 
