@@ -196,7 +196,6 @@
                     echo "<div class='line-1'>" . "<br></div>";
                     $Ami2 = $Amis_data['Ami2'];
                     $_SESSION['Ami2'] = $Ami2;
-                    //echo "Ami2 : ". $Ami2;
                            
                 }//end while
                 
@@ -221,20 +220,19 @@
                 $data_sql = mysqli_fetch_assoc($result_sql);
 
                 $IDutilisateur= $data_sql['IDutilisateur'];
-                //echo $IDutilisateur."<br>";
 
                 $Amis = "SELECT DISTINCT u2.* FROM utilisateur u1 JOIN relation r1 ON r1.Ami1 = u1.IDutilisateur JOIN relation r2 ON r2.Ami1 = r1.Ami2 JOIN utilisateur u2 ON u2.IDutilisateur = r2.Ami2 WHERE r1.statut = '2' AND r2.statut = '2' AND u1.IDutilisateur = '$IDutilisateur' AND u2.IDutilisateur NOT IN (SELECT r3.Ami2 FROM relation r3 WHERE r3.Ami1 = '$IDutilisateur') AND u2.IDutilisateur != '$IDutilisateur'";
                 $Amis_result = mysqli_query($db_handle, $Amis);
                 while($Amis_data = mysqli_fetch_assoc($Amis_result)){
                     echo "<div>". "<br></div>";
                     $image = $Amis_data['PhotoProfil'];
-                    echo "<a href='amis.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
+                    echo "<a href='Amiami.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
                     echo  "<div class='amis'>".$Amis_data['Nom'] . "</div>";
                     echo  "<div class='amis'>".$Amis_data['Prenom'] . "</div><br>";
                     echo "<div>". "<br></div>";                        
                     echo "<div class='line-1'>" . "<br></div>";
-                    //$Ami2 = $Amis_data['IDutilisateur'];
-                    //$_SESSION['Ami2'] = $Ami2;
+                    $Amiami = $Amis_data['IDutilisateur'];
+                    $_SESSION['Amiami'] = $Amiami;
                 }        
             }//end if
                 

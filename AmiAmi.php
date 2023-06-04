@@ -35,6 +35,7 @@
         session_start();
         $Ami2 = isset($_SESSION['Ami2']) ? $_SESSION['Ami2'] : "";
         $email = isset($_SESSION['email']) ? $_SESSION['email'] : "";
+        $Amiami = isset($_SESSION['Amiami']) ? $_SESSION['Amiami'] : "";
     ?>
 </head>
 <body>
@@ -73,10 +74,8 @@
                 $IDuser_result = mysqli_query($db_handle, $IDuser);
                 $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                 $IDuser2 = $IDuser_data["IDutilisateur"];
-
-                //echo "Ami2 : ". $Ami2;
                 
-                $sql2 ="SELECT * FROM relation join utilisateur WHERE Ami2 LIKE '%$Ami2%' and relation.Ami2 = utilisateur.IDutilisateur and relation.Ami1 like '%$IDuser2%'";
+                $sql2 ="SELECT * FROM utilisateur WHERE IDutilisateur LIKE '%$Amiami%'";
                 $sql2_result = mysqli_query($db_handle, $sql2);
                 while($data_sql2 = mysqli_fetch_assoc($sql2_result)){
                 //affichage du profil de l'ami
@@ -105,27 +104,19 @@
         <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
-                $IDuser_result = mysqli_query($db_handle, $IDuser);
-                $IDuser_data = mysqli_fetch_assoc($IDuser_result);
-                $IDuser2 = $IDuser_data["IDutilisateur"];
-                echo $Ami2;
-                $sql = "SELECT * FROM relation join utilisateur WHERE relation.Ami1 LIKE '%$IDuser2%' and Ami2 LIKE '%$Ami2%' and IDutilisateur LIKE '%$Ami2%'"; 
+
+                $sql = "SELECT * FROM formation join utilisateur WHERE utilisateur.IDutilisateur LIKE '%$Amiami%' and  formation.IDutilisateur LIKE '%$Amiami%'"; 
                 $result_sql = mysqli_query($db_handle, $sql);
-                $data_sql = mysqli_fetch_assoc($result_sql);
-                $IDutilisateur= $data_sql['IDutilisateur']; 
-                
-                $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE utilisateur.IDutilisateur LIKE '%$IDutilisateur%'  AND formation.IDutilisateur LIKE '%$IDutilisateur%'"; 
-                $result_sql2 = mysqli_query($db_handle, $sql2);
-                while($data_sql2 = mysqli_fetch_assoc($result_sql2)){
+                while($data_sql = mysqli_fetch_assoc($result_sql)){
+
                     //Affichage des formation de l'ami
-                    echo "<div class='affichageFormation'>Ecole: " . $data_sql2['NomEcole'] . "<br>";
-                    echo "Diplome: " . $data_sql2['Diplome'] . "<br>";
-                    echo "Date de début: " . $data_sql2['DateDebut'] . "<br>";
-                    echo "Date de fin: " . $data_sql2['DateFin'] . "<br>";
-                    echo "Lieu: " . $data_sql2['Lieu'] . "<br>";
-                    echo "Domaine: " . $data_sql2['Domaine'] . "<br>";
-                    echo "Description: " . $data_sql2['Description'] . "<br></div>";
+                    echo "<div class='affichageFormation'>Ecole: " . $data_sql['NomEcole'] . "<br>";
+                    echo "Diplome: " . $data_sql['Diplome'] . "<br>";
+                    echo "Date de début: " . $data_sql['DateDebut'] . "<br>";
+                    echo "Date de fin: " . $data_sql['DateFin'] . "<br>";
+                    echo "Lieu: " . $data_sql['Lieu'] . "<br>";
+                    echo "Domaine: " . $data_sql['Domaine'] . "<br>";
+                    echo "Description: " . $data_sql['Description'] . "<br></div>";
                     echo "<div> "."<br> </div>";
                 } 
             }//end if
@@ -145,31 +136,20 @@
         <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                $result = mysqli_query($db_handle, $sql);
-                $data = mysqli_fetch_assoc($result);
-                $IDutilisateur= $data['IDutilisateur']; 
-
-                $sql = "SELECT * FROM relation join utilisateur WHERE relation.Ami1 LIKE '%$IDuser2%' and Ami2 LIKE '%$Ami2%' and IDutilisateur LIKE '%$Ami2%'"; 
+                $sql = "SELECT * FROM projet join utilisateur WHERE utilisateur.IDutilisateur LIKE '%$Amiami%' and  projet.IDutilisateur LIKE '%$Amiami%'"; 
                 $result_sql = mysqli_query($db_handle, $sql);
-                $data_sql = mysqli_fetch_assoc($result_sql);
-                $IDutilisateur= $data_sql['IDutilisateur']; 
-
-            
-                $sql2 = "SELECT * FROM utilisateur JOIN projet WHERE utilisateur.IDutilisateur LIKE '%$IDutilisateur%'  AND projet.IDutilisateur LIKE '%$IDutilisateur%'"; 
-                $result_sql2 = mysqli_query($db_handle, $sql2);
-                while($data_sql2 = mysqli_fetch_assoc($result_sql2)){
+                while($data_sql = mysqli_fetch_assoc($result_sql)){
                     //Affichage des formation de l'ami
-                    echo "<div class='affichageFormation'>Ecole: " . $data_sql2['NomEcole'] . "<br>";
-                    //echo "Diplome: " . $data_sql2['Diplome'] . "<br>";
-                    echo "Date de début: " . $data_sql2['DateDebut'] . "<br>";
-                    echo "Date de fin: " . $data_sql2['DateFin'] . "<br>";
-                    echo "Lieu: " . $data_sql2['Lieu'] . "<br>";
-                    //echo "Domaine: " . $data_sql2['Domaine'] . "<br>";
-                    echo "Description: " . $data_sql2['Description'] . "<br></div>";
+                    echo "<div class='affichageFormation'>Ecole: " . $data_sql['NomEcole'] . "<br>";
+                    echo "Nom du projet: " . $data_sql['NomProjet'] . "<br>";
+                    echo "Date de début: " . $data_sql['DateDebut'] . "<br>";
+                    echo "Date de fin: " . $data_sql['DateFin'] . "<br>";
+                    echo "Lieu: " . $data_sql['Lieu'] . "<br>";
+                    echo "Description: " . $data_sql['Description'] . "<br></div>";
                     echo "<div> "."<br> </div>";
                 } 
             }//end if
+        
             //si le BDD n'existe pas
             else {
                 echo "Database not found";
