@@ -17,40 +17,38 @@
     $db_found = mysqli_select_db($db_handle, $database);
     session_start();
 
-    //je laisse ?
+    
     $email = isset($_SESSION['email']) ? $_SESSION['email'] : "";
 
+    // Récupérer l'IDutilisateur correspondant à l'email
+    $query = "SELECT IDutilisateur FROM utilisateur WHERE Mail = '$email'";
+    $result = mysqli_query($db_handle, $query);
+    $row = mysqli_fetch_assoc($result);
+    $IDutilisateur = $row['IDutilisateur'];
 
-    //vérifier si les données ont été soumises via le formulaire
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($email)){
-        $NomEcole = $_POST["NomEcole"];
-        $Diplome = $_POST["Diplome"];
-        $DateDebut = $_POST["DateDebut"];
-        $DateFin = $_POST["DateFin"];
-        $Lieu = $_POST["Lieu"];
-        $Domaine = $_POST["Domaine"];
-        $Description = $_POST["Description"];
+    // Récupérer les informations de toutes les formations de l'utilisateur depuis la base de données
+    $query = "SELECT * FROM formation WHERE IDutilisateur = '$IDutilisateur'";
+    $result = mysqli_query($db_handle, $query);
 
-        // Récupérer l'IDutilisateur correspondant à l'email
-        $query = "SELECT IDutilisateur FROM utilisateur WHERE Mail = '$email'";
-        $result = mysqli_query($db_handle, $query);
-        $row = mysqli_fetch_assoc($result);
-        $IDutilisateur = $row['IDutilisateur'];
+    //création d'un nouvel xml
+    $cv = new SimpleXMLElement('<CV></CV>');
+    
+        while ($row = mysqli_fetch_assoc($result)) {
+            $infoFormations = $cv->addChild('infoFormations');
+            $infoFormations->addChild('NomEcole', $row['NomEcole']);
+            $infoFormations->addChild('Diplome', $row['Diplome']);
+            $infoFormations->addChild('DateDebut', $row['DateDebut']);
+            $infoFormations->addChild('DateFin', $row['DateFin']);
+            $infoFormations->addChild('Lieu', $row['Lieu']);
+            $infoFormations->addChild('Domaine', $row['Domaine']);
+            $infoFormations->addChild('Description', $row['Description']);
+        }
+
 
         //création du chemin vers le fichier xml
         $fichierXML = 'C:\wamp64\www\projet_web\Projet_Web_Piscine\CV\CV' . $IDutilisateur . '.xml';
 
-        //création d'un nouvel xml
-        $cv = new SimpleXMLElement('<CV></CV>');
 
-        $infoFormations = $cv->addChild('infoFormations');
-        $infoFormations->addChild('NomEcole', $NomEcole);
-        $infoFormations->addChild('Diplome', $Diplome);
-        $infoFormations->addChild('DateDebut', $DateDebut);
-        $infoFormations->addChild('DateFin', $DateFin);
-        $infoFormations->addChild('Lieu', $Lieu);
-        $infoFormations->addChild('Domaine', $Domaine);
-        $infoFormations->addChild('Description', $Description);
 
         //on génere le xml
         $xmlString = $cv->asXML();
@@ -62,6 +60,6 @@
         echo 'CV bien enregistré';
         unset($_SESSION['IDutilisateur']);
 
-    }
+    
 
 ?>

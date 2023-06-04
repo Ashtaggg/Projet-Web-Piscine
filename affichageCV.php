@@ -30,12 +30,40 @@
 </head>
 
 <body>
-    <?php
+<?php
+    // Chemin vers le répertoire contenant les fichiers XML
+    $repertoire = 'C:\wamp64\www\projet_web\Projet_Web_Piscine\CV\CV';
 
+    // Obtenir la liste des fichiers XML dans le répertoire
+    $fichiers = glob($repertoire . '/*.xml');
 
+    // Trier les fichiers par date de création
+    usort($fichiers, function($a, $b) {
+        return filemtime($a) < filemtime($b);
+    });
 
+    // Sélectionner le fichier XML le plus récent
+    $fichierXML = $fichiers[0];
 
-    ?>
+    // Charger le contenu du fichier XML
+    $xml = simplexml_load_file($fichierXML);
+
+    // Afficher le titre
+    echo "<h1>Mes formations</h1>";
+
+    // Parcourir les informations des formations
+    foreach ($xml->infoFormations as $formation) {
+        echo "<p>Nom de l'école: " . $formation->NomEcole . "</p>";
+        echo "<p>Diplôme: " . $formation->Diplome . "</p>";
+        echo "<p>Date de début: " . $formation->DateDebut . "</p>";
+        echo "<p>Date de fin: " . $formation->DateFin . "</p>";
+        echo "<p>Lieu: " . $formation->Lieu . "</p>";
+        echo "<p>Domaine d'études: " . $formation->Domaine . "</p>";
+        echo "<p>Description: " . $formation->Description . "</p>";
+        echo "<br>";
+    }
+?>
+
 
 
 
