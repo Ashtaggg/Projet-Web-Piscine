@@ -258,6 +258,13 @@ body {
     margin-left:141px;
     font-size: 11px;
 }
+.Localisation{
+    margin-top:-24px;
+    margin-right:180px;
+    text-align: right;
+    font-size: 11px;
+}
+
 .Legende{
     margin-top:60px;
     margin-left:40px;
