@@ -269,7 +269,8 @@
                             }
 
                             echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' data-like='" . $post_data['Aime'] ."' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $post_data['IDpost'] . "'>" . $post_data["Aime"] . "</p>";
-                            echo"<button class='Com' name='Com' id='" . $post_data['IDpost'] . "' data-com='" . $post_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $post_data['IDpost'] . "'>" . $post_data["Commentaires"] . "</p></div></div>";
+                            echo"<button class='Com' name='Com' id='" . $post_data['IDpost'] . "' data-com='" . $post_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $post_data['IDpost'] . "'>" . $post_data["Commentaires"] . "</p>";
+                            echo"<button class='Partager' name='Partager' id='" . $post_data['IDpost'] . "' onclick=partage(this) style='color:white'><ion-icon name='share-social'></ion-icon></button></div></div>";
                         }
                     }
                 }
@@ -301,13 +302,35 @@
             
                     $result2 = mysqli_query($db_handle, $sql);
                 } 
+                if (isset($_POST["IDpostPartage"]) && !(empty($_POST['IDpostPartage']))) {
+                    $IDpostPartage = isset($_POST['IDpostPartage']) ? $_POST['IDpostPartage'] : "";
+
+                    echo"ghvjbkjnk";
+                    /*$like = "SELECT * FROM post WHERE IDpost LIKE '%$IDpostDislike%'";
+                    $like_result = mysqli_query($db_handle,$like);
+                    $like_data = mysqli_fetch_assoc($like_result);
+                    
+                    $Like = $like_data["Aime"] - 1;
+                    
+                    $sql = "UPDATE post SET Aime = $Like WHERE IDpost = {$IDpostDislike}";
+            
+                    $result2 = mysqli_query($db_handle, $sql);*/
+                } 
             ?>
         </table>
         <div id="overlay3" class="overlay3">
             <div class="com-container">
                 <h2>Ajouter un commentaire</h2>
                 <button class="quitterCom" onclick=com_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
-                
+                <div class="php">
+                    
+                </div>
+            </div>
+        </div>
+        <div id="overlay4" class="overlay4">
+            <div class="partager-container">
+                <h2>Partager la publication</h2>
+                <button class="quitterPartage" onclick=partage_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
                 <div class="php">
                     
                 </div>

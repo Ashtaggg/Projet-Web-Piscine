@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="messagerie.js"></script>
+    <script type="text/javascript" src="accueil.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <title>Messagerie ECE In</title>
     <link rel="icon" href="images/logo_ECE_IN.png" type="image/gif">
@@ -257,59 +258,197 @@
             </br>
             <div class="Conv">
                 <div class="scroll" id="scroll_msg">
-                <?php
-                    $Date = new DateTime("now");
-                    $Date->modify("-7 day");
-                    $Date->modify("+2 hours");
-                    $Date = $Date->format('Y-m-d H:i:s');
-                    $utilisateur = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
-                    $utilisateur_result = mysqli_query($db_handle,$utilisateur);
-                    $utilisateur_data = mysqli_fetch_assoc($utilisateur_result);
-                    $IDutilisateur = $utilisateur_data["IDutilisateur"];
-                    if (isset($_GET["IDenvoyeur"]) && !(empty($_GET['IDenvoyeur']))) {
-                        $IDenvoyeur = isset($_GET['IDenvoyeur']) ? $_GET['IDenvoyeur'] : "";
-                        if ($db_found) {
-                            $message = "SELECT * FROM `message` WHERE (Envoyeur = $IDenvoyeur OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDenvoyeur OR Recepteur = $IDutilisateur) ORDER BY Date ASC";
-                            $message_result = mysqli_query($db_handle,$message);
-                            while($message_data = mysqli_fetch_assoc($message_result))
-                            {
-                                $IDenvoyeur_mess = $message_data["Envoyeur"];
-                                $IDrecepteur_mess = $message_data["Recepteur"];
-                                $Contenu_message = $message_data["Contenu"];
-                                $Statut_mess = $message_data["Statut"];
-                                if($IDenvoyeur_mess==$IDutilisateur){
-                                    echo"<p class='message_me'>" . $Contenu_message . "</p><br>";
-                                    if($Statut_mess==0){
-                                        echo "<ion-icon class='icon_me' name='checkmark-outline'></ion-icon></br>";
-                                    }
-                                    else{
-                                        echo "<ion-icon class='icon_me' name='checkmark-done-outline'></ion-icon></br>";
-                                    }
+                    <?php
+                        $Date = new DateTime("now");
+                        $Date->modify("-7 day");
+                        $Date->modify("+2 hours");
+                        $Date = $Date->format('Y-m-d H:i:s');
+                        $utilisateur = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
+                        $utilisateur_result = mysqli_query($db_handle,$utilisateur);
+                        $utilisateur_data = mysqli_fetch_assoc($utilisateur_result);
+                        $IDutilisateur = $utilisateur_data["IDutilisateur"];
+                        if (isset($_GET["IDenvoyeur"]) && !(empty($_GET['IDenvoyeur']))) {
+                            $IDenvoyeur = isset($_GET['IDenvoyeur']) ? $_GET['IDenvoyeur'] : "";
+                            if ($db_found) {
+                                $message = "SELECT * FROM `message` WHERE (Envoyeur = $IDenvoyeur OR Envoyeur = $IDutilisateur) AND (Recepteur = $IDenvoyeur OR Recepteur = $IDutilisateur) ORDER BY Date ASC";
+                                $message_result = mysqli_query($db_handle,$message);
+                                while($message_data = mysqli_fetch_assoc($message_result))
+                                {
+                                    $IDenvoyeur_mess = $message_data["Envoyeur"];
+                                    $IDrecepteur_mess = $message_data["Recepteur"];
+                                    $Contenu_message = $message_data["Contenu"];
+                                    $Statut_mess = $message_data["Statut"];
+                                    if($IDenvoyeur_mess==$IDutilisateur){
+                                        if($message_data["Data"] === ""){
+                                            echo"<p class='message_me'>" . $Contenu_message . "</p><br>";
+                                        }
+                                        else{
+                                            $post = $message_data["Data"];
+                                            $sql = "SELECT * FROM post WHERE IDpost  LIKE '%$post%'"; 
+                                            $sql_result = mysqli_query($db_handle, $sql);
+                                            $data = mysqli_fetch_assoc($sql_result);
 
-                                    //echo "Test moi    env : " . $IDenvoyeur_mess . "    rec : " . $IDrecepteur_mess . "    statut : " . $Statut_mess . "<br>";
-                                }
-                                else{
-                                    echo"<p class='message_him'>" . $Contenu_message . "</p><br>";
-                                    if($Statut_mess==0){
-                                        $message_update = "UPDATE `message` SET `Statut`= 1 WHERE Envoyeur = $IDenvoyeur_mess AND Recepteur = $IDrecepteur_mess";
-                                        $message_update_result = mysqli_query($db_handle,$message_update);
-                                        echo "<ion-icon class='icon_him' name='checkmark-done-outline'></ion-icon></br>";
+                                            $envoyeur = $data['Envoyeur'];
+                                            $sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur  LIKE '%$envoyeur%'"; 
+                                            $sql2_result = mysqli_query($db_handle, $sql2);
+                                            $data2 = mysqli_fetch_assoc($sql2_result);
+
+                                            $Date1 = new DateTime("now");
+                                            $Date1->modify("+2 hours");
+                                            $Date1 = $Date1->format('Y-m-d H:i:s');
+                                            $Date1 = strtotime($Date1);
+                                            $Date2 = strtotime($data["Date"]);
+                                            $DateDiff = $Date1 - $Date2;
+                                            $DateDiff = $DateDiff/86400;
+
+                                            echo"<div class='message_me'>";
+                                            echo"<p class='PhotoProfilMess'><br><br><img height=35 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
+                                            echo"<p class='NomMess'>"  . $data2['Nom'] . " " . $data2['Prenom'] ."</p>";
+                                            if($DateDiff >=1){
+                                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                                echo"<p class='DateMess'>" . $DateDiff . " j</p>";
+                                            }
+                                            else if($DateDiff * 24 >=1){
+                                                $DateDiff = $DateDiff * 24;
+                                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                                echo"<p class='DateMess'>" . $DateDiff . " h</p>";
+                                            }
+                                            else if($DateDiff * 24 * 60 >=1){
+                                                $DateDiff = $DateDiff * 24 * 60;
+                                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                                echo"<p class='DateMess'>" . $DateDiff . " min</p>";
+                                            }
+                                            else{
+                                                $DateDiff = $DateDiff * 24 * 60 * 60;
+                                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                                echo"<p class='DateMess'>" . $DateDiff . " sec</p>";
+                                            }
+                                            echo"<p class='LocalisationMess'><ion-icon name='location'></ion-icon>" . $data["Localisation"] . "</p>";
+                                            echo"<p class='LegendeMess'>" . $data["Legende"] . "</p>";
+                                            $extension = pathinfo($data["Data"], PATHINFO_EXTENSION);
+                                            if ($extension === 'jpg' || $extension === 'jpg' || $extension === 'gif') {
+                                                echo"<p class='DataMess'><img height=170 src='" . $data["Data"] . "' /></p>";
+                                            }
+                                            else if ($extension === 'mp4') {
+                                                echo"<p class='DataMess'><video height=150 controls autoplay><source src='" . $data["Data"] . "' type='video/mp4'></video></p>";
+                                            }
+                                            else if ($extension === 'webm') {
+                                                echo"<p class='DataMess'><video height=150 controls autoplay><source src='" . $data["Data"] . "' type='video/webm'></video></p>";
+                                            }
+                                            echo"<div class='post2' ><button class='LikeMess' name='Like' id='" . $data['IDpost'] . "' data-like='" . $data['Aime'] ."' style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $data['IDpost'] . "'>" . $data["Aime"] . "</p>";
+                                            echo"<button class='ComMess' name='Com' id='" . $data['IDpost'] . "' data-com='" . $data['Commentaires'] ."' style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $data['IDpost'] . "'>" . $data["Commentaires"] . "</p>";
+                                            echo"<button class='PartagerMess' name='Partager' id='" . $data['IDpost'] . "' style='color:white'><ion-icon name='share-social'></ion-icon></button></div></div>";
+                                            echo"</div><br>";
+                                        }
+                                        if($Statut_mess==0){
+                                            echo "<ion-icon class='icon_me' name='checkmark-outline'></ion-icon></br>";
+                                        }
+                                        else{
+                                            echo "<ion-icon class='icon_me' name='checkmark-done-outline'></ion-icon></br>";
+                                        }
+
+                                        //echo "Test moi    env : " . $IDenvoyeur_mess . "    rec : " . $IDrecepteur_mess . "    statut : " . $Statut_mess . "<br>";
                                     }
                                     else{
-                                        echo "<ion-icon class='icon_him' name='checkmark-done-outline'></ion-icon></br>";
+                                        if($message_data["Data"] === ""){
+                                            echo"<p class='message_him'>" . $Contenu_message . "</p><br>";
+                                        }
+                                        else{
+                                            $post = $message_data["Data"];
+                                            $sql = "SELECT * FROM post WHERE IDpost  LIKE '%$post%'"; 
+                                            $sql_result = mysqli_query($db_handle, $sql);
+                                            $data = mysqli_fetch_assoc($sql_result);
+
+                                            $envoyeur = $data['Envoyeur'];
+                                            $sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur  LIKE '%$envoyeur%'"; 
+                                            $sql2_result = mysqli_query($db_handle, $sql2);
+                                            $data2 = mysqli_fetch_assoc($sql2_result);
+
+                                            $Date1 = new DateTime("now");
+                                            $Date1->modify("+2 hours");
+                                            $Date1 = $Date1->format('Y-m-d H:i:s');
+                                            $Date1 = strtotime($Date1);
+                                            $Date2 = strtotime($data["Date"]);
+                                            $DateDiff = $Date1 - $Date2;
+                                            $DateDiff = $DateDiff/86400;
+
+                                            echo"<div class='message_him'>";
+                                            echo"<p class='PhotoProfilMess'><br><br><img height=35 src='" . $utilisateur_data["PhotoProfil"] . "' /></p>";
+                                            echo"<p class='NomMess'>"  . $data2['Nom'] . " " . $data2['Prenom'] ."</p>";
+                                            if($DateDiff >=1){
+                                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                                echo"<p class='DateMess'>" . $DateDiff . " j</p>";
+                                            }
+                                            else if($DateDiff * 24 >=1){
+                                                $DateDiff = $DateDiff * 24;
+                                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                                echo"<p class='DateMess'>" . $DateDiff . " h</p>";
+                                            }
+                                            else if($DateDiff * 24 * 60 >=1){
+                                                $DateDiff = $DateDiff * 24 * 60;
+                                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                                echo"<p class='DateMess'>" . $DateDiff . " min</p>";
+                                            }
+                                            else{
+                                                $DateDiff = $DateDiff * 24 * 60 * 60;
+                                                $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
+                                                echo"<p class='DateMess'>" . $DateDiff . " sec</p>";
+                                            }
+                                            echo"<p class='LocalisationMess'><ion-icon name='location'></ion-icon>" . $data["Localisation"] . "</p>";
+                                            echo"<p class='LegendeMess'>" . $data["Legende"] . "</p>";
+                                            $extension = pathinfo($data["Data"], PATHINFO_EXTENSION);
+                                            if ($extension === 'jpg' || $extension === 'jpg' || $extension === 'gif') {
+                                                echo"<p class='DataMess'><img height=170 src='" . $data["Data"] . "' /></p>";
+                                            }
+                                            else if ($extension === 'mp4') {
+                                                echo"<p class='DataMess'><video height=150 controls autoplay><source src='" . $data["Data"] . "' type='video/mp4'></video></p>";
+                                            }
+                                            else if ($extension === 'webm') {
+                                                echo"<p class='DataMess'><video height=150 controls autoplay><source src='" . $data["Data"] . "' type='video/webm'></video></p>";
+                                            }
+                                            echo"<div class='post2' ><button class='LikeMess' name='Like' id='" . $data['IDpost'] . "' data-like='" . $data['Aime'] ."' style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $data['IDpost'] . "'>" . $data["Aime"] . "</p>";
+                                            echo"<button class='ComMess' name='Com' id='" . $data['IDpost'] . "' data-com='" . $data['Commentaires'] ."' style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $data['IDpost'] . "'>" . $data["Commentaires"] . "</p>";
+                                            echo"<button class='PartagerMess' name='Partager' id='" . $data['IDpost'] . "' style='color:white'><ion-icon name='share-social'></ion-icon></button></div></div>";
+                                            echo"</div><br>";
+                                        }
+                                        if($Statut_mess==0){
+                                            $message_update = "UPDATE `message` SET `Statut`= 1 WHERE Envoyeur = $IDenvoyeur_mess AND Recepteur = $IDrecepteur_mess";
+                                            $message_update_result = mysqli_query($db_handle,$message_update);
+                                            echo "<ion-icon class='icon_him' name='checkmark-done-outline'></ion-icon></br>";
+                                        }
+                                        else{
+                                            echo "<ion-icon class='icon_him' name='checkmark-done-outline'></ion-icon></br>";
+                                        }
+                                        //echo "Test lui    env : " . $IDenvoyeur_mess . "    rec : " . $IDrecepteur_mess . "    statut : " . $Statut_mess . "<br>";
                                     }
-                                    //echo "Test lui    env : " . $IDenvoyeur_mess . "    rec : " . $IDrecepteur_mess . "    statut : " . $Statut_mess . "<br>";
                                 }
                             }
+                            else {
+                                echo "Database not found";
+                            }//end else
                         }
                         else {
-                            echo "Database not found";
+                            echo "<p class='chat_txt'>Parlez avec un ami !</p><br>";
                         }//end else
-                    }
-                    else {
-                        echo "<p class='chat_txt'>Parlez avec un ami !</p><br>";
-                    }//end else
-                ?>
+                    ?>
+                    <div id="overlay3" class="overlay3">
+                        <div class="com-container">
+                            <h2>Ajouter un commentaire</h2>
+                            <button class="quitterCom" onclick=com_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
+                            <div class="php">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div id="overlay4" class="overlay4">
+                        <div class="partager-container">
+                            <h2>Partager la publication</h2>
+                            <button class="quitterPartage" onclick=partage_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
+                            <div class="php">
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="message_ecrir">
                     <a href="https://zoom.us/fr/signin#/login"> <ion-icon class="icon_ecrir" id="lefticons" name="call-outline"></ion-icon> </a>
