@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 04 juin 2023 à 15:55
--- Version du serveur : 8.0.27
--- Version de PHP : 7.4.26
+-- Généré le : dim. 04 juin 2023 à 18:07
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,10 +42,9 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
 --
 
 INSERT INTO `commentaire` (`IDcommentaire`, `Envoyeur`, `IDpost`, `Date`, `Contenu`) VALUES
-(1, 1, 2, '2023-06-02 08:43:48', 'TEST'),
-(2, 2, 2, '2023-06-02 09:18:47', 'Ca marche !!!'),
-(3, 3, 2, '2023-06-02 09:32:01', 'Je suis aigrie !!!'),
-(4, 3, 1, '2023-06-03 16:07:25', 'bfzeb\n');
+(1, 1, 2, '2023-06-02 08:43:48', 'Trop fier de ma nouvelle voiture!'),
+(2, 2, 2, '2023-06-02 09:18:47', 'Gros bisous de maman !!!'),
+(3, 3, 2, '2023-06-02 09:32:01', 'tip top ');
 
 -- --------------------------------------------------------
 
@@ -129,9 +128,8 @@ CREATE TABLE IF NOT EXISTS `message` (
 --
 
 INSERT INTO `message` (`IDmessage`, `Envoyeur`, `Recepteur`, `Date`, `Contenu`, `Data`, `Statut`) VALUES
-(1, '1', '2', '2023-06-02 13:55:40', 'T\'es bo', '', 1),
-(2, '2', '1', '2023-06-02 13:56:05', 'petite taille', '', 1),
-(3, '4', '1', '2023-06-04 16:35:44', 'Salut', '', 1);
+(1, '1', '2', '2023-06-02 13:55:40', 'Depeche de finir le projet', '', 1),
+(2, '2', '1', '2023-06-02 13:56:05', 'oui bebou <3', '', 1);
 
 -- --------------------------------------------------------
 
@@ -165,7 +163,6 @@ CREATE TABLE IF NOT EXISTS `post` (
   `Legende` text NOT NULL,
   `Commentaires` int NOT NULL,
   `Aime` int NOT NULL,
-  `Localisation` varchar(255) NOT NULL,
   PRIMARY KEY (`IDpost`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -173,9 +170,9 @@ CREATE TABLE IF NOT EXISTS `post` (
 -- Déchargement des données de la table `post`
 --
 
-INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`, `Localisation`) VALUES
-(1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 1, 2, 'Paris'),
-(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 3, 0, 'La campagne');
+INSERT INTO `post` (`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES
+(1, '1', 'photo', '2023-05-29 18:45:38', 'images/Cars.jpg', 'Je suis rapide !', 1, 2),
+(2, '2', 'photo', '2023-05-29 19:29:40', 'images/bob.jpg', 'Je suis une éponge !', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -239,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `relation` (
   `Ami2` int NOT NULL,
   `statut` int NOT NULL,
   PRIMARY KEY (`IDrelation`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `relation`
@@ -251,7 +248,7 @@ INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES
 (3, 4, 1, 2),
 (4, 1, 2, 2),
 (5, 2, 1, 2),
-(7, 2, 3, 2);
+(8, 1, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -286,10 +283,11 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Admin`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `MotDePasse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`, `Descript`, `Humeur`) VALUES
-(1, 1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '1234', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', '', ''),
+(1, 1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '1234', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', 'J\'adore rire', ''),
 (2, 1, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '1234', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
 (3, 1, 1, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '1234', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
-(4, 1, 1, 'Cars', 'Flash', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '1234', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'ai envie de rentrer chez moi', 'Motivé');
+(4, 1, 1, 'Grassin', 'Laureline', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '1234', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'adore le projet', 'Motivé'),
+(5, 3, 0, 'TEST', 'Test', '2023-06-07', 'Adresse test', 'test@gmail.com', '1234', 'images/Dislike.png', 2, '', '', '', '', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
