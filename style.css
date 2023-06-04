@@ -135,6 +135,7 @@ body {
     position: sticky;
     top : 140px;
     margin-bottom: 288px;
+    z-index: 11;
 }
 
 .boutonPoster{
@@ -490,6 +491,22 @@ div.scroll {
     margin-left: 10px;
     float:left;   
 }
+
+#accepter{
+    margin-top:-10px;
+    margin-left: 50px;
+    float:left;
+}
+#overlayV2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 100;
+  }
 /* --------------------------------------------------------------------------------*/
 /* ---------------------------------------Vous-------------------------------------*/
 /* --------------------------------------------------------------------------------*/
@@ -572,7 +589,7 @@ div.scroll {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 11;
+    z-index: 12;
   }
 
 .modification {
