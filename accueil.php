@@ -154,9 +154,42 @@
                 }
             </script>
         </div>
+
         <div class="line-2"></div>
         <div id="suggestions">
             <h2>Suggestions</h2>
+            <button id="Poster" onclick="ajouter()">Ajouter un ami</ion-icon></button>
+            <div id="menuAjout" style="display: none;" style="list-style: none;">
+                <form method="post">
+                    <p>Nom : <input type="text" name="Nom"></br></p>
+                    <p>Prenom : <input type="text" name="Prenom"></p>
+                    <button id="Recherher" type="submit" name="Rechercher" value="ON">Ajouter</button>
+                </form>
+                <?php
+                    if ($db_found) {
+                        if (isset($_POST["Rechercher"]) && !(empty($_POST['Rechercher']))) {
+                            $Nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
+                            $Prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
+
+                            $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                            $IDuser_result = mysqli_query($db_handle, $IDuser);
+                            $data = mysqli_fetch_assoc($IDuser_result);
+                            $IDuser2 = $data['IDutilisateur'];
+
+                            $sql = "SELECT * FROM utilisateur where Nom LIKE '%$Nom%' and Prenom LIKE '%$Prenom%'";
+                            $sql_result = mysqli_query($db_handle, $sql);
+                            while($sql_data = mysqli_fetch_assoc($sql_result)){
+                                $IDnvAmi = $sql_data['IDutilisateur'];
+                                echo $IDnvAmi;
+
+                                $Ajout = "INSERT INTO `relation`(`IDrelation`, `Ami1`, `Ami2`,`statut`) VALUES('', '$IDnvAmi', '$IDuser2', '1')";
+                                $result_ajout = mysqli_query($db_handle, $Ajout);
+                            }
+                        }
+                    }
+                ?>
+            </div>
+            <br><br> 
             <div class="line-1"></div>
             <?php
                 if ($db_found) {
@@ -185,6 +218,16 @@
                 }
             ?>
         </div>
+        <script>
+                function ajouter(){
+                    const menu = document.getElementById('menuAjout');
+                    if (menu.style.display === "none") {
+                        menu.style.display = "block";
+                    } else {
+                        menu.style.display = "none";
+                    }
+                }
+            </script>
     </div>
 
     <div id="ECEin_News" class="section">
