@@ -149,7 +149,7 @@ body {
     position: sticky;
     top : 140px;
     margin-bottom: 288px;
-    z-index: 9;
+    z-index: 11;
 }
 
 .boutonPoster{
