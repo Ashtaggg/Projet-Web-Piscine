@@ -91,7 +91,6 @@
                         echo "<a href='amis.php'><div class='photoAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
                         echo "<div class='line-1'>" . "<br></div>";
                         $Ami2 = $Amis_data['Ami2'];
-                        echo $Ami2;
                         $_SESSION['Ami2'] = $Ami2;
                         
                     }
