@@ -555,6 +555,7 @@ div.scroll {
     padding: 5px;
     z-index: 2;
 }
+
 #Projet{
     margin-top: 30px;
     width: 70%;
@@ -698,6 +699,53 @@ div.scroll {
     padding-bottom: 5px;
     padding-left: 10px;  
 }
+
+
+
+/* --------------------------------------------------------------------------------*/
+/* -----------------------------------CV--------------------------------*/
+/* --------------------------------------------------------------------------------*/ 
+
+
+body.affichageCV {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.cv-container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cv-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cv-section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+}
+
+.cv-section-item {
+    margin-bottom: 10px;
+}
+
+
+
+
+
  /* --------------------------------------------------------------------------------*/
 /* -----------------------------------Amis--------------------------------*/
 /* --------------------------------------------------------------------------------*/ 
@@ -922,6 +970,7 @@ div.scroll {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
 
 
 

@@ -7,7 +7,6 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
     </script>
-    <script type="text/javascript" src="carrousel.js"></script>
     <script type="text/javascript" src="admin.js"></script>
     <title>Accueil ECE In</title>
     <link rel="icon" href="images/logo_ECE_IN.png" type="image/gif">
