@@ -59,6 +59,10 @@
                     $data = mysqli_fetch_assoc($IDuser_result);
                     $Envoyeur = $data['IDutilisateur'];
 
+                    if($data['Admin'] == 1)
+                    {
+                        echo"<li><a class='oncolor' href='admin.php'>Admin</a></li>";
+                    }
                 ?>
                 <li><a class="oncolor" href="accueil.php" style="color : #037078">Accueil</a></li>
                 <li><a class="oncolor" href="reseau.php">Mon réseau</a></li>
