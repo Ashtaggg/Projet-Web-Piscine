@@ -40,7 +40,8 @@
             $IDutilisateur = isset($_GET['IDutilisateur']) ? $_GET['IDutilisateur'] : "";
 
             // Chemin du fichier XML
-            $fichierXML = 'C:/wamp64/www/projet_web/Projet-Web-Piscine/CV/CV' . $IDutilisateur . '.xml';
+            //$fichierXML = 'C:/wamp64/www/projet_web/Projet-Web-Piscine/CV/CV' . $IDutilisateur . '.xml';
+            $fichierXML = './CV/CV' . $IDutilisateur . '.xml';
 
 
             if (file_exists($fichierXML)) {
