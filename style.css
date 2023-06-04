@@ -205,9 +205,19 @@ body {
 /* -------------------------------------Accueil------------------------------------*/
 /* --------------------------------------------------------------------------------*/
 .photoSuggestion{
-    margin-top:-50px;
+    margin-top:-55px;
     margin-left: 20px;
     float:left;  
+}
+.amisSugg{
+    margin-top:-15px;
+    margin-left: 120px;
+    float:left; 
+}
+.demander{
+    margin-top:-50px;
+    margin-left: 170px;
+    float:left;
 }
 .post{
     background-color: #037078;
@@ -449,7 +459,16 @@ div.scroll {
     overflow-y: auto;
     text-align:justify;
 }
-
+.scrollSugg {
+    margin:4px, 4px;
+    padding:4px;
+    background-color: transparent;
+    width: 90%;
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+}
 .amis{
     margin-top:5px;
     margin-left: 20px;
