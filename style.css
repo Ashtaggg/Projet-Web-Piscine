@@ -839,6 +839,30 @@ body.affichageCV {
 #Notifs_Posts_Ecole{
     margin-top: 40px;
 }
+.photo_notif{
+    float:left;
+    border-radius: 40px; 
+}
+.notif-post{
+    display: flex;
+    justify-content: center;
+    place-items: center; 
+}
+.notif-post-poster{
+    float : left;
+    display: flex;
+    margin-top: 8px;
+}
+#name{
+    margin-left: 10px;
+}
+#leg{
+    margin-right: 30px;
+
+}
+#date{
+    margin-left: 20px;
+}
 
 /* --------------------------------------------------------------------------------*/
 /* ------------------------------------Messagerie----------------------------------*/

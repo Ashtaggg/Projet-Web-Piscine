@@ -171,16 +171,21 @@
                         {
                             if($notifs_data['Vu']==0)
                             {
-                                $sql_upate_vu = "UPDATE notification SET Vu = '1' where IDutilisateur = {$IDutilisateur} and IDposter = {$IDposter}";
-                                $result_update_vu = mysqli_query($db_handle, $sql_upate_vu);
+                                $sql_supp = "DELETE FROM notification WHERE IDnotification = {$notifs_data['IDnotification']}";
+                                $result_supp = mysqli_query($db_handle, $sql_supp);
                                 $poster = "SELECT * FROM utilisateur where IDutilisateur like '%$IDposter%'";
                                 $result_poster = mysqli_query($db_handle, $poster);
                                 $data_poster = mysqli_fetch_assoc($result_poster);
-                                echo "Nom: " . $data_poster['Nom'] . "<br>";
-                                echo "Prénom: " . $data_poster['Prenom'] . "<br><br>";
-                                echo "<div class='line-1'>" . "<br></div>";
                                 $image = $data_poster['PhotoProfil'];
-                                echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                                echo "<div class='notif-post-poster'><div class='photo_notif'><img src='$image' height='40' width='60'>" . "</div>";
+                                echo "<p id='name'>" . $data_poster['Nom'], $data_poster['Prenom'] . "</p></div>";
+                                $sql_post = "SELECT * FROM post WHERE IDpost = {$notifs_data['IDpost']}";
+                                $result_post = mysqli_query($db_handle, $sql_post);
+                                $data_post = mysqli_fetch_assoc($result_post);
+                                $image_post = $data_post['Data'];
+                                echo "<div class='notif-post'> <p id='leg'>a posté une nouvelle photo : </p><img src='$image_post' height='60' width='80'>" . "";
+                                echo "<p id='date'> Le " . $data_post['Date'] . "</p></div>";
+                                echo "<div class='line-1'>" . "<br></div>";
 
                             }
                         }
@@ -217,16 +222,22 @@
                         {
                             if($notifs_data['Vu']==0)
                             {
-                                echo "Nom: ";
-                                echo "Prénom: ";
+                                $sql_supp = "DELETE FROM notification WHERE IDnotification = {$notifs_data['IDnotification']}";
+                                $result_supp = mysqli_query($db_handle, $sql_supp);
                                 $poster = "SELECT * FROM utilisateur where IDutilisateur like '%$IDposter%'";
                                 $result_poster = mysqli_query($db_handle, $poster);
                                 $data_poster = mysqli_fetch_assoc($result_poster);
-                                echo "Nom: " . $data_poster['Nom'] . "<br>";
-                                echo "Prénom: " . $data_poster['Prenom'] . "<br><br>";
-                                echo "<div class='line-1'>" . "<br></div>";
                                 $image = $data_poster['PhotoProfil'];
-                                echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                                echo "<div class='notif-post-poster'><div class='photo_notif'><img src='$image' height='40' width='60'>" . "</div>";
+                                echo "<p id='name'>" . $data_poster['Nom'], $data_poster['Prenom'] . "</p></div>";
+                                $sql_post = "SELECT * FROM post WHERE IDpost = {$notifs_data['IDpost']}";
+                                $result_post = mysqli_query($db_handle, $sql_post);
+                                $data_post = mysqli_fetch_assoc($result_post);
+                                $image_post = $data_post['Data'];
+                                echo "<div class='notif-post'> <p id='leg'>a posté une nouvelle photo : </p><img src='$image_post' height='60' width='80'>" . "";
+                                echo "<p id='date'> Le " . $data_post['Date'] . "</p></div>";
+                                echo "<div class='line-1'>" . "<br></div>";
+
                             }
                         }
                     }
