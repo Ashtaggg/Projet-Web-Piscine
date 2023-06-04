@@ -31,6 +31,14 @@
 
 <body>
 <?php
+    if (isset($_GET['ID'])){
+        
+    }
+
+
+
+
+/*
     // Chemin vers le répertoire contenant les fichiers XML
     $repertoire = 'C:\wamp64\www\projet_web\Projet_Web_Piscine\CV\CV';
 
@@ -62,6 +70,7 @@
         echo "<p>Description: " . $formation->Description . "</p>";
         echo "<br>";
     }
+    */
 ?>
 
 
