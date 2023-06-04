@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 04 juin 2023 à 18:17
+-- Généré le : dim. 04 juin 2023 à 18:23
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -145,10 +145,18 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `IDnotification` int NOT NULL,
   `IDutilisateur` int NOT NULL,
   `IDposter` int NOT NULL,
+  `TypePoster` int NOT NULL COMMENT '(2) prof (3) etudiant (4) ancien etudiant (5) ecole',
   `IDpost` int NOT NULL,
   `Vu` int NOT NULL COMMENT '(1) oui (0) non',
   PRIMARY KEY (`IDnotification`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `notification`
+--
+
+INSERT INTO `notification` (`IDnotification`, `IDutilisateur`, `IDposter`, `TypePoster`, `IDpost`, `Vu`) VALUES
+(1, 2, 1, 3, 1, 0);
 
 -- --------------------------------------------------------
 
