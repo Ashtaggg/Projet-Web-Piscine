@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
     <title>Mon Espace ECE In</title>
     <link rel="icon" href="images/logo_ECE_IN.png" type="image/gif">
+    
     <?php
         // Identifier le nom de base de données
         $database = "projet-web-piscine";
@@ -200,7 +201,7 @@
                     </fieldset>
 
                     <br><br><br><br><br><br><br>
-                    <input type="submit" value="Valider" name=PosterChangement>
+                    <input type="submit" value="Valider" name="PosterChangement">
                 </form>
                 <?php
                     if ($db_found) {
@@ -257,19 +258,23 @@
         <div style="text-align: center;">
             <h2>Formations</h2>
         </div>
+        
         <button class="plusFormation" onclick="openForm()"><ion-icon name="add-circle-outline"></ion-icon></button>
 
         <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
+                //on récupère les information de l'utilisateur connecté
                 $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
                 $result = mysqli_query($db_handle, $sql);
                 $data = mysqli_fetch_assoc($result);
                 $IDutilisateur= $data['IDutilisateur']; 
 
+                //on joint les tables utilisateur et formation pour qu'à chaque formation soit attribué l'utilisateur connecté
                 $sql2 = "SELECT * FROM utilisateur JOIN formation WHERE $IDutilisateur = utilisateur.IDutilisateur AND $IDutilisateur = formation.IDutilisateur"; 
                 $result2 = mysqli_query($db_handle, $sql2);
                 while ($data2 = mysqli_fetch_assoc($result2)) {
+                    //on affiche les formations de l'utilisateur connecté
                     echo "<div class='affichageFormation'>Ecole: " . $data2['NomEcole'] . "<br>";
                     echo "Diplome: " . $data2['Diplome'] . "<br>";
                     echo "Date de début: " . $data2['DateDebut'] . "<br>";
@@ -287,14 +292,17 @@
         ?>
 
         
-  
+            
         <div id="overlay" class="overlay">
             <div class="form-container">
+
+
+
                 <h2>Ajouter une formation</h2>
                 <a href="vous.php">
                     <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
                 </a><br>
-                <form method=post>
+                <form method="post">
                 <style>
                     .texte-reduit {
                         font-size: 10px;
