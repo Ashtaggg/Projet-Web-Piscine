@@ -54,9 +54,9 @@
                     }
                 ?>
                 <li><a class="oncolor" href="accueil.php">Accueil</a></li>
-                <li><a class="oncolor" href="reseau.php" style="color : #037078">Mon réseau</a></li>
+                <li><a class="oncolor" href="reseau.php">Mon réseau</a></li>
                 <li><a class="oncolor" href="vous.php">Vous</a></li>
-                <li><a class="oncolor" href="notifications.php">Notifications</a></li>
+                <li><a class="oncolor" href="notifications.php" style="color : #037078">Notifications</a></li>
                 <li><a class="oncolor" href="messagerie.php">Messagerie</a></li>
                 <li><a class="oncolor" href="emplois.php">Emplois</a></li>
             </ul>
@@ -107,53 +107,39 @@
     </div>
 
     <div id="MesNotifs">
-    <br><br>
-         <?php
-            //si le BDD existe, faire le traitement
-            if ($db_found) {
-                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
-                $result = mysqli_query($db_handle, $sql);
-                while ($data = mysqli_fetch_assoc($result)) {
-                    echo "Nom: " . $data['Nom'] . "<br>";
-                    echo "Prénom: " . $data['Prenom'] . "<br><br>";
-                    echo "<div class='line-1'>" . "<br></div>";
-                    echo "Ma description : ". $data['Descript']. "<br>";
-                    $image = $data['PhotoProfil'];
-                     echo "<div class='photo'><img src='$image' height='80' width='100'>" . "<br><br></div>";
-                }//end while
-            }//end if
-            //si le BDD n'existe pas
-            else {
-                echo "Database not found";
-            }//end else
-        ?>
+    
     </div>
-    <div id="Notif_Amis" class="section">
+    <div id="Notif_Demande_Amis" class="section">
         <h2>Mes demandes d'Amis</h2>
         <div class="line-1"></div>
         <div class="scroll">
         <?php
-            //si le BDD existe, faire le traitement
+                     //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
-                $result_sql = mysqli_query($db_handle, $sql);
-                while ($data_sql = mysqli_fetch_assoc($result_sql)) {
-                    $IDutilisateur= $data_sql['IDutilisateur'];
-                    $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%' and relation.statut='2' and Ami2 = IDutilisateur";
-                    $Amis_result = mysqli_query($db_handle, $Amis);
-                    $Amis_data = mysqli_fetch_assoc($Amis_result);
-                    echo "<div>". "<br></div>";
-                    $image = $Amis_data['PhotoProfil'];
-                    echo "<a href='amis.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
-                    echo  "<div class='amis'>".$Amis_data['Nom'] . "</div>";
-                    echo  "<div class='amis'>".$Amis_data['Prenom'] . "</div><br>";
-                    echo "<div>". "<br></div>";
+
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $result = mysqli_query($db_handle, $sql);
+                $data = mysqli_fetch_assoc($result);
+                $IDuser = $data['IDutilisateur'];
+
+                $Demande = "SELECT * FROM utilisateur join relation WHERE Ami1 LIKE'%$IDuser%' and statut = '1' and Ami2 = IDutilisateur";
+                $result_demande = mysqli_query($db_handle, $Demande);
+                while($data_demande = mysqli_fetch_assoc($result_demande)){
+                    $Ami = $data_demande['Ami2'];
+                    echo "Nom: " . $data_demande['Nom'] . "<br>";
+                    echo "Prénom: " . $data_demande['Prenom'] . "<br><br>";
                     echo "<div class='line-1'>" . "<br></div>";
-                    $Ami2 = $Amis_data['Ami2'];
-                    $_SESSION['Ami2'] = $Ami2;
-                           
-                }//end while
-                
+                    $image = $data_demande['PhotoProfil'];
+                    echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                    if(isset($_POST['demande']) AND $_POST['demande']=='accepter'){
+                        $sql = "UPDATE relation SET statut = '2' where Ami1 = {$IDuser} and Ami2 = {$Ami}";
+                        $result = mysqli_query($db_handle, $sql);
+                    } 
+                    else if(isset($_POST['demande']) AND $_POST['demande']=='refuser'){
+                        $sql2 = "UPDATE relation SET statut = '0' where Ami1 = {$IDuser} and Ami2 = {$Ami}";
+                        $result2 = mysqli_query($db_handle, $sql2); 
+                    }
+                }
             }//end if
             //si le BDD n'existe pas
             else {
@@ -163,34 +149,89 @@
         </div>
         </br>
     </div>
-    <div id="Notifs_Posts" class="section">
+    <div id="Notifs_Posts_Amis" class="section">
         <h2>Posts de mes Amis</h2>
         <div class="line-1"></div>
         <div class="scroll">
         <?php
             //si le BDD existe, faire le traitement
             if ($db_found) {
-                $sql = "SELECT * FROM utilisateur where Mail like '%$email%'";
-                $result_sql = mysqli_query($db_handle, $sql);
-                $data_sql = mysqli_fetch_assoc($result_sql);
+                $utilisateur = "SELECT * FROM utilisateur where Mail like '%$email%'";
+                $result_utilisateur = mysqli_query($db_handle, $utilisateur);
+                $data_utilisateur = mysqli_fetch_assoc($result_utilisateur);
+                $IDutilisateur = $data_utilisateur['IDutilisateur'];
 
-                $IDutilisateur= $data_sql['IDutilisateur'];
+                $notifs = "SELECT * FROM notification WHERE IDutilisateur='$IDutilisateur'"; 
+                $notifs_result = mysqli_query($db_handle, $notifs);
+                while($notifs_data = mysqli_fetch_assoc($notifs_result)){
+                    $IDposter = $notifs_data['IDposter'];
+                    if($notifs_data['IDutilisateur']==$IDutilisateur)
+                    {
+                        if($notifs_data['TypePoster']>=2 && $notifs_data['TypePoster']<=4)
+                        {
+                            if($notifs_data['Vu']==0)
+                            {
+                                $sql_upate_vu = "UPDATE notification SET Vu = '1' where IDutilisateur = {$IDutilisateur} and IDposter = {$IDposter}";
+                                $result_update_vu = mysqli_query($db_handle, $sql_upate_vu);
+                                $poster = "SELECT * FROM utilisateur where IDutilisateur like '%$IDposter%'";
+                                $result_poster = mysqli_query($db_handle, $poster);
+                                $data_poster = mysqli_fetch_assoc($result_poster);
+                                echo "Nom: " . $data_poster['Nom'] . "<br>";
+                                echo "Prénom: " . $data_poster['Prenom'] . "<br><br>";
+                                echo "<div class='line-1'>" . "<br></div>";
+                                $image = $data_poster['PhotoProfil'];
+                                echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
 
-                $Amis = "SELECT DISTINCT u2.* FROM utilisateur u1 JOIN relation r1 ON r1.Ami1 = u1.IDutilisateur JOIN relation r2 ON r2.Ami1 = r1.Ami2 JOIN utilisateur u2 ON u2.IDutilisateur = r2.Ami2 WHERE r1.statut = '2' AND r2.statut = '2' AND u1.IDutilisateur = '$IDutilisateur' AND u2.IDutilisateur NOT IN (SELECT r3.Ami2 FROM relation r3 WHERE r3.Ami1 = '$IDutilisateur') AND u2.IDutilisateur != '$IDutilisateur'";
-                $Amis_result = mysqli_query($db_handle, $Amis);
-                while($Amis_data = mysqli_fetch_assoc($Amis_result)){
-                    echo "<div>". "<br></div>";
-                    $image = $Amis_data['PhotoProfil'];
-                    echo "<a href='Amiami.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
-                    echo  "<div class='amis'>".$Amis_data['Nom'] . "</div>";
-                    echo  "<div class='amis'>".$Amis_data['Prenom'] . "</div><br>";
-                    echo "<div>". "<br></div>";                        
-                    echo "<div class='line-1'>" . "<br></div>";
-                    $Amiami = $Amis_data['IDutilisateur'];
-                    $_SESSION['Amiami'] = $Amiami;
-                }        
+                            }
+                        }
+                    }
+                }
             }//end if
-                
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+        </div>
+        </br>
+    </div>
+    <div id="Notifs_Posts_Ecole" class="section">
+        <h2>Posts de mon Ecole</h2>
+        <div class="line-1"></div>
+        <div class="scroll">
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $utilisateur = "SELECT * FROM utilisateur where Mail like '%$email%'";
+                $result_utilisateur = mysqli_query($db_handle, $utilisateur);
+                $data_utilisateur = mysqli_fetch_assoc($result_utilisateur);
+                $IDutilisateur = $data_utilisateur['IDutilisateur'];
+
+                $notifs = "SELECT * FROM notification WHERE IDutilisateur='$IDutilisateur'"; 
+                $notifs_result = mysqli_query($db_handle, $notifs);
+                while($notifs_data = mysqli_fetch_assoc($notifs_result)){
+                    $IDposter = $notifs_data['IDposter'];
+                    if($notifs_data['IDutilisateur']==$IDutilisateur)
+                    {
+                        if($notifs_data['TypePoster']==5)
+                        {
+                            if($notifs_data['Vu']==0)
+                            {
+                                echo "Nom: ";
+                                echo "Prénom: ";
+                                $poster = "SELECT * FROM utilisateur where IDutilisateur like '%$IDposter%'";
+                                $result_poster = mysqli_query($db_handle, $poster);
+                                $data_poster = mysqli_fetch_assoc($result_poster);
+                                echo "Nom: " . $data_poster['Nom'] . "<br>";
+                                echo "Prénom: " . $data_poster['Prenom'] . "<br><br>";
+                                echo "<div class='line-1'>" . "<br></div>";
+                                $image = $data_poster['PhotoProfil'];
+                                echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                            }
+                        }
+                    }
+                }
+            }//end if
             //si le BDD n'existe pas
             else {
                 echo "Database not found";

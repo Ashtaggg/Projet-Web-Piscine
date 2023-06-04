@@ -82,3 +82,47 @@ function com_poster(element){
         }
     });
 }
+
+
+function partage(element) {
+    var IDpost = element.id;
+    var overlay4 = document.getElementById("overlay4");
+    overlay4.style.display = "block";
+    $.ajax({
+        url: 'partage.php',
+        type: 'POST',
+        cache: false,
+        data: { IDpostPartage: IDpost },
+        success: function(response) {
+            $('.php').load('partage.php', { IDpostPartage: IDpost });
+        },
+        error: function() {
+            alert('Erreur lors de la requête AJAX');
+        }
+    });
+}
+
+
+function partage_cacher(){
+    var overlay4 = document.getElementById("overlay4");
+    overlay4.style.display = "none";
+}
+
+function selecAmis(element) {
+    var IDamis = parseInt(element.dataset.amis);
+    var IDuser = parseInt(element.dataset.id);
+    var IDpostPartage = parseInt(element.dataset.post);
+    var overlay4 = document.getElementById("overlay4");
+    overlay4.style.display = "none";
+    $.ajax({
+        url: 'partage.php',
+        type: 'POST',
+        cache: false,
+        success: function(response) {
+            $('.php').load('partage.php', { IDamis: IDamis, IDuser: IDuser, IDpostPartage: IDpostPartage});
+        },
+        error: function() {
+            alert('Erreur lors de la requête AJAX');
+        }
+    });
+}
