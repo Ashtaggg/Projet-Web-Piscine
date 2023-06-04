@@ -145,6 +145,7 @@
         <div id="suggestions">
             <h2>Suggestions</h2>
             <div class="line-1"></div>
+            <div class="scrollSugg">
             <?php
                 if ($db_found) {
                     $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'";
@@ -152,25 +153,35 @@
                     $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                     $IDuser2 = $IDuser_data["IDutilisateur"];
 
-                    $sql="SELECT * FROM relation WHERE Ami1 LIKE '%$IDuser2%'";
+                    $sql="SELECT * FROM utilisateur WHERE  utilisateur.IDutilisateur NOT IN (SELECT Ami2 FROM relation join utilisateur WHERE Ami1 LIKE '%$IDuser2%' and statut ='2') AND utilisateur.IDutilisateur NOT LIKE '%$IDuser2%'";
                     $sql_result = mysqli_query($db_handle, $sql);
                     while($sql_data = mysqli_fetch_assoc($sql_result))
                     {
-                        $Amis2 = $sql_data['Ami2'];
-
-                        $sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur NOT LIKE '%$Amis2%' and IDutilisateur NOT LIKE '%$IDuser2%'";
-                        $sql2_result = mysqli_query($db_handle, $sql2);
-                        while($sql2_data = mysqli_fetch_assoc($sql2_result)){
+                        //echo "test". "<br>";
+                        //$Amis2 = $sql_data['IDutilisateur'];
+                        //echo $Amis2;
+                        //soucis car $amis2 change a chaque fois -> essayer avec une jointure
+                        //$sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur NOT LIKE '%$Amis2%' and IDutilisateur NOT LIKE '%$IDuser2%'";
+                        //$sql2_result = mysqli_query($db_handle, $sql2);
+                        //$sql2_data = mysqli_fetch_assoc($sql2_result);
+                            //$NvAmi = $sql2_data['IDutilisateur'];
+                            //echo $NvAmi;
                             //echo $sql2_data['IDutilisateur'];
-                            echo $sql2_data['Nom']. "<br>";
-                            echo $sql2_data['Prenom'] . "<br><br>";
-                            $image = $sql2_data['PhotoProfil'];
-                            echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>";
+                            echo "<div style='text-align: center;'>" .$sql_data['Nom']. "<br></div>";
+                            echo "<div style='text-align: center;'>" .$sql_data['Prenom'] . "<br><br></div>";
+                            //echo "<div class='demander'><form method='post'><input type='submit' value='valider' name='demander'>"."</form></div>";
+                            $image = $sql_data['PhotoProfil'];
+                            echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>"; 
                             echo "<div class='line-1'></div>";
-                        }
+                            //if(isset($_POST['demander']) AND $_POST['demander']=='valider'){
+                            //    $sql = "INSERT INTO `relation` (`IDrelation`, `Ami1`, `Ami2`, `statut`) VALUES('', '$IDuser2', '$Amis2', '1') ";
+                            //    $result = mysqli_query($db_handle, $sql);
+                            //} 
+                        //}
                     } 
                 }
             ?>
+            </div>
         </div>
     </div>
 
@@ -244,7 +255,7 @@
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
                             $extension = pathinfo($post_data["Data"], PATHINFO_EXTENSION);
-                            if ($extension === 'jpg' || $extension === 'jpg' || $extension === 'gif') {
+                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'gif') {
                                 echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
                             }
                             else if ($extension === 'mp4') {
