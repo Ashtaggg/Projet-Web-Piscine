@@ -35,22 +35,22 @@
         <fieldset>
             <legend>Type de compte</legend>
             <div>
-                <input type="radio" id="Prof" name="type" value="2"checked>
+                <input type="radio" id="Prof" name="Type" value="2" checked>
                 <label for="Prof">Prof</label>
             </div>
             <div>
-                <input type="radio" id="Etudiant" name="type" value="3">
+                <input type="radio" id="Etudiant" name="Type" value="3">
                 <label for="Etudiant">Etudiant</label>
             </div>
             <div>
-                <input type="radio" id="AncienEtudiant" name="type" value="4">
+                <input type="radio" id="AncienEtudiant" name="Type" value="4">
                 <label for="AncienEtudiant">Ancien Etudiant</label>
             </div>
         </fieldset>
         <fieldset>
             <legend>Compte Admin</legend>
             <div>
-                <input type="radio" id="Oui" name="Admin" value="1"checked>
+                <input type="radio" id="Oui" name="Admin" value="1" checked>
                 <label for="Oui">Oui</label>
             </div>
             <div>
@@ -85,10 +85,22 @@
                 $Mail = isset($_POST["Mail"]) ? $_POST["Mail"] : "";
                 $MotDePasse = isset($_POST["MotDePasse"]) ? $_POST["MotDePasse"] : "";
                 $PhotoProfil = isset($_POST["PhotoProfil"]) ? $_POST["PhotoProfil"] : "";
+                $PhotoProfil = "images/" . $PhotoProfil;
                 $AnneeEtude = isset($_POST["AnneeEtude"]) ? $_POST["AnneeEtude"] : "";
 
-                $sql = "INSERT INTO `utilisateur`(`IDutilisateur`, `Type`, `Admin`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `MotDePasse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`, `Descript`, `Humeur`)
-                        VALUES('$IDutilisateur', '$Type', '$Admin', '$Nom', '$Prenom', '$DateNaissance', '$Adresse', '$Mail', '$MotDePasse', '$PhotoProfil', '$AnneeEtude', '', '', '', '', '', '')";
+                echo$IDutilisateur;
+                echo$Type;
+                echo$Admin;
+                echo$Nom;
+                echo$Prenom;
+                echo$DateNaissance;
+                echo$Adresse;
+                echo$Mail;
+                echo$MotDePasse;
+                echo$PhotoProfil;
+                echo$AnneeEtude;
+
+                $sql = "INSERT INTO `utilisateur`(`IDutilisateur`, `Type`, `Admin`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `MotDePasse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`, `Descript`, `Humeur`) VALUES('$IDutilisateur', '$Type', '$Admin', '$Nom', '$Prenom', '$DateNaissance', '$Adresse', '$Mail', '$MotDePasse', '$PhotoProfil', '$AnneeEtude', '', '', '', '', '', '')";
                 $result = mysqli_query($db_handle, $sql);
             }
         }
