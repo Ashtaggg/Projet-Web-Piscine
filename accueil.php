@@ -79,8 +79,11 @@
             <button id="Poster" onclick="clic()">Ajouter Une Publication<ion-icon name="add-circle-outline"></ion-icon></button>
             <div id="menuPoster" style="display: none;" style="list-style: none;">
                 <form method="post">
-                    <input type="text" name="Legende"></br>
-                    <input type="file" name="Data"></br>
+                    <label for="Legende">Description : </label>
+                    <input type="text" name="Legende" required></br>
+                    <label for="Localisation">Localisation : </label>
+                    <input type="text" name="Localisation" required></br>
+                    <input type="file" name="Data" required></br>
                     <button id="PosterFinal" type="submit" name="PosterFinal" value="ON">Poster<ion-icon name="add-circle-outline"></ion-icon></button>
                 </form>
                 <?php
@@ -104,11 +107,19 @@
                             $Data = isset($_POST["Data"]) ? $_POST["Data"] : "";
                             $Data = "images/" . $Data;
 
+                            $Localisation = isset($_POST["Localisation"]) ? $_POST["Localisation"] : "";
+
                             $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
 
-                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0')";
+                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`, `Localisation`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0', '$Localisation')";
                             
                             $result = mysqli_query($db_handle, $sql);
+                            if ($result) {
+                                header('Location: accueil.php');
+                                die();
+                            }
+
+                            
                             $All_usres = "SELECT * FROM utilisateur";
                             $All_usres_result = mysqli_query($db_handle, $All_usres);
                             while($data_all_users = mysqli_fetch_assoc($All_usres_result))
@@ -124,11 +135,6 @@
 
                                 $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,'IDposter',`TypePoster` `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notifs', '$IDposter', '$IDpost', '0')";
                                 $result_all_users = mysqli_query($db_handle, $sql2);
-                            }
-
-                            if ($result) {
-                                header('Location: accueil.php');
-                                die();
                             }
                         }
                         else{
@@ -248,6 +254,7 @@
                                 $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                 echo"<p class='Date'>" . $DateDiff . " sec</p>";
                             }
+                            echo"<p class='Localisation'><ion-icon name='location'></ion-icon>" . $post_data["Localisation"] . "</p>";
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
                             $extension = pathinfo($post_data["Data"], PATHINFO_EXTENSION);

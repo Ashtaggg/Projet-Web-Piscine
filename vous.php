@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="accueil.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
     <title>Mon Espace ECE In</title>
     <link rel="icon" href="images/logo_ECE_IN.png" type="image/gif">
     <?php
@@ -524,14 +526,37 @@
                                 $DateDiff = round($DateDiff, 0, PHP_ROUND_HALF_DOWN);
                                 echo"<p class='Date'>" . $DateDiff . " sec</p>";
                             }   
-                            //echo"<p class='Date'>" . $post_data["Date"] . "</p>";
+                            echo"<p class='Localisation'><ion-icon name='location'></ion-icon>" . $Envoyeur_data["Localisation"] . "</p>";
                             echo"<p class='Legende'>" . $Envoyeur_data["Legende"] . "</p>";
-                            echo"<p class='Data'><img height=250 src='" . $Envoyeur_data["Data"] . "' /></p></div>";
+                            
+                            $extension = pathinfo($Envoyeur_data["Data"], PATHINFO_EXTENSION);
+                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'gif') {
+                                echo"<p class='Data'><img height=250 src='" . $Envoyeur_data["Data"] . "' /></p>";
+                            }
+                            else if ($extension === 'mp4') {
+                                echo"<p class='Data'><video height=220 controls autoplay><source src='" . $Envoyeur_data["Data"] . "' type='video/mp4'></video></p>";
+                            }
+                            else if ($extension === 'webm') {
+                                echo"<p class='Data'><video height=220 controls autoplay><source src='" . $Envoyeur_data["Data"] . "' type='video/webm'></video></p>";
+                            }
+
+                            echo"<div class='post2' ><button class='Like' name='Like' id='" . $Envoyeur_data['IDpost'] . "' data-like='" . $Envoyeur_data['Aime'] ."' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $Envoyeur_data['IDpost'] . "'>" . $Envoyeur_data["Aime"] . "</p>";
+                            echo"<button class='Com' name='Com' id='" . $Envoyeur_data['IDpost'] . "' data-com='" . $Envoyeur_data['Commentaires'] ."' onclick=com(this) style='color:white'><ion-icon name='chatbox-ellipses'></ion-icon></button><p class='nbrCom'  data-idpost='" . $Envoyeur_data['IDpost'] . "'>" . $Envoyeur_data["Commentaires"] . "</p></div></div>";
                         }
                     }
                 }
             ?>
         </table>
+        <div id="overlay3" class="overlay3">
+            <div class="com-container">
+                <h2>Ajouter un commentaire</h2>
+                <button class="quitterCom" onclick=com_cacher(this)><ion-icon name="close-outline"></ion-icon></button>
+                
+                <div class="php">
+                    
+                </div>
+            </div>
+        </div>
         </br>
     </div>
 
