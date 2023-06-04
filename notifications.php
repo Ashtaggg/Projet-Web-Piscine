@@ -30,7 +30,7 @@
 </head>
 <body>
     <div id="header">
-        <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>
+        <!-- <h1>ECE In: Social Media Professionnel de l'ECE Paris</h1>-->
     </div>
     <nav class="navigation">
         <a href ="#" class="logo_ECE_In"><img src="images/logo_ECE_IN.png" alt="logo_ECE_In" width="135" height="65"></a>
