@@ -111,15 +111,13 @@
 
                             $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
 
-                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`, `Localisation`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0', '$Localisation')";
-                            
                             $result = mysqli_query($db_handle, $sql);
                             if ($result) {
                                 header('Location: accueil.php');
                                 die();
                             }
-
                             
+                            /*$sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`, `Localisation`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0', '$Localisation')";
                             $All_usres = "SELECT * FROM utilisateur";
                             $All_usres_result = mysqli_query($db_handle, $All_usres);
                             while($data_all_users = mysqli_fetch_assoc($All_usres_result))
@@ -129,13 +127,13 @@
                                 $TypePoster = $data['Type'];
 
                                 $IDnotif_sql = "SELECT * FROM notifications ORDER BY IDnotification DESC LIMIT 1;"; 
-                                $IDnotif_result = mysqli_query($db_handle, $ID);
-                                $IDnotif_data = mysqli_fetch_assoc($ID_result);
-                                $IDnotif = $data["IDnotification"] + 1;
+                                $IDnotif_result = mysqli_query($db_handle, $IDnotif_sql);
+                                $IDnotif_data = mysqli_fetch_assoc($IDnotif_result);
+                                $IDnotif = $IDnotif_data['IDnotification'] + 1;
 
-                                $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,'IDposter',`TypePoster` `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notifs', '$IDposter', '$IDpost', '0')";
+                                $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,'IDposter',`TypePoster` `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notif', '$IDposter', '$IDpost', '0')";
                                 $result_all_users = mysqli_query($db_handle, $sql2);
-                            }
+                            }*/
                         }
                         else{
                             $sql = "";
