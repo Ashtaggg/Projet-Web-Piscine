@@ -134,6 +134,11 @@
             }//end else
         ?>
         <div class='bouton'><button type="submit" >Charger mon CV</button></div>
+        <form method="post" action="creationCV.php">
+            <input type="submit" value="Afficher le CV" name="genererXML">
+        </form>
+
+        
         <br><br>
         <div class='bouton'>
             <a href="connexion.php"><button>Se déconnecter</button></a>
