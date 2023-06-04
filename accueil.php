@@ -180,6 +180,7 @@
                             $sql = "SELECT * FROM utilisateur where Nom LIKE '%$Nom%' and Prenom LIKE '%$Prenom%'";
                             $sql_result = mysqli_query($db_handle, $sql);
                             while($sql_data = mysqli_fetch_assoc($sql_result)){
+                                
                                 $IDnvAmi = $sql_data['IDutilisateur'];
                                 echo $IDnvAmi;
 
@@ -199,24 +200,17 @@
                     $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                     $IDuser2 = $IDuser_data["IDutilisateur"];
 
-                    $sql="SELECT * FROM relation WHERE Ami1 LIKE '%$IDuser2%'";
-                    $sql_result = mysqli_query($db_handle, $sql);
-                    while($sql_data = mysqli_fetch_assoc($sql_result))
-                    {
-                        $Amis2 = $sql_data['Ami2'];
-
-                        $sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur NOT LIKE '%$Amis2%' and IDutilisateur NOT LIKE '%$IDuser2%'";
-                        $sql2_result = mysqli_query($db_handle, $sql2);
-                        while($sql2_data = mysqli_fetch_assoc($sql2_result)){
-                            //echo $sql2_data['IDutilisateur'];
-                            echo $sql2_data['Nom']. "<br>";
-                            echo $sql2_data['Prenom'] . "<br><br>";
-                            $image = $sql2_data['PhotoProfil'];
-                            echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>";
-                            echo "<div class='line-1'></div>";
-                        }
-                    } 
-                }
+                    $sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur NOT LIKE '%$IDuser2%' and IDutilisateur NOT IN (SELECT Ami2 FROM relation WHERE Ami1 LIKE'%$IDuser2%' AND statut = '2')";
+                    $sql2_result = mysqli_query($db_handle, $sql2);
+                    while($sql2_data = mysqli_fetch_assoc($sql2_result)){
+                        echo $sql2_data['Nom']. "<br>";
+                        echo $sql2_data['Prenom'] . "<br><br>";
+                        $image = $sql2_data['PhotoProfil'];
+                        echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>";
+                        echo "<div class='line-1'></div>";
+                    }
+                } 
+                
             ?>
         </div>
         <script>
