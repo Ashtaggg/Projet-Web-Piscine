@@ -138,6 +138,20 @@ body {
     z-index: 9;
 }
 
+#Info_Right2{
+    float: right;
+    width: 25%;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    color:black;
+    padding: 5px;
+    position: sticky;
+    top : 140px;
+    margin-bottom: 288px;
+    z-index: 9;
+}
+
 .boutonPoster{
     margin-top:20px;
     margin-bottom:20px;
