@@ -110,7 +110,22 @@
                             $Localisation = isset($_POST["Localisation"]) ? $_POST["Localisation"] : "";
 
                             $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
+
+                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`, `Localisation`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0', '$Localisation')";
                             
+                            $result = mysqli_query($db_handle, $sql);
+                            if ($result) {
+                                header('Location: accueil.php');
+                                die();
+                            }
+
+                            
+                            if ($result) {
+                                header('Location: accueil.php');
+                                die();
+                            }
+                            
+                            /*$sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`, `Localisation`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0', '$Localisation')";
                             $All_usres = "SELECT * FROM utilisateur";
                             $All_usres_result = mysqli_query($db_handle, $All_usres);
                             while($data_all_users = mysqli_fetch_assoc($All_usres_result))
@@ -119,24 +134,22 @@
                                 $IDposter = $Envoyeur;
                                 $TypePoster = $data['Type'];
 
-                                $IDnotif_sql = "SELECT * FROM notification ORDER BY IDnotification DESC LIMIT 1;"; 
+                                $IDnotif_sql = "SELECT * FROM notifications ORDER BY IDnotification DESC LIMIT 1;"; 
+                                $IDnotif_result = mysqli_query($db_handle, $ID);
+                                $IDnotif_data = mysqli_fetch_assoc($ID_result);
+                                $IDnotif = $data["IDnotification"] + 1;
+
+                                $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,'IDposter',`TypePoster` `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notifs', '$IDposter', '$IDpost', '0')";
+                                $TypePoster = $data['Type'];
+
+                                $IDnotif_sql = "SELECT * FROM notifications ORDER BY IDnotification DESC LIMIT 1;"; 
                                 $IDnotif_result = mysqli_query($db_handle, $IDnotif_sql);
                                 $IDnotif_data = mysqli_fetch_assoc($IDnotif_result);
                                 $IDnotif = $IDnotif_data['IDnotification'] + 1;
 
-                                $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,`IDposter`, `TypePoster`, `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notif', '$IDposter', '$TypePoster', '$IDpost', '0')";
+                                $sql2 = "INSERT INTO `notification`(`IDnotification`, `IDutilisateur`,'IDposter',`TypePoster` `IDpost`, `Vu`) VALUES ('$IDnotif', '$IDuser_notif', '$IDposter', '$IDpost', '0')";
                                 $result_all_users = mysqli_query($db_handle, $sql2);
-                            }
-
-
-                            $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`, `Localisation`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0', '$Localisation')";
-                            
-                            $result = mysqli_query($db_handle, $sql);
-
-                            if($result) {
-                                header('Location: accueil.php');
-                                die();
-                            }
+                            }*/
                         }
                         else{
                             $sql = "";
@@ -199,24 +212,17 @@
                     $IDuser_data = mysqli_fetch_assoc($IDuser_result);
                     $IDuser2 = $IDuser_data["IDutilisateur"];
 
-                    $sql="SELECT * FROM relation WHERE Ami1 LIKE '%$IDuser2%'";
-                    $sql_result = mysqli_query($db_handle, $sql);
-                    while($sql_data = mysqli_fetch_assoc($sql_result))
-                    {
-                        $Amis2 = $sql_data['Ami2'];
-
-                        $sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur NOT LIKE '%$Amis2%' and IDutilisateur NOT LIKE '%$IDuser2%'";
-                        $sql2_result = mysqli_query($db_handle, $sql2);
-                        while($sql2_data = mysqli_fetch_assoc($sql2_result)){
-                            //echo $sql2_data['IDutilisateur'];
-                            echo $sql2_data['Nom']. "<br>";
-                            echo $sql2_data['Prenom'] . "<br><br>";
-                            $image = $sql2_data['PhotoProfil'];
-                            echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>";
-                            echo "<div class='line-1'></div>";
-                        }
-                    } 
-                }
+                    $sql2 = "SELECT * FROM utilisateur WHERE IDutilisateur NOT LIKE '%$IDuser2%' AND IDutilisateur NOT IN (SELECT Ami2 FROM relation where Ami1 LIKE '%$IDuser2%' AND statut = '2' )";
+                    $sql2_result = mysqli_query($db_handle, $sql2);
+                    while($sql2_data = mysqli_fetch_assoc($sql2_result)){
+                        //echo $sql2_data['IDutilisateur'];
+                        echo $sql2_data['Nom']. "<br>";
+                        echo $sql2_data['Prenom'] . "<br><br>";
+                        $image = $sql2_data['PhotoProfil'];
+                        echo "<div class='photoSuggestion'><img src='$image' height='40' width='60'>" . "<br></div>";
+                        echo "<div class='line-1'></div>";
+                    }
+                } 
             ?>
         </div>
         <script>
