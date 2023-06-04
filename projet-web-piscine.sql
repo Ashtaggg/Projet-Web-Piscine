@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 03 juin 2023 à 23:41
+-- Généré le : dim. 04 juin 2023 à 13:41
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -135,6 +135,22 @@ INSERT INTO `message` (`IDmessage`, `Envoyeur`, `Recepteur`, `Date`, `Contenu`, 
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+CREATE TABLE IF NOT EXISTS `notification` (
+  `IDnotification` int NOT NULL,
+  `IDutilisateur` int NOT NULL,
+  `IDposter` int NOT NULL,
+  `IDpost` int NOT NULL,
+  `Vu` int NOT NULL COMMENT '(1) oui (0) non',
+  PRIMARY KEY (`IDnotification`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `post`
 --
 
@@ -261,17 +277,18 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `Descript` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Humeur` varchar(255) NOT NULL,
   PRIMARY KEY (`IDutilisateur`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`IDutilisateur`, `Type`, `Admin`, `Nom`, `Prenom`, `DateNaissance`, `Adresse`, `Mail`, `MotDePasse`, `PhotoProfil`, `AnneeEtude`, `Amis`, `Messages`, `Posts`, `Emplois`, `Descript`, `Humeur`) VALUES
-(1, 1, 0, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '1234', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', '', ''),
-(2, 1, 0, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '1234', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
-(3, 1, 0, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '1234', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
-(4, 1, 0, 'Cars', 'Flash', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '1234', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'ai envie de rentrer chez moi', 'Motivé');
+(1, 1, 1, 'RAYNAL', 'Alexis', '2003-10-01', 'Saint-Mandé', 'alexis.raynal@edu.ece.fr', '1234', 'images/pp.jpg', 2, '2\r\n3\r\n4', '', '1\r\n', '', '', ''),
+(2, 1, 1, 'GRAS', 'Mathis', '2003-06-14', 'Dans les champs', 'mathis.gras@edu.ece.fr', '1234', 'images/pp.jpg', 2, '1\r\n3\r\n4', '', '2', '', '', ''),
+(3, 1, 1, 'BOURSE', 'Camille', '2004-06-09', 'Saint-Cloud', 'camille.bourse@edu.ece.fr', '1234', 'images/Like.png', 2, '1\r\n2\r\n4', '', '', '', '', ''),
+(4, 1, 1, 'Cars', 'Flash', '2003-11-17', 'Paris', 'laureline.grassin@edu.ece.fr', '1234', 'images/cars.jpg', 2, '1\r\n2\r\n3\r\n', '', '', '', 'J\'ai envie de rentrer chez moi', 'Motivé'),
+(5, 3, 0, 'TEST', 'Test', '2023-06-07', 'Adresse test', 'test@gmail.com', '1234', 'images/Dislike.png', 2, '', '', '', '', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

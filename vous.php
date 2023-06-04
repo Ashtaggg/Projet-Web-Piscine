@@ -58,6 +58,17 @@
         </div>
         <div class="menu">
             <ul class="list">
+                <?php
+                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                    $IDuser_result = mysqli_query($db_handle, $IDuser);
+                    $data = mysqli_fetch_assoc($IDuser_result);
+                    $Envoyeur = $data['IDutilisateur'];
+
+                    if($data['Admin'] == 1)
+                    {
+                        echo"<li><a class='oncolor' href='admin.php'>Admin</a></li>";
+                    }
+                ?>
                 <li><a class="oncolor" href="accueil.php">Accueil</a></li>
                 <li><a class="oncolor" href="reseau.php">Mon réseau</a></li>
                 <li><a class="oncolor" href="vous.php" style="color : #037078">Vous</a></li>
@@ -133,11 +144,11 @@
                 echo "Database not found";
             }//end else
         ?>
-        <div class='bouton'><button type="submit" >Charger mon CV</button></div>
-        <form method="post" action="creationCV.php">
-            <input type="submit" value="Afficher le CV" name="genererXML">
-        </form>
-
+        <div class='bouton'>        
+            <form method="post" action="creationCV.php">
+                <input type="submit" value="Afficher mon CV" name="genererXML">
+            </form>
+        </div>
         
         <br><br>
         <div class='bouton'>

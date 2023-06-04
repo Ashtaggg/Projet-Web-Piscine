@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <title>Notifications ECE In</title>
+    <title>Mon Reseau ECE In</title>
     <link rel="icon" href="images/logo_ECE_IN.png" type="image/gif">
     <?php
         // Identifier le nom de base de données
@@ -37,28 +37,178 @@
         <input type="checkbox" id="toggler">
         <label for="toggler"><i class="ri-menu-line"></i></label>
         <div class="inputbox">
-            <ion-icon name="search-outline"></ion-icon>
-            <input type="text" placeholder="Rechercher" size="22">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" placeholder="Rechercher" size="22">
         </div>
         <div class="menu">
             <ul class="list">
+                <?php
+                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                    $IDuser_result = mysqli_query($db_handle, $IDuser);
+                    $data = mysqli_fetch_assoc($IDuser_result);
+                    $Envoyeur = $data['IDutilisateur'];
+
+                    if($data['Admin'] == 1)
+                    {
+                        echo"<li><a class='oncolor' href='admin.php'>Admin</a></li>";
+                    }
+                ?>
                 <li><a class="oncolor" href="accueil.php">Accueil</a></li>
-                <li><a class="oncolor" href="reseau.php">Mon réseau</a></li>
+                <li><a class="oncolor" href="reseau.php" style="color : #037078">Mon réseau</a></li>
                 <li><a class="oncolor" href="vous.php">Vous</a></li>
-                <li><a class="oncolor" href="notifications.php" style="color : #037078">Notifications</a></li>
+                <li><a class="oncolor" href="notifications.php">Notifications</a></li>
                 <li><a class="oncolor" href="messagerie.php">Messagerie</a></li>
                 <li><a class="oncolor" href="emplois.php">Emplois</a></li>
             </ul>
         </div>
-    </nav> 
+    </nav>
+
+    <div id="Gray_bar"></div>
+
+
+    <div id="Info_Right">
+        <h2>Mes amis</h2>
+        <div class="line-1"></div>
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
+                $result_sql = mysqli_query($db_handle, $sql);
+                while ($data_sql = mysqli_fetch_assoc($result_sql)) {
+                    $IDutilisateur= $data_sql['IDutilisateur'];
+                    $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%' and relation.statut='2' and Ami2 = IDutilisateur";
+                    $Amis_result = mysqli_query($db_handle, $Amis);
+                    while ($Amis_data = mysqli_fetch_assoc($Amis_result)){
+                        echo "<div>". "<br></div>";
+                        echo  $Amis_data['Nom'] . "<br>";
+                        echo  $Amis_data['Prenom'] . "<br>";
+                        echo "<div>". "<br></div>";
+                        $image = $Amis_data['PhotoProfil'];
+                        echo "<a href='amis.php'><div class='photoAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
+                        echo "<div class='line-1'>" . "<br></div>";
+                        $Ami2 = $Amis_data['Ami2'];
+                        $_SESSION['Ami2'] = $Ami2;
+                        
+                    }
+                }//end while
+                
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+        <script>
+            function openProf() {
+                var modification = document.getElementById("modification");
+                modification.style.display = "block";
+            }
+        </script>
+    </div>
+
+    <div id="MesNotifs">
+    <br><br>
+         <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                $result = mysqli_query($db_handle, $sql);
+                while ($data = mysqli_fetch_assoc($result)) {
+                    echo "Nom: " . $data['Nom'] . "<br>";
+                    echo "Prénom: " . $data['Prenom'] . "<br><br>";
+                    echo "<div class='line-1'>" . "<br></div>";
+                    echo "Ma description : ". $data['Descript']. "<br>";
+                    $image = $data['PhotoProfil'];
+                     echo "<div class='photo'><img src='$image' height='80' width='100'>" . "<br><br></div>";
+                }//end while
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+    </div>
+    <div id="Notif_Amis" class="section">
+        <h2>Mes demandes d'Amis</h2>
+        <div class="line-1"></div>
+        <div class="scroll">
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur where Mail like '%$email%'"; 
+                $result_sql = mysqli_query($db_handle, $sql);
+                while ($data_sql = mysqli_fetch_assoc($result_sql)) {
+                    $IDutilisateur= $data_sql['IDutilisateur'];
+                    $Amis = "SELECT * FROM relation join utilisateur WHERE Ami1 like '%$IDutilisateur%' and relation.statut='2' and Ami2 = IDutilisateur";
+                    $Amis_result = mysqli_query($db_handle, $Amis);
+                    $Amis_data = mysqli_fetch_assoc($Amis_result);
+                    echo "<div>". "<br></div>";
+                    $image = $Amis_data['PhotoProfil'];
+                    echo "<a href='amis.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
+                    echo  "<div class='amis'>".$Amis_data['Nom'] . "</div>";
+                    echo  "<div class='amis'>".$Amis_data['Prenom'] . "</div><br>";
+                    echo "<div>". "<br></div>";
+                    echo "<div class='line-1'>" . "<br></div>";
+                    $Ami2 = $Amis_data['Ami2'];
+                    $_SESSION['Ami2'] = $Ami2;
+                           
+                }//end while
+                
+            }//end if
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+        </div>
+        </br>
+    </div>
+    <div id="Notifs_Posts" class="section">
+        <h2>Posts de mes Amis</h2>
+        <div class="line-1"></div>
+        <div class="scroll">
+        <?php
+            //si le BDD existe, faire le traitement
+            if ($db_found) {
+                $sql = "SELECT * FROM utilisateur where Mail like '%$email%'";
+                $result_sql = mysqli_query($db_handle, $sql);
+                $data_sql = mysqli_fetch_assoc($result_sql);
+
+                $IDutilisateur= $data_sql['IDutilisateur'];
+
+                $Amis = "SELECT DISTINCT u2.* FROM utilisateur u1 JOIN relation r1 ON r1.Ami1 = u1.IDutilisateur JOIN relation r2 ON r2.Ami1 = r1.Ami2 JOIN utilisateur u2 ON u2.IDutilisateur = r2.Ami2 WHERE r1.statut = '2' AND r2.statut = '2' AND u1.IDutilisateur = '$IDutilisateur' AND u2.IDutilisateur NOT IN (SELECT r3.Ami2 FROM relation r3 WHERE r3.Ami1 = '$IDutilisateur') AND u2.IDutilisateur != '$IDutilisateur'";
+                $Amis_result = mysqli_query($db_handle, $Amis);
+                while($Amis_data = mysqli_fetch_assoc($Amis_result)){
+                    echo "<div>". "<br></div>";
+                    $image = $Amis_data['PhotoProfil'];
+                    echo "<a href='Amiami.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
+                    echo  "<div class='amis'>".$Amis_data['Nom'] . "</div>";
+                    echo  "<div class='amis'>".$Amis_data['Prenom'] . "</div><br>";
+                    echo "<div>". "<br></div>";                        
+                    echo "<div class='line-1'>" . "<br></div>";
+                    $Amiami = $Amis_data['IDutilisateur'];
+                    $_SESSION['Amiami'] = $Amiami;
+                }        
+            }//end if
+                
+            //si le BDD n'existe pas
+            else {
+                echo "Database not found";
+            }//end else
+        ?>
+        </div>
+        </br>
+    </div>
+        </br>
+
     <div id="footer">
         <p>Nous contacter : </p>
         <p>Mail: <a href="mailto:laureline.grassin@edu.ece.fr">laureline.grassin@edu.ece.fr</a></p>
         <p>Tel: 01 44 39 06 00 </p>
         <P>Adresse: 10, Rue Sextius Michel</p>
         <p></br></br>Droit d'auteur | Copyright © 2023</p>
-            <div id="googleMaps">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.3662947158255!2d2.2859909764319983!3d48.851225171331286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685365414049!5m2!1sfr!2sfr" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div id="googleMaps">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.3662947158255!2d2.2859909764319983!3d48.851225171331286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685365414049!5m2!1sfr!2sfr" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

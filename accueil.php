@@ -107,8 +107,18 @@
                             $Legende = isset($_POST["Legende"]) ? $_POST["Legende"] : "";
 
                             $sql = "INSERT INTO `post`(`IDpost`, `Envoyeur`, `Type`, `Date`, `Data`, `Legende`, `Commentaires`, `Aime`) VALUES('$IDpost', '$Envoyeur', '', '$Date', '$Data', '$Legende' , '0' , '0')";
-
+                            
                             $result = mysqli_query($db_handle, $sql);
+                            $All_usres = "SELECT * FROM utilisateur";
+                            $All_usres_result = mysqli_query($db_handle, $All_usres);
+                            while($data_all_users = mysqli_fetch_assoc($All_usres_result))
+                            {
+                                $IDuser_notif = $data_all_users['IDutilisateur'];
+                                $IDposter = $Envoyeur;
+                                $sql2 = "INSERT INTO `notification`(`IDutilisateur`,'IDposter',  `IDpost`, `Vu`) VALUES ('$IDuser_notifs', '$IDpost', '0')";
+                                $result_all_users = mysqli_query($db_handle, $sql2);
+                            }
+
                             if ($result) {
                                 header('Location: accueil.php');
                                 die();
@@ -245,7 +255,7 @@
                             echo"<p class='Legende'>" . $post_data["Legende"] . "</p>";
 
                             $extension = pathinfo($post_data["Data"], PATHINFO_EXTENSION);
-                            if ($extension === 'jpg' || $extension === 'jpg' || $extension === 'gif') {
+                            if ($extension === 'jpg' || $extension === 'png' || $extension === 'gif') {
                                 echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
                             }
                             else if ($extension === 'mp4') {
