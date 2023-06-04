@@ -54,8 +54,65 @@
 
     <div id="Gray_bar"></div>
 
+
     <div id="Info_Right">
         <h2>Mes demandes d'amis</h2>
+        <button id="accepter" value="acceder" onclick="openAcc()">accéder</button>
+
+        <div id="overlayV2" class="overlay3">
+            <div class="form-container">
+                <h2>Accepter mes demandes</h2>
+                <a href="reseau.php">
+                    <button class="quitterFormation"><ion-icon name="close-outline"></ion-icon></button>
+                </a><br>
+                <form method=post>
+                    <input type="submit" value="accepter" name="demande" />
+                    <input type="submit" value="refuser" name="demande" />
+                    <br>
+                </form>
+                <?php
+                     //si le BDD existe, faire le traitement
+                    if ($db_found) {
+
+                        $sql = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                        $result = mysqli_query($db_handle, $sql);
+                        $data = mysqli_fetch_assoc($result);
+                        $IDuser = $data['IDutilisateur'];
+
+                        $Demande = "SELECT * FROM utilisateur join relation WHERE Ami1 LIKE'%$IDuser%' and statut = '1' and Ami2 = IDutilisateur";
+                        $result_demande = mysqli_query($db_handle, $Demande);
+                        while($data_demande = mysqli_fetch_assoc($result_demande)){
+                            $Ami = $data_demande['Ami2'];
+                            echo "Nom: " . $data_demande['Nom'] . "<br>";
+                            echo "Prénom: " . $data_demande['Prenom'] . "<br><br>";
+                            echo "<div class='line-1'>" . "<br></div>";
+                            $image = $data_demande['PhotoProfil'];
+                            echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                            if(isset($_POST['demande']) AND $_POST['demande']=='accepter'){
+                                $sql = "UPDATE relation SET statut = '2' where Ami1 = {$IDuser} and Ami2 = {$Ami}";
+                                $result = mysqli_query($db_handle, $sql);
+                            } 
+                            else if(isset($_POST['demande']) AND $_POST['demande']=='refuser'){
+                                $sql2 = "UPDATE relation SET statut = '0' where Ami1 = {$IDuser} and Ami2 = {$Ami}";
+                                $result2 = mysqli_query($db_handle, $sql2); 
+                            }
+                        }
+                    }//end if
+                    //si le BDD n'existe pas
+                    else {
+                        echo "Database not found";
+                    }//end else
+                 ?>
+                
+            </div>
+        </div>
+        <script>
+            function openAcc() {
+                var overlayV2 = document.getElementById("overlayV2");
+                overlayV2.style.display = "block";
+            }
+        </script>
+        <br>
         <div class="line-1"></div>
         <?php
             //si le BDD existe, faire le traitement
@@ -73,6 +130,8 @@
                     echo "<div class='line-1'>" . "<br></div>";
                     $image = $data_demande['PhotoProfil'];
                     echo "<div class='photoAmi'><img src='$image' height='40' width='60'>" . "<br><br></div>";
+                    //echo "<input type='button' value='accepter' onclick='openAcc()'>";
+                    //echo "<div id='demande' class='demande'>" ."Accepter mes demandes"."</h2></div>";
                 }
             }//end if
             //si le BDD n'existe pas
@@ -81,8 +140,10 @@
             }//end else
         ?>
 
-
     </div>
+
+
+
 
 
     <div id="MonProfil">
@@ -135,7 +196,6 @@
                     echo "<div class='line-1'>" . "<br></div>";
                     $Ami2 = $Amis_data['Ami2'];
                     $_SESSION['Ami2'] = $Ami2;
-                    //echo "Ami2 : ". $Ami2;
                            
                 }//end while
                 
@@ -160,20 +220,19 @@
                 $data_sql = mysqli_fetch_assoc($result_sql);
 
                 $IDutilisateur= $data_sql['IDutilisateur'];
-                //echo $IDutilisateur."<br>";
 
                 $Amis = "SELECT DISTINCT u2.* FROM utilisateur u1 JOIN relation r1 ON r1.Ami1 = u1.IDutilisateur JOIN relation r2 ON r2.Ami1 = r1.Ami2 JOIN utilisateur u2 ON u2.IDutilisateur = r2.Ami2 WHERE r1.statut = '2' AND r2.statut = '2' AND u1.IDutilisateur = '$IDutilisateur' AND u2.IDutilisateur NOT IN (SELECT r3.Ami2 FROM relation r3 WHERE r3.Ami1 = '$IDutilisateur') AND u2.IDutilisateur != '$IDutilisateur'";
                 $Amis_result = mysqli_query($db_handle, $Amis);
                 while($Amis_data = mysqli_fetch_assoc($Amis_result)){
                     echo "<div>". "<br></div>";
                     $image = $Amis_data['PhotoProfil'];
-                    echo "<a href='amis.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
+                    echo "<a href='Amiami.php'><div class='photoMonAmis'><img src='$image' height='40' width='60'>" . "<br></div></a>";
                     echo  "<div class='amis'>".$Amis_data['Nom'] . "</div>";
                     echo  "<div class='amis'>".$Amis_data['Prenom'] . "</div><br>";
                     echo "<div>". "<br></div>";                        
                     echo "<div class='line-1'>" . "<br></div>";
-                    //$Ami2 = $Amis_data['IDutilisateur'];
-                    //$_SESSION['Ami2'] = $Ami2;
+                    $Amiami = $Amis_data['IDutilisateur'];
+                    $_SESSION['Amiami'] = $Amiami;
                 }        
             }//end if
                 

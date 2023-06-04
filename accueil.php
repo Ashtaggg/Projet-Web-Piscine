@@ -53,6 +53,17 @@
         </div>
         <div class="menu">
             <ul class="list">
+                <?php
+                    $IDuser = "SELECT * FROM utilisateur WHERE Mail LIKE '%$email%'"; 
+                    $IDuser_result = mysqli_query($db_handle, $IDuser);
+                    $data = mysqli_fetch_assoc($IDuser_result);
+                    $Envoyeur = $data['IDutilisateur'];
+
+                    if($data['Admin'] == 1)
+                    {
+                        echo"<li><a class='oncolor' href='admin.php'>Admin</a></li>";
+                    }
+                ?>
                 <li><a class="oncolor" href="accueil.php" style="color : #037078">Accueil</a></li>
                 <li><a class="oncolor" href="reseau.php">Mon réseau</a></li>
                 <li><a class="oncolor" href="vous.php">Vous</a></li>
@@ -148,22 +159,6 @@
     <div id="ECEin_Feed" class="section">
         <h2>L'actualité de vos Amis</h2>
         <table>
-            <!--<script>
-                function like(element){
-                    const IDpost = element.id;
-                    if(element.style.color === "red"){
-                        element.style.color = "white";
-                    }
-                    else{
-                        element.style.color = "red";
-                    }
-                    document.location.href="accueil.php?IDpostLike=" + IDpost; 
-                }
-                function com(element){
-                    const IDpost = element.id;
-                    //document.location.href="accueil.php?IDpostCom=" + IDpost; 
-                }
-            </script>-->
             <?php
                 $Date = new DateTime("now");
                 $Date->modify("-7 day");
@@ -216,7 +211,10 @@
                                 echo"<p class='Data'><img height=250 src='" . $post_data["Data"] . "' /></p>";
                             }
                             else if ($extension === 'mp4') {
-                                echo"<video controls autoplay><source src='" . $post_data["Data"] . ".mp4' type='video/mp4'></video>";
+                                echo"<p class='Data'><video height=220 controls autoplay><source src='" . $post_data["Data"] . "' type='video/mp4'></video></p>";
+                            }
+                            else if ($extension === 'webm') {
+                                echo"<p class='Data'><video height=220 controls autoplay><source src='" . $post_data["Data"] . "' type='video/webm'></video></p>";
                             }
 
                             echo"<div class='post2' ><button class='Like' name='Like' id='" . $post_data['IDpost'] . "' data-like='" . $post_data['Aime'] ."' onclick=like(this) style='color:white'><ion-icon name='heart'></ion-icon></button><p class='nbrLike' data-idpost='" . $post_data['IDpost'] . "'>" . $post_data["Aime"] . "</p>";

@@ -140,7 +140,9 @@
             <a href="connexion.php"><button>Se déconnecter</button></a>
         </div>
         <br><br>
+
         <button class='bouton' onclick="openProf()">Modifier mon profil</button>
+
         <div id="modification" class="modification">
             <div class="form-container">
                 <h2>Modifier mon profil</h2>
